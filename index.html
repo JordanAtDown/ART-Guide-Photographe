@@ -808,49 +808,264 @@
     <!-- COURBES TONALES -->
     <div class="module" id="mod-courbestonales">
       <div class="module-header">
-        <div class="module-tag"><div class="tag-dot" style="background:#4a9eff"></div><span style="color:#4a9eff">Exposition & Tonalité</span></div>
+        <div class="module-tag">
+          <div class="tag-dot" style="background:#4a9eff"></div>
+          <span style="color:#4a9eff">Exposition & Tonalité</span>
+        </div>
         <h2>Courbes Tonales</h2>
-        <div class="subtitle">L'outil de contraste avancé — la courbe en S qui donne du caractère</div>
+        <div class="subtitle">
+          Contraste, rendu des tons et look "film" —
+          le module le plus artistique d'ART
+        </div>
       </div>
+
       <div class="tip">
         <div class="tip-label">Point de vue photographe</div>
-        <p>La courbe tonale est l'outil le plus "artistique" du développement RAW. Elle te permet de définir exactement comment chaque valeur de gris de l'original sera reproduite. Une courbe en S crée du contraste. Un "lift des noirs" (courbe partant de 0,10 au lieu de 0,0) donne le look "film dégradé" recherché dans l'esthétique cinéma.</p>
+        <p>
+          La courbe tonale définit exactement comment chaque valeur
+          de luminosité du RAW sera reproduite. C'est l'outil qui
+          donne le "caractère" à une image : une courbe en S =
+          contraste, un lift des noirs = look film dégradé, une
+          compression des HL = ciel qui respire. ART propose deux
+          courbes chaînables (CT1 + CT2) et 7 modes de calcul —
+          chaque mode change la façon dont la couleur réagit
+          aux modifications de luminosité.
+        </p>
       </div>
-      <h3 class="section-title">Modes de Courbe</h3>
+
+      <h3 class="section-title">Mode — 7 algorithmes de traitement</h3>
+
       <div class="param-grid">
+
         <div class="param-item">
-          <div class="param-name">Mode Neutre</div>
-          <div class="param-range">— Point de départ</div>
-          <div class="param-desc">Courbe linéaire — aucune modification. C'est le mode "propre" à utiliser quand tu veux partir de zéro ou laisser le Log Tone Mapping gérer tout seul.</div>
+          <div class="param-name">Neutre</div>
+          <div class="param-range">Point de départ recommandé</div>
+          <div class="param-desc">
+            Aucune hypothèse sur le rendu — courbe linéaire,
+            pas de modification colorimétrique. C'est le mode
+            "propre" à utiliser avec le Log Tone Mapping actif,
+            ou quand tu veux un contrôle total sans que le mode
+            influence la couleur. Idéal pour les workflows
+            cinématiques où tu gères tout toi-même.
+          </div>
         </div>
+
         <div class="param-item">
-          <div class="param-name">Courbe de base : Linéaire</div>
-          <div class="param-range">— Pas de présupposé</div>
-          <div class="param-desc">ART ne rajoute pas de S-curve automatique — tu as la main totale. Opposé à "Standard" qui applique une courbe genre "rendu caméra" automatique.</div>
+          <div class="param-name">Standard</div>
+          <div class="param-range">Rendu caméra simulé</div>
+          <div class="param-desc">
+            Applique une courbe similaire au rendu JPEG de
+            l'appareil — légèrement en S, avec boost de
+            saturation dans les tons moyens. Bon point de départ
+            pour un look "naturel" sans effort. Attention :
+            il modifie légèrement les couleurs, notamment en
+            amplifiant la saturation globale.
+          </div>
         </div>
+
         <div class="param-item">
-          <div class="param-name">Courbe Tonale 1 & 2</div>
-          <div class="param-range">Éditeur de courbe</div>
-          <div class="param-desc">Deux courbes indépendantes que tu peux chaîner. CT1 pour la S-curve générale, CT2 pour des ajustements supplémentaires. Possibilité de travailler sur R, V, B séparément pour le color grading par courbe.</div>
+          <div class="param-name">Standard Pondérée</div>
+          <div class="param-range">Standard + protection des HL</div>
+          <div class="param-desc">
+            Variante du mode Standard avec une meilleure
+            gestion des hautes lumières — la courbe compresse
+            progressivement les HL pour éviter le clip.
+            Utile pour les scènes à fort contraste (mer + ciel
+            ensoleillé) quand tu ne veux pas utiliser le
+            Log Tone Mapping.
+          </div>
         </div>
+
         <div class="param-item">
-          <div class="param-name">Contraste</div>
-          <div class="param-range">-100 → +100</div>
-          <div class="param-desc">Raccourci qui applique une S-curve automatique centrée sur le point gris. Plus simple que la courbe manuelle mais moins précis. Valeur 0 = neutre, +20 = contraste moyen, +50 = très contrasté.</div>
+          <div class="param-name">Type Film</div>
+          <div class="param-range">Émulation pellicule argentique</div>
+          <div class="param-desc">
+            Reproduit la réponse non-linéaire d'un film
+            argentique : ombres douces et détaillées, hautes
+            lumières qui "roulent" progressivement sans clip
+            brutal. Donne une qualité de gradation très
+            agréable et naturelle. Excellent pour les portraits
+            et les paysages à lumière douce. Moins adapté aux
+            scènes très contrastées.
+          </div>
         </div>
+
         <div class="param-item">
-          <div class="param-name">Saturation (dans Courbes)</div>
-          <div class="param-range">Courbe de saturation</div>
-          <div class="param-desc">Permet de lier la saturation à la luminance. Exemple classique : désaturer légèrement les hautes lumières (évite les jaunes et oranges cramés en plein soleil) tout en boostant les tons moyens.</div>
+          <div class="param-name">Mélange Saturation et Valeur</div>
+          <div class="param-range">Contraste sans shift de teinte</div>
+          <div class="param-desc">
+            Applique la courbe en travaillant dans l'espace
+            HSV — sépare la luminosité de la teinte/saturation.
+            Résultat : tu peux augmenter le contraste sans que
+            les couleurs changent de teinte. Utile pour les
+            photos où les couleurs doivent rester fidèles
+            (architecture, produits) tout en ayant du peps.
+          </div>
         </div>
+
         <div class="param-item">
-          <div class="param-name">Point Blanc</div>
-          <div class="param-range">0.5 → 2.0</div>
-          <div class="param-desc">Déplace le maximum de la courbe. Valeur 1.0 = blanc à 100%. Monter à 1.2 "étale" les hautes lumières — utile pour les scènes avec beaucoup d'écumes ou de neige.</div>
+          <div class="param-name">Luminance</div>
+          <div class="param-range">Contraste pur sans impact couleur</div>
+          <div class="param-desc">
+            La courbe n'agit que sur la luminance perçue,
+            sans modifier la saturation ni la teinte. C'est
+            le mode le plus "propre" colorimétri­quement —
+            idéal quand tu as déjà fait ton color grading
+            et que tu veux juste ajouter du contraste
+            sans rien déranger. Similaire à travailler
+            sur le canal L* en Lab.
+          </div>
         </div>
+
+        <div class="param-item">
+          <div class="param-name">Perceptuel</div>
+          <div class="param-range">Rendu proche de la vision humaine</div>
+          <div class="param-desc">
+            Utilise un modèle de vision humaine (CIECAM)
+            pour adapter la courbe. Les changements de
+            luminosité sont compensés perceptuellement —
+            une zone plus sombre garde sa "sensation"
+            colorée même si sa valeur RVB change.
+            Le plus sophistiqué des 7 modes, mais aussi
+            le plus imprévisible si tu ne connais pas
+            bien son comportement.
+          </div>
+        </div>
+
       </div>
+
+      <h3 class="section-title">Courbe de base — 3 points de départ</h3>
+
+      <div class="param-grid">
+
+        <div class="param-item">
+          <div class="param-name">Linéaire</div>
+          <div class="param-range">Pas de présupposé — tout à la main</div>
+          <div class="param-desc">
+            La courbe part droite de coin à coin — aucune
+            modification. C'est la base recommandée quand
+            tu utilises le Log Tone Mapping, ou quand tu
+            veux construire ton look de zéro. Associe-la
+            au mode Neutre pour un pipeline totalement
+            sous contrôle.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Atténuation progressive des hautes lumières</div>
+          <div class="param-range">Protection automatique des HL</div>
+          <div class="param-desc">
+            La courbe de base intègre déjà une compression
+            douce des hautes lumières — les zones claires
+            sont "roulées" progressivement avant même que
+            tu ne touches quoi que ce soit. Très utile
+            pour les ciels lumineux méditerranéens :
+            ça évite le clipping sans avoir à tout gérer
+            manuellement.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Courbe en S progressive</div>
+          <div class="param-range">Contraste intégré dès le départ</div>
+          <div class="param-desc">
+            ART applique une S-curve légère comme base —
+            les ombres sont légèrement abaissées et les
+            hautes lumières légèrement compressées.
+            Donne d'emblée un rendu avec du peps, proche
+            du rendu JPEG caméra. Bon point de départ
+            pour un workflow rapide sans Log Tone Mapping.
+          </div>
+        </div>
+
+      </div>
+
+      <h3 class="section-title">Courbe Tonale 1 & 2 — éditeur de courbe</h3>
+
+      <div class="param-grid">
+
+        <div class="param-item">
+          <div class="param-name">Courbe Tonale 1 (CT1)</div>
+          <div class="param-range">Courbe principale</div>
+          <div class="param-desc">
+            La courbe de travail principale. Clique pour
+            ajouter des points de contrôle, glisse pour
+            les déplacer. Le curseur <strong>E</strong>
+            (entrée) et <strong>S</strong> (sortie)
+            affichent les valeurs du point sélectionné.
+            C'est ici que tu construis ta S-curve,
+            ton lift des noirs, ou ta compression des HL.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Courbe Tonale 2 (CT2)</div>
+          <div class="param-range">Courbe de saturation ou secondaire</div>
+          <div class="param-desc">
+            Deuxième courbe chaînée après CT1. Peut être
+            utilisée pour un deuxième ajustement tonal,
+            ou configurée en mode saturation pour lier
+            l'intensité des couleurs à la luminance —
+            exemple classique : désaturer les hautes
+            lumières pour éviter les jaunes cramés.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Curseurs E / S / TG / TD</div>
+          <div class="param-range">Visibles quand un point est sélectionné</div>
+          <div class="param-desc">
+            <strong>E</strong> = valeur d'Entrée du point
+            (0–100, luminosité dans le RAW).<br>
+            <strong>S</strong> = valeur de Sortie du point
+            (0–100, luminosité en sortie).<br>
+            <strong>TG</strong> = Tangente Gauche —
+            contrôle la pente à gauche du point.<br>
+            <strong>TD</strong> = Tangente Droite —
+            contrôle la pente à droite du point.<br>
+            TG/TD permettent de faire des courbes
+            asymétriques précises sans déplacer les
+            points voisins.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Courbe Tonale basée sur l'Aperçu</div>
+          <div class="param-range">Bouton — analyse automatique</div>
+          <div class="param-desc">
+            ART analyse l'histogramme de l'image et
+            propose automatiquement une courbe adaptée.
+            Bon point de départ à affiner manuellement —
+            ne remplace pas le jugement artistique mais
+            évite de partir de zéro sur une image
+            difficile.
+          </div>
+        </div>
+
+      </div>
+
       <div class="warning">
-        <p>⚠️ <strong>À savoir :</strong> Si tu utilises le Log Tone Mapping, la courbe tonale intervient APRÈS lui. Elle "peaufine" le résultat du Log — ne remet pas tout en question avec une S-curve agressive, des valeurs douces (+15 contraste max) suffisent.</p>
+        <p>⚠️ <strong>Avec le Log Tone Mapping actif</strong>,
+        la courbe tonale intervient APRÈS lui dans le pipeline.
+        Utilise Mode <strong>Neutre</strong> + base
+        <strong>Linéaire</strong> et n'applique qu'une S-curve
+        très légère (contraste +10 à +15 max) —
+        le Log a déjà géré l'essentiel de la dynamique.</p>
+      </div>
+
+      <div class="tip">
+        <div class="tip-label">Recette pour look méditerranée cinématique</div>
+        <p>
+          Mode <strong>Luminance</strong> + base
+          <strong>Linéaire</strong>.<br>
+          CT1 : point bas (E:20 → S:25), point haut
+          (E:80 → S:75) — S-curve subtile.<br>
+          CT2 : mode Saturation, courbe légèrement
+          en cloche — boost centre, compression aux
+          extrêmes.<br>
+          Résultat : contraste propre sans shift de
+          teinte, couleurs vivifiées dans les tons moyens.
+        </p>
       </div>
     </div>
 
