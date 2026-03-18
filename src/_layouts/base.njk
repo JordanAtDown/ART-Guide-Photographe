@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ title }} — ART Guide Photographe</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ '/assets/style.css' | url }}">
+</head>
+<body>
+
+<header>
+  <div class="header-label">Documentation · ART Raw Image Processor</div>
+  <h1>Guide du <span>Photographe</span></h1>
+  <p>Documentation complète de chaque module d'ART (Another RawTherapee), expliquée du point de vue de la pratique photographique.</p>
+  <div class="version-badge">ART · Dérivé de RawTherapee · Workflow RAW → TIFF → Affinity</div>
+</header>
+
+<div class="container">
+  <nav>
+    {% include "nav.njk" %}
+  </nav>
+
+  <main>
+    <div class="module">
+      {{ content | safe }}
+    </div>
+  </main>
+</div>
+
+<script src="{{ '/assets/app.js' | url }}"></script>
+</body>
+</html>

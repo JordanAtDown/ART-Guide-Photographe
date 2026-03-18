@@ -1,0 +1,70 @@
+---
+layout: base.njk
+title: 'Bruit d''Impulsion'
+permalink: '/modules/bruitimpulsion/'
+---
+
+<div class="module-header">
+        <div class="module-tag">
+          <div class="tag-dot" style="background:#e879a0"></div>
+          <span style="color:#e879a0">Détail & Netteté</span>
+        </div>
+        <h2>Réduction du Bruit d'Impulsion</h2>
+        <div class="subtitle">
+          Pixels morts, hot pixels, poussières — nettoyage ciblé
+        </div>
+      </div>
+
+      <div class="tip">
+        <div class="tip-label">Point de vue photographe</div>
+        <p>Le bruit d'impulsion est différent du bruit classique :
+        ce sont des <strong>pixels isolés anormalement clairs ou
+        colorés</strong> — pixels chauds (hot pixels) en longue
+        exposition, pixels morts, artefacts de capteur par forte
+        chaleur. Ils apparaissent comme des points brillants isolés,
+        souvent rouges ou blancs, dans les zones sombres.
+        Ce module les détecte et les remplace par interpolation
+        avec les pixels voisins. Complètement indépendant de la
+        réduction de bruit principale.</p>
+      </div>
+
+      <div class="param-grid">
+
+        <div class="param-item">
+          <div class="param-name">Seuil</div>
+          <div class="param-range">0 → 100 (défaut : 50)</div>
+          <div class="param-desc">
+            Sensibilité de détection des pixels aberrants.
+            Valeur basse (20–35) = détecte et corrige beaucoup
+            de pixels suspects — risque de corriger des détails
+            légitimes (étoiles, reflets ponctuels sur l'eau).
+            Valeur haute (60–80) = ne corrige que les pixels
+            vraiment aberrants. Pour la photo de jour,
+            50–60 est optimal. Pour la nuit ou longue expo,
+            descendre à 25–35.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Défranger</div>
+          <div class="param-range">Activer / Désactiver</div>
+          <div class="param-desc">
+            Module complémentaire qui réduit les franges chromatiques
+            (aberrations chromatiques latérales) visibles aux contours
+            à fort contraste — typiquement les contours entre rochers
+            sombres et ciel clair, ou entre écume blanche et eau sombre.
+            Apparaît comme une frange violette ou verte sur les bords.
+            À activer si tu constates ces franges à 100% de zoom.
+          </div>
+        </div>
+
+      </div>
+
+      <div class="warning">
+        <p>⚠️ <strong>Attention aux reflets sur l'eau :</strong>
+        avec un seuil trop bas, la réduction de bruit d'impulsion
+        peut supprimer les petits reflets lumineux ponctuels sur
+        l'eau (scintillement) en les confondant avec des hot pixels.
+        Vérifier à 100% de zoom sur les zones d'eau avant d'exporter.
+        </p>
+      </div>

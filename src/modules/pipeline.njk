@@ -1,0 +1,66 @@
+---
+layout: base.njk
+title: 'Pipeline de traitement'
+permalink: '/modules/pipeline/'
+---
+
+<div class="module-header">
+        <div class="module-tag"><div class="tag-dot" style="background:#00d4aa"></div><span style="color:#00d4aa">Architecture</span></div>
+        <h2>Pipeline de Traitement</h2>
+        <div class="subtitle">Comprendre l'ordre dans lequel ART traite tes données RAW</div>
+      </div>
+      <div class="tip">
+        <div class="tip-label">Point clé</div>
+        <p>ART traite les données dans un ordre fixe en interne, même si tu peux activer les modules dans n'importe quel ordre. Connaître ce pipeline t'évite des surprises : une modif en amont peut changer le résultat d'un module en aval.</p>
+      </div>
+      <div class="workflow">
+        <div class="workflow-step">
+          <div class="step-num" style="background:rgba(74,158,255,0.15);color:#4a9eff">1</div>
+          <div class="step-content">
+            <h4>Démosaïquage RAW</h4>
+            <p>Conversion des données brutes du capteur en pixels RVB. Algorithme AMAZE ou DCB selon le bruit.</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-num" style="background:rgba(74,158,255,0.15);color:#4a9eff">2</div>
+          <div class="step-content">
+            <h4>Balance des Blancs</h4>
+            <p>Appliquée très tôt dans la chaîne — corriger la WB maintenant évite des problèmes de couleur plus tard.</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-num" style="background:rgba(0,212,170,0.15);color:#00d4aa">3</div>
+          <div class="step-content">
+            <h4>Log Tone Mapping</h4>
+            <p>Si activé, il transforme la courbe de réponse de manière logarithmique. À faire avant tout réglage d'exposition.</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-num" style="background:rgba(0,212,170,0.15);color:#00d4aa">4</div>
+          <div class="step-content">
+            <h4>Exposition & Égaliseur Tonal</h4>
+            <p>Réglages globaux de luminosité, récupération des ombres et hautes lumières.</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-num" style="background:rgba(245,158,11,0.15);color:#f59e0b">5</div>
+          <div class="step-content">
+            <h4>Courbes Tonales</h4>
+            <p>Affinage du contraste. La courbe en S vient affiner ce que le Log Tone Mapping a établi.</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-num" style="background:rgba(245,158,11,0.15);color:#f59e0b">6</div>
+          <div class="step-content">
+            <h4>Couleur (HSL, Color Grading, Canaux)</h4>
+            <p>Travail sur les couleurs une fois la tonalité stabilisée. Ordre : HSL → Color Wheels → Canaux.</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-num" style="background:rgba(232,121,160,0.15);color:#e879a0">7</div>
+          <div class="step-content">
+            <h4>Détail (Texture, Contraste Local, NR)</h4>
+            <p>Toujours en dernier — les réglages de netteté et de bruit doivent s'appliquer sur l'image finale.</p>
+          </div>
+        </div>
+      </div>

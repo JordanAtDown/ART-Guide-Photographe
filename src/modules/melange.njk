@@ -1,0 +1,37 @@
+---
+layout: base.njk
+title: 'Mélange des Canaux'
+permalink: '/modules/melange/'
+---
+
+<div class="module-header">
+        <div class="module-tag"><div class="tag-dot" style="background:#f59e0b"></div><span style="color:#f59e0b">Couleur — Avancé</span></div>
+        <h2>Mélange des Canaux</h2>
+        <div class="subtitle">Manipulation directe des canaux R, V, B — pour effets avancés</div>
+      </div>
+      <div class="tip">
+        <div class="tip-label">Point de vue photographe</div>
+        <p>Le mélange des canaux permet de "contaminer" un canal par un autre. Exemple classique : injecter un peu de canal Bleu dans le canal Vert pour créer une dominante "teal" dans les verts naturels. Très puissant mais demande de la précision — de petites valeurs (±5%) suffisent.</p>
+      </div>
+      <div class="param-grid">
+        <div class="param-item">
+          <div class="param-name">Mode Matrice RVB</div>
+          <div class="param-range">—</div>
+          <div class="param-desc">Mode standard. Chaque canal de sortie est une combinaison linéaire des 3 canaux d'entrée. La diagonale à 100% = pas de modification. C'est un outil de coloriste avancé, à utiliser après avoir maîtrisé les autres modules.</div>
+        </div>
+        <div class="param-item">
+          <div class="param-name">Canal Rouge (ligne)</div>
+          <div class="param-range">R:100 V:0 B:0 = neutre</div>
+          <div class="param-desc">Contrôle ce qui constitue le rouge en sortie. Injecter un peu de vert (R:95 V:8 B:0) donne des tons chair plus dorés. Injecter du bleu (R:95 V:0 B:8) refroidit les rouges.</div>
+        </div>
+        <div class="param-item">
+          <div class="param-name">Canal Vert (ligne)</div>
+          <div class="param-range">R:0 V:100 B:0 = neutre</div>
+          <div class="param-desc">Pour look teal : V:97 B:5 injecte un peu de bleu dans les verts → les végétations et l'eau prennent une teinte plus froide et "aquatique".</div>
+        </div>
+        <div class="param-item">
+          <div class="param-name">Canal Bleu (ligne)</div>
+          <div class="param-range">R:0 V:0 B:100 = neutre</div>
+          <div class="param-desc">Pour deepening du ciel : B:105 = bleu légèrement amplifié → ciel plus profond. Injecter du vert (V:3 B:97) = bleu légèrement teal dans les zones bleues.</div>
+        </div>
+      </div>

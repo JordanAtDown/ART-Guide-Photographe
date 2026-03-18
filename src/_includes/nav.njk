@@ -1,0 +1,14 @@
+<div class="search-bar">
+  <input class="search-input" type="text" placeholder="Chercher un module..." id="searchInput" oninput="filterNav(this.value)">
+</div>
+
+{% for section in nav %}
+  <div class="nav-section">{{ section.section }}</div>
+  {% for item in section.items %}
+    <a href="{{ item.url | url }}" id="nav-{{ item.id }}"
+       class="{% if page.url == item.url %}active{% endif %}">
+      <div class="dot" style="background:{{ item.color }}"></div>
+      {{ item.label }}
+    </a>
+  {% endfor %}
+{% endfor %}

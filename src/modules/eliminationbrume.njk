@@ -1,0 +1,115 @@
+---
+layout: base.njk
+title: 'Élimination de la Brume'
+permalink: '/modules/eliminationbrume/'
+---
+
+<div class="module-header">
+        <div class="module-tag">
+          <div class="tag-dot" style="background:#e879a0"></div>
+          <span style="color:#e879a0">Détail & Netteté</span>
+        </div>
+        <h2>Élimination de la Brume</h2>
+        <div class="subtitle">
+          Dehaze — augmente le contraste atmosphérique et la clarté
+        </div>
+      </div>
+
+      <div class="tip">
+        <div class="tip-label">Point de vue photographe</div>
+        <p>L'élimination de brume analyse la
+        <strong>diffusion atmosphérique</strong> dans l'image
+        et tente de la corriger — c'est le module "Dehaze"
+        d'ART. Il récupère le contraste perdu par la brume,
+        la pollution lumineuse, ou la diffusion de l'air chaud
+        en été. Très utile pour les paysages côtiers où
+        l'air marin crée souvent un voile laiteux dans
+        les lointains. Peut aussi être utilisé en sens inverse
+        pour <strong>ajouter de la brume</strong> (valeur négative)
+        et créer une atmosphère vaporeuse.</p>
+      </div>
+
+      <h3 class="section-title">Paramètres</h3>
+
+      <div class="param-grid">
+
+        <div class="param-item">
+          <div class="param-name">Mode : RVB</div>
+          <div class="param-range">Traitement sur les 3 canaux</div>
+          <div class="param-desc">
+            Traite la brume sur les canaux Rouge, Vert, Bleu
+            simultanément. Résultat plus "mordant" et contrasté.
+            Peut légèrement modifier la balance des couleurs
+            si la brume est colorée (brume chaude orangée,
+            embruns bleutés). Mode à utiliser en premier.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Mode : Luminosité</div>
+          <div class="param-range">Traitement sur la luminance seule</div>
+          <div class="param-desc">
+            Traite uniquement la luminance sans affecter
+            la couleur. Résultat plus neutre colorimétriquement —
+            le contraste augmente sans dérive de teinte.
+            Préférable quand la couleur de base est déjà
+            bien calibrée et qu'on veut juste récupérer
+            de la profondeur dans les lointains.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Force</div>
+          <div class="param-range">Courbe personnalisable</div>
+          <div class="param-desc">
+            Courbe qui contrôle l'intensité du dehaze selon
+            la luminance des zones. La courbe plate au centre =
+            effet neutre. Monter la courbe = plus de dehaze.
+            Descendre en dessous du centre = ajouter de la brume.
+            Travailler en courbe permet d'appliquer l'effet
+            différemment selon les zones claires et sombres.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Correction du Point Noir</div>
+          <div class="param-range">0 → 100 (défaut : 0)</div>
+          <div class="param-desc">
+            Après le dehaze, les noirs peuvent sembler
+            délavés (levés). Ce curseur remet les noirs
+            à leur place en comprimant les ombres.
+            Valeur 0 = pas de correction.
+            Monter progressivement jusqu'à ce que
+            les ombres retrouvent leur densité naturelle
+            sans sur-contraster.
+          </div>
+        </div>
+
+      </div>
+
+      <div class="tip">
+        <div class="tip-label">Recette paysage marin avec voile atmosphérique</div>
+        <p>
+          1. Activer <strong>Élimination de la Brume</strong>,
+          Mode <strong>Luminosité</strong>.<br>
+          2. Monter la courbe Force modérément —
+          vérifier que les collines lointaines retrouvent
+          du contraste sans que les rochers au premier plan
+          deviennent trop "durs".<br>
+          3. Ajuster <strong>Correction Point Noir</strong>
+          à 10–20 pour redonner de la densité aux ombres.<br>
+          4. Si trop agressif sur les premiers plans :
+          ajouter un <strong>masque de zone</strong> pour
+          limiter l'effet aux lointains uniquement.
+        </p>
+      </div>
+
+      <div class="warning">
+        <p>⚠️ <strong>Effet secondaire fréquent :</strong>
+        le dehaze augmente le contraste global et peut
+        "durcir" l'image. Compenser avec l'Égaliseur Tonal
+        (baisser légèrement les Hautes Lumières) si
+        le ciel devient trop lourd après application.
+        Ne pas dépasser une force modérée — l'effet
+        s'accumule avec les autres modules de contraste.</p>
+      </div>

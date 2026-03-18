@@ -2,11 +2,17 @@
   "name": "art-guide-photographe",
   "version": "1.0.0",
   "scripts": {
+    "build": "eleventy",
+    "serve": "eleventy --serve",
     "extract": "node scripts/extract-knowledge.js",
-    "watch": "node scripts/watch.js"
+    "watch": "node scripts/watch.js",
+    "migrate": "node scripts/migrate-to-eleventy.js"
   },
   "dependencies": {
     "node-html-parser": "^6.1.0",
     "chokidar": "^3.6.0"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0"
   }
 }

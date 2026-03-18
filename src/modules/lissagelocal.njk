@@ -1,0 +1,233 @@
+---
+layout: base.njk
+title: 'Lissage — 8 Modes Détail'
+permalink: '/modules/lissagelocal/'
+---
+
+<div class="module-header">
+        <div class="module-tag">
+          <div class="tag-dot" style="background:#e879a0"></div>
+          <span style="color:#e879a0">Détail & Netteté — Avancé</span>
+        </div>
+        <h2>Lissage — Les 8 Modes de Traitement</h2>
+        <div class="subtitle">
+          Flou, netteté, débruitage local — chaque mode a une logique propre
+        </div>
+      </div>
+
+      <div class="tip">
+        <div class="tip-label">Point de vue photographe</div>
+        <p>Le module Lissage dans ART ne fait pas que "flouter" —
+        c'est un outil multi-usage qui peut aussi bien
+        <strong>adoucir une zone</strong> (peau, fond),
+        <strong>simuler un flou d'objectif</strong> (bokeh),
+        <strong>ajouter du grain</strong> ou
+        <strong>débruiter localement</strong> avec des algorithmes
+        très différents. Le choix du mode change radicalement
+        le résultat. Chaque mode peut être appliqué avec un
+        <strong>masque</strong> pour cibler précisément une zone
+        (ciel, rochers, visage).</p>
+      </div>
+
+      <h3 class="section-title">
+        Paramètre Canal — commun à plusieurs modes
+      </h3>
+
+      <div class="param-grid">
+
+        <div class="param-item">
+          <div class="param-name">Canal : Luminance</div>
+          <div class="param-range">—</div>
+          <div class="param-desc">
+            Le lissage/flou s'applique uniquement sur la luminosité
+            des pixels — la couleur n'est pas touchée. Idéal pour
+            adoucir le bruit de luminance dans les ombres sans
+            dégrader la saturation de l'eau turquoise.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Canal : Chrominance</div>
+          <div class="param-range">—</div>
+          <div class="param-desc">
+            Agit uniquement sur la couleur, pas sur la netteté.
+            Utile pour lisser le bruit de chrominance résiduel
+            après la réduction de bruit principale, ou pour
+            uniformiser une couleur de fond.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Canal : RVB</div>
+          <div class="param-range">—</div>
+          <div class="param-desc">
+            Traitement sur les 3 canaux simultanément — affecte
+            à la fois la luminosité et la couleur. Mode par
+            défaut pour la plupart des effets créatifs
+            (flou objectif, flou mouvement, grain).
+          </div>
+        </div>
+
+      </div>
+
+      <h3 class="section-title">Les 8 Modes — Descriptions Complètes</h3>
+
+      <div class="param-grid">
+
+        <div class="param-item">
+          <div class="param-name">Guidé</div>
+          <div class="param-range">Rayon · Détail · Itérations · Canal</div>
+          <div class="param-desc">
+            <strong>Le mode le plus intelligent.</strong>
+            Lissage qui respecte les contours — il analyse
+            la structure de l'image pour ne pas flouter
+            les bords nets. Résultat : zones uniformes lissées
+            (ciel, eau calme) sans toucher aux contrastes forts
+            (bord rocher/eau).<br>
+            <strong>Rayon</strong> : taille de la zone analysée.
+            <strong>Détail</strong> : préservation des contours
+            (0 = ignore les bords, haut = les préserve fort).
+            <strong>Itérations</strong> : passes supplémentaires
+            pour un résultat plus lissé.
+            Idéal pour débruiter le ciel sans halo à l'horizon.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Gaussien</div>
+          <div class="param-range">Rayon · Itérations · Canal</div>
+          <div class="param-desc">
+            Flou classique uniforme — le "flou standard" de
+            tous les logiciels. Simple et prévisible : chaque
+            pixel est moyenné avec ses voisins dans un rayon
+            donné. Ne respecte pas les contours.
+            Utile pour créer un flou de fond intentionnel,
+            adoucir une texture uniforme, ou comme base
+            pour des effets créatifs.
+            Rayon faible (1–3) = léger. Rayon fort (10+) = flou visible.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Halo Diffus</div>
+          <div class="param-range">Rayon · Itérations · Atténuation</div>
+          <div class="param-desc">
+            Crée un effet de <strong>glow/halo lumineux</strong>
+            autour des zones claires — typique des vieux objectifs
+            à flou doux ou des effets "glamour". L'écume de vague
+            et les reflets sur l'eau prennent une auréole lumineuse.
+            <strong>Atténuation</strong> : contrôle l'intensité
+            de l'effet (1.00 = fort, proche de 0 = subtil).
+            Très utilisé en portrait pour la douceur de peau,
+            mais peut créer une atmosphère onirique sur l'eau.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Outils Non-Locaux</div>
+          <div class="param-range">Force · Détail · Itérations · Canal</div>
+          <div class="param-desc">
+            Algorithme avancé : compare des zones similaires
+            dans toute l'image (pas seulement les voisins proches)
+            pour débruiter intelligemment. Très efficace sur les
+            textures répétitives (sable, eau calme, ciel uniforme).
+            <strong>Force</strong> : intensité du débruitage.
+            <strong>Détail (50)</strong> : seuil de similarité —
+            haut = zones très similaires seulement.
+            Plus lent que les autres modes mais meilleure
+            qualité sur les grandes zones uniformes.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Wavelets</div>
+          <div class="param-range">Force · Levels · Gamma · Canal</div>
+          <div class="param-desc">
+            Décompose l'image en <strong>niveaux de fréquences</strong>
+            (ondelettes) et applique le lissage séparément sur
+            chaque niveau. Très précis : peut lisser le grain fin
+            sans toucher aux grandes textures.
+            <strong>Levels (5)</strong> : nombre de niveaux analysés
+            (plus = traitement plus profond).
+            <strong>Gamma (2.2)</strong> : correction gamma
+            avant traitement. Idéal pour un débruitage fin et
+            naturel sur les hauts ISO.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Flou de Mouvement</div>
+          <div class="param-range">Rayon · Angle · Courbure · Décalage</div>
+          <div class="param-desc">
+            Simule le <strong>flou de bougé</strong> d'un appareil
+            photo en mouvement. Crée des trainées directionnelles.
+            <strong>Angle</strong> : direction du mouvement (0° = horizontal).
+            <strong>Courbure</strong> : rend le mouvement courbe
+            plutôt que linéaire.
+            <strong>Décalage</strong> : décentre le point de pivot.
+            Utilisé créativement pour simuler une prise de vue
+            en filé (voiture, vague déferlante).
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Flou d'Objectif</div>
+          <div class="param-range">Rayon · Diaphragme (lames) · Angle</div>
+          <div class="param-desc">
+            Simule le <strong>bokeh d'un vrai objectif</strong>
+            avec la forme du diaphragme.
+            <strong>Rayon</strong> : intensité du flou (profondeur
+            de champ simulée).
+            <strong>Diaphragme (9 lames)</strong> : forme des
+            pastilles de bokeh — 5 lames = pentagone, 9 lames =
+            quasi-circulaire (bokeh premium).
+            <strong>Angle</strong> : rotation des pastilles.
+            Parfait pour créer un effet de mise au point sélective
+            en post-traitement avec un masque de zone.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Ajouter du Bruit</div>
+          <div class="param-range">Force · Dureté · Canal</div>
+          <div class="param-desc">
+            Ajoute du <strong>grain numérique/argentique</strong>
+            à l'image. L'opposé du débruitage — utile pour
+            homogénéiser le grain entre zones (les ombres récupérées
+            sont souvent plus bruitées que les HL), ou pour
+            créer un look film vintage.
+            <strong>Force (10)</strong> : quantité de grain.
+            <strong>Dureté (30)</strong> : taille des grains —
+            doux (0) = grain fin/argentique, dur (100) = grain
+            numérique carré.
+            Appliquer globalement à faible dose après le
+            débruitage pour retrouver un grain uniforme.
+          </div>
+        </div>
+
+      </div>
+
+      <div class="tip">
+        <div class="tip-label">Quel mode pour quelle situation ?</div>
+        <p>
+          <strong>Ciel bruité sans halo à l'horizon</strong> →
+          Guidé, Rayon 4, Détail 0.3, masque ciel.<br>
+          <strong>Peau ou zone uniforme</strong> →
+          Gaussien ou Guidé, Rayon 2–5.<br>
+          <strong>Look film / grain homogène</strong> →
+          Ajouter du Bruit, Force 8–15, Dureté 20.<br>
+          <strong>Effet bokeh créatif</strong> →
+          Flou d'Objectif, Rayon 8–20, 9 lames,
+          masque de zone pour le fond uniquement.<br>
+          <strong>Hauts ISO, grandes zones</strong> →
+          Outils Non-Locaux ou Wavelets.
+        </p>
+      </div>
+
+      <div class="warning">
+        <p>⚠️ <strong>Toujours utiliser un masque</strong> avec
+        ces modes — appliquer un flou ou un grain sur toute
+        l'image globalement donne rarement un bon résultat.
+        Le masque paramétrique (par luminance) ou le masque
+        de zone permettent de cibler précisément la zone voulue.</p>
+      </div>

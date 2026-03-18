@@ -2,67 +2,114 @@
 
 ## Présentation du projet
 
-Documentation HTML du logiciel **ART** (Another RawTherapee, dérivé de RawTherapee), destinée aux photographes. Le workflow couvert est **RAW → TIFF → Affinity Photo**.
-
-## Architecture
-
-- **Un seul fichier** : `index.html` (HTML5, CSS et JS embarqués, ~2400+ lignes)
-- Single Page Application minimaliste : JS gère la navigation entre modules via `show(id)`
-- Pipeline Node.js pour extraction de la knowledge base (voir section ci-dessous)
-
-## Modifier la documentation
-
-Éditer directement [index.html](index.html) :
-
-- **Ajouter un module** : copier un `<div class="module" id="mod-xxx">` existant, puis ajouter le lien de nav dans la sidebar
-- **Modifier un paramètre** : chercher le texte dans les `<div class="param-grid">` ou `<table>`
-- **Ajouter un look/preset** : section `mod-looks`
-- **Langue** : français uniquement
-
-## Déploiement
-
-Pousser sur `main` → GitHub Actions déclenche automatiquement la publication sur GitHub Pages.
+Documentation du logiciel **ART** (Another RawTherapee, dérivé de RawTherapee), destinée aux photographes. Le workflow couvert est **RAW → TIFF → Affinity Photo**.
 
 URL de production : `https://jordanatdown.github.io/ART-Guide-Photographe/`
 
-## Conventions
+---
 
-- Thème sombre, variables CSS dans `:root`
-- Bleu `--accent` pour exposition, orange `--accent3` pour couleur, rose `--accent4` pour détail
-- Classes utiles : `.tip` (conseil), `.warning` (mise en garde), `.param-grid`, `.workflow-steps`
-- Ne pas externaliser le CSS ou le JS — garder tout dans `index.html`
+## Architecture — Eleventy (11ty)
 
-## Pipeline Knowledge — art-knowledge.json
+Le projet utilise **Eleventy v3** (SSG) avec **Nunjucks** pour générer un site statique multi-pages depuis `src/`.
 
-Le projet inclut un pipeline d'extraction qui parse `index.html` et génère `art-knowledge.json` (base de connaissances structurée, utilisable par MCP ou tout système de génération `.arp`).
+```
+ART-guide-photographe/
+├── src/
+│   ├── _layouts/
+│   │   └── base.njk          ← shell HTML (head, nav, footer)
+│   ├── _includes/
+│   │   └── nav.njk           ← sidebar navigation partagée
+│   ├── _data/
+│   │   └── nav.js            ← structure de navigation (sections + modules)
+│   ├── assets/
+│   │   ├── style.css         ← CSS du site
+│   │   └── app.js            ← JS (filterNav uniquement)
+│   ├── index.njk             ← page d'accueil
+│   └── modules/
+│       └── *.njk             ← 21 fichiers modules (un par module ART)
+├── _site/                    ← build output (gitignore, généré par Eleventy)
+├── .eleventy.js              ← config Eleventy (pathPrefix, dirs)
+├── package.json
+└── scripts/
+    ├── extract-knowledge.js  ← parse _site/index.html → art-knowledge.json
+    ├── watch.js              ← surveillance locale
+    └── migrate-to-eleventy.js ← script one-shot de migration (déjà exécuté)
+```
 
-### Environnement
+### Structure d'un fichier module
 
-L'utilisateur est sur **Windows sans Node.js natif**. Toutes les commandes npm passent par **WSL Ubuntu**.
+Chaque `src/modules/{id}.njk` suit ce format :
+
+```yaml
+---
+layout: base.njk
+title: 'Nom du Module'
+permalink: '/modules/{id}/'
+---
+
+<!-- HTML du contenu du module -->
+```
+
+### Données de navigation
+
+`src/_data/nav.js` exporte la liste des sections et modules. Pour ajouter un module :
+1. Créer `src/modules/{id}.njk`
+2. Ajouter l'entrée dans `src/_data/nav.js`
+3. Rebuild
+
+---
+
+## Environnement
+
+L'utilisateur est sur **Windows sans Node.js natif**. Toutes les commandes npm passent par **WSL Ubuntu**. Le flag `-l` (login shell) est **obligatoire** pour que npm/nvm soient dans le PATH.
 
 ### Commandes WSL
 
 ```bash
 # Installation des dépendances (une seule fois ou après maj package.json)
-wsl -e bash -c "cd /mnt/d/developpement.code/ART-guide-photographe && npm install"
+wsl -e bash -l -c "cd /mnt/d/developpement.code/ART-guide-photographe && npm install"
 
-# Générer art-knowledge.json
-wsl -e bash -c "cd /mnt/d/developpement.code/ART-guide-photographe && npm run extract"
+# Build Eleventy → génère _site/
+wsl -e bash -l -c "cd /mnt/d/developpement.code/ART-guide-photographe && npm run build"
 
-# Surveillance locale (regénère auto à chaque sauvegarde de index.html)
-wsl -e bash -c "cd /mnt/d/developpement.code/ART-guide-photographe && npm run watch"
+# Dev server local avec hot reload (http://localhost:8080)
+wsl -e bash -l -c "cd /mnt/d/developpement.code/ART-guide-photographe && npm run serve"
+
+# Générer art-knowledge.json (nécessite un build préalable)
+wsl -e bash -l -c "cd /mnt/d/developpement.code/ART-guide-photographe && npm run build && npm run extract"
+
+# Surveillance locale
+wsl -e bash -l -c "cd /mnt/d/developpement.code/ART-guide-photographe && npm run watch"
 ```
 
-### Quand relancer l'extraction
+---
 
-- Après **tout ajout ou refonte d'un module** dans `index.html`
-- Avant de commiter si `index.html` a changé (ou laisser GitHub Actions le faire)
+## Déploiement
 
-### Règles importantes
+Pousser sur `main` → GitHub Actions (`deploy.yml`) :
+1. `npm install`
+2. `npm run build` → génère `_site/`
+3. Upload de `_site/` vers GitHub Pages
 
-- **Ne jamais éditer `art-knowledge.json` à la main** — fichier généré
-- **GitHub Actions** (`extract.yml`) régénère et commite `art-knowledge.json` automatiquement à chaque push touchant `index.html`
-- Si le workflow échoue, relancer l'extraction manuellement via WSL et commiter
+---
+
+## Conventions de style
+
+- Thème sombre, variables CSS dans `:root`
+- Bleu `--accent` pour exposition, orange `--accent3` pour couleur, rose `--accent4` pour détail, violet `--accent` (a78bfa) pour Looks & Presets
+- Classes HTML utiles : `.tip`, `.warning`, `.param-grid`, `.workflow`, `.card`, `.module-header`
+- Langue : **français uniquement**
+- Les liens inter-modules utilisent des `href` réels (ex: `/ART-Guide-Photographe/modules/exposition/`), pas de `onclick`
+
+---
+
+## Pipeline Knowledge — art-knowledge.json
+
+`scripts/extract-knowledge.js` parse `_site/index.html` (build nécessaire) et génère `art-knowledge.json` (base de connaissances structurée, utilisable par MCP ou tout système de génération `.arp`).
+
+**GitHub Actions** (`extract.yml`) régénère et commite `art-knowledge.json` automatiquement à chaque push touchant `src/modules/**` ou `src/index.njk`.
+
+**Ne jamais éditer `art-knowledge.json` à la main** — fichier généré.
 
 ### Structure du JSON généré
 
@@ -72,14 +119,12 @@ wsl -e bash -c "cd /mnt/d/developpement.code/ART-guide-photographe && npm run wa
     "source": "ART Raw Image Processor — Documentation Photographe",
     "version": "1.0",
     "generated": "ISO timestamp",
-    "total_modules": 22,
-    "description": "..."
+    "total_modules": 22
   },
   "modules": [
     {
       "id": "mod-logtonemapping",
       "name": "Log Tone Mapping",
-      "subtitle": "...",
       "category": "Module Signature d'ART ⭐",
       "params": [{ "name": "...", "range": "...", "description": "..." }],
       "tips": [{ "label": "...", "content": "..." }],
@@ -89,13 +134,3 @@ wsl -e bash -c "cd /mnt/d/developpement.code/ART-guide-photographe && npm run wa
   ]
 }
 ```
-
-### Fichiers du pipeline
-
-| Fichier | Rôle |
-|---|---|
-| `scripts/extract-knowledge.js` | Parser HTML → JSON |
-| `scripts/watch.js` | Surveillance locale avec chokidar |
-| `package.json` | Dépendances + scripts npm |
-| `.github/workflows/extract.yml` | CI auto sur push GitHub |
-| `art-knowledge.json` | Fichier généré — ne pas éditer |

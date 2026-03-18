@@ -1,0 +1,242 @@
+---
+layout: base.njk
+title: 'Correction Couleurs / Tonalité'
+permalink: '/modules/correctioncouleurs/'
+---
+
+<div class="module-header">
+        <div class="module-tag">
+          <div class="tag-dot" style="background:#f59e0b"></div>
+          <span style="color:#f59e0b">Module Signature d'ART ⭐</span>
+        </div>
+        <h2>Correction des Couleurs / Tonalités</h2>
+        <div class="subtitle">
+          7 modes de color grading — des color wheels au LUT
+        </div>
+      </div>
+
+      <div class="tip">
+        <div class="tip-label">Point de vue photographe</div>
+        <p>C'est le module de <strong>color grading</strong> central d'ART —
+        l'équivalent des Primary Wheels de DaVinci Resolve. Il permet
+        d'assigner une couleur différente aux ombres, tons moyens et
+        hautes lumières simultanément. C'est ici que naît le look
+        "teal & orange", le look "film", ou n'importe quelle
+        atmosphère colorée. ART propose 7 algorithmes différents
+        pour arriver à ce résultat — chacun avec une logique propre.
+        Le système de <strong>calques (instances)</strong> permet
+        d'empiler plusieurs corrections indépendantes.</p>
+      </div>
+
+      <h3 class="section-title">Système de Calques (Instances)</h3>
+
+      <div class="param-grid">
+
+        <div class="param-item">
+          <div class="param-name">Liste des instances</div>
+          <div class="param-range">Boutons + / −</div>
+          <div class="param-desc">
+            Chaque ligne dans la liste est une correction indépendante
+            avec son propre mode et ses propres masques. Tu peux
+            empiler plusieurs instances : une en mode
+            <strong>Coefficients TSL</strong> pour le color grading
+            général, une autre en mode <strong>Canaux RVB séparés</strong>
+            pour un ajustement fin sur un canal spécifique.
+            Cocher/décocher la case active ou bypass l'instance.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Paramètres de l'instance</div>
+          <div class="param-range">HSL S=0 So=0 h=0 g=2.4 …</div>
+          <div class="param-desc">
+            La ligne de résumé affiche l'état courant de l'instance
+            de façon compacte. H= teinte, S= saturation,
+            So= saturation sortie, s= scale, o= offset, p= pivot,
+            c= compression, P= préservation, g= gamma.
+            Toutes ces valeurs à zéro = instance neutre, pas d'effet.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Masques par instance</div>
+          <div class="param-range">Colonne Masques</div>
+          <div class="param-desc">
+            Chaque instance peut avoir son propre masque —
+            limiter la correction à une zone de l'image
+            (masque de zone, masque paramétrique par luminance/couleur,
+            masque au pinceau). Puissant pour appliquer le color grading
+            uniquement sur le ciel ou uniquement sur les rochers.
+          </div>
+        </div>
+
+      </div>
+
+      <h3 class="section-title">Mode — 7 Algorithmes</h3>
+
+      <div class="param-grid">
+
+        <div class="param-item">
+          <div class="param-name">Neutre</div>
+          <div class="param-range">Point de départ propre</div>
+          <div class="param-desc">
+            Aucun rendu colorimétrique — courbe linéaire, espace
+            colorimétrique natif. C'est le mode "vierge" à utiliser
+            avec le Log Tone Mapping actif quand tu veux un
+            contrôle total sans présupposé de rendu.
+            Idéal pour les workflows où tu construis tout toi-même.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Standard</div>
+          <div class="param-range">Rendu caméra simulé</div>
+          <div class="param-desc">
+            Similaire au rendu JPEG de l'appareil — applique
+            une courbe tonale douce et une légère saturation.
+            Bon point de départ si tu veux retrouver le look
+            "out-of-camera" avant de personnaliser.
+            Correspond approximativement au profil Standard
+            du Sony Alpha.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Coefficients TSL</div>
+          <div class="param-range">Color wheels Teinte/Sat/Lum</div>
+          <div class="param-desc">
+            <strong>Le mode principal pour le color grading.</strong>
+            Les 3 color wheels (Hautes lumières / Ombres /
+            Tons moyens) agissent simultanément sur la teinte
+            ET la luminosité. Le curseur <strong>Gamma (2.4)</strong>
+            contrôle la courbure de la transition entre zones.
+            C'est le mode "DaVinci Resolve" d'ART.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Perceptuel</div>
+          <div class="param-range">Color wheel unique + courbe</div>
+          <div class="param-desc">
+            Une seule color wheel globale avec une approche
+            perceptuelle — les modifications respectent mieux
+            la perception humaine des couleurs. Moins de
+            dérive de teinte lors des changements de saturation.
+            Idéal pour des corrections subtiles qui doivent
+            rester "invisibles".
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Canaux RVB séparés</div>
+          <div class="param-range">Courbe + sliders R/V/B + wheels</div>
+          <div class="param-desc">
+            Mode avancé : une courbe de tons par canal
+            Rouge, Vert, Bleu <strong>indépendante</strong>,
+            plus les color wheels. Options <em>Lier les curseurs
+            correspondants</em> et <em>Mode luminance</em>.
+            Permet un split toning ultra-précis : lever les
+            ombres du canal bleu pendant qu'on compresse
+            les HL du rouge — look film classique.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">LUT</div>
+          <div class="param-range">Fichier .cube / .3dl</div>
+          <div class="param-desc">
+            Applique une LUT (Look-Up Table) externe —
+            fichiers .cube ou .3dl téléchargeables ou créés
+            dans d'autres logiciels (DaVinci, Dehancer, etc.).
+            Champ <strong>Fichier LUT</strong> pour charger
+            le fichier. Permet d'appliquer des looks cinéma
+            professionnels (Kodak 2383, Fuji 3510, etc.)
+            directement sur tes RAWs.
+          </div>
+        </div>
+
+      </div>
+
+      <h3 class="section-title">Paramètres Communs (tous modes)</h3>
+
+      <div class="param-grid">
+
+        <div class="param-item">
+          <div class="param-name">Modification de la teinte</div>
+          <div class="param-range">-180° → +180° (barre arc-en-ciel)</div>
+          <div class="param-desc">
+            Rotation globale de toutes les teintes de l'image
+            sur la roue chromatique. 0 = pas de décalage.
+            +30° = tout décale vers le jaune-vert.
+            -30° = tout décale vers le magenta-rouge.
+            Utile pour corriger une dominante de couleur globale
+            sans toucher à la saturation.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Saturation Entrée / Sortie</div>
+          <div class="param-range">-100 → +100</div>
+          <div class="param-desc">
+            <strong>Entrée</strong> : filtre quelles saturation
+            sont affectées par la correction (0 = toutes).
+            <strong>Sortie</strong> : saturation finale après
+            correction. Séparer les deux permet de
+            "protéger" les couleurs déjà très saturées
+            (eau turquoise) tout en boostant les autres.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Gamma (mode Coefficients TSL)</div>
+          <div class="param-range">0.5 → 4.0 (défaut : 2.4)</div>
+          <div class="param-desc">
+            Contrôle la courbure de la transition entre ombres
+            et hautes lumières sur les color wheels.
+            2.4 = comportement standard sRGB.
+            Valeur haute (3.0+) = les tons moyens basculent
+            davantage vers les "ombres" — wheels d'ombres
+            plus influentes. Valeur basse (1.5) = tons
+            moyens plus proches des HL.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Pivot / Compression</div>
+          <div class="param-range">0 → 2.0 / 0 → 1.0</div>
+          <div class="param-desc">
+            <strong>Pivot</strong> : point de luminosité qui
+            sépare "ombres" et "hautes lumières" sur les wheels.
+            1.0 = séparation au niveau des tons moyens standard.
+            <strong>Compression</strong> : réduit l'effet aux
+            extrêmes pour éviter la saturation excessive dans
+            les zones très claires ou très sombres.
+          </div>
+        </div>
+
+      </div>
+
+      <div class="tip">
+        <div class="tip-label">Bonnes pratiques — workflow recommandé</div>
+        <p>
+          <strong>Instance 1</strong> — Mode <strong>Coefficients TSL</strong> :
+          color grading principal (ombres teal, HL chaud).<br>
+          <strong>Instance 2</strong> — Mode <strong>Canaux RVB séparés</strong> :
+          ajustements fins canal par canal (lever ombres bleu,
+          compresser HL rouge).<br>
+          <strong>Instance 3</strong> — Mode <strong>LUT</strong> (optionnel) :
+          appliquer un look cinéma par-dessus.<br><br>
+          Toujours travailler avec des valeurs <strong>subtiles</strong>
+          sur les wheels — intensité 0.05 à 0.15 max. L'œil
+          s'adapte vite, ce qui paraît subtil à l'écran
+          sera visible à l'impression.
+        </p>
+      </div>
+
+      <div class="warning">
+        <p>⚠️ <strong>Ordre des instances :</strong> ART applique
+        les instances de haut en bas dans la liste. Mettre le
+        color grading général (Coefficients TSL) en instance 1
+        et les ajustements fins en instance 2 donne
+        de meilleurs résultats que l'inverse.</p>
+      </div>

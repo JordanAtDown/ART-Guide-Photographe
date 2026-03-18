@@ -1,0 +1,41 @@
+---
+layout: base.njk
+title: 'Égaliseur Tonal'
+permalink: '/modules/egaliseurtonal/'
+---
+
+<div class="module-header">
+        <div class="module-tag"><div class="tag-dot" style="background:#4a9eff"></div><span style="color:#4a9eff">Exposition & Tonalité</span></div>
+        <h2>Égaliseur Tonal</h2>
+        <div class="subtitle">Sculption chirurgicale de la dynamique — l'outil qui remplace Ombres/HLs de Lightroom</div>
+      </div>
+      <div class="tip">
+        <div class="tip-label">Point de vue photographe</div>
+        <p>C'est l'outil le plus direct pour sculpter la lumière dans une image. Pense à lui comme à un dodging/burning numérique : tu décides quelle zone de la plage tonale doit être plus lumineuse ou plus sombre, sans affecter le reste. Extrêmement puissant pour récupérer des rochers sombres sans cramer le ciel.</p>
+      </div>
+      <h3 class="section-title">Les 5 Bandes Tonales</h3>
+      <table>
+        <tr><th>Curseur</th><th>Plage (EV)</th><th>Ce qu'il touche sur ta photo</th></tr>
+        <tr><td>Noirs</td><td>-4 → +4</td><td>Les zones vraiment sombres — ombres profondes, zones presque noires. Lever = lift des noirs (look "cinéma"). Baisser = crush, look "contrasté".</td></tr>
+        <tr><td>Ombres</td><td>-4 → +4</td><td>Les demi-ombres — rochers sombres, intérieur de bâtiments, faces sombres d'un sujet. Le plus utile pour récupérer du détail sans tout dénaturer.</td></tr>
+        <tr><td>Tons Moyens</td><td>-4 → +4</td><td>Le "ventre" de l'image — tout ce qui est à 18% gris, peau, herbe, mer en mi-journée. Très sensible visuellement.</td></tr>
+        <tr><td>Hautes Lumières</td><td>-4 → +4</td><td>Les zones claires non cramées — ciel bleu, eau éclairée, nuages détaillés. Baisser pour garder du "poids" dans le ciel.</td></tr>
+        <tr><td>Blancs</td><td>-4 → +4</td><td>Les zones très lumineuses, presque cramées. Baisse si les écumes de vague ou les nuages perdent leur texture.</td></tr>
+      </table>
+      <h3 class="section-title">Paramètres Techniques</h3>
+      <div class="param-grid">
+        <div class="param-item">
+          <div class="param-name">Pivot (EV)</div>
+          <div class="param-range">-3 → +3 EV</div>
+          <div class="param-desc">Déplace la frontière entre "ombres" et "hautes lumières". Un pivot bas (-0.5) élargit la zone d'ombres — utile pour les scènes sombres. Un pivot haut protège mieux les HL sur une photo de plage en plein soleil.</div>
+        </div>
+        <div class="param-item">
+          <div class="param-name">Régularisation</div>
+          <div class="param-range">1 → 10</div>
+          <div class="param-desc">Contrôle le "lissage" entre les bandes. Valeur haute (4-6) = transitions douces et naturelles. Valeur basse (1-2) = chaque bande agit de façon plus isolée, risque d'artefacts aux transitions.</div>
+        </div>
+      </div>
+      <div class="tip">
+        <div class="tip-label">Recette paysage marin</div>
+        <p>Pour une photo de vague sur rochers (comme la tienne) : <strong>Ombres +35 à +50</strong> pour récupérer les rochers, <strong>Hautes Lumières -15 à -25</strong> pour protéger l'eau et le ciel, <strong>Noirs +10 à +15</strong> pour éviter le crush total. Régularisation à 4.</p>
+      </div>

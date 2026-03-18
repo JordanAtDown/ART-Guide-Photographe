@@ -1,0 +1,32 @@
+---
+layout: base.njk
+title: 'Compression Plage Dynamique'
+permalink: '/modules/compressiondyn/'
+---
+
+<div class="module-header">
+        <div class="module-tag"><div class="tag-dot" style="background:#4a9eff"></div><span style="color:#4a9eff">Exposition & Tonalité</span></div>
+        <h2>Compression de la Plage Dynamique</h2>
+        <div class="subtitle">Tone Mapping "local" — récupération de détail dans les zones extrêmes</div>
+      </div>
+      <div class="tip">
+        <div class="tip-label">Point de vue photographe</div>
+        <p>C'est le "tone mapping" au sens traditionnel — il analyse les zones locales de l'image et compresse les écarts de luminosité pour faire ressortir le détail partout. Pense à l'effet "HDR de qualité" sans l'aspect criard. Complémentaire au Log Tone Mapping qui, lui, agit globalement.</p>
+      </div>
+      <div class="param-grid">
+        <div class="param-item">
+          <div class="param-name">Quantité</div>
+          <div class="param-range">0 → 100 (défaut : 20)</div>
+          <div class="param-desc">Force de la compression dynamique locale. 20 = léger, naturel. 40-60 = récupération marquée, peut révéler beaucoup de détail dans les ombres sombres. Au-delà de 70, risque d'aspect "tonné" artificiel.</div>
+        </div>
+        <div class="param-item">
+          <div class="param-name">Détail</div>
+          <div class="param-range">0 → 100 (défaut : 30)</div>
+          <div class="param-desc">Définit l'échelle spatiale de l'analyse. Valeur basse (10-20) = compression sur de grandes zones. Valeur haute (50-70) = compression fine qui préserve mieux les textures. Augmenter si les rochers semblent "plats" après la quantité.</div>
+        </div>
+        <div class="param-item">
+          <div class="param-name">Contrôle de Saturation</div>
+          <div class="param-range">☑ / ☐</div>
+          <div class="param-desc">Quand coché, la compression dynamique affecte aussi la saturation proportionnellement — évite que les zones récupérées deviennent trop grises. À activer pour garder la couleur de l'eau dans les ombres.</div>
+        </div>
+      </div>

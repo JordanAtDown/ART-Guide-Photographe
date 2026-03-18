@@ -1,0 +1,268 @@
+---
+layout: base.njk
+title: 'Lissage (Réduction de Bruit)'
+permalink: '/modules/lissage/'
+---
+
+<div class="module-header">
+        <div class="module-tag">
+          <div class="tag-dot" style="background:#e879a0"></div>
+          <span style="color:#e879a0">Détail & Netteté</span>
+        </div>
+        <h2>Réduction de Bruit</h2>
+        <div class="subtitle">
+          Débruitage luminance + chrominance — 2 modes, 2 espaces colorimétriques
+        </div>
+      </div>
+
+      <div class="tip">
+        <div class="tip-label">Point de vue photographe</div>
+        <p>Le bruit numérique a deux composantes distinctes : le
+        <strong>bruit de luminance</strong> (grain gris, proche du
+        grain argentique — souvent esthétique) et le <strong>bruit de
+        chrominance</strong> (taches de couleur rouge/verte/bleue —
+        toujours disgracieux). Stratégie : traiter agressivement la
+        chrominance, préserver une partie de la luminance pour garder
+        le piqué et la texture des rochers et de l'eau.</p>
+      </div>
+
+      <h3 class="section-title">Mode — Conservatif vs Agressif</h3>
+
+      <div class="param-grid">
+
+        <div class="param-item">
+          <div class="param-name">Mode : Conservatif</div>
+          <div class="param-range">Préserve les détails fins</div>
+          <div class="param-desc">
+            Algorithme doux qui protège les contours et les textures.
+            Recommandé pour les photos à faible ISO (100–800) ou quand
+            la texture est importante : rochers, écumes, végétation.
+            Réduit le bruit sans amollir les détails. C'est le mode
+            à utiliser par défaut sur tes photos de mer en plein soleil.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Mode : Agressif</div>
+          <div class="param-range">Réduction plus forte, moins de détail</div>
+          <div class="param-desc">
+            Algorithme plus puissant pour les hauts ISO (1600+) ou les
+            ombres très bruitées récupérées avec l'Égaliseur Tonal.
+            Peut légèrement amollir les textures fines — compenser
+            ensuite avec le module Amplification de Texture.
+            Deux sous-options d'espace colorimétrique disponibles :
+            RVB ou Lab (voir ci-dessous).
+          </div>
+        </div>
+
+      </div>
+
+      <h3 class="section-title">
+        Espace Colorimétrique (mode Agressif uniquement)
+      </h3>
+
+      <div class="param-grid">
+
+        <div class="param-item">
+          <div class="param-name">Espace : RVB</div>
+          <div class="param-range">Traitement dans l'espace natif</div>
+          <div class="param-desc">
+            Traite le bruit directement sur les canaux Rouge, Vert, Bleu.
+            Plus rapide, résultats cohérents sur les zones uniformes.
+            Peut parfois créer des artefacts de couleur aux transitions
+            contrastées. Bon choix pour les images à dominante colorée
+            forte (eau turquoise, ciel bleu).
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Espace : Lab</div>
+          <div class="param-range">Traitement luminance/couleur séparé</div>
+          <div class="param-desc">
+            Sépare le traitement de la luminosité (L) et de la couleur
+            (a, b) — résultats plus naturels car le débruitage de
+            luminance ne pollue pas la couleur. Meilleur choix pour
+            les photos avec beaucoup de transitions (rochers sombres
+            / eau claire) ou les portraits. Légèrement plus lent.
+          </div>
+        </div>
+
+      </div>
+
+      <h3 class="section-title">Paramètres — Luminance</h3>
+
+      <div class="param-grid">
+
+        <div class="param-item">
+          <div class="param-name">Gamma</div>
+          <div class="param-range">1.0 → 3.0 (défaut : 1.70)</div>
+          <div class="param-desc">
+            Contrôle dans quelle zone tonale le débruitage est le plus
+            actif. Valeur haute (1.7–2.0) = plus actif dans les ombres
+            où le bruit est concentré. Valeur basse (1.0–1.2) =
+            traitement uniforme sur toute la plage. Garder à 1.70
+            dans la plupart des cas — c'est la valeur optimale pour
+            les capteurs Sony.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Luminance</div>
+          <div class="param-range">0.00 → 1.00 (défaut : 0.00)</div>
+          <div class="param-desc">
+            Force du débruitage de luminance. 0 = désactivé.
+            0.10–0.25 = léger, idéal faible ISO.
+            0.40–0.60 = standard pour ISO 800–3200.
+            0.70–1.00 = agressif pour hauts ISO.
+            À faible ISO sur tes photos de plage, souvent inutile
+            de dépasser 0.20.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Niveau de détails de Luminance</div>
+          <div class="param-range">0.00 → 1.00 (défaut : 0.00)</div>
+          <div class="param-desc">
+            Préservation des détails pendant le débruitage luminance.
+            0 = aucune préservation (lissage maximum).
+            0.50 = équilibre bruit/détail.
+            1.00 = préserve tous les détails (débruitage minimal).
+            Monter à 0.30–0.50 pour garder la texture des rochers
+            et des écumes.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Détail Seuil</div>
+          <div class="param-range">0 → 100 (défaut : 0)</div>
+          <div class="param-desc">
+            Seuil en dessous duquel les détails sont considérés comme
+            du bruit et supprimés. Valeur basse = traite même les très
+            petits détails. Valeur haute = ne traite que le gros bruit,
+            préserve les micro-textures. Utile sur les surfaces
+            texturées comme les strates rocheuses.
+          </div>
+        </div>
+
+      </div>
+
+      <h3 class="section-title">Paramètres — Chrominance</h3>
+
+      <div class="param-grid">
+
+        <div class="param-item">
+          <div class="param-name">Méthode : Global auto.</div>
+          <div class="param-range">Automatique</div>
+          <div class="param-desc">
+            ART analyse l'image et applique une réduction de chrominance
+            adaptée automatiquement. Bon point de départ. Utilise
+            un seul curseur "Réduction de force automatique" pour
+            contrôler l'intensité globale.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Méthode : Manuel</div>
+          <div class="param-range">3 curseurs indépendants</div>
+          <div class="param-desc">
+            Contrôle fin avec 3 curseurs séparés :
+            <strong>Chrominance Maître</strong> (force globale),
+            <strong>Rouge-Vert</strong> (axe magenta/vert),
+            <strong>Bleu-Jaune</strong> (axe bleu/jaune).
+            Utile quand un type de bruit coloré domine — par exemple
+            bruit bleu dans les ombres de ciel nocturne.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Réduction de force automatique</div>
+          <div class="param-range">0.00 → 2.00 (défaut : 1.00)</div>
+          <div class="param-desc">
+            En mode Global auto. : multiplicateur de la force calculée
+            automatiquement. 1.00 = valeur calculée par ART.
+            1.50–2.00 = augmente la réduction (utile hauts ISO).
+            0.50 = réduit à moitié (si l'auto est trop agressive
+            sur une image peu bruitée).
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Chrominance Maître (Manuel)</div>
+          <div class="param-range">0 → 100 (défaut : 15)</div>
+          <div class="param-desc">
+            Force globale de débruitage chrominance en mode manuel.
+            15–25 = standard, naturel. 40–60 = hauts ISO ou ombres
+            poussées. Traiter agressivement ici ne nuit pas au piqué
+            de l'image — la chrominance n'a aucune valeur esthétique.
+          </div>
+        </div>
+
+      </div>
+
+      <h3 class="section-title">Lissage Final</h3>
+
+      <div class="param-grid">
+
+        <div class="param-item">
+          <div class="param-name">Niveau de détails de Luminance</div>
+          <div class="param-range">0 → 100 (défaut : 80)</div>
+          <div class="param-desc">
+            Passe de lissage finale appliquée après le débruitage
+            principal. Valeur haute (70–90) = lissage fort des
+            résidus. Valeur basse (20–40) = préserve davantage
+            de micro-texture. Sur les photos de mer à faible ISO,
+            descendre à 50–60 pour garder le "grain" de l'eau.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Luminance (Lissage final)</div>
+          <div class="param-range">0 → 100 (défaut : 0)</div>
+          <div class="param-desc">
+            Force du lissage final sur la luminance. 0 = désactivé.
+            Activer seulement si des artefacts résiduels persistent
+            après le débruitage principal. Valeurs 5–15 max —
+            au-delà, l'image paraît "plastique".
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Chrominance (Lissage final)</div>
+          <div class="param-range">0 → 10 (défaut : 3)</div>
+          <div class="param-desc">
+            Lissage final de la chrominance — élimine les derniers
+            artefacts de couleur. Valeur 3 est généralement optimale.
+            Monter à 5–7 si des pixels colorés isolés persistent
+            dans les zones sombres.
+          </div>
+        </div>
+
+      </div>
+
+      <div class="tip">
+        <div class="tip-label">Recette pour photos de mer Sony Alpha</div>
+        <p>
+          ISO bas (100–400), plein soleil : Mode <strong>Conservatif</strong>,
+          Luminance <strong>0.10</strong>, Chrominance auto
+          <strong>1.00</strong>, Lissage final Niv. détails
+          <strong>60</strong>.<br><br>
+          Ombres récupérées (+40 Égaliseur) : Mode <strong>Agressif /
+          Lab</strong>, Luminance <strong>0.35</strong>, Niveau détails
+          <strong>0.40</strong>, Chrominance Maître <strong>25</strong>.
+        </p>
+      </div>
+
+      <h3 class="section-title">Lissage — Traitement Local</h3>
+
+      <div class="tip">
+        <div class="tip-label">Modes avancés</div>
+        <p>
+          Le module Lissage propose également <strong>8 modes de traitement local</strong>
+          (Guidé, Gaussien, Halo Diffus, Outils Non-Locaux, Wavelets, Flou de Mouvement,
+          Flou d'Objectif, Ajouter du Bruit) chacun avec ses propres paramètres et
+          applicable avec un masque de zone. Ces modes permettent d'aller bien au-delà
+          du simple débruitage : bokeh créatif, grain film, flou atmosphérique, etc.
+          → Voir le module <a href="#" onclick="show('lissagelocal')" style="color:var(--accent)">
+          Lissage — 8 Modes Détail</a> pour la documentation complète.
+        </p>
+      </div>

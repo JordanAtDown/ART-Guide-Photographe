@@ -3,7 +3,8 @@ name: Extract ART Knowledge
 on:
   push:
     paths:
-      - 'index.html'
+      - 'src/modules/**'
+      - 'src/index.njk'
 
 jobs:
   extract:
@@ -17,6 +18,9 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+
+      - name: Build Eleventy site
+        run: npm run build
 
       - name: Extract knowledge
         run: npm run extract
