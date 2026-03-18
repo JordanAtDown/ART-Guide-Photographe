@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ART — Documentation Photographe</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0f11;
+    --bg2: #15171a;
+    --bg3: #1c1f24;
+    --border: #2a2d33;
+    --text: #e8e9eb;
+    --muted: #6b7280;
+    --accent: #4a9eff;
+    --accent2: #00d4aa;
+    --accent3: #f59e0b;
+    --accent4: #e879a0;
+    --red: #ff6b6b;
+    --mono: 'DM Mono', monospace;
+    --serif: 'Playfair Display', serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* HEADER */
+  header {
+    padding: 60px 40px 40px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(74,158,255,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  header h1 {
+    font-family: var(--serif);
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  header h1 span { color: var(--accent2); font-style: italic; }
+  header p {
+    color: var(--muted);
+    font-size: 16px;
+    max-width: 600px;
+    line-height: 1.6;
+  }
+  .version-badge {
+    display: inline-block;
+    margin-top: 20px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  /* LAYOUT */
+  .container {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    min-height: calc(100vh - 200px);
+  }
+
+  /* SIDEBAR */
+  nav {
+    border-right: 1px solid var(--border);
+    padding: 30px 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  nav::-webkit-scrollbar { width: 3px; }
+  nav::-webkit-scrollbar-track { background: transparent; }
+  nav::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  .nav-section {
+    padding: 6px 24px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-top: 20px;
+    margin-bottom: 4px;
+  }
+  nav a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 24px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 400;
+    transition: all 0.15s;
+    border-left: 2px solid transparent;
+  }
+  nav a:hover, nav a.active {
+    color: var(--text);
+    background: rgba(74,158,255,0.06);
+    border-left-color: var(--accent);
+  }
+  nav a .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* MAIN CONTENT */
+  main {
+    padding: 40px 50px;
+    max-width: 900px;
+  }
+
+  .module {
+    display: none;
+    animation: fadeIn 0.2s ease;
+  }
+  .module.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .module-header {
+    margin-bottom: 36px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  .module-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .module-tag .tag-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+  }
+  .module-header h2 {
+    font-family: var(--serif);
+    font-size: 34px;
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+  .module-header .subtitle {
+    color: var(--muted);
+    font-size: 15px;
+    font-style: italic;
+    font-family: var(--serif);
+  }
+
+  /* CARDS */
+  .card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+  .card h3 {
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    letter-spacing: 0.05em;
+  }
+  .card p { color: var(--muted); font-size: 14px; line-height: 1.7; }
+
+  /* PARAM BLOCKS */
+  .param-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 20px 0;
+  }
+  @media (max-width: 700px) { .param-grid { grid-template-columns: 1fr; } }
+
+  .param-item {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px;
+  }
+  .param-name {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .param-range {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent3);
+    margin-bottom: 8px;
+  }
+  .param-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+  /* PHOTOGRAPHER TIP */
+  .tip {
+    background: rgba(0, 212, 170, 0.06);
+    border: 1px solid rgba(0, 212, 170, 0.2);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 20px 0;
+    position: relative;
+  }
+  .tip::before {
+    content: '📷';
+    position: absolute;
+    top: -10px; left: 20px;
+    background: var(--bg);
+    padding: 0 6px;
+    font-size: 16px;
+  }
+  .tip-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--accent2);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .tip p { font-size: 14px; color: #b0d8d0; line-height: 1.6; }
+
+  /* WARNING */
+  .warning {
+    background: rgba(245,158,11,0.06);
+    border: 1px solid rgba(245,158,11,0.25);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 16px 0;
+  }
+  .warning p { font-size: 13px; color: #c8a040; }
+
+  /* WORKFLOW */
+  .workflow {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 20px 0;
+  }
+  .workflow-step {
+    display: flex;
+    gap: 20px;
+    position: relative;
+  }
+  .workflow-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 32px;
+    width: 1px;
+    height: calc(100% + 0px);
+    background: var(--border);
+  }
+  .step-num {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 500;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+  .step-content {
+    padding: 4px 0 28px;
+  }
+  .step-content h4 { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+  .step-content p { font-size: 13px; color: var(--muted); }
+
+  /* TABLE */
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+  th {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  td { padding: 10px 14px; border-bottom: 1px solid rgba(42,45,51,0.5); }
+  td:first-child { font-family: var(--mono); font-size: 12px; color: var(--accent); }
+  td:nth-child(2) { color: var(--accent3); font-family: var(--mono); font-size: 11px; }
+  td:last-child { color: var(--muted); }
+  tr:hover td { background: rgba(74,158,255,0.03); }
+
+  /* LOOK PRESETS */
+  .preset-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+  }
+  .preset-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .preset-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .preset-color {
+    width: 100%; height: 50px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  .preset-name { font-size: 13px; font-weight: 500; margin-bottom: 4px; }
+  .preset-desc { font-size: 11px; color: var(--muted); }
+
+  /* BREADCRUMB */
+  .breadcrumb {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .breadcrumb span { color: var(--border); }
+
+  /* SEARCH */
+  .search-bar {
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .search-input {
+    width: 100%;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 14px;
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 12px;
+    outline: none;
+  }
+  .search-input::placeholder { color: var(--muted); }
+  .search-input:focus { border-color: var(--accent); }
+
+  /* HOME */
+  .home-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 30px;
+  }
+  .home-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 22px;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-decoration: none;
+    color: inherit;
+  }
+  .home-card:hover {
+    border-color: var(--accent);
+    background: rgba(74,158,255,0.04);
+    transform: translateY(-2px);
+  }
+  .home-card-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+  .home-card h3 { font-size: 15px; font-weight: 500; margin-bottom: 6px; }
+  .home-card p { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+  code {
+    font-family: var(--mono);
+    font-size: 12px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2px 7px;
+    color: var(--accent2);
+  }
+
+  .highlight { color: var(--accent); font-weight: 500; }
+  .highlight2 { color: var(--accent2); }
+  .highlight3 { color: var(--accent3); }
+
+  hr { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
+
+  h3.section-title {
+    font-size: 13px;
+    font-family: var(--mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 28px 0 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  h3.section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-label">Documentation · ART Raw Image Processor</div>
+  <h1>Guide du <span>Photographe</span></h1>
+  <p>Documentation complète de chaque module d'ART (Another RawTherapee), expliquée du point de vue de la pratique photographique.</p>
+  <div class="version-badge">ART · Dérivé de RawTherapee · Workflow RAW → TIFF → Affinity</div>
+</header>
+
+<div class="container">
+  <nav>
+    <div class="search-bar">
+      <input class="search-input" type="text" placeholder="Chercher un module..." id="searchInput" oninput="filterNav(this.value)">
+    </div>
+
+    <div class="nav-section">Vue d'ensemble</div>
+    <a href="#" onclick="show('home')" class="active" id="nav-home">
+      <div class="dot" style="background:#4a9eff"></div> Accueil & Workflow
+    </a>
+    <a href="#" onclick="show('pipeline')" id="nav-pipeline">
+      <div class="dot" style="background:#00d4aa"></div> Pipeline de traitement
+    </a>
+
+    <div class="nav-section">Exposition & Tonalité</div>
+    <a href="#" onclick="show('exposition')" id="nav-exposition">
+      <div class="dot" style="background:#4a9eff"></div> Exposition
+    </a>
+    <a href="#" onclick="show('egaliseurtonal')" id="nav-egaliseurtonal">
+      <div class="dot" style="background:#4a9eff"></div> Égaliseur Tonal
+    </a>
+    <a href="#" onclick="show('courbestonales')" id="nav-courbestonales">
+      <div class="dot" style="background:#4a9eff"></div> Courbes Tonales
+    </a>
+    <a href="#" onclick="show('logtonemapping')" id="nav-logtonemapping">
+      <div class="dot" style="background:#4a9eff"></div> Log Tone Mapping ⭐
+    </a>
+    <a href="#" onclick="show('compressiondyn')" id="nav-compressiondyn">
+      <div class="dot" style="background:#4a9eff"></div> Compression Plage Dyn.
+    </a>
+
+    <div class="nav-section">Couleur</div>
+    <a href="#" onclick="show('balanceblancs')" id="nav-balanceblancs">
+      <div class="dot" style="background:#f59e0b"></div> Balance des Blancs
+    </a>
+    <a href="#" onclick="show('saturation')" id="nav-saturation">
+      <div class="dot" style="background:#f59e0b"></div> Saturation / Vibrance
+    </a>
+    <a href="#" onclick="show('eqcouleurs')" id="nav-eqcouleurs">
+      <div class="dot" style="background:#f59e0b"></div> Égaliseur de Couleurs (HSL)
+    </a>
+    <a href="#" onclick="show('correctioncouleurs')" id="nav-correctioncouleurs">
+      <div class="dot" style="background:#f59e0b"></div> Correction Couleurs ⭐
+    </a>
+    <a href="#" onclick="show('melange')" id="nav-melange">
+      <div class="dot" style="background:#f59e0b"></div> Mélange des Canaux
+    </a>
+    <a href="#" onclick="show('courbesrvb')" id="nav-courbesrvb">
+      <div class="dot" style="background:#f59e0b"></div> Courbes RVB
+    </a>
+
+    <div class="nav-section">Détail & Netteté</div>
+    <a href="#" onclick="show('texture')" id="nav-texture">
+      <div class="dot" style="background:#e879a0"></div> Amplification Texture
+    </a>
+    <a href="#" onclick="show('contrastelocal')" id="nav-contrastelocal">
+      <div class="dot" style="background:#e879a0"></div> Contraste Local
+    </a>
+    <a href="#" onclick="show('lissage')" id="nav-lissage">
+      <div class="dot" style="background:#e879a0"></div> Lissage (NR)
+    </a>
+
+    <div class="nav-section">Looks & Presets</div>
+    <a href="#" onclick="show('looks')" id="nav-looks">
+      <div class="dot" style="background:#a78bfa"></div> 3 Looks Méditerranée
+    </a>
+    <a href="#" onclick="show('ordremodules')" id="nav-ordremodules">
+      <div class="dot" style="background:#a78bfa"></div> Ordre des Modules
+    </a>
+  </nav>
+
+  <main>
+
+    <!-- HOME -->
+    <div class="module active" id="mod-home">
+      <div class="module-header">
+        <div class="module-tag"><div class="tag-dot" style="background:#4a9eff"></div><span style="color:#4a9eff">Vue d'ensemble</span></div>
+        <h2>ART — Guide Photographe</h2>
+        <div class="subtitle">Tout ce que tu dois savoir pour développer tes RAWs avec intention</div>
+      </div>
+
+      <div class="tip">
+        <div class="tip-label">Philosophie ART</div>
+        <p><strong>ART</strong> (Another RawTherapee) est un développeur RAW non-destructif. Contrairement à Lightroom, il ne touche jamais ton fichier original — tout est stocké dans un fichier <code>.arp</code> séparé. C'est une liberté totale d'expérimentation.</p>
+      </div>
+
+      <h3 class="section-title">Modules principaux</h3>
+      <div class="home-grid">
+        <a class="home-card" href="#" onclick="show('logtonemapping')">
+          <div class="home-card-icon" style="background:rgba(74,158,255,0.1)">⚡</div>
+          <h3>Log Tone Mapping</h3>
+          <p>Le module le plus puissant d'ART. Gestion HDR de type "Filmic". À comprendre en premier.</p>
+        </a>
+        <a class="home-card" href="#" onclick="show('egaliseurtonal')">
+          <div class="home-card-icon" style="background:rgba(0,212,170,0.1)">🎚</div>
+          <h3>Égaliseur Tonal</h3>
+          <p>Ombres, tons moyens, hautes lumières — contrôle chirurgical de la dynamique.</p>
+        </a>
+        <a class="home-card" href="#" onclick="show('correctioncouleurs')">
+          <div class="home-card-icon" style="background:rgba(245,158,11,0.1)">🎨</div>
+          <h3>Correction Couleurs</h3>
+          <p>Les color wheels — l'outil de color grading cinématique d'ART.</p>
+        </a>
+        <a class="home-card" href="#" onclick="show('eqcouleurs')">
+          <div class="home-card-icon" style="background:rgba(232,121,160,0.1)">🌈</div>
+          <h3>Égaliseur Couleurs (HSL)</h3>
+          <p>Contrôle précis de chaque teinte : ciel, eau, peau, végétation.</p>
+        </a>
+        <a class="home-card" href="#" onclick="show('courbestonales')">
+          <div class="home-card-icon" style="background:rgba(167,139,250,0.1)">📈</div>
+          <h3>Courbes Tonales</h3>
+          <p>La courbe en S classique — contraste et rendu du noir profond.</p>
+        </a>
+        <a class="home-card" href="#" onclick="show('ordremodules')">
+          <div class="home-card-icon" style="background:rgba(255,107,107,0.1)">🔄</div>
+          <h3>Ordre des Modules</h3>
+          <p>Dans quel ordre activer les modules pour un résultat optimal.</p>
+        </a>
+      </div>
+    </div>
+
+    <!-- PIPELINE -->
+    <div class="module" id="mod-pipeline">
+      <div class="module-header">
+        <div class="module-tag"><div class="tag-dot" style="background:#00d4aa"></div><span style="color:#00d4aa">Architecture</span></div>
+        <h2>Pipeline de Traitement</h2>
+        <div class="subtitle">Comprendre l'ordre dans lequel ART traite tes données RAW</div>
+      </div>
+      <div class="tip">
+        <div class="tip-label">Point clé</div>
+        <p>ART traite les données dans un ordre fixe en interne, même si tu peux activer les modules dans n'importe quel ordre. Connaître ce pipeline t'évite des surprises : une modif en amont peut changer le résultat d'un module en aval.</p>
+      </div>
+      <div class="workflow">
+        <div class="workflow-step">
+          <div class="step-num" style="background:rgba(74,158,255,0.15);color:#4a9eff">1</div>
+          <div class="step-content">
+            <h4>Démosaïquage RAW</h4>
+            <p>Conversion des données brutes du capteur en pixels RVB. Algorithme AMAZE ou DCB selon le bruit.</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-num" style="background:rgba(74,158,255,0.15);color:#4a9eff">2</div>
+          <div class="step-content">
+            <h4>Balance des Blancs</h4>
+            <p>Appliquée très tôt dans la chaîne — corriger la WB maintenant évite des problèmes de couleur plus tard.</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-num" style="background:rgba(0,212,170,0.15);color:#00d4aa">3</div>
+          <div class="step-content">
+            <h4>Log Tone Mapping</h4>
+            <p>Si activé, il transforme la courbe de réponse de manière logarithmique. À faire avant tout réglage d'exposition.</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-num" style="background:rgba(0,212,170,0.15);color:#00d4aa">4</div>
+          <div class="step-content">
+            <h4>Exposition & Égaliseur Tonal</h4>
+            <p>Réglages globaux de luminosité, récupération des ombres et hautes lumières.</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-num" style="background:rgba(245,158,11,0.15);color:#f59e0b">5</div>
+          <div class="step-content">
+            <h4>Courbes Tonales</h4>
+            <p>Affinage du contraste. La courbe en S vient affiner ce que le Log Tone Mapping a établi.</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-num" style="background:rgba(245,158,11,0.15);color:#f59e0b">6</div>
+          <div class="step-content">
+            <h4>Couleur (HSL, Color Grading, Canaux)</h4>
+            <p>Travail sur les couleurs une fois la tonalité stabilisée. Ordre : HSL → Color Wheels → Canaux.</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-num" style="background:rgba(232,121,160,0.15);color:#e879a0">7</div>
+          <div class="step-content">
+            <h4>Détail (Texture, Contraste Local, NR)</h4>
+            <p>Toujours en dernier — les réglages de netteté et de bruit doivent s'appliquer sur l'image finale.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXPOSITION -->
+    <div class="module" id="mod-exposition">
+      <div class="module-header">
+        <div class="module-tag"><div class="tag-dot" style="background:#4a9eff"></div><span style="color:#4a9eff">Exposition & Tonalité</span></div>
+        <h2>Exposition</h2>
+        <div class="subtitle">Le premier contact avec ton RAW — établir la base tonale</div>
+      </div>
+      <div class="tip">
+        <div class="tip-label">Point de vue photographe</div>
+        <p>Ce module est ton "premier coup de main" sur l'image. Pense à lui comme à l'exposition au moment de la prise de vue : corriger les erreurs de mesure, établir le niveau global. Ne cherche pas la perfection ici — les modules suivants affineront.</p>
+      </div>
+      <h3 class="section-title">Paramètres</h3>
+      <div class="param-grid">
+        <div class="param-item">
+          <div class="param-name">Reconstruction Hautes Lumières</div>
+          <div class="param-range">Équilibré / Luminance / Couleur / HLRecovery</div>
+          <div class="param-desc">Choisit comment récupérer les zones surexposées. <strong>Équilibré</strong> est le meilleur pour la plupart des cas — il reconstruit à la fois la luminance et la couleur. <strong>Luminance</strong> si le ciel est cramé mais garde de la couleur.</div>
+        </div>
+        <div class="param-item">
+          <div class="param-name">Compensation d'exposition</div>
+          <div class="param-range">-5 EV → +5 EV</div>
+          <div class="param-desc">L'équivalent du réglage d'exposition en post. Chaque +1 EV double la luminosité. Travaille en fractions : ±0.3, ±0.7 pour des corrections fines. Attention : pousser trop fort amplifie le bruit dans les ombres.</div>
+        </div>
+        <div class="param-item">
+          <div class="param-name">Compensation Point Noir</div>
+          <div class="param-range">-1 → +1</div>
+          <div class="param-desc">Déplace le point noir de l'image. Valeur positive = ombres plus claires (lift), valeur négative = crush des noirs. Différent des "Noirs" de l'égaliseur tonal — celui-ci agit au niveau du profil de couleur.</div>
+        </div>
+      </div>
+      <div class="warning">
+        <p>⚠️ <strong>Pièges fréquents :</strong> Ne pas tenter de récupérer les HL ici si tu utilises le Log Tone Mapping — laisse ce dernier gérer la dynamique. L'exposition ne doit faire qu'un réglage grossier (+/- 0.5 EV max).</p>
+      </div>
+    </div>
+
+    <!-- EGALISEURTONAL -->
+    <div class="module" id="mod-egaliseurtonal">
+      <div class="module-header">
+        <div class="module-tag"><div class="tag-dot" style="background:#4a9eff"></div><span style="color:#4a9eff">Exposition & Tonalité</span></div>
+        <h2>Égaliseur Tonal</h2>
+        <div class="subtitle">Sculption chirurgicale de la dynamique — l'outil qui remplace Ombres/HLs de Lightroom</div>
+      </div>
+      <div class="tip">
+        <div class="tip-label">Point de vue photographe</div>
+        <p>C'est l'outil le plus direct pour sculpter la lumière dans une image. Pense à lui comme à un dodging/burning numérique : tu décides quelle zone de la plage tonale doit être plus lumineuse ou plus sombre, sans affecter le reste. Extrêmement puissant pour récupérer des rochers sombres sans cramer le ciel.</p>
+      </div>
+      <h3 class="section-title">Les 5 Bandes Tonales</h3>
+      <table>
+        <tr><th>Curseur</th><th>Plage (EV)</th><th>Ce qu'il touche sur ta photo</th></tr>
+        <tr><td>Noirs</td><td>-4 → +4</td><td>Les zones vraiment sombres — ombres profondes, zones presque noires. Lever = lift des noirs (look "cinéma"). Baisser = crush, look "contrasté".</td></tr>
+        <tr><td>Ombres</td><td>-4 → +4</td><td>Les demi-ombres — rochers sombres, intérieur de bâtiments, faces sombres d'un sujet. Le plus utile pour récupérer du détail sans tout dénaturer.</td></tr>
+        <tr><td>Tons Moyens</td><td>-4 → +4</td><td>Le "ventre" de l'image — tout ce qui est à 18% gris, peau, herbe, mer en mi-journée. Très sensible visuellement.</td></tr>
+        <tr><td>Hautes Lumières</td><td>-4 → +4</td><td>Les zones claires non cramées — ciel bleu, eau éclairée, nuages détaillés. Baisser pour garder du "poids" dans le ciel.</td></tr>
+        <tr><td>Blancs</td><td>-4 → +4</td><td>Les zones très lumineuses, presque cramées. Baisse si les écumes de vague ou les nuages perdent leur texture.</td></tr>
+      </table>
+      <h3 class="section-title">Paramètres Techniques</h3>
+      <div class="param-grid">
+        <div class="param-item">
+          <div class="param-name">Pivot (EV)</div>
+          <div class="param-range">-3 → +3 EV</div>
+          <div class="param-desc">Déplace la frontière entre "ombres" et "hautes lumières". Un pivot bas (-0.5) élargit la zone d'ombres — utile pour les scènes sombres. Un pivot haut protège mieux les HL sur une photo de plage en plein soleil.</div>
+        </div>
+        <div class="param-item">
+          <div class="param-name">Régularisation</div>
+          <div class="param-range">1 → 10</div>
+          <div class="param-desc">Contrôle le "lissage" entre les bandes. Valeur haute (4-6) = transitions douces et naturelles. Valeur basse (1-2) = chaque bande agit de façon plus isolée, risque d'artefacts aux transitions.</div>
+        </div>
+      </div>
+      <div class="tip">
+        <div class="tip-label">Recette paysage marin</div>
+        <p>Pour une photo de vague sur rochers (comme la tienne) : <strong>Ombres +35 à +50</strong> pour récupérer les rochers, <strong>Hautes Lumières -15 à -25</strong> pour protéger l'eau et le ciel, <strong>Noirs +10 à +15</strong> pour éviter le crush total. Régularisation à 4.</p>
+      </div>
+    </div>
+
+    <!-- COURBES TONALES -->
+    <div class="module" id="mod-courbestonales">
+      <div class="module-header">
+        <div class="module-tag"><div class="tag-dot" style="background:#4a9eff"></div><span style="color:#4a9eff">Exposition & Tonalité</span></div>
+        <h2>Courbes Tonales</h2>
+        <div class="subtitle">L'outil de contraste avancé — la courbe en S qui donne du caractère</div>
+      </div>
+      <div class="tip">
+        <div class="tip-label">Point de vue photographe</div>
+        <p>La courbe tonale est l'outil le plus "artistique" du développement RAW. Elle te permet de définir exactement comment chaque valeur de gris de l'original sera reproduite. Une courbe en S crée du contraste. Un "lift des noirs" (courbe partant de 0,10 au lieu de 0,0) donne le look "film dégradé" recherché dans l'esthétique cinéma.</p>
+      </div>
+      <h3 class="section-title">Modes de Courbe</h3>
+      <div class="param-grid">
+        <div class="param-item">
+          <div class="param-name">Mode Neutre</div>
+          <div class="param-range">— Point de départ</div>
+          <div class="param-desc">Courbe linéaire — aucune modification. C'est le mode "propre" à utiliser quand tu veux partir de zéro ou laisser le Log Tone Mapping gérer tout seul.</div>
+        </div>
+        <div class="param-item">
+          <div class="param-name">Courbe de base : Linéaire</div>
+          <div class="param-range">— Pas de présupposé</div>
+          <div class="param-desc">ART ne rajoute pas de S-curve automatique — tu as la main totale. Opposé à "Standard" qui applique une courbe genre "rendu caméra" automatique.</div>
+        </div>
+        <div class="param-item">
+          <div class="param-name">Courbe Tonale 1 & 2</div>
+          <div class="param-range">Éditeur de courbe</div>
+          <div class="param-desc">Deux courbes indépendantes que tu peux chaîner. CT1 pour la S-curve générale, CT2 pour des ajustements supplémentaires. Possibilité de travailler sur R, V, B séparément pour le color grading par courbe.</div>
+        </div>
+        <div class="param-item">
+          <div class="param-name">Contraste</div>
+          <div class="param-range">-100 → +100</div>
+          <div class="param-desc">Raccourci qui applique une S-curve automatique centrée sur le point gris. Plus simple que la courbe manuelle mais moins précis. Valeur 0 = neutre, +20 = contraste moyen, +50 = très contrasté.</div>
+        </div>
+        <div class="param-item">
+          <div class="param-name">Saturation (dans Courbes)</div>
+          <div class="param-range">Courbe de saturation</div>
+          <div class="param-desc">Permet de lier la saturation à la luminance. Exemple classique : désaturer légèrement les hautes lumières (évite les jaunes et oranges cramés en plein soleil) tout en boostant les tons moyens.</div>
+        </div>
+        <div class="param-item">
+          <div class="param-name">Point Blanc</div>
+          <div class="param-range">0.5 → 2.0</div>
+          <div class="param-desc">Déplace le maximum de la courbe. Valeur 1.0 = blanc à 100%. Monter à 1.2 "étale" les hautes lumières — utile pour les scènes avec beaucoup d'écumes ou de neige.</div>
+        </div>
+      </div>
+      <div class="warning">
+        <p>⚠️ <strong>À savoir :</strong> Si tu utilises le Log Tone Mapping, la courbe tonale intervient APRÈS lui. Elle "peaufine" le résultat du Log — ne remet pas tout en question avec une S-curve agressive, des valeurs douces (+15 contraste max) suffisent.</p>
+      </div>
+    </div>
+
+    <!-- LOG TONE MAPPING -->
+    <div class="module" id="mod-logtonemapping">
+      <div class="module-header">
+        <div class="module-tag"><div class="tag-dot" style="background:#4a9eff"></div><span style="color:#4a9eff">Module Signature d'ART ⭐</span></div>
+        <h2>Log Tone Mapping</h2>
+        <div class="subtitle">La gestion HDR de type "Filmic" — le module le plus puissant d'ART</div>
+      </div>
+      <div class="tip">
+        <div class="tip-label">C'est quoi concrètement ?</div>
+        <p>Le Log Tone Mapping est l'équivalent du module <strong>Filmic RGB de Darktable</strong>. Il transforme la plage dynamique brute (qui peut aller de -13 EV à +2 EV sur un capteur moderne) en une courbe logarithmique qui "tasse" les extrêmes pour les faire rentrer dans la plage d'affichage — exactement comme ce que fait le log C-Log ou S-Log en vidéo professionnelle. Résultat : ombres détaillées ET hautes lumières récupérées, simultanément.</p>
+      </div>
+      <h3 class="section-title">Paramètres Clés</h3>
+      <div class="param-grid">
+        <div class="param-item">
+          <div class="param-name">Point Gris Cible (luminosité)</div>
+          <div class="param-range">1 → 100 (défaut : 18)</div>
+          <div class="param-desc"><strong>Le paramètre central.</strong> Définit à quelle luminosité les tons moyens de ta scène seront rendus. 18% = gris standard = rendu naturel. Monter à 22-25 éclaircit l'image globalement (look aéré). Descendre à 14-16 assombrit (look dramatique).</div>
+        </div>
+        <div class="param-item">
+          <div class="param-name">Gain (EV)</div>
+          <div class="param-range">-5 → +5 EV</div>
+          <div class="param-desc">Exposition globale avant le mappage log. Fonctionne comme un pré-réglage d'exposition. Si ton RAW est sous-exposé de 1 EV, mets +1 ici plutôt que dans le module Exposition — le Log Tone Mapping gérera mieux la dynamique.</div>
+        </div>
+        <div class="param-item">
+          <div class="param-name">Blanc Exposition Relative (EV)</div>
+          <div class="param-range">0.5 → 8 EV</div>
+          <div class="param-desc"><strong>Haut de la plage dynamique.</strong> Définit combien d'EV au-dessus du gris moyen seront récupérés. 2.5 EV = récupère 2.5 stops de hautes lumières. Augmenter récupère plus de ciel/nuages mais peut "tasser" les HL.</div>
+        </div>
+        <div class="param-item">
+          <div class="param-name">Noir Exposition Relative (EV)</div>
+          <div class="param-range">-20 → -1 EV</div>
+          <div class="param-desc"><strong>Bas de la plage dynamique.</strong> Définit combien d'EV sous le gris moyen sont récupérés. -13.5 = récupère 13.5 stops d'ombres. Moins négatif (-8) = ombres plus riches/plus sombres. Plus négatif (-16) = ombres très ouvertes.</div>
+        </div>
+        <div class="param-item">
+          <div class="param-name">Précompression Hautes Lumières</div>
+          <div class="param-range">0 → 100</div>
+          <div class="param-desc">Compresse doucement les HL avant le mappage — évite l'effet "halo" autour des zones très claires. Sur une photo de plage avec ciel très lumineux, mettre 15-25 donne un ciel plus "propre".</div>
+        </div>
+        <div class="param-item">
+          <div class="param-name">Régularisation</div>
+          <div class="param-range">0 → 100</div>
+          <div class="param-desc">Contrôle la "douceur" de la compression. Valeur haute (60-80) = transitions douces, look cinématique. Valeur basse (20-30) = contraste local plus marqué, look "HDR" plus visible.</div>
+        </div>
+      </div>
+      <div class="tip">
+        <div class="tip-label">Réglage de départ recommandé pour paysage marin</div>
+        <p>Clique <strong>Automatique</strong> d'abord — ART analyse ton histogramme et propose des valeurs. Puis ajuste : Blanc EV à <strong>2.0-2.2</strong> (moins de compression HL), Noir EV à <strong>-10 / -11</strong> (ombres plus riches), Régularisation à <strong>50-60</strong>, Point gris à <strong>18-20</strong>.</p>
+      </div>
+    </div>
+
+    <!-- COMPRESSION DYNAMIQUE -->
+    <div class="module" id="mod-compressiondyn">
+      <div class="module-header">
+        <div class="module-tag"><div class="tag-dot" style="background:#4a9eff"></div><span style="color:#4a9eff">Exposition & Tonalité</span></div>
+        <h2>Compression de la Plage Dynamique</h2>
+        <div class="subtitle">Tone Mapping "local" — récupération de détail dans les zones extrêmes</div>
+      </div>
+      <div class="tip">
+        <div class="tip-label">Point de vue photographe</div>
+        <p>C'est le "tone mapping" au sens traditionnel — il analyse les zones locales de l'image et compresse les écarts de luminosité pour faire ressortir le détail partout. Pense à l'effet "HDR de qualité" sans l'aspect criard. Complémentaire au Log Tone Mapping qui, lui, agit globalement.</p>
+      </div>
+      <div class="param-grid">
+        <div class="param-item">
+          <div class="param-name">Quantité</div>
+          <div class="param-range">0 → 100 (défaut : 20)</div>
+          <div class="param-desc">Force de la compression dynamique locale. 20 = léger, naturel. 40-60 = récupération marquée, peut révéler beaucoup de détail dans les ombres sombres. Au-delà de 70, risque d'aspect "tonné" artificiel.</div>
+        </div>
+        <div class="param-item">
+          <div class="param-name">Détail</div>
+          <div class="param-range">0 → 100 (défaut : 30)</div>
+          <div class="param-desc">Définit l'échelle spatiale de l'analyse. Valeur basse (10-20) = compression sur de grandes zones. Valeur haute (50-70) = compression fine qui préserve mieux les textures. Augmenter si les rochers semblent "plats" après la quantité.</div>
+        </div>
+        <div class="param-item">
+          <div class="param-name">Contrôle de Saturation</div>
+          <div class="param-range">☑ / ☐</div>
+          <div class="param-desc">Quand coché, la compression dynamique affecte aussi la saturation proportionnellement — évite que les zones récupérées deviennent trop grises. À activer pour garder la couleur de l'eau dans les ombres.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BALANCE DES BLANCS -->
+    <div class="module" id="mod-balanceblancs">
+      <div class="module-header">
+        <div class="module-tag"><div class="tag-dot" style="background:#f59e0b"></div><span style="color:#f59e0b">Couleur</span></div>
+        <h2>Balance des Blancs</h2>
+        <div class="subtitle">La fondation de la couleur — à régler avant tout travail colorimétrique</div>
+      </div>
+      <div class="tip">
+        <div class="tip-label">Point de vue photographe</div>
+        <p>La balance des blancs définit la "température émotionnelle" de ta photo. Un léger push vers le chaud (5200-5500K) sur une photo de mer méditerranéenne lui donne une qualité lumineuse de "milieu de journée ensoleillée". Trop chaud (6000K+) et ça part sur un look "coucher de soleil" artificiel. La clé : ajuster jusqu'à ce que les blancs paraissent naturels à ton œil.</p>
+      </div>
+      <div class="param-grid">
+        <div class="param-item">
+          <div class="param-name">Méthode</div>
+          <div class="param-range">Prise de vue / Manuel / Automatique</div>
+          <div class="param-desc"><strong>Prise de vue</strong> = utilise la WB enregistrée par l'appareil. Bon point de départ. <strong>Manuel</strong> = tu fixes Température + Dominante toi-même. <strong>Echantillonner</strong> = clique sur une zone neutre dans l'image.</div>
+        </div>
+        <div class="param-item">
+          <div class="param-name">Température</div>
+          <div class="param-range">2000K → 25000K</div>
+          <div class="param-desc">Axe chaud/froid. Lumière du jour = 5500K, ombre = 7000K, tungstène = 3200K, flash = 5500K. Pour la Méditerranée en été (ton cas) : 5100-5400K donne le meilleur résultat naturel.</div>
+        </div>
+        <div class="param-item">
+          <div class="param-name">Dominante Couleur (Tint)</div>
+          <div class="param-range">0.5 → 2.0</div>
+          <div class="param-desc">Axe vert/magenta. 1.0 = neutre. Monter légèrement (1.005-1.01) pousse vers le vert, ce qui avec l'eau turquoise méditerranéenne donne une teinte "teal" naturelle. Descendre = magenta, utile pour les couchers de soleil orangés.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SATURATION -->
+    <div class="module" id="mod-saturation">
+      <div class="module-header">
+        <div class="module-tag"><div class="tag-dot" style="background:#f59e0b"></div><span style="color:#f59e0b">Couleur</span></div>
+        <h2>Saturation / Vibrance</h2>
+        <div class="subtitle">Intensité globale des couleurs — à utiliser avec parcimonie</div>
+      </div>
+      <div class="tip">
+        <div class="tip-label">Point de vue photographe</div>
+        <p><strong>Saturation</strong> boost toutes les couleurs de façon uniforme — risque de rendre les couleurs déjà saturées (eau turquoise, ciel bleu) trop intenses et peu naturelles. <strong>Vibrance</strong> (algorithme plus intelligent) boost en priorité les couleurs peu saturées et protège les couleurs déjà intenses. Sur une photo de mer : préfère toujours la Vibrance à la Saturation.</p>
+      </div>
+      <div class="param-grid">
+        <div class="param-item">
+          <div class="param-name">Saturation</div>
+          <div class="param-range">-100 → +100</div>
+          <div class="param-desc">Boost global. 0 = neutre. +10 à +20 pour une touche de vie. Évite de dépasser +30 sauf effet délibéré. Valeur négative (-100) donne un N&B, (-20 à -40) donne un look "désaturé/film".</div>
+        </div>
+        <div class="param-item">
+          <div class="param-name">Vibrance</div>
+          <div class="param-range">-100 → +100</div>
+          <div class="param-desc">Boost intelligent. +20 à +30 pour vivifier les couleurs sans les rendre criardes. Idéal pour récupérer la couleur teal de l'eau méditerranéenne sans saturer le ciel déjà bleu. Beaucoup plus naturel que la Saturation.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EGALISEUER COULEURS (HSL) -->
+    <div class="module" id="mod-eqcouleurs">
+      <div class="module-header">
+        <div class="module-tag"><div class="tag-dot" style="background:#f59e0b"></div><span style="color:#f59e0b">Couleur</span></div>
+        <h2>Égaliseur de Couleurs (HSL)</h2>
+        <div class="subtitle">Contrôle couleur par couleur — l'outil de sélection par teinte</div>
+      </div>
+      <div class="tip">
+        <div class="tip-label">Point de vue photographe</div>
+        <p>C'est l'outil qui permet de dire "je veux que le ciel soit plus bleu foncé, l'eau plus teal, et les rochers moins orange". Tu travailles couleur par couleur, avec trois axes : <strong>T</strong> (teinte = décaler la couleur), <strong>S</strong> (saturation = intensifier), <strong>L</strong> (luminance = éclaircir/assombrir). Outil incontournable pour le look méditerranéen.</p>
+      </div>
+      <h3 class="section-title">Les 3 Axes (T / S / L)</h3>
+      <table>
+        <tr><th>Axe</th><th>Ce que ça fait</th><th>Exemple pratique</th></tr>
+        <tr><td>T — Teinte</td><td>Décale la couleur vers une teinte voisine</td><td>Bleu T -8 → le ciel part vers le violet-bleu profond</td></tr>
+        <tr><td>S — Saturation</td><td>Amplifie ou réduit l'intensité de cette couleur</td><td>Cyan S +30 → l'eau méditerranéenne devient plus turquoise</td></tr>
+        <tr><td>L — Luminance</td><td>Éclaircit ou assombrit cette couleur uniquement</td><td>Bleu L -10 → le ciel devient plus "lourd", dramatique</td></tr>
+      </table>
+      <h3 class="section-title">Réglages pour Look Méditerranéen</h3>
+      <table>
+        <tr><th>Canal</th><th>T</th><th>S</th><th>L</th><th>Effet visuel</th></tr>
+        <tr><td>Bleu</td><td>-8</td><td>+28</td><td>-12</td><td>Ciel bleu profond, dramatique</td></tr>
+        <tr><td>Cyan</td><td>+10</td><td>+32</td><td>+6</td><td>Eau turquoise méditerranéenne</td></tr>
+        <tr><td>Vert</td><td>+5</td><td>-8</td><td>0</td><td>Végétation des collines naturelle</td></tr>
+        <tr><td>Orange</td><td>-5</td><td>-18</td><td>+12</td><td>Rochers : moins "brûlés", plus lumineux</td></tr>
+        <tr><td>Jaune</td><td>0</td><td>-12</td><td>+5</td><td>Lumière dorée contrôlée</td></tr>
+      </table>
+    </div>
+
+    <!-- CORRECTION COULEURS -->
+    <div class="module" id="mod-correctioncouleurs">
+      <div class="module-header">
+        <div class="module-tag"><div class="tag-dot" style="background:#f59e0b"></div><span style="color:#f59e0b">Module Signature d'ART ⭐</span></div>
+        <h2>Correction des Couleurs / Tonalités</h2>
+        <div class="subtitle">Les Color Wheels — le color grading cinématique par plage tonale</div>
+      </div>
+      <div class="tip">
+        <div class="tip-label">Point de vue photographe</div>
+        <p>C'est l'outil de <strong>color grading</strong> par excellence — l'équivalent des "Primary Wheels" de DaVinci Resolve. Le principe : assigner une teinte différente aux ombres, aux tons moyens, et aux hautes lumières. C'est ce qui crée le fameux look "teal & orange" ou le look "cinéma" avec des ombres bleutées et des hautes lumières chaudes.</p>
+      </div>
+      <h3 class="section-title">Les 3 Roues de Couleur</h3>
+      <div class="param-grid">
+        <div class="param-item">
+          <div class="param-name">Hautes Lumières / Gain</div>
+          <div class="param-range">Color wheel + slider intensité</div>
+          <div class="param-desc"><strong>Colore les zones claires.</strong> Pour le look méditerranée cinématique : léger push vers le <strong>jaune-chaud</strong> (~55°), intensité 0.06-0.10. Donne une chaleur solaire aux écumes, au ciel clair, aux reflets.</div>
+        </div>
+        <div class="param-item">
+          <div class="param-name">Ombres / Déboucher</div>
+          <div class="param-range">Color wheel + slider intensité</div>
+          <div class="param-desc"><strong>Colore les zones sombres.</strong> Pour le look ciné : push vers <strong>cyan-bleu</strong> (~200°), intensité 0.10-0.15. Les rochers sombres, le fond de l'eau, les ombres profondes prennent une teinte froide — contraste chaud/froid très cinématique.</div>
+        </div>
+        <div class="param-item">
+          <div class="param-name">Tons Moyens / Gamma</div>
+          <div class="param-range">Color wheel + slider intensité</div>
+          <div class="param-desc"><strong>Colore la zone médiane.</strong> Très léger push vers le <strong>teal</strong> (~185°), intensité 0.04-0.07. Unifie l'atmosphère de l'image sans la "teinter" de façon visible. C'est ici que le look "méditerranéen" prend corps.</div>
+        </div>
+      </div>
+      <div class="tip">
+        <div class="tip-label">Lire le color wheel</div>
+        <p>Le point blanc au centre = neutre. Tu déplaces le point vers la couleur souhaitée. Plus tu t'éloignes du centre, plus l'effet est fort. Le slider en dessous contrôle l'intensité globale indépendamment de la direction.</p>
+      </div>
+      <div class="warning">
+        <p>⚠️ <strong>Mode TSL vs Coefficients TSL :</strong> "Coefficients TSL" (ce que tu as) agit sur la luminosité + couleur simultanément. C'est le mode le plus puissant. "TSL" agit uniquement sur la couleur sans toucher la luminance.</p>
+      </div>
+    </div>
+
+    <!-- MELANGE CANAUX -->
+    <div class="module" id="mod-melange">
+      <div class="module-header">
+        <div class="module-tag"><div class="tag-dot" style="background:#f59e0b"></div><span style="color:#f59e0b">Couleur — Avancé</span></div>
+        <h2>Mélange des Canaux</h2>
+        <div class="subtitle">Manipulation directe des canaux R, V, B — pour effets avancés</div>
+      </div>
+      <div class="tip">
+        <div class="tip-label">Point de vue photographe</div>
+        <p>Le mélange des canaux permet de "contaminer" un canal par un autre. Exemple classique : injecter un peu de canal Bleu dans le canal Vert pour créer une dominante "teal" dans les verts naturels. Très puissant mais demande de la précision — de petites valeurs (±5%) suffisent.</p>
+      </div>
+      <div class="param-grid">
+        <div class="param-item">
+          <div class="param-name">Mode Matrice RVB</div>
+          <div class="param-range">—</div>
+          <div class="param-desc">Mode standard. Chaque canal de sortie est une combinaison linéaire des 3 canaux d'entrée. La diagonale à 100% = pas de modification. C'est un outil de coloriste avancé, à utiliser après avoir maîtrisé les autres modules.</div>
+        </div>
+        <div class="param-item">
+          <div class="param-name">Canal Rouge (ligne)</div>
+          <div class="param-range">R:100 V:0 B:0 = neutre</div>
+          <div class="param-desc">Contrôle ce qui constitue le rouge en sortie. Injecter un peu de vert (R:95 V:8 B:0) donne des tons chair plus dorés. Injecter du bleu (R:95 V:0 B:8) refroidit les rouges.</div>
+        </div>
+        <div class="param-item">
+          <div class="param-name">Canal Vert (ligne)</div>
+          <div class="param-range">R:0 V:100 B:0 = neutre</div>
+          <div class="param-desc">Pour look teal : V:97 B:5 injecte un peu de bleu dans les verts → les végétations et l'eau prennent une teinte plus froide et "aquatique".</div>
+        </div>
+        <div class="param-item">
+          <div class="param-name">Canal Bleu (ligne)</div>
+          <div class="param-range">R:0 V:0 B:100 = neutre</div>
+          <div class="param-desc">Pour deepening du ciel : B:105 = bleu légèrement amplifié → ciel plus profond. Injecter du vert (V:3 B:97) = bleu légèrement teal dans les zones bleues.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COURBES RVB -->
+    <div class="module" id="mod-courbesrvb">
+      <div class="module-header">
+        <div class="module-tag"><div class="tag-dot" style="background:#f59e0b"></div><span style="color:#f59e0b">Couleur — Avancé</span></div>
+        <h2>Courbes RVB</h2>
+        <div class="subtitle">Courbes individuelles par canal — color grading précis</div>
+      </div>
+      <div class="tip">
+        <div class="tip-label">Point de vue photographe</div>
+        <p>Les courbes RVB te permettent de manipuler chaque canal de couleur indépendamment avec toute la précision d'une courbe. C'est l'outil privilégié pour créer des looks "film" spécifiques : monter les ombres du canal bleu pour un look "Kodak Portra", courber les HL du rouge pour un look "Fuji Velvia".</p>
+      </div>
+      <table>
+        <tr><th>Canal</th><th>Manipulation</th><th>Effet</th></tr>
+        <tr><td>R (Rouge)</td><td>Lever les ombres R</td><td>Ombres légèrement rosées/orangées — look film chaud</td></tr>
+        <tr><td>R (Rouge)</td><td>Compresser les HL R</td><td>HL moins saturées en rouge — look plus "propre"</td></tr>
+        <tr><td>V (Vert)</td><td>Légère S-curve V</td><td>Contraste dans les tons moyens verts</td></tr>
+        <tr><td>B (Bleu)</td><td>Lever les ombres B</td><td>Ombres bleutées — look cinéma/teal</td></tr>
+        <tr><td>B (Bleu)</td><td>Baisser les HL B</td><td>HL moins bleues = plus chaudes — split toning classique</td></tr>
+      </table>
+    </div>
+
+    <!-- TEXTURE -->
+    <div class="module" id="mod-texture">
+      <div class="module-header">
+        <div class="module-tag"><div class="tag-dot" style="background:#e879a0"></div><span style="color:#e879a0">Détail & Netteté</span></div>
+        <h2>Amplification de la Texture</h2>
+        <div class="subtitle">Révélation des micro-détails — rochers, eau, écumes</div>
+      </div>
+      <div class="tip">
+        <div class="tip-label">Point de vue photographe</div>
+        <p>Ce module est spécialement conçu pour les textures — il travaille sur des fréquences spatiales moyennes (les détails de surface) sans amplifier le bruit (petites fréquences) ni créer de halos (grandes fréquences). Sur ta photo de rochers et d'eau, c'est lui qui va "réveiller" la texture des strates rocheuses et le mouvement de l'eau.</p>
+      </div>
+      <div class="param-grid">
+        <div class="param-item">
+          <div class="param-name">Force</div>
+          <div class="param-range">-1.0 → +1.0</div>
+          <div class="param-desc">Intensité de l'amplification. 0 = neutre. +0.2 à +0.4 = légère révélation des textures, naturel. +0.6 à +0.8 = effet "hyper-réaliste" visible. Négatif (-0.2) = lissage doux de la texture, utile pour la peau.</div>
+        </div>
+        <div class="param-item">
+          <div class="param-name">Échelle des Détails</div>
+          <div class="param-range">0.0 → 1.0</div>
+          <div class="param-desc">Taille des détails ciblés. 0.10-0.20 = micro-textures (grain, aspérités). 0.40-0.60 = textures moyennes (strates des rochers). 0.80+ = grandes textures (ondulations de l'eau).</div>
+        </div>
+        <div class="param-item">
+          <div class="param-name">Itérations</div>
+          <div class="param-range">1 → 5</div>
+          <div class="param-desc">Nombre de passes de traitement. 1 = standard, rapide. 2-3 = résultat plus lissé et naturel, sans artefacts. Augmenter si tu constates des "auréoles" autour des contrastes forts.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTRASTE LOCAL -->
+    <div class="module" id="mod-contrastelocal">
+      <div class="module-header">
+        <div class="module-tag"><div class="tag-dot" style="background:#e879a0"></div><span style="color:#e879a0">Détail & Netteté</span></div>
+        <h2>Contraste Local</h2>
+        <div class="subtitle">Clarté et micro-contraste — donne de la "présence" à l'image</div>
+      </div>
+      <div class="tip">
+        <div class="tip-label">Point de vue photographe</div>
+        <p>Le contraste local agit sur les moyennes fréquences spatiales — il augmente le contraste entre zones adjacentes sans modifier l'exposition globale. L'effet visuellement ressemble à la "Clarté" de Lightroom ou au "Structure" de Capture One. Il donne une impression de profondeur et de présence à l'image. Attention : trop fort = look HDR criard.</p>
+      </div>
+      <div class="param-grid">
+        <div class="param-item">
+          <div class="param-name">Courbe de Contraste Local</div>
+          <div class="param-range">Courbe personnalisable</div>
+          <div class="param-desc">La courbe définit l'intensité du contraste selon la luminance locale. La courbe neutre est <code>(0.00, 0.50)(1.00, 0.50)</code> — ligne horizontale au milieu = pas d'effet. Monter la courbe = plus de contraste, descendre = moins.</div>
+        </div>
+      </div>
+      <div class="tip">
+        <div class="tip-label">Courbe recommandée pour paysage</div>
+        <p>Pour un effet de clarté subtil : ajoute un point à <strong>(0.30, 0.55)</strong> — légèrement au-dessus du centre dans les tons sombres. Et un point à <strong>(0.70, 0.45)</strong> — légèrement en dessous dans les tons clairs. Cela crée une micro S-curve qui donne de la "mordant" sans excès.</p>
+      </div>
+    </div>
+
+    <!-- LISSAGE -->
+    <div class="module" id="mod-lissage">
+      <div class="module-header">
+        <div class="module-tag"><div class="tag-dot" style="background:#e879a0"></div><span style="color:#e879a0">Détail & Netteté</span></div>
+        <h2>Lissage (Réduction de Bruit)</h2>
+        <div class="subtitle">Gestion du bruit numérique — équilibre netteté/douceur</div>
+      </div>
+      <div class="tip">
+        <div class="tip-label">Point de vue photographe</div>
+        <p>Le bruit numérique a deux composantes : le <strong>bruit de luminance</strong> (grain gris, comme le grain argentique) qui est souvent esthétique, et le <strong>bruit de chrominance</strong> (taches de couleur rouge/verte) qui est toujours disgracieux. La stratégie : traiter agressivement le bruit de chrominance, mais préserver une partie du bruit de luminance pour garder le "piqué" de l'image.</p>
+      </div>
+      <div class="param-grid">
+        <div class="param-item">
+          <div class="param-name">Lissage — Force</div>
+          <div class="param-range">0 → 1.0</div>
+          <div class="param-desc">Force globale du débruitage de luminance. 0.1-0.2 = léger, préserve la texture. 0.4-0.6 = standard. 0.8-1.0 = agressif, peut amollir les détails. À faible ISO, garde sous 0.3.</div>
+        </div>
+        <div class="param-item">
+          <div class="param-name">Échelle des Détails (NR)</div>
+          <div class="param-range">0.0 → 1.0</div>
+          <div class="param-desc">Détermine quelle taille de "grain" est lissée. 0.20 = seulement le très fin grain. 0.50+ = lisse aussi les textures moyennes — attention à ne pas perdre la texture des rochers.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOOKS -->
+    <div class="module" id="mod-looks">
+      <div class="module-header">
+        <div class="module-tag"><div class="tag-dot" style="background:#a78bfa"></div><span style="color:#a78bfa">Looks & Presets</span></div>
+        <h2>3 Looks Méditerranée</h2>
+        <div class="subtitle">Les recettes complètes module par module pour tes photos de mer</div>
+      </div>
+
+      <div class="preset-grid">
+        <div class="preset-card">
+          <div class="preset-color" style="background: linear-gradient(135deg, #1d4878 0%, #0d7a7a 50%, #4a3c2a 100%)"></div>
+          <div class="preset-name">🌊 Méditerranée Cinématique</div>
+          <div class="preset-desc">Teal profond, rochers récupérés, look film</div>
+        </div>
+        <div class="preset-card">
+          <div class="preset-color" style="background: linear-gradient(135deg, #1a1a2e 0%, #2d3a4a 50%, #1a2a1a 100%)"></div>
+          <div class="preset-name">🪨 Raw & Minéral</div>
+          <div class="preset-desc">Contraste fort, désaturé, dramatique</div>
+        </div>
+        <div class="preset-card">
+          <div class="preset-color" style="background: linear-gradient(135deg, #4a3520 0%, #6b8060 50%, #1a5060 100%)"></div>
+          <div class="preset-name">☀️ Golden Hour Simulé</div>
+          <div class="preset-desc">Chaleur dans les HL, ombres violacées</div>
+        </div>
+      </div>
+
+      <h3 class="section-title">🌊 Recette Complète — Méditerranée Cinématique</h3>
+      <table>
+        <tr><th>Module</th><th>Paramètre</th><th>Valeur</th></tr>
+        <tr><td>Exposition</td><td>Compensation</td><td>+0.35</td></tr>
+        <tr><td>Log Tone Mapping</td><td>Point gris</td><td>20</td></tr>
+        <tr><td>Log Tone Mapping</td><td>Blanc EV</td><td>2.20</td></tr>
+        <tr><td>Log Tone Mapping</td><td>Noir EV</td><td>-10.00</td></tr>
+        <tr><td>Égaliseur Tonal</td><td>Ombres</td><td>+40</td></tr>
+        <tr><td>Égaliseur Tonal</td><td>Hautes lumières</td><td>-18</td></tr>
+        <tr><td>Égaliseur Tonal</td><td>Noirs</td><td>+15</td></tr>
+        <tr><td>Balance Blancs</td><td>Température</td><td>5350K</td></tr>
+        <tr><td>HSL Bleu</td><td>S</td><td>+28 / L -12</td></tr>
+        <tr><td>HSL Cyan</td><td>T +10, S</td><td>+32</td></tr>
+        <tr><td>Color Grading Ombres</td><td>Cyan-Bleu ~200°</td><td>0.12</td></tr>
+        <tr><td>Color Grading HL</td><td>Jaune ~55°</td><td>0.08</td></tr>
+        <tr><td>Texture</td><td>Force</td><td>+0.25</td></tr>
+      </table>
+    </div>
+
+    <!-- ORDRE DES MODULES -->
+    <div class="module" id="mod-ordremodules">
+      <div class="module-header">
+        <div class="module-tag"><div class="tag-dot" style="background:#a78bfa"></div><span style="color:#a78bfa">Workflow</span></div>
+        <h2>Ordre de Travail Optimal</h2>
+        <div class="subtitle">La séquence qui donne les meilleurs résultats à chaque fois</div>
+      </div>
+      <div class="tip">
+        <div class="tip-label">Règle d'or</div>
+        <p>En développement RAW : <strong>global avant local, tonalité avant couleur, structure avant détail</strong>. Ne jamais affiner les couleurs si la dynamique n'est pas établie — tu retoucheras tout deux fois.</p>
+      </div>
+      <div class="workflow">
+        <div class="workflow-step">
+          <div class="step-num" style="background:rgba(74,158,255,0.2);color:#4a9eff">1</div>
+          <div class="step-content">
+            <h4>Balance des Blancs</h4>
+            <p>Toujours en premier. Tout le reste dépend d'une couleur de base correcte.</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-num" style="background:rgba(74,158,255,0.2);color:#4a9eff">2</div>
+          <div class="step-content">
+            <h4>Log Tone Mapping → Automatique</h4>
+            <p>Cliquer "Automatique" pour laisser ART analyser la dynamique. Affiner Blanc/Noir EV ensuite.</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-num" style="background:rgba(74,158,255,0.2);color:#4a9eff">3</div>
+          <div class="step-content">
+            <h4>Exposition + Égaliseur Tonal</h4>
+            <p>Corriger l'exposition globale, puis sculpter ombres/HLs avec l'égaliseur.</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-num" style="background:rgba(0,212,170,0.2);color:#00d4aa">4</div>
+          <div class="step-content">
+            <h4>Courbes Tonales</h4>
+            <p>S-curve légère pour le contraste et le "peps" de l'image.</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-num" style="background:rgba(245,158,11,0.2);color:#f59e0b">5</div>
+          <div class="step-content">
+            <h4>Égaliseur de Couleurs (HSL)</h4>
+            <p>Affiner chaque couleur : ciel, eau, rochers, végétation.</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-num" style="background:rgba(245,158,11,0.2);color:#f59e0b">6</div>
+          <div class="step-content">
+            <h4>Correction Couleurs (Color Wheels)</h4>
+            <p>Appliquer le color grading cinématique (ombres teal / HL chauds).</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-num" style="background:rgba(232,121,160,0.2);color:#e879a0">7</div>
+          <div class="step-content">
+            <h4>Texture + Contraste Local</h4>
+            <p>Révéler les détails des rochers et l'eau en tout dernier.</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-num" style="background:rgba(232,121,160,0.2);color:#e879a0">8</div>
+          <div class="step-content">
+            <h4>Export TIFF 16-bit → Affinity</h4>
+            <p>Exporter en TIFF 16-bit ProPhoto ou AdobeRGB pour finitions dans Affinity Photo/Studio.</p>
+          </div>
+        </div>
+      </div>
+      <div class="tip">
+        <div class="tip-label">Workflow ART → Affinity</div>
+        <p>Dans Affinity : les ajustements après ART doivent être <strong>légers</strong> — recadrage, dust spots, ajustements locaux fins (pinceau). Le gros du travail se fait dans ART sur le RAW. Affinity = finitions, pas re-développement.</p>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+  function show(id) {
+    document.querySelectorAll('.module').forEach(m => m.classList.remove('active'));
+    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+    const mod = document.getElementById('mod-' + id);
+    const nav = document.getElementById('nav-' + id);
+    if (mod) mod.classList.add('active');
+    if (nav) nav.classList.add('active');
+    return false;
+  }
+
+  function filterNav(query) {
+    const q = query.toLowerCase();
+    document.querySelectorAll('nav a').forEach(a => {
+      a.style.display = a.textContent.toLowerCase().includes(q) ? 'flex' : 'none';
+    });
+    document.querySelectorAll('.nav-section').forEach(s => {
+      s.style.display = q ? 'none' : 'block';
+    });
+  }
+</script>
+</body>
+</html>
