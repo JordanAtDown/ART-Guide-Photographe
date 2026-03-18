@@ -6,6 +6,9 @@ on:
       - 'src/modules/**'
       - 'src/index.njk'
 
+permissions:
+  contents: write
+
 jobs:
   extract:
     runs-on: ubuntu-latest
@@ -18,9 +21,6 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-
-      - name: Build Eleventy site
-        run: npm run build
 
       - name: Extract knowledge
         run: npm run extract
