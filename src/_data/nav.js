@@ -3,7 +3,8 @@ module.exports = [
     section: "Vue d'ensemble",
     items: [
       { id: "home", label: "Accueil & Workflow", url: "/", color: "#4a9eff" },
-      { id: "pipeline", label: "Pipeline de traitement", url: "/modules/pipeline/", color: "#00d4aa" }
+      { id: "pipeline", label: "Pipeline de traitement", url: "/modules/pipeline/", color: "#00d4aa" },
+      { id: "ordremodules", label: "Workflow de traitement", url: "/modules/ordremodules/", color: "#00d4aa" }
     ]
   },
   {
@@ -47,8 +48,7 @@ module.exports = [
   {
     section: "Looks & Presets",
     items: [
-      { id: "looks", label: "3 Looks Méditerranée", url: "/modules/looks/", color: "#a78bfa" },
-      { id: "ordremodules", label: "Ordre des Modules", url: "/modules/ordremodules/", color: "#a78bfa" }
+      { id: "looks", label: "3 Looks Méditerranée", url: "/modules/looks/", color: "#a78bfa" }
     ]
   }
 ];
