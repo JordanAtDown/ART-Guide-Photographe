@@ -2,7 +2,7 @@ module.exports = [
   {
     section: "Vue d'ensemble",
     items: [
-      { id: "home", label: "Accueil & Workflow", url: "/", color: "#4a9eff" },
+      { id: "home", label: "Accueil", url: "/", color: "#4a9eff" },
       { id: "pipeline", label: "Pipeline de traitement", url: "/modules/pipeline/", color: "#00d4aa" },
       { id: "ordremodules", label: "Workflow de traitement", url: "/modules/ordremodules/", color: "#00d4aa" }
     ]

@@ -2,311 +2,11 @@
   "meta": {
     "source": "ART Raw Image Processor — Documentation Photographe",
     "version": "1.0",
-    "generated": "2026-03-18T18:15:23.171Z",
+    "generated": "2026-03-18T19:35:24.953Z",
     "total_modules": 21,
-    "description": "Knowledge base extractée de la documentation ART pour usage par MCP ou tout système de génération de fichiers .arp"
+    "description": "Knowledge base extraite des sources Eleventy pour usage par MCP ou tout système de génération de fichiers .arp"
   },
   "modules": [
-    {
-      "id": "mod-pipeline",
-      "name": "Pipeline de Traitement",
-      "subtitle": "Comprendre l'ordre dans lequel ART traite tes données RAW",
-      "category": "Architecture",
-      "params": [],
-      "tips": [
-        {
-          "label": "Point clé",
-          "content": "ART traite les données dans un ordre fixe en interne, même si tu peux activer les modules dans n'importe quel ordre. Connaître ce pipeline t'évite des surprises : une modif en amont peut changer le résultat d'un module en aval."
-        }
-      ],
-      "warnings": [],
-      "tables": []
-    },
-    {
-      "id": "mod-exposition",
-      "name": "Exposition",
-      "subtitle": "Le premier contact avec ton RAW — établir la base tonale",
-      "category": "Exposition & Tonalité",
-      "params": [
-        {
-          "name": "Inactif",
-          "range": "Aucune récupération",
-          "description": "ART ne tente aucune reconstruction des zones cramées — elles restent blanches/clipées. À utiliser quand ton RAW n'a aucune zone surexposée (histogramme ne touche pas le bord droit), ou quand tu utilises le Log Tone Mapping qui gère lui-même la dynamique. Mode le plus \"propre\" car il n'introduit aucun artefact de reconstruction."
-        },
-        {
-          "name": "Blend (Mélange)",
-          "range": "Récupération douce par mélange",
-          "description": "Reconstruit les hautes lumières en interpolant entre les canaux non saturés. Méthode équilibrée : récupère à la fois la luminance et la couleur sans artefacts visibles. Bon choix universel pour les paysages avec ciel légèrement surexposé. Moins agressif que \"Propagation de la couleur\" — idéal quand la surexposition est modérée (1 à 1.5 stops max)."
-        },
-        {
-          "name": "Propagation de la couleur",
-          "range": "+ curseur Adoucissement (0–100)",
-          "description": "Mode le plus puissant : reconstruit les HL en propageant la couleur depuis les zones adjacentes non saturées. Donne les meilleurs résultats sur les ciels très surexposés ou les écumes de vague cramées. Le curseur **Adoucissement** contrôle la douceur de la transition entre zones récupérées et zones normales — valeur 0 = transition nette, 30-50 = fondu naturel recommandé pour éviter les halos."
-        },
-        {
-          "name": "Compensation d'exposition",
-          "range": "-5 EV → +5 EV (ici : +0.35)",
-          "description": "L'équivalent du réglage d'exposition en post. Chaque +1 EV double la luminosité. Travaille en fractions : ±0.3, ±0.7 pour des corrections fines. Attention : pousser trop fort amplifie le bruit dans les ombres. Avec le Log Tone Mapping actif, garder ce réglage entre -0.5 et +0.5 EV max."
-        },
-        {
-          "name": "Compensation du point noir",
-          "range": "-1 → +1 (ici : 0.008)",
-          "description": "Déplace le point noir de l'image au niveau du profil couleur. Valeur positive = lift des noirs (ombres plus claires). Valeur négative = crush des noirs. Différent du curseur \"Noirs\" de l'Égaliseur Tonal qui agit plus tard dans le pipeline. Une valeur de 0.005–0.010 est un bon point de départ pour éviter le clip dans les ombres."
-        }
-      ],
-      "tips": [
-        {
-          "label": "Point de vue photographe",
-          "content": "Ce module est ton \"premier coup de main\" sur l'image. Pense à lui comme à l'exposition au moment de la prise de vue : corriger les erreurs de mesure, établir le niveau global. Ne cherche pas la perfection ici — les modules suivants affineront. Le choix du mode de Reconstruction des Hautes Lumières est critique : il détermine comment ART gère les zones surexposées de ton capteur avant tout autre traitement."
-        },
-        {
-          "label": "Quel mode choisir pour tes photos de mer ?",
-          "content": "Ciel légèrement voilé ou surexposé d'1 stop → **Blend**. Écumes de vague cramées + ciel chargé → **Propagation de la couleur**, Adoucissement à 30. RAW bien exposé + Log Tone Mapping actif → **Inactif**, laisse le Log gérer."
-        }
-      ],
-      "warnings": [
-        "⚠️ **Curseur Adoucissement** (uniquement visible en mode \"Propagation de la couleur\") : valeur recommandée 20–40. En dessous de 10, risque de halo visible à la jonction ciel/horizon. Au-dessus de 60, la reconstruction devient trop étalée et peut affecter des zones qui n'étaient pas surexposées."
-      ],
-      "tables": []
-    },
-    {
-      "id": "mod-egaliseurtonal",
-      "name": "Égaliseur Tonal",
-      "subtitle": "Sculption chirurgicale de la dynamique — l'outil qui remplace Ombres/HLs de Lightroom",
-      "category": "Exposition & Tonalité",
-      "params": [
-        {
-          "name": "Pivot (EV)",
-          "range": "-3 → +3 EV",
-          "description": "Déplace la frontière entre \"ombres\" et \"hautes lumières\". Un pivot bas (-0.5) élargit la zone d'ombres — utile pour les scènes sombres. Un pivot haut protège mieux les HL sur une photo de plage en plein soleil."
-        },
-        {
-          "name": "Régularisation",
-          "range": "1 → 10",
-          "description": "Contrôle le \"lissage\" entre les bandes. Valeur haute (4-6) = transitions douces et naturelles. Valeur basse (1-2) = chaque bande agit de façon plus isolée, risque d'artefacts aux transitions."
-        }
-      ],
-      "tips": [
-        {
-          "label": "Point de vue photographe",
-          "content": "C'est l'outil le plus direct pour sculpter la lumière dans une image. Pense à lui comme à un dodging/burning numérique : tu décides quelle zone de la plage tonale doit être plus lumineuse ou plus sombre, sans affecter le reste. Extrêmement puissant pour récupérer des rochers sombres sans cramer le ciel."
-        },
-        {
-          "label": "Recette paysage marin",
-          "content": "Pour une photo de vague sur rochers (comme la tienne) : **Ombres +35 à +50** pour récupérer les rochers, **Hautes Lumières -15 à -25** pour protéger l'eau et le ciel, **Noirs +10 à +15** pour éviter le crush total. Régularisation à 4."
-        }
-      ],
-      "warnings": [],
-      "tables": [
-        {
-          "headers": [
-            "Curseur",
-            "Plage (EV)",
-            "Ce qu'il touche sur ta photo"
-          ],
-          "rows": [
-            [
-              "Noirs",
-              "-4 → +4",
-              "Les zones vraiment sombres — ombres profondes, zones presque noires. Lever = lift des noirs (look \"cinéma\"). Baisser = crush, look \"contrasté\"."
-            ],
-            [
-              "Ombres",
-              "-4 → +4",
-              "Les demi-ombres — rochers sombres, intérieur de bâtiments, faces sombres d'un sujet. Le plus utile pour récupérer du détail sans tout dénaturer."
-            ],
-            [
-              "Tons Moyens",
-              "-4 → +4",
-              "Le \"ventre\" de l'image — tout ce qui est à 18% gris, peau, herbe, mer en mi-journée. Très sensible visuellement."
-            ],
-            [
-              "Hautes Lumières",
-              "-4 → +4",
-              "Les zones claires non cramées — ciel bleu, eau éclairée, nuages détaillés. Baisser pour garder du \"poids\" dans le ciel."
-            ],
-            [
-              "Blancs",
-              "-4 → +4",
-              "Les zones très lumineuses, presque cramées. Baisse si les écumes de vague ou les nuages perdent leur texture."
-            ]
-          ]
-        }
-      ]
-    },
-    {
-      "id": "mod-courbestonales",
-      "name": "Courbes Tonales",
-      "subtitle": "Contraste, rendu des tons et look \"film\" — le module le plus artistique d'ART",
-      "category": "Exposition & Tonalité",
-      "params": [
-        {
-          "name": "Neutre",
-          "range": "Point de départ recommandé",
-          "description": "Aucune hypothèse sur le rendu — courbe linéaire, pas de modification colorimétrique. C'est le mode \"propre\" à utiliser avec le Log Tone Mapping actif, ou quand tu veux un contrôle total sans que le mode influence la couleur. Idéal pour les workflows cinématiques où tu gères tout toi-même."
-        },
-        {
-          "name": "Standard",
-          "range": "Rendu caméra simulé",
-          "description": "Applique une courbe similaire au rendu JPEG de l'appareil — légèrement en S, avec boost de saturation dans les tons moyens. Bon point de départ pour un look \"naturel\" sans effort. Attention : il modifie légèrement les couleurs, notamment en amplifiant la saturation globale."
-        },
-        {
-          "name": "Standard Pondérée",
-          "range": "Standard + protection des HL",
-          "description": "Variante du mode Standard avec une meilleure gestion des hautes lumières — la courbe compresse progressivement les HL pour éviter le clip. Utile pour les scènes à fort contraste (mer + ciel ensoleillé) quand tu ne veux pas utiliser le Log Tone Mapping."
-        },
-        {
-          "name": "Type Film",
-          "range": "Émulation pellicule argentique",
-          "description": "Reproduit la réponse non-linéaire d'un film argentique : ombres douces et détaillées, hautes lumières qui \"roulent\" progressivement sans clip brutal. Donne une qualité de gradation très agréable et naturelle. Excellent pour les portraits et les paysages à lumière douce. Moins adapté aux scènes très contrastées."
-        },
-        {
-          "name": "Mélange Saturation et Valeur",
-          "range": "Contraste sans shift de teinte",
-          "description": "Applique la courbe en travaillant dans l'espace HSV — sépare la luminosité de la teinte/saturation. Résultat : tu peux augmenter le contraste sans que les couleurs changent de teinte. Utile pour les photos où les couleurs doivent rester fidèles (architecture, produits) tout en ayant du peps."
-        },
-        {
-          "name": "Luminance",
-          "range": "Contraste pur sans impact couleur",
-          "description": "La courbe n'agit que sur la luminance perçue, sans modifier la saturation ni la teinte. C'est le mode le plus \"propre\" colorimétri­quement — idéal quand tu as déjà fait ton color grading et que tu veux juste ajouter du contraste sans rien déranger. Similaire à travailler sur le canal L* en Lab."
-        },
-        {
-          "name": "Perceptuel",
-          "range": "Rendu proche de la vision humaine",
-          "description": "Utilise un modèle de vision humaine (CIECAM) pour adapter la courbe. Les changements de luminosité sont compensés perceptuellement — une zone plus sombre garde sa \"sensation\" colorée même si sa valeur RVB change. Le plus sophistiqué des 7 modes, mais aussi le plus imprévisible si tu ne connais pas bien son comportement."
-        },
-        {
-          "name": "Linéaire",
-          "range": "Pas de présupposé — tout à la main",
-          "description": "La courbe part droite de coin à coin — aucune modification. C'est la base recommandée quand tu utilises le Log Tone Mapping, ou quand tu veux construire ton look de zéro. Associe-la au mode Neutre pour un pipeline totalement sous contrôle."
-        },
-        {
-          "name": "Atténuation progressive des hautes lumières",
-          "range": "Protection automatique des HL",
-          "description": "La courbe de base intègre déjà une compression douce des hautes lumières — les zones claires sont \"roulées\" progressivement avant même que tu ne touches quoi que ce soit. Très utile pour les ciels lumineux méditerranéens : ça évite le clipping sans avoir à tout gérer manuellement."
-        },
-        {
-          "name": "Courbe en S progressive",
-          "range": "Contraste intégré dès le départ",
-          "description": "ART applique une S-curve légère comme base — les ombres sont légèrement abaissées et les hautes lumières légèrement compressées. Donne d'emblée un rendu avec du peps, proche du rendu JPEG caméra. Bon point de départ pour un workflow rapide sans Log Tone Mapping."
-        },
-        {
-          "name": "Courbe Tonale 1 (CT1)",
-          "range": "Courbe principale",
-          "description": "La courbe de travail principale. Clique pour ajouter des points de contrôle, glisse pour les déplacer. Le curseur **E** (entrée) et **S** (sortie) affichent les valeurs du point sélectionné. C'est ici que tu construis ta S-curve, ton lift des noirs, ou ta compression des HL."
-        },
-        {
-          "name": "Courbe Tonale 2 (CT2)",
-          "range": "Courbe de saturation ou secondaire",
-          "description": "Deuxième courbe chaînée après CT1. Peut être utilisée pour un deuxième ajustement tonal, ou configurée en mode saturation pour lier l'intensité des couleurs à la luminance — exemple classique : désaturer les hautes lumières pour éviter les jaunes cramés."
-        },
-        {
-          "name": "Curseurs E / S / TG / TD",
-          "range": "Visibles quand un point est sélectionné",
-          "description": "**E** = valeur d'Entrée du point (0–100, luminosité dans le RAW). **S** = valeur de Sortie du point (0–100, luminosité en sortie). **TG** = Tangente Gauche — contrôle la pente à gauche du point. **TD** = Tangente Droite — contrôle la pente à droite du point. TG/TD permettent de faire des courbes asymétriques précises sans déplacer les points voisins."
-        },
-        {
-          "name": "Courbe Tonale basée sur l'Aperçu",
-          "range": "Bouton — analyse automatique",
-          "description": "ART analyse l'histogramme de l'image et propose automatiquement une courbe adaptée. Bon point de départ à affiner manuellement — ne remplace pas le jugement artistique mais évite de partir de zéro sur une image difficile."
-        }
-      ],
-      "tips": [
-        {
-          "label": "Point de vue photographe",
-          "content": "La courbe tonale définit exactement comment chaque valeur de luminosité du RAW sera reproduite. C'est l'outil qui donne le \"caractère\" à une image : une courbe en S = contraste, un lift des noirs = look film dégradé, une compression des HL = ciel qui respire. ART propose deux courbes chaînables (CT1 + CT2) et 7 modes de calcul — chaque mode change la façon dont la couleur réagit aux modifications de luminosité."
-        },
-        {
-          "label": "Recette pour look méditerranée cinématique",
-          "content": "Mode **Luminance** + base **Linéaire**. CT1 : point bas (E:20 → S:25), point haut (E:80 → S:75) — S-curve subtile. CT2 : mode Saturation, courbe légèrement en cloche — boost centre, compression aux extrêmes. Résultat : contraste propre sans shift de teinte, couleurs vivifiées dans les tons moyens."
-        }
-      ],
-      "warnings": [
-        "⚠️ **Avec le Log Tone Mapping actif**, la courbe tonale intervient APRÈS lui dans le pipeline. Utilise Mode **Neutre** + base **Linéaire** et n'applique qu'une S-curve très légère (contraste +10 à +15 max) — le Log a déjà géré l'essentiel de la dynamique."
-      ],
-      "tables": []
-    },
-    {
-      "id": "mod-logtonemapping",
-      "name": "Log Tone Mapping",
-      "subtitle": "La gestion HDR de type \"Filmic\" — le module le plus puissant d'ART",
-      "category": "Module Signature d'ART ⭐",
-      "params": [
-        {
-          "name": "Point Gris Cible (luminosité)",
-          "range": "1 → 100 (défaut : 18)",
-          "description": "**Le paramètre central.** Définit à quelle luminosité les tons moyens de ta scène seront rendus. 18% = gris standard = rendu naturel. Monter à 22-25 éclaircit l'image globalement (look aéré). Descendre à 14-16 assombrit (look dramatique)."
-        },
-        {
-          "name": "Gain (EV)",
-          "range": "-5 → +5 EV",
-          "description": "Exposition globale avant le mappage log. Fonctionne comme un pré-réglage d'exposition. Si ton RAW est sous-exposé de 1 EV, mets +1 ici plutôt que dans le module Exposition — le Log Tone Mapping gérera mieux la dynamique."
-        },
-        {
-          "name": "Blanc Exposition Relative (EV)",
-          "range": "0.5 → 8 EV",
-          "description": "**Haut de la plage dynamique.** Définit combien d'EV au-dessus du gris moyen seront récupérés. 2.5 EV = récupère 2.5 stops de hautes lumières. Augmenter récupère plus de ciel/nuages mais peut \"tasser\" les HL."
-        },
-        {
-          "name": "Noir Exposition Relative (EV)",
-          "range": "-20 → -1 EV",
-          "description": "**Bas de la plage dynamique.** Définit combien d'EV sous le gris moyen sont récupérés. -13.5 = récupère 13.5 stops d'ombres. Moins négatif (-8) = ombres plus riches/plus sombres. Plus négatif (-16) = ombres très ouvertes."
-        },
-        {
-          "name": "Précompression Hautes Lumières",
-          "range": "0 → 100",
-          "description": "Compresse doucement les HL avant le mappage — évite l'effet \"halo\" autour des zones très claires. Sur une photo de plage avec ciel très lumineux, mettre 15-25 donne un ciel plus \"propre\"."
-        },
-        {
-          "name": "Régularisation",
-          "range": "0 → 100",
-          "description": "Contrôle la \"douceur\" de la compression. Valeur haute (60-80) = transitions douces, look cinématique. Valeur basse (20-30) = contraste local plus marqué, look \"HDR\" plus visible."
-        }
-      ],
-      "tips": [
-        {
-          "label": "C'est quoi concrètement ?",
-          "content": "Le Log Tone Mapping est l'équivalent du module **Filmic RGB de Darktable**. Il transforme la plage dynamique brute (qui peut aller de -13 EV à +2 EV sur un capteur moderne) en une courbe logarithmique qui \"tasse\" les extrêmes pour les faire rentrer dans la plage d'affichage — exactement comme ce que fait le log C-Log ou S-Log en vidéo professionnelle. Résultat : ombres détaillées ET hautes lumières récupérées, simultanément."
-        },
-        {
-          "label": "Réglage de départ recommandé pour paysage marin",
-          "content": "Clique **Automatique** d'abord — ART analyse ton histogramme et propose des valeurs. Puis ajuste : Blanc EV à **2.0-2.2** (moins de compression HL), Noir EV à **-10 / -11** (ombres plus riches), Régularisation à **50-60**, Point gris à **18-20**."
-        }
-      ],
-      "warnings": [],
-      "tables": []
-    },
-    {
-      "id": "mod-compressiondyn",
-      "name": "Compression de la Plage Dynamique",
-      "subtitle": "Tone Mapping \"local\" — récupération de détail dans les zones extrêmes",
-      "category": "Exposition & Tonalité",
-      "params": [
-        {
-          "name": "Quantité",
-          "range": "0 → 100 (défaut : 20)",
-          "description": "Force de la compression dynamique locale. 20 = léger, naturel. 40-60 = récupération marquée, peut révéler beaucoup de détail dans les ombres sombres. Au-delà de 70, risque d'aspect \"tonné\" artificiel."
-        },
-        {
-          "name": "Détail",
-          "range": "0 → 100 (défaut : 30)",
-          "description": "Définit l'échelle spatiale de l'analyse. Valeur basse (10-20) = compression sur de grandes zones. Valeur haute (50-70) = compression fine qui préserve mieux les textures. Augmenter si les rochers semblent \"plats\" après la quantité."
-        },
-        {
-          "name": "Contrôle de Saturation",
-          "range": "☑ / ☐",
-          "description": "Quand coché, la compression dynamique affecte aussi la saturation proportionnellement — évite que les zones récupérées deviennent trop grises. À activer pour garder la couleur de l'eau dans les ombres."
-        }
-      ],
-      "tips": [
-        {
-          "label": "Point de vue photographe",
-          "content": "C'est le \"tone mapping\" au sens traditionnel — il analyse les zones locales de l'image et compresse les écarts de luminosité pour faire ressortir le détail partout. Pense à l'effet \"HDR de qualité\" sans l'aspect criard. Complémentaire au Log Tone Mapping qui, lui, agit globalement."
-        }
-      ],
-      "warnings": [],
-      "tables": []
-    },
     {
       "id": "mod-balanceblancs",
       "name": "Balance des Blancs",
@@ -339,201 +39,30 @@
       "tables": []
     },
     {
-      "id": "mod-saturation",
-      "name": "Saturation / Vibrance",
-      "subtitle": "Intensité globale des couleurs — à utiliser avec parcimonie",
-      "category": "Couleur",
+      "id": "mod-bruitimpulsion",
+      "name": "Réduction du Bruit d'Impulsion",
+      "subtitle": "Pixels morts, hot pixels, poussières — nettoyage ciblé",
+      "category": "Détail & Netteté",
       "params": [
         {
-          "name": "Saturation",
-          "range": "-100 → +100",
-          "description": "Boost global. 0 = neutre. +10 à +20 pour une touche de vie. Évite de dépasser +30 sauf effet délibéré. Valeur négative (-100) donne un N&B, (-20 à -40) donne un look \"désaturé/film\"."
+          "name": "Seuil",
+          "range": "0 → 100 (défaut : 50)",
+          "description": "Sensibilité de détection des pixels aberrants. Valeur basse (20–35) = détecte et corrige beaucoup de pixels suspects — risque de corriger des détails légitimes (étoiles, reflets ponctuels sur l'eau). Valeur haute (60–80) = ne corrige que les pixels vraiment aberrants. Pour la photo de jour, 50–60 est optimal. Pour la nuit ou longue expo, descendre à 25–35."
         },
         {
-          "name": "Vibrance",
-          "range": "-100 → +100",
-          "description": "Boost intelligent. +20 à +30 pour vivifier les couleurs sans les rendre criardes. Idéal pour récupérer la couleur teal de l'eau méditerranéenne sans saturer le ciel déjà bleu. Beaucoup plus naturel que la Saturation."
+          "name": "Défranger",
+          "range": "Activer / Désactiver",
+          "description": "Module complémentaire qui réduit les franges chromatiques (aberrations chromatiques latérales) visibles aux contours à fort contraste — typiquement les contours entre rochers sombres et ciel clair, ou entre écume blanche et eau sombre. Apparaît comme une frange violette ou verte sur les bords. À activer si tu constates ces franges à 100% de zoom."
         }
       ],
       "tips": [
         {
           "label": "Point de vue photographe",
-          "content": "**Saturation** boost toutes les couleurs de façon uniforme — risque de rendre les couleurs déjà saturées (eau turquoise, ciel bleu) trop intenses et peu naturelles. **Vibrance** (algorithme plus intelligent) boost en priorité les couleurs peu saturées et protège les couleurs déjà intenses. Sur une photo de mer : préfère toujours la Vibrance à la Saturation."
-        }
-      ],
-      "warnings": [],
-      "tables": []
-    },
-    {
-      "id": "mod-eqcouleurs",
-      "name": "Égaliseur de Couleurs (HSL)",
-      "subtitle": "Contrôle couleur par couleur — l'outil de sélection par teinte",
-      "category": "Couleur",
-      "params": [],
-      "tips": [
-        {
-          "label": "Point de vue photographe",
-          "content": "C'est l'outil qui permet de dire \"je veux que le ciel soit plus bleu foncé, l'eau plus teal, et les rochers moins orange\". Tu travailles couleur par couleur, avec trois axes : **T** (teinte = décaler la couleur), **S** (saturation = intensifier), **L** (luminance = éclaircir/assombrir). Outil incontournable pour le look méditerranéen."
-        }
-      ],
-      "warnings": [],
-      "tables": [
-        {
-          "headers": [
-            "Axe",
-            "Ce que ça fait",
-            "Exemple pratique"
-          ],
-          "rows": [
-            [
-              "T — Teinte",
-              "Décale la couleur vers une teinte voisine",
-              "Bleu T -8 → le ciel part vers le violet-bleu profond"
-            ],
-            [
-              "S — Saturation",
-              "Amplifie ou réduit l'intensité de cette couleur",
-              "Cyan S +30 → l'eau méditerranéenne devient plus turquoise"
-            ],
-            [
-              "L — Luminance",
-              "Éclaircit ou assombrit cette couleur uniquement",
-              "Bleu L -10 → le ciel devient plus \"lourd\", dramatique"
-            ]
-          ]
-        },
-        {
-          "headers": [
-            "Canal",
-            "T",
-            "S",
-            "L",
-            "Effet visuel"
-          ],
-          "rows": [
-            [
-              "Bleu",
-              "-8",
-              "+28",
-              "-12",
-              "Ciel bleu profond, dramatique"
-            ],
-            [
-              "Cyan",
-              "+10",
-              "+32",
-              "+6",
-              "Eau turquoise méditerranéenne"
-            ],
-            [
-              "Vert",
-              "+5",
-              "-8",
-              "0",
-              "Végétation des collines naturelle"
-            ],
-            [
-              "Orange",
-              "-5",
-              "-18",
-              "+12",
-              "Rochers : moins \"brûlés\", plus lumineux"
-            ],
-            [
-              "Jaune",
-              "0",
-              "-12",
-              "+5",
-              "Lumière dorée contrôlée"
-            ]
-          ]
-        }
-      ]
-    },
-    {
-      "id": "mod-correctioncouleurs",
-      "name": "Correction des Couleurs / Tonalités",
-      "subtitle": "7 modes de color grading — des color wheels au LUT",
-      "category": "Module Signature d'ART ⭐",
-      "params": [
-        {
-          "name": "Liste des instances",
-          "range": "Boutons + / −",
-          "description": "Chaque ligne dans la liste est une correction indépendante avec son propre mode et ses propres masques. Tu peux empiler plusieurs instances : une en mode **Coefficients TSL** pour le color grading général, une autre en mode **Canaux RVB séparés** pour un ajustement fin sur un canal spécifique. Cocher/décocher la case active ou bypass l'instance."
-        },
-        {
-          "name": "Paramètres de l'instance",
-          "range": "HSL S=0 So=0 h=0 g=2.4 …",
-          "description": "La ligne de résumé affiche l'état courant de l'instance de façon compacte. H= teinte, S= saturation, So= saturation sortie, s= scale, o= offset, p= pivot, c= compression, P= préservation, g= gamma. Toutes ces valeurs à zéro = instance neutre, pas d'effet."
-        },
-        {
-          "name": "Masques par instance",
-          "range": "Colonne Masques",
-          "description": "Chaque instance peut avoir son propre masque — limiter la correction à une zone de l'image (masque de zone, masque paramétrique par luminance/couleur, masque au pinceau). Puissant pour appliquer le color grading uniquement sur le ciel ou uniquement sur les rochers."
-        },
-        {
-          "name": "Neutre",
-          "range": "Point de départ propre",
-          "description": "Aucun rendu colorimétrique — courbe linéaire, espace colorimétrique natif. C'est le mode \"vierge\" à utiliser avec le Log Tone Mapping actif quand tu veux un contrôle total sans présupposé de rendu. Idéal pour les workflows où tu construis tout toi-même."
-        },
-        {
-          "name": "Standard",
-          "range": "Rendu caméra simulé",
-          "description": "Similaire au rendu JPEG de l'appareil — applique une courbe tonale douce et une légère saturation. Bon point de départ si tu veux retrouver le look \"out-of-camera\" avant de personnaliser. Correspond approximativement au profil Standard du Sony Alpha."
-        },
-        {
-          "name": "Coefficients TSL",
-          "range": "Color wheels Teinte/Sat/Lum",
-          "description": "**Le mode principal pour le color grading.** Les 3 color wheels (Hautes lumières / Ombres / Tons moyens) agissent simultanément sur la teinte ET la luminosité. Le curseur **Gamma (2.4)** contrôle la courbure de la transition entre zones. C'est le mode \"DaVinci Resolve\" d'ART."
-        },
-        {
-          "name": "Perceptuel",
-          "range": "Color wheel unique + courbe",
-          "description": "Une seule color wheel globale avec une approche perceptuelle — les modifications respectent mieux la perception humaine des couleurs. Moins de dérive de teinte lors des changements de saturation. Idéal pour des corrections subtiles qui doivent rester \"invisibles\"."
-        },
-        {
-          "name": "Canaux RVB séparés",
-          "range": "Courbe + sliders R/V/B + wheels",
-          "description": "Mode avancé : une courbe de tons par canal Rouge, Vert, Bleu **indépendante**, plus les color wheels. Options Lier les curseurs correspondants et Mode luminance. Permet un split toning ultra-précis : lever les ombres du canal bleu pendant qu'on compresse les HL du rouge — look film classique."
-        },
-        {
-          "name": "LUT",
-          "range": "Fichier .cube / .3dl",
-          "description": "Applique une LUT (Look-Up Table) externe — fichiers .cube ou .3dl téléchargeables ou créés dans d'autres logiciels (DaVinci, Dehancer, etc.). Champ **Fichier LUT** pour charger le fichier. Permet d'appliquer des looks cinéma professionnels (Kodak 2383, Fuji 3510, etc.) directement sur tes RAWs."
-        },
-        {
-          "name": "Modification de la teinte",
-          "range": "-180° → +180° (barre arc-en-ciel)",
-          "description": "Rotation globale de toutes les teintes de l'image sur la roue chromatique. 0 = pas de décalage. +30° = tout décale vers le jaune-vert. -30° = tout décale vers le magenta-rouge. Utile pour corriger une dominante de couleur globale sans toucher à la saturation."
-        },
-        {
-          "name": "Saturation Entrée / Sortie",
-          "range": "-100 → +100",
-          "description": "**Entrée** : filtre quelles saturation sont affectées par la correction (0 = toutes). **Sortie** : saturation finale après correction. Séparer les deux permet de \"protéger\" les couleurs déjà très saturées (eau turquoise) tout en boostant les autres."
-        },
-        {
-          "name": "Gamma (mode Coefficients TSL)",
-          "range": "0.5 → 4.0 (défaut : 2.4)",
-          "description": "Contrôle la courbure de la transition entre ombres et hautes lumières sur les color wheels. 2.4 = comportement standard sRGB. Valeur haute (3.0+) = les tons moyens basculent davantage vers les \"ombres\" — wheels d'ombres plus influentes. Valeur basse (1.5) = tons moyens plus proches des HL."
-        },
-        {
-          "name": "Pivot / Compression",
-          "range": "0 → 2.0 / 0 → 1.0",
-          "description": "**Pivot** : point de luminosité qui sépare \"ombres\" et \"hautes lumières\" sur les wheels. 1.0 = séparation au niveau des tons moyens standard. **Compression** : réduit l'effet aux extrêmes pour éviter la saturation excessive dans les zones très claires ou très sombres."
-        }
-      ],
-      "tips": [
-        {
-          "label": "Point de vue photographe",
-          "content": "C'est le module de **color grading** central d'ART — l'équivalent des Primary Wheels de DaVinci Resolve. Il permet d'assigner une couleur différente aux ombres, tons moyens et hautes lumières simultanément. C'est ici que naît le look \"teal & orange\", le look \"film\", ou n'importe quelle atmosphère colorée. ART propose 7 algorithmes différents pour arriver à ce résultat — chacun avec une logique propre. Le système de **calques (instances)** permet d'empiler plusieurs corrections indépendantes."
-        },
-        {
-          "label": "Bonnes pratiques — workflow recommandé",
-          "content": "**Instance 1** — Mode **Coefficients TSL** : color grading principal (ombres teal, HL chaud). **Instance 2** — Mode **Canaux RVB séparés** : ajustements fins canal par canal (lever ombres bleu, compresser HL rouge). **Instance 3** — Mode **LUT** (optionnel) : appliquer un look cinéma par-dessus. Toujours travailler avec des valeurs **subtiles** sur les wheels — intensité 0.05 à 0.15 max. L'œil s'adapte vite, ce qui paraît subtil à l'écran sera visible à l'impression."
+          "content": "Le bruit d'impulsion est différent du bruit classique : ce sont des **pixels isolés anormalement clairs ou colorés** — pixels chauds (hot pixels) en longue exposition, pixels morts, artefacts de capteur par forte chaleur. Ils apparaissent comme des points brillants isolés, souvent rouges ou blancs, dans les zones sombres. Ce module les détecte et les remplace par interpolation avec les pixels voisins. Complètement indépendant de la réduction de bruit principale."
         }
       ],
       "warnings": [
-        "⚠️ **Ordre des instances :** ART applique les instances de haut en bas dans la liste. Mettre le color grading général (Coefficients TSL) en instance 1 et les ajustements fins en instance 2 donne de meilleurs résultats que l'inverse."
+        "⚠️ **Attention aux reflets sur l'eau :** avec un seuil trop bas, la réduction de bruit d'impulsion peut supprimer les petits reflets lumineux ponctuels sur l'eau (scintillement) en les confondant avec des hot pixels. Vérifier à 100% de zoom sur les zones d'eau avant d'exporter."
       ],
       "tables": []
     },
@@ -655,39 +184,146 @@
       ]
     },
     {
-      "id": "mod-melange",
-      "name": "Mélange des Canaux",
-      "subtitle": "Manipulation directe des canaux R, V, B — pour effets avancés",
-      "category": "Couleur — Avancé",
+      "id": "mod-compressiondyn",
+      "name": "Compression de la Plage Dynamique",
+      "subtitle": "Tone Mapping \"local\" — récupération de détail dans les zones extrêmes",
+      "category": "Exposition & Tonalité",
       "params": [
         {
-          "name": "Mode Matrice RVB",
-          "range": "—",
-          "description": "Mode standard. Chaque canal de sortie est une combinaison linéaire des 3 canaux d'entrée. La diagonale à 100% = pas de modification. C'est un outil de coloriste avancé, à utiliser après avoir maîtrisé les autres modules."
+          "name": "Quantité",
+          "range": "0 → 100 (défaut : 20)",
+          "description": "Force de la compression dynamique locale. 20 = léger, naturel. 40-60 = récupération marquée, peut révéler beaucoup de détail dans les ombres sombres. Au-delà de 70, risque d'aspect \"tonné\" artificiel."
         },
         {
-          "name": "Canal Rouge (ligne)",
-          "range": "R:100 V:0 B:0 = neutre",
-          "description": "Contrôle ce qui constitue le rouge en sortie. Injecter un peu de vert (R:95 V:8 B:0) donne des tons chair plus dorés. Injecter du bleu (R:95 V:0 B:8) refroidit les rouges."
+          "name": "Détail",
+          "range": "0 → 100 (défaut : 30)",
+          "description": "Définit l'échelle spatiale de l'analyse. Valeur basse (10-20) = compression sur de grandes zones. Valeur haute (50-70) = compression fine qui préserve mieux les textures. Augmenter si les rochers semblent \"plats\" après la quantité."
         },
         {
-          "name": "Canal Vert (ligne)",
-          "range": "R:0 V:100 B:0 = neutre",
-          "description": "Pour look teal : V:97 B:5 injecte un peu de bleu dans les verts → les végétations et l'eau prennent une teinte plus froide et \"aquatique\"."
-        },
-        {
-          "name": "Canal Bleu (ligne)",
-          "range": "R:0 V:0 B:100 = neutre",
-          "description": "Pour deepening du ciel : B:105 = bleu légèrement amplifié → ciel plus profond. Injecter du vert (V:3 B:97) = bleu légèrement teal dans les zones bleues."
+          "name": "Contrôle de Saturation",
+          "range": "☑ / ☐",
+          "description": "Quand coché, la compression dynamique affecte aussi la saturation proportionnellement — évite que les zones récupérées deviennent trop grises. À activer pour garder la couleur de l'eau dans les ombres."
         }
       ],
       "tips": [
         {
           "label": "Point de vue photographe",
-          "content": "Le mélange des canaux permet de \"contaminer\" un canal par un autre. Exemple classique : injecter un peu de canal Bleu dans le canal Vert pour créer une dominante \"teal\" dans les verts naturels. Très puissant mais demande de la précision — de petites valeurs (±5%) suffisent."
+          "content": "C'est le \"tone mapping\" au sens traditionnel — il analyse les zones locales de l'image et compresse les écarts de luminosité pour faire ressortir le détail partout. Pense à l'effet \"HDR de qualité\" sans l'aspect criard. Complémentaire au Log Tone Mapping qui, lui, agit globalement."
         }
       ],
       "warnings": [],
+      "tables": []
+    },
+    {
+      "id": "mod-contrastelocal",
+      "name": "Contraste Local",
+      "subtitle": "Clarté et micro-contraste — donne de la \"présence\" à l'image",
+      "category": "Détail & Netteté",
+      "params": [
+        {
+          "name": "Courbe de Contraste Local",
+          "range": "Courbe personnalisable",
+          "description": "La courbe définit l'intensité du contraste selon la luminance locale. La courbe neutre est (0.00, 0.50)(1.00, 0.50) — ligne horizontale au milieu = pas d'effet. Monter la courbe = plus de contraste, descendre = moins."
+        }
+      ],
+      "tips": [
+        {
+          "label": "Point de vue photographe",
+          "content": "Le contraste local agit sur les moyennes fréquences spatiales — il augmente le contraste entre zones adjacentes sans modifier l'exposition globale. L'effet visuellement ressemble à la \"Clarté\" de Lightroom ou au \"Structure\" de Capture One. Il donne une impression de profondeur et de présence à l'image. Attention : trop fort = look HDR criard."
+        },
+        {
+          "label": "Courbe recommandée pour paysage",
+          "content": "Pour un effet de clarté subtil : ajoute un point à **(0.30, 0.55)** — légèrement au-dessus du centre dans les tons sombres. Et un point à **(0.70, 0.45)** — légèrement en dessous dans les tons clairs. Cela crée une micro S-curve qui donne de la \"mordant\" sans excès."
+        }
+      ],
+      "warnings": [],
+      "tables": []
+    },
+    {
+      "id": "mod-correctioncouleurs",
+      "name": "Correction des Couleurs / Tonalités",
+      "subtitle": "7 modes de color grading — des color wheels au LUT",
+      "category": "Module Signature d'ART ⭐",
+      "params": [
+        {
+          "name": "Liste des instances",
+          "range": "Boutons + / −",
+          "description": "Chaque ligne dans la liste est une correction indépendante avec son propre mode et ses propres masques. Tu peux empiler plusieurs instances : une en mode **Coefficients TSL** pour le color grading général, une autre en mode **Canaux RVB séparés** pour un ajustement fin sur un canal spécifique. Cocher/décocher la case active ou bypass l'instance."
+        },
+        {
+          "name": "Paramètres de l'instance",
+          "range": "HSL S=0 So=0 h=0 g=2.4 …",
+          "description": "La ligne de résumé affiche l'état courant de l'instance de façon compacte. H= teinte, S= saturation, So= saturation sortie, s= scale, o= offset, p= pivot, c= compression, P= préservation, g= gamma. Toutes ces valeurs à zéro = instance neutre, pas d'effet."
+        },
+        {
+          "name": "Masques par instance",
+          "range": "Colonne Masques",
+          "description": "Chaque instance peut avoir son propre masque — limiter la correction à une zone de l'image (masque de zone, masque paramétrique par luminance/couleur, masque au pinceau). Puissant pour appliquer le color grading uniquement sur le ciel ou uniquement sur les rochers."
+        },
+        {
+          "name": "Neutre",
+          "range": "Point de départ propre",
+          "description": "Aucun rendu colorimétrique — courbe linéaire, espace colorimétrique natif. C'est le mode \"vierge\" à utiliser avec le Log Tone Mapping actif quand tu veux un contrôle total sans présupposé de rendu. Idéal pour les workflows où tu construis tout toi-même."
+        },
+        {
+          "name": "Standard",
+          "range": "Rendu caméra simulé",
+          "description": "Similaire au rendu JPEG de l'appareil — applique une courbe tonale douce et une légère saturation. Bon point de départ si tu veux retrouver le look \"out-of-camera\" avant de personnaliser. Correspond approximativement au profil Standard du Sony Alpha."
+        },
+        {
+          "name": "Coefficients TSL",
+          "range": "Color wheels Teinte/Sat/Lum",
+          "description": "**Le mode principal pour le color grading.** Les 3 color wheels (Hautes lumières / Ombres / Tons moyens) agissent simultanément sur la teinte ET la luminosité. Le curseur **Gamma (2.4)** contrôle la courbure de la transition entre zones. C'est le mode \"DaVinci Resolve\" d'ART."
+        },
+        {
+          "name": "Perceptuel",
+          "range": "Color wheel unique + courbe",
+          "description": "Une seule color wheel globale avec une approche perceptuelle — les modifications respectent mieux la perception humaine des couleurs. Moins de dérive de teinte lors des changements de saturation. Idéal pour des corrections subtiles qui doivent rester \"invisibles\"."
+        },
+        {
+          "name": "Canaux RVB séparés",
+          "range": "Courbe + sliders R/V/B + wheels",
+          "description": "Mode avancé : une courbe de tons par canal Rouge, Vert, Bleu **indépendante**, plus les color wheels. Options Lier les curseurs correspondants et Mode luminance. Permet un split toning ultra-précis : lever les ombres du canal bleu pendant qu'on compresse les HL du rouge — look film classique."
+        },
+        {
+          "name": "LUT",
+          "range": "Fichier .cube / .3dl",
+          "description": "Applique une LUT (Look-Up Table) externe — fichiers .cube ou .3dl téléchargeables ou créés dans d'autres logiciels (DaVinci, Dehancer, etc.). Champ **Fichier LUT** pour charger le fichier. Permet d'appliquer des looks cinéma professionnels (Kodak 2383, Fuji 3510, etc.) directement sur tes RAWs."
+        },
+        {
+          "name": "Modification de la teinte",
+          "range": "-180° → +180° (barre arc-en-ciel)",
+          "description": "Rotation globale de toutes les teintes de l'image sur la roue chromatique. 0 = pas de décalage. +30° = tout décale vers le jaune-vert. -30° = tout décale vers le magenta-rouge. Utile pour corriger une dominante de couleur globale sans toucher à la saturation."
+        },
+        {
+          "name": "Saturation Entrée / Sortie",
+          "range": "-100 → +100",
+          "description": "**Entrée** : filtre quelles saturation sont affectées par la correction (0 = toutes). **Sortie** : saturation finale après correction. Séparer les deux permet de \"protéger\" les couleurs déjà très saturées (eau turquoise) tout en boostant les autres."
+        },
+        {
+          "name": "Gamma (mode Coefficients TSL)",
+          "range": "0.5 → 4.0 (défaut : 2.4)",
+          "description": "Contrôle la courbure de la transition entre ombres et hautes lumières sur les color wheels. 2.4 = comportement standard sRGB. Valeur haute (3.0+) = les tons moyens basculent davantage vers les \"ombres\" — wheels d'ombres plus influentes. Valeur basse (1.5) = tons moyens plus proches des HL."
+        },
+        {
+          "name": "Pivot / Compression",
+          "range": "0 → 2.0 / 0 → 1.0",
+          "description": "**Pivot** : point de luminosité qui sépare \"ombres\" et \"hautes lumières\" sur les wheels. 1.0 = séparation au niveau des tons moyens standard. **Compression** : réduit l'effet aux extrêmes pour éviter la saturation excessive dans les zones très claires ou très sombres."
+        }
+      ],
+      "tips": [
+        {
+          "label": "Point de vue photographe",
+          "content": "C'est le module de **color grading** central d'ART — l'équivalent des Primary Wheels de DaVinci Resolve. Il permet d'assigner une couleur différente aux ombres, tons moyens et hautes lumières simultanément. C'est ici que naît le look \"teal & orange\", le look \"film\", ou n'importe quelle atmosphère colorée. ART propose 7 algorithmes différents pour arriver à ce résultat — chacun avec une logique propre. Le système de **calques (instances)** permet d'empiler plusieurs corrections indépendantes."
+        },
+        {
+          "label": "Bonnes pratiques — workflow recommandé",
+          "content": "**Instance 1** — Mode **Coefficients TSL** : color grading principal (ombres teal, HL chaud). **Instance 2** — Mode **Canaux RVB séparés** : ajustements fins canal par canal (lever ombres bleu, compresser HL rouge). **Instance 3** — Mode **LUT** (optionnel) : appliquer un look cinéma par-dessus. Toujours travailler avec des valeurs **subtiles** sur les wheels — intensité 0.05 à 0.15 max. L'œil s'adapte vite, ce qui paraît subtil à l'écran sera visible à l'impression."
+        }
+      ],
+      "warnings": [
+        "⚠️ **Ordre des instances :** ART applique les instances de haut en bas dans la liste. Mettre le color grading général (Coefficients TSL) en instance 1 et les ajustements fins en instance 2 donne de meilleurs résultats que l'inverse."
+      ],
       "tables": []
     },
     {
@@ -741,59 +377,335 @@
       ]
     },
     {
-      "id": "mod-texture",
-      "name": "Amplification de la Texture",
-      "subtitle": "Révélation des micro-détails — rochers, eau, écumes",
-      "category": "Détail & Netteté",
+      "id": "mod-courbestonales",
+      "name": "Courbes Tonales",
+      "subtitle": "Contraste, rendu des tons et look \"film\" — le module le plus artistique d'ART",
+      "category": "Exposition & Tonalité",
       "params": [
         {
-          "name": "Force",
-          "range": "-1.0 → +1.0",
-          "description": "Intensité de l'amplification. 0 = neutre. +0.2 à +0.4 = légère révélation des textures, naturel. +0.6 à +0.8 = effet \"hyper-réaliste\" visible. Négatif (-0.2) = lissage doux de la texture, utile pour la peau."
+          "name": "Neutre",
+          "range": "Point de départ recommandé",
+          "description": "Aucune hypothèse sur le rendu — courbe linéaire, pas de modification colorimétrique. C'est le mode \"propre\" à utiliser avec le Log Tone Mapping actif, ou quand tu veux un contrôle total sans que le mode influence la couleur. Idéal pour les workflows cinématiques où tu gères tout toi-même."
         },
         {
-          "name": "Échelle des Détails",
-          "range": "0.0 → 1.0",
-          "description": "Taille des détails ciblés. 0.10-0.20 = micro-textures (grain, aspérités). 0.40-0.60 = textures moyennes (strates des rochers). 0.80+ = grandes textures (ondulations de l'eau)."
+          "name": "Standard",
+          "range": "Rendu caméra simulé",
+          "description": "Applique une courbe similaire au rendu JPEG de l'appareil — légèrement en S, avec boost de saturation dans les tons moyens. Bon point de départ pour un look \"naturel\" sans effort. Attention : il modifie légèrement les couleurs, notamment en amplifiant la saturation globale."
         },
         {
-          "name": "Itérations",
-          "range": "1 → 5",
-          "description": "Nombre de passes de traitement. 1 = standard, rapide. 2-3 = résultat plus lissé et naturel, sans artefacts. Augmenter si tu constates des \"auréoles\" autour des contrastes forts."
+          "name": "Standard Pondérée",
+          "range": "Standard + protection des HL",
+          "description": "Variante du mode Standard avec une meilleure gestion des hautes lumières — la courbe compresse progressivement les HL pour éviter le clip. Utile pour les scènes à fort contraste (mer + ciel ensoleillé) quand tu ne veux pas utiliser le Log Tone Mapping."
+        },
+        {
+          "name": "Type Film",
+          "range": "Émulation pellicule argentique",
+          "description": "Reproduit la réponse non-linéaire d'un film argentique : ombres douces et détaillées, hautes lumières qui \"roulent\" progressivement sans clip brutal. Donne une qualité de gradation très agréable et naturelle. Excellent pour les portraits et les paysages à lumière douce. Moins adapté aux scènes très contrastées."
+        },
+        {
+          "name": "Mélange Saturation et Valeur",
+          "range": "Contraste sans shift de teinte",
+          "description": "Applique la courbe en travaillant dans l'espace HSV — sépare la luminosité de la teinte/saturation. Résultat : tu peux augmenter le contraste sans que les couleurs changent de teinte. Utile pour les photos où les couleurs doivent rester fidèles (architecture, produits) tout en ayant du peps."
+        },
+        {
+          "name": "Luminance",
+          "range": "Contraste pur sans impact couleur",
+          "description": "La courbe n'agit que sur la luminance perçue, sans modifier la saturation ni la teinte. C'est le mode le plus \"propre\" colorimétri­quement — idéal quand tu as déjà fait ton color grading et que tu veux juste ajouter du contraste sans rien déranger. Similaire à travailler sur le canal L* en Lab."
+        },
+        {
+          "name": "Perceptuel",
+          "range": "Rendu proche de la vision humaine",
+          "description": "Utilise un modèle de vision humaine (CIECAM) pour adapter la courbe. Les changements de luminosité sont compensés perceptuellement — une zone plus sombre garde sa \"sensation\" colorée même si sa valeur RVB change. Le plus sophistiqué des 7 modes, mais aussi le plus imprévisible si tu ne connais pas bien son comportement."
+        },
+        {
+          "name": "Linéaire",
+          "range": "Pas de présupposé — tout à la main",
+          "description": "La courbe part droite de coin à coin — aucune modification. C'est la base recommandée quand tu utilises le Log Tone Mapping, ou quand tu veux construire ton look de zéro. Associe-la au mode Neutre pour un pipeline totalement sous contrôle."
+        },
+        {
+          "name": "Atténuation progressive des hautes lumières",
+          "range": "Protection automatique des HL",
+          "description": "La courbe de base intègre déjà une compression douce des hautes lumières — les zones claires sont \"roulées\" progressivement avant même que tu ne touches quoi que ce soit. Très utile pour les ciels lumineux méditerranéens : ça évite le clipping sans avoir à tout gérer manuellement."
+        },
+        {
+          "name": "Courbe en S progressive",
+          "range": "Contraste intégré dès le départ",
+          "description": "ART applique une S-curve légère comme base — les ombres sont légèrement abaissées et les hautes lumières légèrement compressées. Donne d'emblée un rendu avec du peps, proche du rendu JPEG caméra. Bon point de départ pour un workflow rapide sans Log Tone Mapping."
+        },
+        {
+          "name": "Courbe Tonale 1 (CT1)",
+          "range": "Courbe principale",
+          "description": "La courbe de travail principale. Clique pour ajouter des points de contrôle, glisse pour les déplacer. Le curseur **E** (entrée) et **S** (sortie) affichent les valeurs du point sélectionné. C'est ici que tu construis ta S-curve, ton lift des noirs, ou ta compression des HL."
+        },
+        {
+          "name": "Courbe Tonale 2 (CT2)",
+          "range": "Courbe de saturation ou secondaire",
+          "description": "Deuxième courbe chaînée après CT1. Peut être utilisée pour un deuxième ajustement tonal, ou configurée en mode saturation pour lier l'intensité des couleurs à la luminance — exemple classique : désaturer les hautes lumières pour éviter les jaunes cramés."
+        },
+        {
+          "name": "Curseurs E / S / TG / TD",
+          "range": "Visibles quand un point est sélectionné",
+          "description": "**E** = valeur d'Entrée du point (0–100, luminosité dans le RAW). **S** = valeur de Sortie du point (0–100, luminosité en sortie). **TG** = Tangente Gauche — contrôle la pente à gauche du point. **TD** = Tangente Droite — contrôle la pente à droite du point. TG/TD permettent de faire des courbes asymétriques précises sans déplacer les points voisins."
+        },
+        {
+          "name": "Courbe Tonale basée sur l'Aperçu",
+          "range": "Bouton — analyse automatique",
+          "description": "ART analyse l'histogramme de l'image et propose automatiquement une courbe adaptée. Bon point de départ à affiner manuellement — ne remplace pas le jugement artistique mais évite de partir de zéro sur une image difficile."
         }
       ],
       "tips": [
         {
           "label": "Point de vue photographe",
-          "content": "Ce module est spécialement conçu pour les textures — il travaille sur des fréquences spatiales moyennes (les détails de surface) sans amplifier le bruit (petites fréquences) ni créer de halos (grandes fréquences). Sur ta photo de rochers et d'eau, c'est lui qui va \"réveiller\" la texture des strates rocheuses et le mouvement de l'eau."
+          "content": "La courbe tonale définit exactement comment chaque valeur de luminosité du RAW sera reproduite. C'est l'outil qui donne le \"caractère\" à une image : une courbe en S = contraste, un lift des noirs = look film dégradé, une compression des HL = ciel qui respire. ART propose deux courbes chaînables (CT1 + CT2) et 7 modes de calcul — chaque mode change la façon dont la couleur réagit aux modifications de luminosité."
+        },
+        {
+          "label": "Recette pour look méditerranée cinématique",
+          "content": "Mode **Luminance** + base **Linéaire**. CT1 : point bas (E:20 → S:25), point haut (E:80 → S:75) — S-curve subtile. CT2 : mode Saturation, courbe légèrement en cloche — boost centre, compression aux extrêmes. Résultat : contraste propre sans shift de teinte, couleurs vivifiées dans les tons moyens."
         }
       ],
-      "warnings": [],
+      "warnings": [
+        "⚠️ **Avec le Log Tone Mapping actif**, la courbe tonale intervient APRÈS lui dans le pipeline. Utilise Mode **Neutre** + base **Linéaire** et n'applique qu'une S-curve très légère (contraste +10 à +15 max) — le Log a déjà géré l'essentiel de la dynamique."
+      ],
       "tables": []
     },
     {
-      "id": "mod-contrastelocal",
-      "name": "Contraste Local",
-      "subtitle": "Clarté et micro-contraste — donne de la \"présence\" à l'image",
-      "category": "Détail & Netteté",
+      "id": "mod-egaliseurtonal",
+      "name": "Égaliseur Tonal",
+      "subtitle": "Sculption chirurgicale de la dynamique — l'outil qui remplace Ombres/HLs de Lightroom",
+      "category": "Exposition & Tonalité",
       "params": [
         {
-          "name": "Courbe de Contraste Local",
-          "range": "Courbe personnalisable",
-          "description": "La courbe définit l'intensité du contraste selon la luminance locale. La courbe neutre est (0.00, 0.50)(1.00, 0.50) — ligne horizontale au milieu = pas d'effet. Monter la courbe = plus de contraste, descendre = moins."
+          "name": "Pivot (EV)",
+          "range": "-3 → +3 EV",
+          "description": "Déplace la frontière entre \"ombres\" et \"hautes lumières\". Un pivot bas (-0.5) élargit la zone d'ombres — utile pour les scènes sombres. Un pivot haut protège mieux les HL sur une photo de plage en plein soleil."
+        },
+        {
+          "name": "Régularisation",
+          "range": "1 → 10",
+          "description": "Contrôle le \"lissage\" entre les bandes. Valeur haute (4-6) = transitions douces et naturelles. Valeur basse (1-2) = chaque bande agit de façon plus isolée, risque d'artefacts aux transitions."
         }
       ],
       "tips": [
         {
           "label": "Point de vue photographe",
-          "content": "Le contraste local agit sur les moyennes fréquences spatiales — il augmente le contraste entre zones adjacentes sans modifier l'exposition globale. L'effet visuellement ressemble à la \"Clarté\" de Lightroom ou au \"Structure\" de Capture One. Il donne une impression de profondeur et de présence à l'image. Attention : trop fort = look HDR criard."
+          "content": "C'est l'outil le plus direct pour sculpter la lumière dans une image. Pense à lui comme à un dodging/burning numérique : tu décides quelle zone de la plage tonale doit être plus lumineuse ou plus sombre, sans affecter le reste. Extrêmement puissant pour récupérer des rochers sombres sans cramer le ciel."
         },
         {
-          "label": "Courbe recommandée pour paysage",
-          "content": "Pour un effet de clarté subtil : ajoute un point à **(0.30, 0.55)** — légèrement au-dessus du centre dans les tons sombres. Et un point à **(0.70, 0.45)** — légèrement en dessous dans les tons clairs. Cela crée une micro S-curve qui donne de la \"mordant\" sans excès."
+          "label": "Recette paysage marin",
+          "content": "Pour une photo de vague sur rochers (comme la tienne) : **Ombres +35 à +50** pour récupérer les rochers, **Hautes Lumières -15 à -25** pour protéger l'eau et le ciel, **Noirs +10 à +15** pour éviter le crush total. Régularisation à 4."
         }
       ],
       "warnings": [],
+      "tables": [
+        {
+          "headers": [
+            "Curseur",
+            "Plage (EV)",
+            "Ce qu'il touche sur ta photo"
+          ],
+          "rows": [
+            [
+              "Noirs",
+              "-4 → +4",
+              "Les zones vraiment sombres — ombres profondes, zones presque noires. Lever = lift des noirs (look \"cinéma\"). Baisser = crush, look \"contrasté\"."
+            ],
+            [
+              "Ombres",
+              "-4 → +4",
+              "Les demi-ombres — rochers sombres, intérieur de bâtiments, faces sombres d'un sujet. Le plus utile pour récupérer du détail sans tout dénaturer."
+            ],
+            [
+              "Tons Moyens",
+              "-4 → +4",
+              "Le \"ventre\" de l'image — tout ce qui est à 18% gris, peau, herbe, mer en mi-journée. Très sensible visuellement."
+            ],
+            [
+              "Hautes Lumières",
+              "-4 → +4",
+              "Les zones claires non cramées — ciel bleu, eau éclairée, nuages détaillés. Baisser pour garder du \"poids\" dans le ciel."
+            ],
+            [
+              "Blancs",
+              "-4 → +4",
+              "Les zones très lumineuses, presque cramées. Baisse si les écumes de vague ou les nuages perdent leur texture."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mod-eliminationbrume",
+      "name": "Élimination de la Brume",
+      "subtitle": "Dehaze — augmente le contraste atmosphérique et la clarté",
+      "category": "Détail & Netteté",
+      "params": [
+        {
+          "name": "Mode : RVB",
+          "range": "Traitement sur les 3 canaux",
+          "description": "Traite la brume sur les canaux Rouge, Vert, Bleu simultanément. Résultat plus \"mordant\" et contrasté. Peut légèrement modifier la balance des couleurs si la brume est colorée (brume chaude orangée, embruns bleutés). Mode à utiliser en premier."
+        },
+        {
+          "name": "Mode : Luminosité",
+          "range": "Traitement sur la luminance seule",
+          "description": "Traite uniquement la luminance sans affecter la couleur. Résultat plus neutre colorimétriquement — le contraste augmente sans dérive de teinte. Préférable quand la couleur de base est déjà bien calibrée et qu'on veut juste récupérer de la profondeur dans les lointains."
+        },
+        {
+          "name": "Force",
+          "range": "Courbe personnalisable",
+          "description": "Courbe qui contrôle l'intensité du dehaze selon la luminance des zones. La courbe plate au centre = effet neutre. Monter la courbe = plus de dehaze. Descendre en dessous du centre = ajouter de la brume. Travailler en courbe permet d'appliquer l'effet différemment selon les zones claires et sombres."
+        },
+        {
+          "name": "Correction du Point Noir",
+          "range": "0 → 100 (défaut : 0)",
+          "description": "Après le dehaze, les noirs peuvent sembler délavés (levés). Ce curseur remet les noirs à leur place en comprimant les ombres. Valeur 0 = pas de correction. Monter progressivement jusqu'à ce que les ombres retrouvent leur densité naturelle sans sur-contraster."
+        }
+      ],
+      "tips": [
+        {
+          "label": "Point de vue photographe",
+          "content": "L'élimination de brume analyse la **diffusion atmosphérique** dans l'image et tente de la corriger — c'est le module \"Dehaze\" d'ART. Il récupère le contraste perdu par la brume, la pollution lumineuse, ou la diffusion de l'air chaud en été. Très utile pour les paysages côtiers où l'air marin crée souvent un voile laiteux dans les lointains. Peut aussi être utilisé en sens inverse pour **ajouter de la brume** (valeur négative) et créer une atmosphère vaporeuse."
+        },
+        {
+          "label": "Recette paysage marin avec voile atmosphérique",
+          "content": "1. Activer **Élimination de la Brume**, Mode **Luminosité**. 2. Monter la courbe Force modérément — vérifier que les collines lointaines retrouvent du contraste sans que les rochers au premier plan deviennent trop \"durs\". 3. Ajuster **Correction Point Noir** à 10–20 pour redonner de la densité aux ombres. 4. Si trop agressif sur les premiers plans : ajouter un **masque de zone** pour limiter l'effet aux lointains uniquement."
+        }
+      ],
+      "warnings": [
+        "⚠️ **Effet secondaire fréquent :** le dehaze augmente le contraste global et peut \"durcir\" l'image. Compenser avec l'Égaliseur Tonal (baisser légèrement les Hautes Lumières) si le ciel devient trop lourd après application. Ne pas dépasser une force modérée — l'effet s'accumule avec les autres modules de contraste."
+      ],
+      "tables": []
+    },
+    {
+      "id": "mod-eqcouleurs",
+      "name": "Égaliseur de Couleurs (HSL)",
+      "subtitle": "Contrôle couleur par couleur — l'outil de sélection par teinte",
+      "category": "Couleur",
+      "params": [],
+      "tips": [
+        {
+          "label": "Point de vue photographe",
+          "content": "C'est l'outil qui permet de dire \"je veux que le ciel soit plus bleu foncé, l'eau plus teal, et les rochers moins orange\". Tu travailles couleur par couleur, avec trois axes : **T** (teinte = décaler la couleur), **S** (saturation = intensifier), **L** (luminance = éclaircir/assombrir). Outil incontournable pour le look méditerranéen."
+        }
+      ],
+      "warnings": [],
+      "tables": [
+        {
+          "headers": [
+            "Axe",
+            "Ce que ça fait",
+            "Exemple pratique"
+          ],
+          "rows": [
+            [
+              "T — Teinte",
+              "Décale la couleur vers une teinte voisine",
+              "Bleu T -8 → le ciel part vers le violet-bleu profond"
+            ],
+            [
+              "S — Saturation",
+              "Amplifie ou réduit l'intensité de cette couleur",
+              "Cyan S +30 → l'eau méditerranéenne devient plus turquoise"
+            ],
+            [
+              "L — Luminance",
+              "Éclaircit ou assombrit cette couleur uniquement",
+              "Bleu L -10 → le ciel devient plus \"lourd\", dramatique"
+            ]
+          ]
+        },
+        {
+          "headers": [
+            "Canal",
+            "T",
+            "S",
+            "L",
+            "Effet visuel"
+          ],
+          "rows": [
+            [
+              "Bleu",
+              "-8",
+              "+28",
+              "-12",
+              "Ciel bleu profond, dramatique"
+            ],
+            [
+              "Cyan",
+              "+10",
+              "+32",
+              "+6",
+              "Eau turquoise méditerranéenne"
+            ],
+            [
+              "Vert",
+              "+5",
+              "-8",
+              "0",
+              "Végétation des collines naturelle"
+            ],
+            [
+              "Orange",
+              "-5",
+              "-18",
+              "+12",
+              "Rochers : moins \"brûlés\", plus lumineux"
+            ],
+            [
+              "Jaune",
+              "0",
+              "-12",
+              "+5",
+              "Lumière dorée contrôlée"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mod-exposition",
+      "name": "Exposition",
+      "subtitle": "Le premier contact avec ton RAW — établir la base tonale",
+      "category": "Exposition & Tonalité",
+      "params": [
+        {
+          "name": "Inactif",
+          "range": "Aucune récupération",
+          "description": "ART ne tente aucune reconstruction des zones cramées — elles restent blanches/clipées. À utiliser quand ton RAW n'a aucune zone surexposée (histogramme ne touche pas le bord droit), ou quand tu utilises le Log Tone Mapping qui gère lui-même la dynamique. Mode le plus \"propre\" car il n'introduit aucun artefact de reconstruction."
+        },
+        {
+          "name": "Blend (Mélange)",
+          "range": "Récupération douce par mélange",
+          "description": "Reconstruit les hautes lumières en interpolant entre les canaux non saturés. Méthode équilibrée : récupère à la fois la luminance et la couleur sans artefacts visibles. Bon choix universel pour les paysages avec ciel légèrement surexposé. Moins agressif que \"Propagation de la couleur\" — idéal quand la surexposition est modérée (1 à 1.5 stops max)."
+        },
+        {
+          "name": "Propagation de la couleur",
+          "range": "+ curseur Adoucissement (0–100)",
+          "description": "Mode le plus puissant : reconstruit les HL en propageant la couleur depuis les zones adjacentes non saturées. Donne les meilleurs résultats sur les ciels très surexposés ou les écumes de vague cramées. Le curseur **Adoucissement** contrôle la douceur de la transition entre zones récupérées et zones normales — valeur 0 = transition nette, 30-50 = fondu naturel recommandé pour éviter les halos."
+        },
+        {
+          "name": "Compensation d'exposition",
+          "range": "-5 EV → +5 EV (ici : +0.35)",
+          "description": "L'équivalent du réglage d'exposition en post. Chaque +1 EV double la luminosité. Travaille en fractions : ±0.3, ±0.7 pour des corrections fines. Attention : pousser trop fort amplifie le bruit dans les ombres. Avec le Log Tone Mapping actif, garder ce réglage entre -0.5 et +0.5 EV max."
+        },
+        {
+          "name": "Compensation du point noir",
+          "range": "-1 → +1 (ici : 0.008)",
+          "description": "Déplace le point noir de l'image au niveau du profil couleur. Valeur positive = lift des noirs (ombres plus claires). Valeur négative = crush des noirs. Différent du curseur \"Noirs\" de l'Égaliseur Tonal qui agit plus tard dans le pipeline. Une valeur de 0.005–0.010 est un bon point de départ pour éviter le clip dans les ombres."
+        }
+      ],
+      "tips": [
+        {
+          "label": "Point de vue photographe",
+          "content": "Ce module est ton \"premier coup de main\" sur l'image. Pense à lui comme à l'exposition au moment de la prise de vue : corriger les erreurs de mesure, établir le niveau global. Ne cherche pas la perfection ici — les modules suivants affineront. Le choix du mode de Reconstruction des Hautes Lumières est critique : il détermine comment ART gère les zones surexposées de ton capteur avant tout autre traitement."
+        },
+        {
+          "label": "Quel mode choisir pour tes photos de mer ?",
+          "content": "Ciel légèrement voilé ou surexposé d'1 stop → **Blend**. Écumes de vague cramées + ciel chargé → **Propagation de la couleur**, Adoucissement à 30. RAW bien exposé + Log Tone Mapping actif → **Inactif**, laisse le Log gérer."
+        }
+      ],
+      "warnings": [
+        "⚠️ **Curseur Adoucissement** (uniquement visible en mode \"Propagation de la couleur\") : valeur recommandée 20–40. En dessous de 10, risque de halo visible à la jonction ciel/horizon. Au-dessus de 60, la reconstruction devient trop étalée et peut affecter des zones qui n'étaient pas surexposées."
+      ],
       "tables": []
     },
     {
@@ -896,34 +808,6 @@
       "tables": []
     },
     {
-      "id": "mod-bruitimpulsion",
-      "name": "Réduction du Bruit d'Impulsion",
-      "subtitle": "Pixels morts, hot pixels, poussières — nettoyage ciblé",
-      "category": "Détail & Netteté",
-      "params": [
-        {
-          "name": "Seuil",
-          "range": "0 → 100 (défaut : 50)",
-          "description": "Sensibilité de détection des pixels aberrants. Valeur basse (20–35) = détecte et corrige beaucoup de pixels suspects — risque de corriger des détails légitimes (étoiles, reflets ponctuels sur l'eau). Valeur haute (60–80) = ne corrige que les pixels vraiment aberrants. Pour la photo de jour, 50–60 est optimal. Pour la nuit ou longue expo, descendre à 25–35."
-        },
-        {
-          "name": "Défranger",
-          "range": "Activer / Désactiver",
-          "description": "Module complémentaire qui réduit les franges chromatiques (aberrations chromatiques latérales) visibles aux contours à fort contraste — typiquement les contours entre rochers sombres et ciel clair, ou entre écume blanche et eau sombre. Apparaît comme une frange violette ou verte sur les bords. À activer si tu constates ces franges à 100% de zoom."
-        }
-      ],
-      "tips": [
-        {
-          "label": "Point de vue photographe",
-          "content": "Le bruit d'impulsion est différent du bruit classique : ce sont des **pixels isolés anormalement clairs ou colorés** — pixels chauds (hot pixels) en longue exposition, pixels morts, artefacts de capteur par forte chaleur. Ils apparaissent comme des points brillants isolés, souvent rouges ou blancs, dans les zones sombres. Ce module les détecte et les remplace par interpolation avec les pixels voisins. Complètement indépendant de la réduction de bruit principale."
-        }
-      ],
-      "warnings": [
-        "⚠️ **Attention aux reflets sur l'eau :** avec un seuil trop bas, la réduction de bruit d'impulsion peut supprimer les petits reflets lumineux ponctuels sur l'eau (scintillement) en les confondant avec des hot pixels. Vérifier à 100% de zoom sur les zones d'eau avant d'exporter."
-      ],
-      "tables": []
-    },
-    {
       "id": "mod-lissagelocal",
       "name": "Lissage — Les 8 Modes de Traitement",
       "subtitle": "Flou, netteté, débruitage local — chaque mode a une logique propre",
@@ -1001,45 +885,53 @@
       "tables": []
     },
     {
-      "id": "mod-eliminationbrume",
-      "name": "Élimination de la Brume",
-      "subtitle": "Dehaze — augmente le contraste atmosphérique et la clarté",
-      "category": "Détail & Netteté",
+      "id": "mod-logtonemapping",
+      "name": "Log Tone Mapping",
+      "subtitle": "La gestion HDR de type \"Filmic\" — le module le plus puissant d'ART",
+      "category": "Module Signature d'ART ⭐",
       "params": [
         {
-          "name": "Mode : RVB",
-          "range": "Traitement sur les 3 canaux",
-          "description": "Traite la brume sur les canaux Rouge, Vert, Bleu simultanément. Résultat plus \"mordant\" et contrasté. Peut légèrement modifier la balance des couleurs si la brume est colorée (brume chaude orangée, embruns bleutés). Mode à utiliser en premier."
+          "name": "Point Gris Cible (luminosité)",
+          "range": "1 → 100 (défaut : 18)",
+          "description": "**Le paramètre central.** Définit à quelle luminosité les tons moyens de ta scène seront rendus. 18% = gris standard = rendu naturel. Monter à 22-25 éclaircit l'image globalement (look aéré). Descendre à 14-16 assombrit (look dramatique)."
         },
         {
-          "name": "Mode : Luminosité",
-          "range": "Traitement sur la luminance seule",
-          "description": "Traite uniquement la luminance sans affecter la couleur. Résultat plus neutre colorimétriquement — le contraste augmente sans dérive de teinte. Préférable quand la couleur de base est déjà bien calibrée et qu'on veut juste récupérer de la profondeur dans les lointains."
+          "name": "Gain (EV)",
+          "range": "-5 → +5 EV",
+          "description": "Exposition globale avant le mappage log. Fonctionne comme un pré-réglage d'exposition. Si ton RAW est sous-exposé de 1 EV, mets +1 ici plutôt que dans le module Exposition — le Log Tone Mapping gérera mieux la dynamique."
         },
         {
-          "name": "Force",
-          "range": "Courbe personnalisable",
-          "description": "Courbe qui contrôle l'intensité du dehaze selon la luminance des zones. La courbe plate au centre = effet neutre. Monter la courbe = plus de dehaze. Descendre en dessous du centre = ajouter de la brume. Travailler en courbe permet d'appliquer l'effet différemment selon les zones claires et sombres."
+          "name": "Blanc Exposition Relative (EV)",
+          "range": "0.5 → 8 EV",
+          "description": "**Haut de la plage dynamique.** Définit combien d'EV au-dessus du gris moyen seront récupérés. 2.5 EV = récupère 2.5 stops de hautes lumières. Augmenter récupère plus de ciel/nuages mais peut \"tasser\" les HL."
         },
         {
-          "name": "Correction du Point Noir",
-          "range": "0 → 100 (défaut : 0)",
-          "description": "Après le dehaze, les noirs peuvent sembler délavés (levés). Ce curseur remet les noirs à leur place en comprimant les ombres. Valeur 0 = pas de correction. Monter progressivement jusqu'à ce que les ombres retrouvent leur densité naturelle sans sur-contraster."
+          "name": "Noir Exposition Relative (EV)",
+          "range": "-20 → -1 EV",
+          "description": "**Bas de la plage dynamique.** Définit combien d'EV sous le gris moyen sont récupérés. -13.5 = récupère 13.5 stops d'ombres. Moins négatif (-8) = ombres plus riches/plus sombres. Plus négatif (-16) = ombres très ouvertes."
+        },
+        {
+          "name": "Précompression Hautes Lumières",
+          "range": "0 → 100",
+          "description": "Compresse doucement les HL avant le mappage — évite l'effet \"halo\" autour des zones très claires. Sur une photo de plage avec ciel très lumineux, mettre 15-25 donne un ciel plus \"propre\"."
+        },
+        {
+          "name": "Régularisation",
+          "range": "0 → 100",
+          "description": "Contrôle la \"douceur\" de la compression. Valeur haute (60-80) = transitions douces, look cinématique. Valeur basse (20-30) = contraste local plus marqué, look \"HDR\" plus visible."
         }
       ],
       "tips": [
         {
-          "label": "Point de vue photographe",
-          "content": "L'élimination de brume analyse la **diffusion atmosphérique** dans l'image et tente de la corriger — c'est le module \"Dehaze\" d'ART. Il récupère le contraste perdu par la brume, la pollution lumineuse, ou la diffusion de l'air chaud en été. Très utile pour les paysages côtiers où l'air marin crée souvent un voile laiteux dans les lointains. Peut aussi être utilisé en sens inverse pour **ajouter de la brume** (valeur négative) et créer une atmosphère vaporeuse."
+          "label": "C'est quoi concrètement ?",
+          "content": "Le Log Tone Mapping est l'équivalent du module **Filmic RGB de Darktable**. Il transforme la plage dynamique brute (qui peut aller de -13 EV à +2 EV sur un capteur moderne) en une courbe logarithmique qui \"tasse\" les extrêmes pour les faire rentrer dans la plage d'affichage — exactement comme ce que fait le log C-Log ou S-Log en vidéo professionnelle. Résultat : ombres détaillées ET hautes lumières récupérées, simultanément."
         },
         {
-          "label": "Recette paysage marin avec voile atmosphérique",
-          "content": "1. Activer **Élimination de la Brume**, Mode **Luminosité**. 2. Monter la courbe Force modérément — vérifier que les collines lointaines retrouvent du contraste sans que les rochers au premier plan deviennent trop \"durs\". 3. Ajuster **Correction Point Noir** à 10–20 pour redonner de la densité aux ombres. 4. Si trop agressif sur les premiers plans : ajouter un **masque de zone** pour limiter l'effet aux lointains uniquement."
+          "label": "Réglage de départ recommandé pour paysage marin",
+          "content": "Clique **Automatique** d'abord — ART analyse ton histogramme et propose des valeurs. Puis ajuste : Blanc EV à **2.0-2.2** (moins de compression HL), Noir EV à **-10 / -11** (ombres plus riches), Régularisation à **50-60**, Point gris à **18-20**."
         }
       ],
-      "warnings": [
-        "⚠️ **Effet secondaire fréquent :** le dehaze augmente le contraste global et peut \"durcir\" l'image. Compenser avec l'Égaliseur Tonal (baisser légèrement les Hautes Lumières) si le ciel devient trop lourd après application. Ne pas dépasser une force modérée — l'effet s'accumule avec les autres modules de contraste."
-      ],
+      "warnings": [],
       "tables": []
     },
     {
@@ -1128,6 +1020,42 @@
       ]
     },
     {
+      "id": "mod-melange",
+      "name": "Mélange des Canaux",
+      "subtitle": "Manipulation directe des canaux R, V, B — pour effets avancés",
+      "category": "Couleur — Avancé",
+      "params": [
+        {
+          "name": "Mode Matrice RVB",
+          "range": "—",
+          "description": "Mode standard. Chaque canal de sortie est une combinaison linéaire des 3 canaux d'entrée. La diagonale à 100% = pas de modification. C'est un outil de coloriste avancé, à utiliser après avoir maîtrisé les autres modules."
+        },
+        {
+          "name": "Canal Rouge (ligne)",
+          "range": "R:100 V:0 B:0 = neutre",
+          "description": "Contrôle ce qui constitue le rouge en sortie. Injecter un peu de vert (R:95 V:8 B:0) donne des tons chair plus dorés. Injecter du bleu (R:95 V:0 B:8) refroidit les rouges."
+        },
+        {
+          "name": "Canal Vert (ligne)",
+          "range": "R:0 V:100 B:0 = neutre",
+          "description": "Pour look teal : V:97 B:5 injecte un peu de bleu dans les verts → les végétations et l'eau prennent une teinte plus froide et \"aquatique\"."
+        },
+        {
+          "name": "Canal Bleu (ligne)",
+          "range": "R:0 V:0 B:100 = neutre",
+          "description": "Pour deepening du ciel : B:105 = bleu légèrement amplifié → ciel plus profond. Injecter du vert (V:3 B:97) = bleu légèrement teal dans les zones bleues."
+        }
+      ],
+      "tips": [
+        {
+          "label": "Point de vue photographe",
+          "content": "Le mélange des canaux permet de \"contaminer\" un canal par un autre. Exemple classique : injecter un peu de canal Bleu dans le canal Vert pour créer une dominante \"teal\" dans les verts naturels. Très puissant mais demande de la précision — de petites valeurs (±5%) suffisent."
+        }
+      ],
+      "warnings": [],
+      "tables": []
+    },
+    {
       "id": "mod-ordremodules",
       "name": "Ordre de Travail Optimal",
       "subtitle": "La séquence qui donne les meilleurs résultats à chaque fois",
@@ -1141,6 +1069,78 @@
         {
           "label": "Workflow ART → Affinity",
           "content": "Dans Affinity : les ajustements après ART doivent être **légers** — recadrage, dust spots, ajustements locaux fins (pinceau). Le gros du travail se fait dans ART sur le RAW. Affinity = finitions, pas re-développement."
+        }
+      ],
+      "warnings": [],
+      "tables": []
+    },
+    {
+      "id": "mod-pipeline",
+      "name": "Pipeline de Traitement",
+      "subtitle": "Comprendre l'ordre dans lequel ART traite tes données RAW",
+      "category": "Architecture",
+      "params": [],
+      "tips": [
+        {
+          "label": "Point clé",
+          "content": "ART traite les données dans un ordre fixe en interne, même si tu peux activer les modules dans n'importe quel ordre. Connaître ce pipeline t'évite des surprises : une modif en amont peut changer le résultat d'un module en aval."
+        }
+      ],
+      "warnings": [],
+      "tables": []
+    },
+    {
+      "id": "mod-saturation",
+      "name": "Saturation / Vibrance",
+      "subtitle": "Intensité globale des couleurs — à utiliser avec parcimonie",
+      "category": "Couleur",
+      "params": [
+        {
+          "name": "Saturation",
+          "range": "-100 → +100",
+          "description": "Boost global. 0 = neutre. +10 à +20 pour une touche de vie. Évite de dépasser +30 sauf effet délibéré. Valeur négative (-100) donne un N&B, (-20 à -40) donne un look \"désaturé/film\"."
+        },
+        {
+          "name": "Vibrance",
+          "range": "-100 → +100",
+          "description": "Boost intelligent. +20 à +30 pour vivifier les couleurs sans les rendre criardes. Idéal pour récupérer la couleur teal de l'eau méditerranéenne sans saturer le ciel déjà bleu. Beaucoup plus naturel que la Saturation."
+        }
+      ],
+      "tips": [
+        {
+          "label": "Point de vue photographe",
+          "content": "**Saturation** boost toutes les couleurs de façon uniforme — risque de rendre les couleurs déjà saturées (eau turquoise, ciel bleu) trop intenses et peu naturelles. **Vibrance** (algorithme plus intelligent) boost en priorité les couleurs peu saturées et protège les couleurs déjà intenses. Sur une photo de mer : préfère toujours la Vibrance à la Saturation."
+        }
+      ],
+      "warnings": [],
+      "tables": []
+    },
+    {
+      "id": "mod-texture",
+      "name": "Amplification de la Texture",
+      "subtitle": "Révélation des micro-détails — rochers, eau, écumes",
+      "category": "Détail & Netteté",
+      "params": [
+        {
+          "name": "Force",
+          "range": "-1.0 → +1.0",
+          "description": "Intensité de l'amplification. 0 = neutre. +0.2 à +0.4 = légère révélation des textures, naturel. +0.6 à +0.8 = effet \"hyper-réaliste\" visible. Négatif (-0.2) = lissage doux de la texture, utile pour la peau."
+        },
+        {
+          "name": "Échelle des Détails",
+          "range": "0.0 → 1.0",
+          "description": "Taille des détails ciblés. 0.10-0.20 = micro-textures (grain, aspérités). 0.40-0.60 = textures moyennes (strates des rochers). 0.80+ = grandes textures (ondulations de l'eau)."
+        },
+        {
+          "name": "Itérations",
+          "range": "1 → 5",
+          "description": "Nombre de passes de traitement. 1 = standard, rapide. 2-3 = résultat plus lissé et naturel, sans artefacts. Augmenter si tu constates des \"auréoles\" autour des contrastes forts."
+        }
+      ],
+      "tips": [
+        {
+          "label": "Point de vue photographe",
+          "content": "Ce module est spécialement conçu pour les textures — il travaille sur des fréquences spatiales moyennes (les détails de surface) sans amplifier le bruit (petites fréquences) ni créer de halos (grandes fréquences). Sur ta photo de rochers et d'eau, c'est lui qui va \"réveiller\" la texture des strates rocheuses et le mouvement de l'eau."
         }
       ],
       "warnings": [],
