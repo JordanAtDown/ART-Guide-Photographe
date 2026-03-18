@@ -525,6 +525,14 @@
     <a href="#" onclick="show('bruitimpulsion')" id="nav-bruitimpulsion">
       <div class="dot" style="background:#e879a0"></div> Bruit d'Impulsion
     </a>
+    <a href="#" onclick="show('lissagelocal')" id="nav-lissagelocal">
+      <div class="dot" style="background:#e879a0"></div>
+      Lissage — 8 Modes Détail
+    </a>
+    <a href="#" onclick="show('eliminationbrume')" id="nav-eliminationbrume">
+      <div class="dot" style="background:#e879a0"></div>
+      Élimination de la Brume
+    </a>
 
     <div class="nav-section">Looks & Presets</div>
     <a href="#" onclick="show('looks')" id="nav-looks">
@@ -2024,6 +2032,21 @@
           <strong>0.40</strong>, Chrominance Maître <strong>25</strong>.
         </p>
       </div>
+
+      <h3 class="section-title">Lissage — Traitement Local</h3>
+
+      <div class="tip">
+        <div class="tip-label">Modes avancés</div>
+        <p>
+          Le module Lissage propose également <strong>8 modes de traitement local</strong>
+          (Guidé, Gaussien, Halo Diffus, Outils Non-Locaux, Wavelets, Flou de Mouvement,
+          Flou d'Objectif, Ajouter du Bruit) chacun avec ses propres paramètres et
+          applicable avec un masque de zone. Ces modes permettent d'aller bien au-delà
+          du simple débruitage : bokeh créatif, grain film, flou atmosphérique, etc.
+          → Voir le module <a href="#" onclick="show('lissagelocal')" style="color:var(--accent)">
+          Lissage — 8 Modes Détail</a> pour la documentation complète.
+        </p>
+      </div>
     </div>
 
     <!-- BRUIT D'IMPULSION -->
@@ -2091,6 +2114,350 @@
         l'eau (scintillement) en les confondant avec des hot pixels.
         Vérifier à 100% de zoom sur les zones d'eau avant d'exporter.
         </p>
+      </div>
+    </div>
+
+    <!-- LISSAGE LOCAL — 8 MODES -->
+    <div class="module" id="mod-lissagelocal">
+      <div class="module-header">
+        <div class="module-tag">
+          <div class="tag-dot" style="background:#e879a0"></div>
+          <span style="color:#e879a0">Détail & Netteté — Avancé</span>
+        </div>
+        <h2>Lissage — Les 8 Modes de Traitement</h2>
+        <div class="subtitle">
+          Flou, netteté, débruitage local — chaque mode a une logique propre
+        </div>
+      </div>
+
+      <div class="tip">
+        <div class="tip-label">Point de vue photographe</div>
+        <p>Le module Lissage dans ART ne fait pas que "flouter" —
+        c'est un outil multi-usage qui peut aussi bien
+        <strong>adoucir une zone</strong> (peau, fond),
+        <strong>simuler un flou d'objectif</strong> (bokeh),
+        <strong>ajouter du grain</strong> ou
+        <strong>débruiter localement</strong> avec des algorithmes
+        très différents. Le choix du mode change radicalement
+        le résultat. Chaque mode peut être appliqué avec un
+        <strong>masque</strong> pour cibler précisément une zone
+        (ciel, rochers, visage).</p>
+      </div>
+
+      <h3 class="section-title">
+        Paramètre Canal — commun à plusieurs modes
+      </h3>
+
+      <div class="param-grid">
+
+        <div class="param-item">
+          <div class="param-name">Canal : Luminance</div>
+          <div class="param-range">—</div>
+          <div class="param-desc">
+            Le lissage/flou s'applique uniquement sur la luminosité
+            des pixels — la couleur n'est pas touchée. Idéal pour
+            adoucir le bruit de luminance dans les ombres sans
+            dégrader la saturation de l'eau turquoise.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Canal : Chrominance</div>
+          <div class="param-range">—</div>
+          <div class="param-desc">
+            Agit uniquement sur la couleur, pas sur la netteté.
+            Utile pour lisser le bruit de chrominance résiduel
+            après la réduction de bruit principale, ou pour
+            uniformiser une couleur de fond.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Canal : RVB</div>
+          <div class="param-range">—</div>
+          <div class="param-desc">
+            Traitement sur les 3 canaux simultanément — affecte
+            à la fois la luminosité et la couleur. Mode par
+            défaut pour la plupart des effets créatifs
+            (flou objectif, flou mouvement, grain).
+          </div>
+        </div>
+
+      </div>
+
+      <h3 class="section-title">Les 8 Modes — Descriptions Complètes</h3>
+
+      <div class="param-grid">
+
+        <div class="param-item">
+          <div class="param-name">Guidé</div>
+          <div class="param-range">Rayon · Détail · Itérations · Canal</div>
+          <div class="param-desc">
+            <strong>Le mode le plus intelligent.</strong>
+            Lissage qui respecte les contours — il analyse
+            la structure de l'image pour ne pas flouter
+            les bords nets. Résultat : zones uniformes lissées
+            (ciel, eau calme) sans toucher aux contrastes forts
+            (bord rocher/eau).<br>
+            <strong>Rayon</strong> : taille de la zone analysée.
+            <strong>Détail</strong> : préservation des contours
+            (0 = ignore les bords, haut = les préserve fort).
+            <strong>Itérations</strong> : passes supplémentaires
+            pour un résultat plus lissé.
+            Idéal pour débruiter le ciel sans halo à l'horizon.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Gaussien</div>
+          <div class="param-range">Rayon · Itérations · Canal</div>
+          <div class="param-desc">
+            Flou classique uniforme — le "flou standard" de
+            tous les logiciels. Simple et prévisible : chaque
+            pixel est moyenné avec ses voisins dans un rayon
+            donné. Ne respecte pas les contours.
+            Utile pour créer un flou de fond intentionnel,
+            adoucir une texture uniforme, ou comme base
+            pour des effets créatifs.
+            Rayon faible (1–3) = léger. Rayon fort (10+) = flou visible.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Halo Diffus</div>
+          <div class="param-range">Rayon · Itérations · Atténuation</div>
+          <div class="param-desc">
+            Crée un effet de <strong>glow/halo lumineux</strong>
+            autour des zones claires — typique des vieux objectifs
+            à flou doux ou des effets "glamour". L'écume de vague
+            et les reflets sur l'eau prennent une auréole lumineuse.
+            <strong>Atténuation</strong> : contrôle l'intensité
+            de l'effet (1.00 = fort, proche de 0 = subtil).
+            Très utilisé en portrait pour la douceur de peau,
+            mais peut créer une atmosphère onirique sur l'eau.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Outils Non-Locaux</div>
+          <div class="param-range">Force · Détail · Itérations · Canal</div>
+          <div class="param-desc">
+            Algorithme avancé : compare des zones similaires
+            dans toute l'image (pas seulement les voisins proches)
+            pour débruiter intelligemment. Très efficace sur les
+            textures répétitives (sable, eau calme, ciel uniforme).
+            <strong>Force</strong> : intensité du débruitage.
+            <strong>Détail (50)</strong> : seuil de similarité —
+            haut = zones très similaires seulement.
+            Plus lent que les autres modes mais meilleure
+            qualité sur les grandes zones uniformes.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Wavelets</div>
+          <div class="param-range">Force · Levels · Gamma · Canal</div>
+          <div class="param-desc">
+            Décompose l'image en <strong>niveaux de fréquences</strong>
+            (ondelettes) et applique le lissage séparément sur
+            chaque niveau. Très précis : peut lisser le grain fin
+            sans toucher aux grandes textures.
+            <strong>Levels (5)</strong> : nombre de niveaux analysés
+            (plus = traitement plus profond).
+            <strong>Gamma (2.2)</strong> : correction gamma
+            avant traitement. Idéal pour un débruitage fin et
+            naturel sur les hauts ISO.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Flou de Mouvement</div>
+          <div class="param-range">Rayon · Angle · Courbure · Décalage</div>
+          <div class="param-desc">
+            Simule le <strong>flou de bougé</strong> d'un appareil
+            photo en mouvement. Crée des trainées directionnelles.
+            <strong>Angle</strong> : direction du mouvement (0° = horizontal).
+            <strong>Courbure</strong> : rend le mouvement courbe
+            plutôt que linéaire.
+            <strong>Décalage</strong> : décentre le point de pivot.
+            Utilisé créativement pour simuler une prise de vue
+            en filé (voiture, vague déferlante).
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Flou d'Objectif</div>
+          <div class="param-range">Rayon · Diaphragme (lames) · Angle</div>
+          <div class="param-desc">
+            Simule le <strong>bokeh d'un vrai objectif</strong>
+            avec la forme du diaphragme.
+            <strong>Rayon</strong> : intensité du flou (profondeur
+            de champ simulée).
+            <strong>Diaphragme (9 lames)</strong> : forme des
+            pastilles de bokeh — 5 lames = pentagone, 9 lames =
+            quasi-circulaire (bokeh premium).
+            <strong>Angle</strong> : rotation des pastilles.
+            Parfait pour créer un effet de mise au point sélective
+            en post-traitement avec un masque de zone.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Ajouter du Bruit</div>
+          <div class="param-range">Force · Dureté · Canal</div>
+          <div class="param-desc">
+            Ajoute du <strong>grain numérique/argentique</strong>
+            à l'image. L'opposé du débruitage — utile pour
+            homogénéiser le grain entre zones (les ombres récupérées
+            sont souvent plus bruitées que les HL), ou pour
+            créer un look film vintage.
+            <strong>Force (10)</strong> : quantité de grain.
+            <strong>Dureté (30)</strong> : taille des grains —
+            doux (0) = grain fin/argentique, dur (100) = grain
+            numérique carré.
+            Appliquer globalement à faible dose après le
+            débruitage pour retrouver un grain uniforme.
+          </div>
+        </div>
+
+      </div>
+
+      <div class="tip">
+        <div class="tip-label">Quel mode pour quelle situation ?</div>
+        <p>
+          <strong>Ciel bruité sans halo à l'horizon</strong> →
+          Guidé, Rayon 4, Détail 0.3, masque ciel.<br>
+          <strong>Peau ou zone uniforme</strong> →
+          Gaussien ou Guidé, Rayon 2–5.<br>
+          <strong>Look film / grain homogène</strong> →
+          Ajouter du Bruit, Force 8–15, Dureté 20.<br>
+          <strong>Effet bokeh créatif</strong> →
+          Flou d'Objectif, Rayon 8–20, 9 lames,
+          masque de zone pour le fond uniquement.<br>
+          <strong>Hauts ISO, grandes zones</strong> →
+          Outils Non-Locaux ou Wavelets.
+        </p>
+      </div>
+
+      <div class="warning">
+        <p>⚠️ <strong>Toujours utiliser un masque</strong> avec
+        ces modes — appliquer un flou ou un grain sur toute
+        l'image globalement donne rarement un bon résultat.
+        Le masque paramétrique (par luminance) ou le masque
+        de zone permettent de cibler précisément la zone voulue.</p>
+      </div>
+    </div>
+
+    <!-- ÉLIMINATION DE LA BRUME -->
+    <div class="module" id="mod-eliminationbrume">
+      <div class="module-header">
+        <div class="module-tag">
+          <div class="tag-dot" style="background:#e879a0"></div>
+          <span style="color:#e879a0">Détail & Netteté</span>
+        </div>
+        <h2>Élimination de la Brume</h2>
+        <div class="subtitle">
+          Dehaze — augmente le contraste atmosphérique et la clarté
+        </div>
+      </div>
+
+      <div class="tip">
+        <div class="tip-label">Point de vue photographe</div>
+        <p>L'élimination de brume analyse la
+        <strong>diffusion atmosphérique</strong> dans l'image
+        et tente de la corriger — c'est le module "Dehaze"
+        d'ART. Il récupère le contraste perdu par la brume,
+        la pollution lumineuse, ou la diffusion de l'air chaud
+        en été. Très utile pour les paysages côtiers où
+        l'air marin crée souvent un voile laiteux dans
+        les lointains. Peut aussi être utilisé en sens inverse
+        pour <strong>ajouter de la brume</strong> (valeur négative)
+        et créer une atmosphère vaporeuse.</p>
+      </div>
+
+      <h3 class="section-title">Paramètres</h3>
+
+      <div class="param-grid">
+
+        <div class="param-item">
+          <div class="param-name">Mode : RVB</div>
+          <div class="param-range">Traitement sur les 3 canaux</div>
+          <div class="param-desc">
+            Traite la brume sur les canaux Rouge, Vert, Bleu
+            simultanément. Résultat plus "mordant" et contrasté.
+            Peut légèrement modifier la balance des couleurs
+            si la brume est colorée (brume chaude orangée,
+            embruns bleutés). Mode à utiliser en premier.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Mode : Luminosité</div>
+          <div class="param-range">Traitement sur la luminance seule</div>
+          <div class="param-desc">
+            Traite uniquement la luminance sans affecter
+            la couleur. Résultat plus neutre colorimétriquement —
+            le contraste augmente sans dérive de teinte.
+            Préférable quand la couleur de base est déjà
+            bien calibrée et qu'on veut juste récupérer
+            de la profondeur dans les lointains.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Force</div>
+          <div class="param-range">Courbe personnalisable</div>
+          <div class="param-desc">
+            Courbe qui contrôle l'intensité du dehaze selon
+            la luminance des zones. La courbe plate au centre =
+            effet neutre. Monter la courbe = plus de dehaze.
+            Descendre en dessous du centre = ajouter de la brume.
+            Travailler en courbe permet d'appliquer l'effet
+            différemment selon les zones claires et sombres.
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Correction du Point Noir</div>
+          <div class="param-range">0 → 100 (défaut : 0)</div>
+          <div class="param-desc">
+            Après le dehaze, les noirs peuvent sembler
+            délavés (levés). Ce curseur remet les noirs
+            à leur place en comprimant les ombres.
+            Valeur 0 = pas de correction.
+            Monter progressivement jusqu'à ce que
+            les ombres retrouvent leur densité naturelle
+            sans sur-contraster.
+          </div>
+        </div>
+
+      </div>
+
+      <div class="tip">
+        <div class="tip-label">Recette paysage marin avec voile atmosphérique</div>
+        <p>
+          1. Activer <strong>Élimination de la Brume</strong>,
+          Mode <strong>Luminosité</strong>.<br>
+          2. Monter la courbe Force modérément —
+          vérifier que les collines lointaines retrouvent
+          du contraste sans que les rochers au premier plan
+          deviennent trop "durs".<br>
+          3. Ajuster <strong>Correction Point Noir</strong>
+          à 10–20 pour redonner de la densité aux ombres.<br>
+          4. Si trop agressif sur les premiers plans :
+          ajouter un <strong>masque de zone</strong> pour
+          limiter l'effet aux lointains uniquement.
+        </p>
+      </div>
+
+      <div class="warning">
+        <p>⚠️ <strong>Effet secondaire fréquent :</strong>
+        le dehaze augmente le contraste global et peut
+        "durcir" l'image. Compenser avec l'Égaliseur Tonal
+        (baisser légèrement les Hautes Lumières) si
+        le ciel devient trop lourd après application.
+        Ne pas dépasser une force modérée — l'effet
+        s'accumule avec les autres modules de contraste.</p>
       </div>
     </div>
 
