@@ -1,0 +1,28 @@
+name: Extract ART Knowledge
+
+on:
+  push:
+    paths:
+      - 'index.html'
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Extract knowledge
+        run: npm run extract
+
+      - name: Commit art-knowledge.json
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'chore: update art-knowledge.json'
+          file_pattern: 'art-knowledge.json'

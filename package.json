@@ -1,0 +1,12 @@
+{
+  "name": "art-guide-photographe",
+  "version": "1.0.0",
+  "scripts": {
+    "extract": "node scripts/extract-knowledge.js",
+    "watch": "node scripts/watch.js"
+  },
+  "dependencies": {
+    "node-html-parser": "^6.1.0",
+    "chokidar": "^3.6.0"
+  }
+}
