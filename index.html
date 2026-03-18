@@ -646,34 +646,123 @@
     <!-- EXPOSITION -->
     <div class="module" id="mod-exposition">
       <div class="module-header">
-        <div class="module-tag"><div class="tag-dot" style="background:#4a9eff"></div><span style="color:#4a9eff">Exposition & Tonalité</span></div>
+        <div class="module-tag">
+          <div class="tag-dot" style="background:#4a9eff"></div>
+          <span style="color:#4a9eff">Exposition & Tonalité</span>
+        </div>
         <h2>Exposition</h2>
-        <div class="subtitle">Le premier contact avec ton RAW — établir la base tonale</div>
+        <div class="subtitle">
+          Le premier contact avec ton RAW — établir la base tonale
+        </div>
       </div>
+
       <div class="tip">
         <div class="tip-label">Point de vue photographe</div>
-        <p>Ce module est ton "premier coup de main" sur l'image. Pense à lui comme à l'exposition au moment de la prise de vue : corriger les erreurs de mesure, établir le niveau global. Ne cherche pas la perfection ici — les modules suivants affineront.</p>
+        <p>Ce module est ton "premier coup de main" sur l'image.
+        Pense à lui comme à l'exposition au moment de la prise de vue :
+        corriger les erreurs de mesure, établir le niveau global.
+        Ne cherche pas la perfection ici — les modules suivants affineront.
+        Le choix du mode de Reconstruction des Hautes Lumières est
+        critique : il détermine comment ART gère les zones surexposées
+        de ton capteur avant tout autre traitement.</p>
       </div>
-      <h3 class="section-title">Paramètres</h3>
+
+      <h3 class="section-title">Reconstruction des Hautes Lumières — 3 modes</h3>
+
       <div class="param-grid">
+
         <div class="param-item">
-          <div class="param-name">Reconstruction Hautes Lumières</div>
-          <div class="param-range">Équilibré / Luminance / Couleur / HLRecovery</div>
-          <div class="param-desc">Choisit comment récupérer les zones surexposées. <strong>Équilibré</strong> est le meilleur pour la plupart des cas — il reconstruit à la fois la luminance et la couleur. <strong>Luminance</strong> si le ciel est cramé mais garde de la couleur.</div>
+          <div class="param-name">Inactif</div>
+          <div class="param-range">Aucune récupération</div>
+          <div class="param-desc">
+            ART ne tente aucune reconstruction des zones cramées —
+            elles restent blanches/clipées. À utiliser quand ton RAW
+            n'a aucune zone surexposée (histogramme ne touche pas
+            le bord droit), ou quand tu utilises le Log Tone Mapping
+            qui gère lui-même la dynamique. Mode le plus "propre"
+            car il n'introduit aucun artefact de reconstruction.
+          </div>
         </div>
+
+        <div class="param-item">
+          <div class="param-name">Blend (Mélange)</div>
+          <div class="param-range">Récupération douce par mélange</div>
+          <div class="param-desc">
+            Reconstruit les hautes lumières en interpolant entre les
+            canaux non saturés. Méthode équilibrée : récupère à la fois
+            la luminance et la couleur sans artefacts visibles.
+            Bon choix universel pour les paysages avec ciel légèrement
+            surexposé. Moins agressif que "Propagation de la couleur"
+            — idéal quand la surexposition est modérée (1 à 1.5 stops max).
+          </div>
+        </div>
+
+        <div class="param-item">
+          <div class="param-name">Propagation de la couleur</div>
+          <div class="param-range">+ curseur Adoucissement (0–100)</div>
+          <div class="param-desc">
+            Mode le plus puissant : reconstruit les HL en propageant
+            la couleur depuis les zones adjacentes non saturées.
+            Donne les meilleurs résultats sur les ciels très surexposés
+            ou les écumes de vague cramées. Le curseur
+            <strong>Adoucissement</strong> contrôle la douceur de la
+            transition entre zones récupérées et zones normales —
+            valeur 0 = transition nette, 30-50 = fondu naturel
+            recommandé pour éviter les halos.
+          </div>
+        </div>
+
+      </div>
+
+      <div class="warning">
+        <p>⚠️ <strong>Curseur Adoucissement</strong> (uniquement visible
+        en mode "Propagation de la couleur") : valeur recommandée
+        20–40. En dessous de 10, risque de halo visible à la jonction
+        ciel/horizon. Au-dessus de 60, la reconstruction devient trop
+        étalée et peut affecter des zones qui n'étaient pas surexposées.
+        </p>
+      </div>
+
+      <h3 class="section-title">Autres paramètres</h3>
+
+      <div class="param-grid">
+
         <div class="param-item">
           <div class="param-name">Compensation d'exposition</div>
-          <div class="param-range">-5 EV → +5 EV</div>
-          <div class="param-desc">L'équivalent du réglage d'exposition en post. Chaque +1 EV double la luminosité. Travaille en fractions : ±0.3, ±0.7 pour des corrections fines. Attention : pousser trop fort amplifie le bruit dans les ombres.</div>
+          <div class="param-range">-5 EV → +5 EV (ici : +0.35)</div>
+          <div class="param-desc">
+            L'équivalent du réglage d'exposition en post. Chaque +1 EV
+            double la luminosité. Travaille en fractions : ±0.3, ±0.7
+            pour des corrections fines. Attention : pousser trop fort
+            amplifie le bruit dans les ombres. Avec le Log Tone Mapping
+            actif, garder ce réglage entre -0.5 et +0.5 EV max.
+          </div>
         </div>
+
         <div class="param-item">
-          <div class="param-name">Compensation Point Noir</div>
-          <div class="param-range">-1 → +1</div>
-          <div class="param-desc">Déplace le point noir de l'image. Valeur positive = ombres plus claires (lift), valeur négative = crush des noirs. Différent des "Noirs" de l'égaliseur tonal — celui-ci agit au niveau du profil de couleur.</div>
+          <div class="param-name">Compensation du point noir</div>
+          <div class="param-range">-1 → +1 (ici : 0.008)</div>
+          <div class="param-desc">
+            Déplace le point noir de l'image au niveau du profil couleur.
+            Valeur positive = lift des noirs (ombres plus claires).
+            Valeur négative = crush des noirs. Différent du curseur
+            "Noirs" de l'Égaliseur Tonal qui agit plus tard dans
+            le pipeline. Une valeur de 0.005–0.010 est un bon
+            point de départ pour éviter le clip dans les ombres.
+          </div>
         </div>
+
       </div>
-      <div class="warning">
-        <p>⚠️ <strong>Pièges fréquents :</strong> Ne pas tenter de récupérer les HL ici si tu utilises le Log Tone Mapping — laisse ce dernier gérer la dynamique. L'exposition ne doit faire qu'un réglage grossier (+/- 0.5 EV max).</p>
+
+      <div class="tip">
+        <div class="tip-label">Quel mode choisir pour tes photos de mer ?</div>
+        <p>
+          Ciel légèrement voilé ou surexposé d'1 stop → <strong>Blend</strong>.<br>
+          Écumes de vague cramées + ciel chargé → <strong>Propagation
+          de la couleur</strong>, Adoucissement à 30.<br>
+          RAW bien exposé + Log Tone Mapping actif → <strong>Inactif</strong>,
+          laisse le Log gérer.
+        </p>
       </div>
     </div>
 
