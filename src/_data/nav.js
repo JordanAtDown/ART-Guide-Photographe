@@ -35,7 +35,12 @@ module.exports = [
       { id: "contrastelocal", label: "Contraste Local", url: "/modules/contrastelocal/", color: "#e879a0" },
       { id: "lissage", label: "Lissage (NR)", url: "/modules/lissage/", color: "#e879a0" },
       { id: "bruitimpulsion", label: "Bruit d'Impulsion", url: "/modules/bruitimpulsion/", color: "#e879a0" },
-      { id: "lissagelocal", label: "Lissage — 8 Modes Détail", url: "/modules/lissagelocal/", color: "#e879a0" },
+      { id: "lissagelocal", label: "Lissage — 8 Modes Détail", url: "/modules/lissagelocal/", color: "#e879a0" }
+    ]
+  },
+  {
+    section: "Effets spéciaux",
+    items: [
       { id: "eliminationbrume", label: "Élimination de la Brume", url: "/modules/eliminationbrume/", color: "#e879a0" }
     ]
   },
