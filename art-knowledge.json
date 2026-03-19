@@ -2,8 +2,8 @@
   "meta": {
     "source": "ART Raw Image Processor — Documentation Photographe",
     "version": "1.0",
-    "generated": "2026-03-19T20:23:55.382Z",
-    "total_modules": 36,
+    "generated": "2026-03-19T20:33:40.236Z",
+    "total_modules": 37,
     "description": "Knowledge base extraite des sources Eleventy pour usage par MCP ou tout système de génération de fichiers .arp"
   },
   "modules": [
@@ -1123,6 +1123,115 @@
         "⚠️ **Avec le Log Tone Mapping actif**, la courbe tonale intervient APRÈS lui dans le pipeline. Utilise Mode **Neutre** + base **Linéaire** et n'applique qu'une S-curve très légère (contraste +10 à +15 max) — le Log a déjà géré l'essentiel de la dynamique."
       ],
       "tables": []
+    },
+    {
+      "id": "mod-direction-artistique",
+      "name": "Direction Artistique & Looks",
+      "subtitle": "Corriger une photo, c'est technique. Lui donner une vision, c'est artistique.",
+      "category": "Direction Artistique",
+      "params": [
+        {
+          "name": "La Correction",
+          "range": "Rendre l'image juste",
+          "description": "Exposition correcte, couleurs neutres, balance des blancs fidèle. C'est la base technique. Une image bien corrigée est une page blanche propre — elle ne dit rien encore, mais elle ne ment pas non plus."
+        },
+        {
+          "name": "La Direction Artistique",
+          "range": "Décider ce que l'image doit ressentir",
+          "description": "Choisir un look, une ambiance, une palette. La DA transforme une image correcte en image intentionnelle. C'est ici que tu passes de technicien à photographe."
+        },
+        {
+          "name": "1 — Revenir à l'instant",
+          "range": "La mémoire du déclenchement",
+          "description": "Qu'est-ce qui t'a poussé à déclencher ? Une lumière particulière, une ambiance, une émotion du sujet ? Ce ressenti est ton point de départ — le look doit l'amplifier, pas le remplacer."
+        },
+        {
+          "name": "2 — Identifier la température émotionnelle",
+          "range": "Chaud / froid · proche / distant",
+          "description": "L'image est-elle censée être chaude ou froide ? Intimiste ou distante ? Joyeuse ou mélancolique ? Ces polarités dictent immédiatement les grandes orientations du grading."
+        },
+        {
+          "name": "3 — Penser le contraste comme narration",
+          "range": "Un choix qui raconte quelque chose",
+          "description": "Un contraste fort crée de la tension et du drame. Un contraste doux crée de la douceur et de l'intimité. Le niveau de contraste que tu choisis n'est pas qu'une décision technique."
+        },
+        {
+          "name": "4 — Évaluer ce que l'image peut supporter",
+          "range": "Laisser l'image te guider",
+          "description": "Toutes les images ne supportent pas tous les looks. Un portrait en lumière douce supporte mal un look dramatique à noirs profonds. Une photo de rue à fort contraste résiste au grading cinématique."
+        },
+        {
+          "name": "Axe 1 — La dynamique tonale",
+          "range": "Comment les ombres et les hautes lumières se comportent",
+          "description": "Sont-elles dures ou douces ? Les noirs sont-ils profonds ou relevés ? Les blancs sont-ils lumineux ou contenus ? **Dans ART :** Courbes Tonales + Égaliseur Tonal"
+        },
+        {
+          "name": "Axe 2 — La palette chromatique",
+          "range": "Quelles couleurs dominent dans chaque zone tonale",
+          "description": "Les ombres tirent-elles vers le froid ou le chaud ? Les hautes lumières sont-elles neutres ou colorées ? Y a-t-il une harmonie ou un contraste entre ces zones ? **Dans ART :** Color Wheels + Balance des Blancs + HSL"
+        },
+        {
+          "name": "Axe 3 — La texture et la matière",
+          "range": "L'impression tactile de l'image",
+          "description": "L'image est-elle nette et détaillée, ou douce et picturale ? Y a-t-il du grain ? Les textures sont-elles accentuées ou atténuées ? **Dans ART :** Amplification Texture + Contraste Local + Lissage NR"
+        }
+      ],
+      "tips": [],
+      "warnings": [],
+      "tables": [
+        {
+          "headers": [
+            "Principe",
+            "Définition",
+            "Exemple"
+          ],
+          "rows": [
+            [
+              "**Contraste complémentaire**",
+              "Deux couleurs opposées sur le cercle chromatique. Le plus puissant — crée tension et dynamisme.",
+              "Orange/Teal : peaux chaudes contre ombres froides. Le cerveau le lit comme naturel (soleil/ombre)."
+            ],
+            [
+              "**Harmonie analogue**",
+              "Couleurs voisines sur le cercle. Crée une ambiance unifiée, cohérente, apaisante.",
+              "Jaunes-oranges-rouges (golden hour) ou bleus-cyans-verts (atmosphère froide)."
+            ],
+            [
+              "**Monochromie partielle**",
+              "Une couleur dominante, les autres désaturées. Très fort émotionnellement — crée l'immersion.",
+              "Tout désaturé sauf un rouge central (vêtement, fleur). Le regard va instantanément là."
+            ]
+          ]
+        },
+        {
+          "headers": [
+            "Si l'image évoque…",
+            "Oriente-toi vers…"
+          ],
+          "rows": [
+            [
+              "Action, tension, urgence",
+              "Dramatique ou Cinématique"
+            ],
+            [
+              "Douceur, intimité, beauté",
+              "Golden Hour ou Naturel"
+            ],
+            [
+              "Mélancolie, mystère, immersion",
+              "Moody / Atmosphérique"
+            ],
+            [
+              "Authenticité, temps qui passe",
+              "Film Argentique"
+            ],
+            [
+              "Clarté, élégance, vérité",
+              "Naturel / Propre"
+            ]
+          ]
+        }
+      ]
     },
     {
       "id": "mod-egaliseurtonal",
