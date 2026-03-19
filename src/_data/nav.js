@@ -9,6 +9,12 @@ module.exports = [
     ]
   },
   {
+    section: "Regard & Pratique",
+    items: [
+      { id: "regard", label: "Le Regard du Photographe", url: "/modules/regard/", color: "#d4a853" }
+    ]
+  },
+  {
     section: "Exposition & Tonalité",
     items: [
       { id: "exposition", label: "Exposition", url: "/modules/exposition/", color: "#4a9eff" },

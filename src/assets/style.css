@@ -602,3 +602,115 @@ h3.section-title::after {
 .ltt-name { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 4px; font-family: var(--mono); }
 .ltt-short { font-size: 12px; color: var(--muted); line-height: 1.5; }
 .ltt-link { font-size: 11px; color: var(--accent); margin-top: 8px; font-family: var(--mono); }
+
+/* ─── Regard du Photographe — Composants éditoriaux ─── */
+
+/* Citation d'ouverture */
+.intro-quote {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.8;
+  padding: 20px 0 20px 22px;
+  border-left: 3px solid #d4a853;
+  margin: 20px 0 28px;
+}
+
+/* Table des matières */
+.toc {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin: 24px 0 36px;
+}
+.toc-title {
+  font-size: 11px; font-family: var(--mono); letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 14px;
+}
+.toc ol { list-style: none; counter-reset: toc-counter; padding: 0; margin: 0; }
+.toc ol li {
+  counter-increment: toc-counter;
+  margin: 8px 0;
+  display: flex; align-items: baseline; gap: 12px;
+}
+.toc ol li::before {
+  content: counter(toc-counter, decimal-leading-zero);
+  font-family: var(--mono); font-size: 11px; color: #d4a853; flex-shrink: 0;
+}
+.toc ol a {
+  font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.15s;
+}
+.toc ol a:hover { color: var(--text); }
+
+/* Citation éditoriale / blockquote */
+.blockquote {
+  border-left: 3px solid #d4a853;
+  background: rgba(212,168,83,0.07);
+  padding: 14px 18px;
+  border-radius: 0 8px 8px 0;
+  margin: 20px 0;
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.7;
+}
+.blockquote strong { color: #d4a853; font-style: normal; }
+.blockquote em { font-style: italic; }
+
+/* Encadré "principe / règle" (distinct du .tip technique) */
+.insight {
+  background: rgba(74,158,255,0.06);
+  border: 1px solid rgba(74,158,255,0.2);
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin: 20px 0;
+}
+.insight-label {
+  font-size: 11px; font-family: var(--mono); text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--accent); margin-bottom: 6px;
+}
+.insight p { font-size: 13px; color: var(--muted); line-height: 1.6; margin: 0; }
+.insight strong { color: var(--text); }
+
+/* Carte erreur */
+.erreur-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--red);
+  border-radius: 0 10px 10px 0;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+}
+.erreur-title {
+  font-size: 14px; font-weight: 500; color: var(--red); margin-bottom: 8px;
+  display: flex; align-items: center; gap: 8px;
+}
+.erreur-title::before { content: '✕'; font-size: 11px; opacity: 0.8; }
+.erreur-body { font-size: 13px; color: var(--muted); line-height: 1.6; }
+.erreur-body strong { color: var(--text); }
+.erreur-test {
+  margin-top: 12px; padding: 10px 14px; border-radius: 6px;
+  background: rgba(0,212,170,0.08); font-size: 12px; color: var(--accent2);
+  line-height: 1.5;
+}
+.erreur-test strong { color: var(--accent2); }
+
+/* Styles typographiques pour pages éditoriales */
+.editorial h4 {
+  font-size: 14px; font-weight: 500; color: #d4a853;
+  margin: 20px 0 8px; font-family: var(--sans);
+}
+.editorial ul, .editorial ol {
+  padding-left: 20px; margin: 10px 0;
+}
+.editorial li {
+  font-size: 13px; color: var(--muted); line-height: 1.6; margin: 5px 0;
+}
+.editorial li strong { color: var(--text); }
+.editorial p {
+  font-size: 14px; line-height: 1.7; color: var(--muted); margin: 12px 0;
+}
+.editorial p strong { color: var(--text); }
+.editorial p em { font-style: italic; color: var(--text); }
