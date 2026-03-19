@@ -2,8 +2,8 @@
   "meta": {
     "source": "ART Raw Image Processor — Documentation Photographe",
     "version": "1.0",
-    "generated": "2026-03-19T17:59:31.280Z",
-    "total_modules": 23,
+    "generated": "2026-03-19T19:33:33.666Z",
+    "total_modules": 29,
     "description": "Knowledge base extraite des sources Eleventy pour usage par MCP ou tout système de génération de fichiers .arp"
   },
   "modules": [
@@ -1232,6 +1232,305 @@
           "content": "Ce module est spécialement conçu pour les textures — il travaille sur des fréquences spatiales moyennes (les détails de surface) sans amplifier le bruit (petites fréquences) ni créer de halos (grandes fréquences). Sur ta photo de rochers et d'eau, c'est lui qui va \"réveiller\" la texture des strates rocheuses et le mouvement de l'eau."
         }
       ],
+      "warnings": [],
+      "tables": []
+    },
+    {
+      "id": "mod-workflow-lumiere-dure",
+      "name": "Lumière Dure & Soleil d'Été",
+      "subtitle": "Dompter la dynamique extrême sans trahir l'intensité lumineuse",
+      "category": "Lumière Dure",
+      "params": [],
+      "tips": [],
+      "warnings": [],
+      "tables": [
+        {
+          "headers": [
+            "Rôle",
+            "Module",
+            "Priorité"
+          ],
+          "rows": [
+            [
+              "Récupérer les hautes lumières cramées",
+              "Exposition — Propagation couleur",
+              "Toujours en premier"
+            ],
+            [
+              "Dompter la dynamique extrême",
+              "Log Tone Mapping",
+              "Avec parcimonie — risque HDR"
+            ],
+            [
+              "Sculpter ombres et HLs",
+              "Égaliseur Tonal",
+              "Après le Log si utilisé"
+            ],
+            [
+              "Contraste des tons moyens",
+              "Courbes Tonales",
+              "S-curve protectrice"
+            ],
+            [
+              "Couleurs de mer et de ciel",
+              "HSL — Bleu + Cyan",
+              "Baisser, jamais monter"
+            ],
+            [
+              "Cibler l'eau séparément",
+              "Édition Locale — Masque de zone",
+              "Si l'eau seule est problématique"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mod-workflow-lumiere-plate",
+      "name": "Lumière Plate & Faible Contraste",
+      "subtitle": "Construire ce que la lumière n'a pas fourni, sans rendre le rendu artificiel",
+      "category": "Lumière Plate",
+      "params": [],
+      "tips": [],
+      "warnings": [],
+      "tables": [
+        {
+          "headers": [
+            "",
+            "Lumière plate",
+            "Photo sombre / faible lumière"
+          ],
+          "rows": [
+            [
+              "Exposition",
+              "Correcte",
+              "Sous-exposée ou limite"
+            ],
+            [
+              "Bruit",
+              "Faible ou absent",
+              "Élevé"
+            ],
+            [
+              "Histogramme",
+              "Centré, étroit",
+              "Décalé à gauche"
+            ],
+            [
+              "Problème",
+              "Manque de punch",
+              "Bruit + récupération"
+            ],
+            [
+              "Solution",
+              "Construire le contraste",
+              "Gérer le bruit + exposition"
+            ]
+          ]
+        },
+        {
+          "headers": [
+            "Rôle",
+            "Module",
+            "Note"
+          ],
+          "rows": [
+            [
+              "Construire le contraste",
+              "Courbes Tonales",
+              "Central — point noir et S-curve"
+            ],
+            [
+              "Redonner de la vie aux couleurs",
+              "Vibrance — HSL ciblé",
+              "Vibrance avant Saturation"
+            ],
+            [
+              "Séparation tonale par couleur",
+              "Correction Couleurs (Color Wheels)",
+              "Ombres froides / HLs chaudes"
+            ],
+            [
+              "Texture et matière",
+              "Amplification Texture",
+              "En dernier"
+            ],
+            [
+              "Microcontraste",
+              "Contraste Local",
+              "Complète la texture"
+            ],
+            [
+              "Brume atmosphérique",
+              "Élimination de la Brume",
+              "Dosé — max 0.30"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mod-workflow-paysage",
+      "name": "Paysage & Nature",
+      "subtitle": "Gérer la dynamique extrême sans trahir la matière du terrain",
+      "category": "Paysage & Nature",
+      "params": [],
+      "tips": [],
+      "warnings": [],
+      "tables": [
+        {
+          "headers": [
+            "Rôle",
+            "Module",
+            "Note"
+          ],
+          "rows": [
+            [
+              "Gérer la dynamique",
+              "Log Tone Mapping ⭐",
+              "Incontournable dès que le contraste ciel/sol est fort"
+            ],
+            [
+              "Sculpter la lumière",
+              "Égaliseur Tonal",
+              "Contrôle fin ombres / HLs sans le Log"
+            ],
+            [
+              "Donner du contraste",
+              "Courbes Tonales",
+              "Courbe en S — plus propre que le curseur Contraste"
+            ],
+            [
+              "Cibler les couleurs",
+              "Égaliseur HSL",
+              "Verts, bleus, jaunes — chacun selon le terrain"
+            ],
+            [
+              "Color grading",
+              "Correction Couleurs",
+              "Ombres teal, HLs chaudes — look cinématique"
+            ],
+            [
+              "Texture & matière",
+              "Amplification Texture + Contraste Local",
+              "En dernier, dosé"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mod-workflow-portrait",
+      "name": "Portrait",
+      "subtitle": "La justesse des tons chair avant tout le reste",
+      "category": "Portrait",
+      "params": [],
+      "tips": [],
+      "warnings": [],
+      "tables": [
+        {
+          "headers": [
+            "Rôle",
+            "Module",
+            "Pourquoi"
+          ],
+          "rows": [
+            [
+              "Base des tons chair",
+              "Balance des Blancs",
+              "Réglage n°1 — tout part de là"
+            ],
+            [
+              "Affinage des tons chair",
+              "HSL — Orange & Rouge",
+              "Saturation et luminance ciblées sur la peau"
+            ],
+            [
+              "Contraste enveloppant",
+              "Courbes Tonales",
+              "S-curve douce avec ombres relevées"
+            ],
+            [
+              "Ouverture des ombres",
+              "Égaliseur Tonal",
+              "Déboucher sans brutalité"
+            ],
+            [
+              "Color grading",
+              "Correction Couleurs (Color Wheels)",
+              "Tons moyens légèrement chauds, ombres légèrement froides"
+            ],
+            [
+              "Texture peau",
+              "Lissage (NR)",
+              "Minimal — juste pour le bruit, pas pour lisser la peau"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mod-workflow-reportage",
+      "name": "Reportage & Street",
+      "subtitle": "Préserver l'authenticité du moment, rendre l'image lisible et impactante",
+      "category": "Reportage & Street",
+      "params": [],
+      "tips": [],
+      "warnings": [],
+      "tables": [
+        {
+          "headers": [
+            "Rôle",
+            "Module",
+            "Pourquoi"
+          ],
+          "rows": [
+            [
+              "Récupération exposition",
+              "Exposition + Égaliseur Tonal",
+              "Rattrapage des images prises vite"
+            ],
+            [
+              "Gestion dynamique",
+              "Égaliseur Tonal seul (sans Log)",
+              "Le Log est souvent excessif pour le reportage"
+            ],
+            [
+              "Contraste documentaire",
+              "Courbes Tonales",
+              "S-curve plus marquée, noirs profonds acceptés"
+            ],
+            [
+              "Dominantes couleur",
+              "Balance des Blancs (Teinte ++)",
+              "Le curseur Teinte corrige le vert des néons"
+            ],
+            [
+              "N&B",
+              "Mélange des Canaux",
+              "Contrôle tonal par couleur d'origine"
+            ],
+            [
+              "Bruit ISO élevé",
+              "Lissage (NR)",
+              "Chrominance à éliminer, luminance à doser"
+            ],
+            [
+              "Cohérence série",
+              "Profils .arp + Color Wheels neutres",
+              "Unifier sans uniformiser"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mod-workflows",
+      "name": "Adapter son développement au genre",
+      "subtitle": "Même pipeline de base, intentions radicalement différentes.",
+      "category": "Workflows par Genre",
+      "params": [],
+      "tips": [],
       "warnings": [],
       "tables": []
     }
