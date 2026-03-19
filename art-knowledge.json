@@ -2,8 +2,8 @@
   "meta": {
     "source": "ART Raw Image Processor — Documentation Photographe",
     "version": "1.0",
-    "generated": "2026-03-19T20:06:59.749Z",
-    "total_modules": 30,
+    "generated": "2026-03-19T20:23:55.382Z",
+    "total_modules": 36,
     "description": "Knowledge base extraite des sources Eleventy pour usage par MCP ou tout système de génération de fichiers .arp"
   },
   "modules": [
@@ -324,6 +324,662 @@
       "warnings": [
         "⚠️ **Ordre des instances :** ART applique les instances de haut en bas dans la liste. Mettre le color grading général (Coefficients TSL) en instance 1 et les ajustements fins en instance 2 donne de meilleurs résultats que l'inverse."
       ],
+      "tables": []
+    },
+    {
+      "id": "mod-courbes-colorwheels",
+      "name": "Color Wheels & Correction Couleurs",
+      "subtitle": "Color grading par zone tonale — le module DaVinci Resolve d'ART",
+      "category": "Color Grading",
+      "params": [
+        {
+          "name": "Hautes Lumières / Gain",
+          "range": "Zones claires → blancs",
+          "description": "Affecte les pixels les plus lumineux : ciel clair, écumes, reflets, nuages. Pour un look méditerranéen : push léger vers **jaune-chaud (~55°)**, intensité 0.06–0.10. Donne une chaleur solaire aux zones brillantes sans affecter les ombres."
+        },
+        {
+          "name": "Ombres / Déboucher",
+          "range": "Zones sombres → noirs",
+          "description": "Affecte les pixels les plus sombres : rochers dans l'ombre, zones non éclairées. Pour le look cinéma : push vers **cyan-bleu (~200°)**, intensité 0.10–0.15. Les ombres prennent une teinte froide — contraste chaud/froid très cinématique avec les HL chaudes."
+        },
+        {
+          "name": "Tons Moyens / Gamma",
+          "range": "Zone médiane — 18% gris",
+          "description": "Affecte la majorité des pixels. C'est la roue la plus influente visuellement. Push très léger vers **teal (~185°)**, intensité 0.04–0.07 max. Unifie l'atmosphère sans \"colorier\" de façon visible. À régler **en dernier**, après les ombres et les HL."
+        },
+        {
+          "name": "Système d'instances (calques)",
+          "range": "Boutons + / −",
+          "description": "Chaque instance est une correction indépendante avec son propre mode et ses propres masques. Instance 1 en Coefficients TSL pour le color grading général, Instance 2 en Canaux RVB pour un ajustement fin. Les instances s'appliquent de haut en bas."
+        },
+        {
+          "name": "Coefficients TSL",
+          "range": "Mode principal — Color Wheels",
+          "description": "**Le mode principal pour le color grading.** Les 3 color wheels agissent simultanément sur la teinte ET la luminosité. C'est le mode \"DaVinci Resolve Primary\" d'ART. Modifier simultanément les 3 roues pour créer un split toning cohérent."
+        },
+        {
+          "name": "Canaux RVB séparés",
+          "range": "Courbes + sliders R/V/B + wheels",
+          "description": "Mode avancé : une courbe par canal R, V, B indépendante, plus les color wheels. Permet un split toning ultra-précis. Exemple : lever les ombres du canal B pendant qu'on compresse les HL du R — look film classique."
+        },
+        {
+          "name": "LUT",
+          "range": "Fichier .cube / .3dl",
+          "description": "Applique une LUT externe — fichiers .cube ou .3dl créés dans DaVinci, Dehancer, etc. Permet d'appliquer des émulations de film professionnel (Kodak 2383, Fuji 3510) directement sur tes RAWs."
+        },
+        {
+          "name": "Neutre",
+          "range": "Point de départ propre",
+          "description": "Aucun rendu colorimétrique — courbe linéaire. À utiliser avec le Log Tone Mapping actif quand tu veux un contrôle total sans présupposé de rendu."
+        },
+        {
+          "name": "Standard",
+          "range": "Rendu caméra simulé",
+          "description": "Similaire au rendu JPEG caméra — légère courbe en S et boost de saturation. Bon point de départ si tu veux retrouver le look \"out-of-camera\" avant de personnaliser."
+        },
+        {
+          "name": "Perceptuel",
+          "range": "Une roue globale",
+          "description": "Approche perceptuelle — une seule roue globale. Les modifications respectent mieux la perception humaine. Idéal pour des corrections subtiles qui doivent rester invisibles."
+        },
+        {
+          "name": "1 — Opposer ombres et hautes lumières",
+          "range": "Principe fondamental",
+          "description": "Si les HL sont chaudes (jaune/orange), les ombres doivent être froides (cyan/bleu) — et vice versa. C'est le principe du split toning qui donne de la profondeur et du contraste coloré à l'image."
+        },
+        {
+          "name": "2 — Intensités très faibles",
+          "range": "0.05 à 0.15 maximum",
+          "description": "L'effet paraît subtil à l'écran mais s'accumule. Au-delà de 0.20, l'image \"sonne faux\". L'œil s'adapte vite — après 10 minutes de travail, tu as besoin de revenir à la version d'origine pour évaluer objectivement."
+        },
+        {
+          "name": "3 — Les tons moyens en dernier",
+          "range": "Ordre de travail",
+          "description": "Règle d'abord les ombres et les HL, puis ajuste les tons moyens pour \"coller\" l'atmosphère. Les tons moyens sont la roue la plus puissante — un léger push peut unifier toute l'image. À doser avec précaution."
+        },
+        {
+          "name": "4 — Comparer sans cesse",
+          "range": "Touche avant/après",
+          "description": "Le color grading est un outil qui biaise l'œil rapidement. Utilise le bouton avant/après régulièrement pour évaluer l'écart entre l'original et ta retouche. Ce qui paraît \"léger\" après 30 minutes de travail peut être très chargé vu de l'extérieur."
+        }
+      ],
+      "tips": [],
+      "warnings": [],
+      "tables": [
+        {
+          "headers": [
+            "Direction",
+            "Angle approx.",
+            "Effet caractéristique"
+          ],
+          "rows": [
+            [
+              "Jaune-chaud",
+              "~50–60°",
+              "Lumière solaire, chaleur méditerranéenne dans les HL"
+            ],
+            [
+              "Orange",
+              "~30°",
+              "Tons chair, lumière golden hour, look film Kodak"
+            ],
+            [
+              "Vert",
+              "~120°",
+              "Végétation, eau peu profonde verdâtre"
+            ],
+            [
+              "Cyan / Teal",
+              "~180–195°",
+              "Eau profonde méditerranéenne, ombres fraîches, cinéma"
+            ],
+            [
+              "Bleu profond",
+              "~220–240°",
+              "Ciel dramatique, ombres nocturnes, look froid"
+            ],
+            [
+              "Violet",
+              "~270–290°",
+              "Couchers de soleil, look rétro, ombres golden hour"
+            ],
+            [
+              "Magenta",
+              "~300°",
+              "Look cross-process, ambiance noctambule"
+            ]
+          ]
+        },
+        {
+          "headers": [
+            "Look",
+            "Ombres",
+            "Tons Moyens",
+            "Hautes Lumières"
+          ],
+          "rows": [
+            [
+              "**Méditerranée Cinématique**",
+              "Cyan ~200° / 0.12",
+              "Teal ~185° / 0.06",
+              "Jaune ~55° / 0.08"
+            ],
+            [
+              "**Raw & Minéral**",
+              "Bleu ~230° / 0.08",
+              "Neutre / 0",
+              "Neutre / 0"
+            ],
+            [
+              "**Golden Hour**",
+              "Violet ~280° / 0.08",
+              "Orange ~35° / 0.05",
+              "Jaune ~45° / 0.12"
+            ],
+            [
+              "**Film Kodak Portra**",
+              "Bleu ~220° / 0.06",
+              "Neutre / 0",
+              "Jaune-vert ~70° / 0.07"
+            ],
+            [
+              "**Désaturé Cinéma**",
+              "Teal ~190° / 0.10",
+              "Neutre / 0",
+              "Orange ~30° / 0.08"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mod-courbes-contraste-local",
+      "name": "Contraste Local",
+      "subtitle": "Présence, profondeur, \"mordant\" — accentuer les détails à l'échelle de la structure",
+      "category": "Détail & Netteté",
+      "params": [
+        {
+          "name": "Hautes fréquences",
+          "range": "Petits détails, contours fins",
+          "description": "Texture de la peau, grain du rocher, détails des feuilles, bord net entre deux zones. La netteté (masque flou) et l'Amplification Texture agissent ici. Trop amplifiées = image \"crispy\", look sur-accentué."
+        },
+        {
+          "name": "Moyennes fréquences",
+          "range": "Structures, volumes, masses",
+          "description": "Le relief d'une montagne, la forme d'un visage, la masse des nuages. C'est le domaine du Contraste Local. Il accentue le contraste à cette échelle — les volumes gagnent en définition et en présence."
+        },
+        {
+          "name": "Basses fréquences",
+          "range": "Lumière globale, dégradés larges",
+          "description": "Le ciel dégradé du haut vers le bas, l'ombre portée d'un bâtiment. La courbe tonale et l'Égaliseur Tonal agissent à cette échelle. Le Contraste Local n'a pas ou peu d'effet ici."
+        },
+        {
+          "name": "Courbe neutre",
+          "range": "(0.00, 0.50)(1.00, 0.50) — ligne horizontale",
+          "description": "La ligne horizontale au milieu (valeur 0.50 en sortie) = aucun effet. C'est le point de départ. Monter la courbe au-dessus de 0.50 = amplifier le contraste local. Descendre en dessous = réduire (effet de lissage)."
+        },
+        {
+          "name": "Monter la courbe",
+          "range": "Sortie > 0.50",
+          "description": "Augmente le contraste local — les zones adjacentes se différencient davantage. L'image gagne en \"présence\" et en profondeur. Trop haut = look HDR criard avec halos visibles aux bords des structures."
+        },
+        {
+          "name": "Descendre la courbe",
+          "range": "Sortie < 0.50",
+          "description": "Réduit le contraste local — les zones adjacentes se fondent davantage. Donne un effet de lissage de structure, utile pour adoucir la texture de la peau ou lisser des dégradés difficiles."
+        },
+        {
+          "name": "Contraste résiduel",
+          "range": "Curseur — impact sur les basses fréquences",
+          "description": "Contrôle dans quelle mesure le Contraste Local affecte aussi les structures de grande échelle (basses fréquences). À 0 = n'agit que sur les moyennes fréquences (structures). Valeur positive = étend l'effet aux dégradés larges. Généralement à garder bas pour éviter les aplats."
+        },
+        {
+          "name": "E / S / TG / TD sur la courbe",
+          "range": "Précision du point de contrôle",
+          "description": "Comme sur toutes les courbes ART : permet de positionner précisément les points de contrôle. Utile pour cibler un effet uniquement dans les tons sombres (E:0.20–0.40) ou uniquement dans les tons clairs (E:0.60–0.80)."
+        },
+        {
+          "name": "Masque paramétrique luminance",
+          "range": "Limiter par valeur tonale",
+          "description": "Restreint l'effet aux zones sombres ou aux zones claires uniquement. Exemple : appliquer le Contraste Local seulement dans les tons moyens (luminance 30–70) pour éviter les halos dans le ciel très clair et les ombres très sombres."
+        },
+        {
+          "name": "Masque paramétrique couleur",
+          "range": "Limiter par plage de teinte",
+          "description": "Restreint l'effet à une couleur spécifique. Exemple : appliquer le Contraste Local uniquement sur les tons orange/brun des rochers, sans affecter le ciel bleu ni l'eau turquoise."
+        },
+        {
+          "name": "Inverser le masque",
+          "range": "Bouton \"Inverser\"",
+          "description": "Applique l'effet partout SAUF dans la zone du masque. Utile pour protéger les peaux : masque sur les tons chair + inversion = le Contraste Local s'applique partout sauf sur le visage."
+        },
+        {
+          "name": "Montrer le masque",
+          "range": "Bouton visualisation",
+          "description": "Affiche le masque en surimpression colorée pour voir exactement quelles zones sont affectées avant d'appliquer. Indispensable pour vérifier que le masque ne déborde pas sur des zones indésirables."
+        }
+      ],
+      "tips": [],
+      "warnings": [],
+      "tables": [
+        {
+          "headers": [
+            "",
+            "Contraste Local",
+            "Amplification Texture"
+          ],
+          "rows": [
+            [
+              "Échelle",
+              "Moyennes fréquences — structures et volumes",
+              "Hautes fréquences — micro-détails et contours fins"
+            ],
+            [
+              "Effet visuel",
+              "Profondeur, présence, \"clarté\"",
+              "Netteté, grain, aspérités de surface"
+            ],
+            [
+              "Risque",
+              "Halos aux bords des grandes structures, look HDR",
+              "Image \"crispy\", sur-accentuée, artefacts sur peau"
+            ],
+            [
+              "Idéal pour",
+              "Paysage, architecture, prise de vue globale",
+              "Texture de pierre, fourrure, tissu, yeux en portrait"
+            ],
+            [
+              "À éviter sur",
+              "Portrait (peaux), ciel uni",
+              "Peaux, ciels, zones de dégradé"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mod-courbes-hsl",
+      "name": "Égaliseur de Couleurs",
+      "subtitle": "Contrôle couleur par couleur — ajuster le bleu sans toucher au cyan, le rouge sans toucher à l'orange",
+      "category": "Couleur",
+      "params": [
+        {
+          "name": "E / S — Entrée / Sortie",
+          "range": "Visibles quand un point est sélectionné",
+          "description": "Fonctionnent comme sur les courbes tonales : E = position dans le spectre (quelle teinte exactement), S = valeur de modification appliquée à cette teinte. Permet un réglage numérique précis au lieu de manipuler la courbe à la souris."
+        },
+        {
+          "name": "TG / TD — Tangentes",
+          "range": "Pente gauche et droite du point",
+          "description": "Contrôlent la progressivité du passage entre la teinte modifiée et ses voisines. Des tangentes douces = transition graduelle, naturelle. Des tangentes abruptes = modification qui s'arrête net à la bordure de la plage sélectionnée."
+        },
+        {
+          "name": "Lissage",
+          "range": "Paramètre global de la courbe",
+          "description": "Lisse les transitions entre les points de contrôle. Un lissage élevé évite les artefacts et les ruptures visibles dans le dégradé de couleur. À utiliser si les bords de sélection de couleur produisent des halos ou des lignes visibles."
+        }
+      ],
+      "tips": [],
+      "warnings": [],
+      "tables": [
+        {
+          "headers": [
+            "Canal",
+            "Ce que ça fait",
+            "Exemple pratique"
+          ],
+          "rows": [
+            [
+              "**T — Teinte**",
+              "Décale la couleur vers une teinte voisine sur la roue chromatique",
+              "Cyan T +10 → l'eau glisse vers le bleu-vert. Bleu T -8 → le ciel part vers le violet-bleu profond"
+            ],
+            [
+              "**S — Saturation**",
+              "Amplifie ou réduit l'intensité de la couleur concernée",
+              "Cyan S +30 → l'eau méditerranéenne devient plus turquoise. Orange S -20 → les tons chair se désaturent légèrement"
+            ],
+            [
+              "**L — Luminance**",
+              "Éclaircit ou assombrit la plage de couleur sans changer sa saturation",
+              "Bleu L -10 → le ciel devient plus lourd, dramatique. Orange L +12 → les rochers s'éclaircissent sans se décolorer"
+            ]
+          ]
+        },
+        {
+          "headers": [
+            "Canal",
+            "T",
+            "S",
+            "L",
+            "Effet visuel"
+          ],
+          "rows": [
+            [
+              "Bleu",
+              "-8",
+              "+28",
+              "-12",
+              "Ciel bleu profond, dramatique"
+            ],
+            [
+              "Cyan",
+              "+10",
+              "+32",
+              "+6",
+              "Eau turquoise méditerranéenne"
+            ],
+            [
+              "Vert",
+              "+5",
+              "-8",
+              "0",
+              "Végétation naturelle, pas criarde"
+            ],
+            [
+              "Orange",
+              "-5",
+              "-18",
+              "+12",
+              "Rochers : moins brûlés, plus lumineux"
+            ],
+            [
+              "Jaune",
+              "0",
+              "-12",
+              "+5",
+              "Lumière dorée contrôlée"
+            ]
+          ]
+        },
+        {
+          "headers": [
+            "Canal",
+            "T",
+            "S",
+            "L",
+            "Effet visuel"
+          ],
+          "rows": [
+            [
+              "Orange",
+              "0",
+              "-12",
+              "+8",
+              "Tons chair plus doux, moins saturés"
+            ],
+            [
+              "Rouge",
+              "+5",
+              "-8",
+              "0",
+              "Réduire les rougeurs résiduelles"
+            ],
+            [
+              "Jaune",
+              "0",
+              "-10",
+              "+5",
+              "Éclaircir les zones lumineuses du teint"
+            ]
+          ]
+        },
+        {
+          "headers": [
+            "Canal",
+            "L uniquement",
+            "Effet en N&B"
+          ],
+          "rows": [
+            [
+              "Bleu",
+              "-15",
+              "Ciel plus sombre, dramatique"
+            ],
+            [
+              "Vert",
+              "+10",
+              "Végétation plus claire"
+            ],
+            [
+              "Orange",
+              "+15",
+              "Peaux plus claires, lumineuses"
+            ],
+            [
+              "Rouge",
+              "+8",
+              "Lèvres et rougeurs clarifiées"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mod-courbes-rvb",
+      "name": "Courbes RVB",
+      "subtitle": "Manipulation canal par canal — split toning de précision et looks filmiques",
+      "category": "Couleur",
+      "params": [
+        {
+          "name": "Canal Rouge (R)",
+          "range": "Chaud / Cyan",
+          "description": "Monter la courbe R = ajouter du rouge, de la chaleur. Descendre = ajouter du cyan (la couleur complémentaire du rouge). Lever les ombres R = ombres légèrement rosées/orangées, caractéristique du film chaud Kodak. Descendre les HL R = hautes lumières moins saturées en rouge, look plus propre."
+        },
+        {
+          "name": "Canal Vert (V)",
+          "range": "Vert / Magenta",
+          "description": "Monter la courbe V = ajouter du vert dans les tons concernés. Descendre = ajouter du magenta. Le canal vert influence beaucoup les tons moyens car l'œil est plus sensible au vert. Une légère S-curve sur le canal V amplifie le contraste des tons moyens avec une légère vibrance naturelle."
+        },
+        {
+          "name": "Canal Bleu (B)",
+          "range": "Froid / Ambre",
+          "description": "Monter la courbe B = ajouter du bleu, de la fraîcheur. Descendre = ajouter de l'ambre (complémentaire du bleu). C'est le canal le plus utilisé pour les looks cinématiques : lever les ombres B crée le look \"teal shadows\" caractéristique du cinéma moderne. Descendre les HL B = hautes lumières plus ambrées, split toning classique."
+        },
+        {
+          "name": "Lift des ombres filmique",
+          "range": "Canal B — point bas monté",
+          "description": "Prends le point noir (coin bas gauche) du canal B et monte-le : E:0 → S:8 à 15. Les ombres ne descendent plus à 0 en bleu — elles ont une base bleutée. Combiné avec les ombres R neutres ou légèrement levées, tu obtiens un look teal profond très cinématique."
+        },
+        {
+          "name": "Compression HL ambrée",
+          "range": "Canal B — coin haut abaissé",
+          "description": "Descends le point blanc du canal B : E:100 → S:88 à 92. Les hautes lumières perdent une partie de leur composante bleue — elles deviennent légèrement ambrées/orangées. C'est la \"chaleur\" des hautes lumières dans le look split toning teal & orange."
+        }
+      ],
+      "tips": [],
+      "warnings": [],
+      "tables": [
+        {
+          "headers": [
+            "Canal",
+            "Zone",
+            "Manipulation",
+            "Effet visuel"
+          ],
+          "rows": [
+            [
+              "R (Rouge)",
+              "Ombres",
+              "Lever les ombres R",
+              "Ombres légèrement rosées/orangées — look film chaud"
+            ],
+            [
+              "R (Rouge)",
+              "Hautes lumières",
+              "Compresser les HL R",
+              "HL moins saturées en rouge — look plus neutre et propre"
+            ],
+            [
+              "R (Rouge)",
+              "Global",
+              "Descendre légèrement",
+              "Dominante cyan/teal sur toute l'image"
+            ],
+            [
+              "V (Vert)",
+              "Tons moyens",
+              "Légère S-curve V",
+              "Contraste dans les tons moyens, légère vivacité"
+            ],
+            [
+              "V (Vert)",
+              "Global",
+              "Descendre légèrement",
+              "Dominante magenta discrète — look rétro"
+            ],
+            [
+              "B (Bleu)",
+              "Ombres",
+              "Lever les ombres B",
+              "Ombres bleutées/teal — look cinéma contemporain"
+            ],
+            [
+              "B (Bleu)",
+              "Hautes lumières",
+              "Descendre les HL B",
+              "HL plus ambrées/chaudes — split toning chaud/froid classique"
+            ],
+            [
+              "B (Bleu)",
+              "Global",
+              "Lift global canal B",
+              "Atmosphère froide, nuit, hiver"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mod-courbes-tonales",
+      "name": "Courbes Tonales",
+      "subtitle": "L'outil le plus précis d'ART pour sculpter la lumière — contraste, caractère, look film",
+      "category": "Tonalité",
+      "params": [
+        {
+          "name": "Monter un point",
+          "range": "Sortie > Entrée",
+          "description": "Les valeurs concernées deviennent plus claires. Monter le milieu de la courbe = éclaircir les tons moyens. Monter le bas = déboucher les ombres."
+        },
+        {
+          "name": "Descendre un point",
+          "range": "Sortie < Entrée",
+          "description": "Les valeurs concernées deviennent plus sombres. Descendre le haut de la courbe = compresser les hautes lumières. Descendre le milieu = assombrir les tons moyens."
+        },
+        {
+          "name": "S-curve classique",
+          "range": "Point bas descendu + point haut monté",
+          "description": "Les ombres s'assombrissent, les hautes lumières s'éclaircissent — le contraste augmente. C'est la forme de courbe la plus universelle."
+        },
+        {
+          "name": "Lift des noirs",
+          "range": "Point en bas à gauche monté",
+          "description": "Le point noir ne descend plus à 0 — les ombres sont relevées. Donne un look \"dégradé\" caractéristique du rendu film et des looks cinématiques."
+        },
+        {
+          "name": "Curseur E (Entrée)",
+          "range": "0 → 100 — luminosité dans le RAW",
+          "description": "Affiche la valeur du point sélectionné sur l'axe horizontal. Permet de positionner le point avec précision sur une plage tonale exacte (ex : E:25 = quart inférieur des ombres)."
+        },
+        {
+          "name": "Curseur S (Sortie)",
+          "range": "0 → 100 — luminosité en sortie",
+          "description": "Détermine à quelle valeur sera reproduite la plage E. S > E = éclaircissement, S < E = assombrissement. La différence entre E et S est l'amplitude de ta modification."
+        },
+        {
+          "name": "Curseur TG (Tangente Gauche)",
+          "range": "Pente à gauche du point",
+          "description": "Contrôle la transition de la courbe à gauche du point actif. Une TG forte = transition abrupte (contraste marqué dans les tons inférieurs). TG douce = transition progressive et naturelle."
+        },
+        {
+          "name": "Curseur TD (Tangente Droite)",
+          "range": "Pente à droite du point",
+          "description": "Idem pour la droite du point. TG et TD indépendants permettent des courbes asymétriques : une transition douce dans les ombres et abrupte dans les tons moyens, par exemple."
+        },
+        {
+          "name": "CT2 en mode tonal",
+          "range": "Ajustement secondaire",
+          "description": "Utilise CT2 pour des retouches fines après CT1. Exemple : CT1 gère le contraste général, CT2 compresse légèrement les hautes lumières pour éviter le clip sur un ciel lumineux."
+        },
+        {
+          "name": "CT2 en mode saturation",
+          "range": "Saturation liée à la luminance",
+          "description": "La courbe contrôle la saturation selon la luminance de chaque pixel. Descendre la courbe dans les hautes lumières = désaturer les zones très claires (évite les jaunes cramés). Monter dans les tons moyens = vivifier les couleurs dans les midtones."
+        },
+        {
+          "name": "Linéaire",
+          "range": "Aucun présupposé",
+          "description": "La courbe part droite de coin à coin. Idéale avec le Log Tone Mapping ou quand tu construis ton look de zéro. Associe-la au mode Neutre pour un pipeline totalement sous contrôle."
+        },
+        {
+          "name": "Atténuation progressive des hautes lumières",
+          "range": "Protection automatique des HL",
+          "description": "Compression douce des hautes lumières intégrée dès le départ. Très utile pour les ciels lumineux : ça évite le clipping sans avoir à tout gérer manuellement. Bon choix pour le paysage ensoleillé."
+        },
+        {
+          "name": "Courbe en S progressive",
+          "range": "Contraste intégré dès le départ",
+          "description": "ART applique une S-curve légère comme base — ombres légèrement abaissées, hautes lumières légèrement compressées. Rendu avec du peps immédiatement, proche du JPEG caméra. Bon pour un workflow rapide sans Log."
+        }
+      ],
+      "tips": [],
+      "warnings": [],
+      "tables": [
+        {
+          "headers": [
+            "Mode",
+            "Comportement couleur",
+            "Idéal pour"
+          ],
+          "rows": [
+            [
+              "**Neutre**",
+              "Aucune modification colorimétrique — courbe linéaire pure",
+              "Pipeline avec Log Tone Mapping actif, workflows cinématiques"
+            ],
+            [
+              "**Standard**",
+              "Simule le rendu JPEG caméra — boost saturation dans les tons moyens",
+              "Point de départ \"naturel\" rapide"
+            ],
+            [
+              "**Standard Pondérée**",
+              "Standard + compression progressive des HL — évite le clip",
+              "Scènes à fort contraste (ciel + ombres)"
+            ],
+            [
+              "**Type Film**",
+              "Réponse non-linéaire argentique — ombres douces, HL qui \"roulent\"",
+              "Portrait, paysage lumière douce, look film"
+            ],
+            [
+              "**Mélange Sat. & Valeur**",
+              "Travaille en HSV — sépare luminosité et teinte/saturation",
+              "Augmenter contraste sans drift de teinte (architecture, produits)"
+            ],
+            [
+              "**Luminance**",
+              "N'agit que sur la luminance perçue — teinte et saturation intactes",
+              "Ajouter contraste après color grading sans perturber les couleurs"
+            ],
+            [
+              "**Perceptuel**",
+              "Modèle CIECAM — respecte la perception humaine des couleurs",
+              "Corrections subtiles \"invisibles\" — avancé"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mod-courbes",
+      "name": "Maîtriser les Courbes & Outils Tonaux",
+      "subtitle": "Précision tonale et colorimétrique — de la S-curve au color grading cinématique.",
+      "category": "Courbes & Outils Tonaux",
+      "params": [],
+      "tips": [],
+      "warnings": [],
       "tables": []
     },
     {
