@@ -33,6 +33,20 @@ function scrollToTop() {
 document.addEventListener('DOMContentLoaded', () => {
   const btn = document.getElementById('backToTop');
   if (btn) btn.addEventListener('click', scrollToTop);
+
+  // ─── Liens retour en haut sur les titres de section ───
+  document.querySelectorAll('h3.section-title').forEach(h => {
+    const a = document.createElement('a');
+    a.href = '#';
+    a.className = 'section-top-link';
+    a.setAttribute('aria-label', 'Retour en haut');
+    a.textContent = '↑';
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    h.appendChild(a);
+  });
 });
 
 // ─── Lexique — Données ───
