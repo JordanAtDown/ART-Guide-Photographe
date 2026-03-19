@@ -524,3 +524,81 @@ h3.section-title::after {
     grid-template-columns: 1fr;
   }
 }
+
+/* ─── Lexique — Page ─── */
+.lex-search { margin-bottom: 8px; }
+.lex-search input {
+  width: 100%; padding: 8px 14px; font-size: 13px;
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 8px; color: var(--text); font-family: var(--sans);
+  transition: border-color 0.15s;
+}
+.lex-search input:focus { outline: none; border-color: var(--accent); }
+
+.lex-cat-filter { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 24px; }
+.lex-cat-btn {
+  font-size: 12px; padding: 4px 12px; border-radius: 99px;
+  border: 1px solid var(--border); background: transparent;
+  color: var(--muted); cursor: pointer; font-family: var(--mono);
+  transition: all 0.15s;
+}
+.lex-cat-btn.active, .lex-cat-btn:hover {
+  background: rgba(74,158,255,0.12); color: var(--accent); border-color: var(--accent);
+}
+
+.lex-cat-title {
+  font-size: 11px; font-family: var(--mono); letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--muted); margin: 24px 0 10px;
+  padding-bottom: 6px; border-bottom: 1px solid var(--border);
+}
+
+.lex-card {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px 18px; margin-bottom: 8px;
+  cursor: pointer; transition: border-color 0.15s;
+}
+.lex-card:hover { border-color: var(--accent); }
+.lex-card-header { display: flex; align-items: center; gap: 10px; }
+.lex-card-name { font-size: 14px; font-weight: 500; color: var(--text); flex: 1; }
+.lex-badge {
+  font-size: 11px; padding: 2px 8px; border-radius: 99px;
+  font-family: var(--mono); flex-shrink: 0;
+}
+.lex-badge-general { background: rgba(107,114,128,0.2); color: var(--muted); }
+.lex-badge-expo { background: rgba(74,158,255,0.15); color: var(--accent); }
+.lex-badge-couleur { background: rgba(245,158,11,0.15); color: var(--accent3); }
+.lex-badge-detail { background: rgba(232,121,160,0.15); color: var(--accent4); }
+
+.lex-chevron { font-size: 11px; color: var(--muted); transition: transform 0.2s; flex-shrink: 0; }
+.lex-card.open .lex-chevron { transform: rotate(180deg); }
+.lex-card-short { font-size: 13px; color: var(--muted); margin-top: 6px; line-height: 1.5; }
+.lex-card-detail {
+  display: none; font-size: 13px; color: var(--muted); line-height: 1.6;
+  margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border);
+}
+.lex-card.open .lex-card-detail { display: block; }
+
+/* ─── Lexique — Termes survolables ─── */
+.lexique-term {
+  border-bottom: 1px dashed rgba(107,114,128,0.6);
+  cursor: help;
+}
+
+/* ─── Lexique — Tooltip flottant ─── */
+.lexique-tooltip {
+  position: fixed;
+  z-index: 1000;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  max-width: 280px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.12s;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+}
+.lexique-tooltip.visible { opacity: 1; }
+.ltt-name { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 4px; font-family: var(--mono); }
+.ltt-short { font-size: 12px; color: var(--muted); line-height: 1.5; }
+.ltt-link { font-size: 11px; color: var(--accent); margin-top: 8px; font-family: var(--mono); }

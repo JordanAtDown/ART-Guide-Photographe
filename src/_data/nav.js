@@ -4,7 +4,8 @@ module.exports = [
     items: [
       { id: "home", label: "Accueil", url: "/", color: "#4a9eff" },
       { id: "pipeline", label: "Pipeline de traitement", url: "/modules/pipeline/", color: "#00d4aa" },
-      { id: "ordremodules", label: "Workflow de traitement", url: "/modules/ordremodules/", color: "#00d4aa" }
+      { id: "ordremodules", label: "Workflow de traitement", url: "/modules/ordremodules/", color: "#00d4aa" },
+      { id: "lexique", label: "Lexique", url: "/modules/lexique/", color: "#6b7280" }
     ]
   },
   {

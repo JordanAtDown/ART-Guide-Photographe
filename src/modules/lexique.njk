@@ -1,0 +1,122 @@
+---
+layout: base.njk
+title: 'Lexique ART'
+permalink: '/modules/lexique/'
+---
+
+<div class="module-header">
+  <div class="module-tag"><div class="tag-dot" style="background:#6b7280"></div><span style="color:#6b7280">Référence</span></div>
+  <h2>Lexique ART</h2>
+  <div class="subtitle">35 termes essentiels pour comprendre ART et la photographie numérique</div>
+</div>
+
+<div class="lex-search">
+  <input type="text" id="lexSearch" placeholder="Rechercher un terme..." oninput="lexFilterAll()">
+</div>
+<div class="lex-cat-filter">
+  <button class="lex-cat-btn active" onclick="lexSetFilter('all',this)">Tous</button>
+  <button class="lex-cat-btn" onclick="lexSetFilter('general',this)">Général</button>
+  <button class="lex-cat-btn" onclick="lexSetFilter('expo',this)">Exposition &amp; Tonalité</button>
+  <button class="lex-cat-btn" onclick="lexSetFilter('couleur',this)">Couleur</button>
+  <button class="lex-cat-btn" onclick="lexSetFilter('detail',this)">Détail &amp; Netteté</button>
+</div>
+
+<div id="lexList"></div>
+
+<script>
+const LEX_TERMS = [
+  { cat: 'general', name: 'RAW', short: 'Format de fichier brut du capteur photo.', detail: 'Fichier non traité contenant toutes les données brutes enregistrées par le capteur. Contrairement au JPEG, le RAW n\'applique aucun traitement en interne — aucune netteté, aucune couleur, aucune compression. Il conserve toute la latitude de développement pour la post-production. ART ouvre et développe les fichiers RAW de façon non-destructive.' },
+  { cat: 'general', name: 'Fichier .arp', short: 'Fichier de paramètres ART — contient tous les réglages sans toucher au RAW original.', detail: 'Quand tu travailles dans ART, aucune modification n\'est écrite dans le fichier RAW. Tout est stocké dans un fichier .arp séparé qui enregistre l\'état de chaque module. C\'est ce qui rend ART entièrement non-destructif : le RAW original reste intact, et tu peux revenir à n\'importe quel état antérieur.' },
+  { cat: 'general', name: 'Pipeline de traitement', short: 'Ordre interne fixe dans lequel ART applique chaque module.', detail: 'ART traite toujours les données dans le même ordre, peu importe l\'ordre dans lequel tu actives les modules : Dématriçage → Balance des Blancs → Log Tone Mapping → Exposition → Courbes tonales → Couleur → Détail. Connaître cet ordre évite des surprises : un réglage en amont influe sur ce que voient les modules en aval.' },
+  { cat: 'general', name: 'Dématriçage', short: 'Conversion des données brutes du capteur en image RVB exploitable.', detail: 'Le capteur photo ne capte qu\'une couleur par pixel (grille de Bayer). Le dématriçage est l\'algorithme qui reconstitue une image couleur complète à partir de cette grille. ART utilise principalement AMAZE ou DCB. Un mauvais dématriçage peut introduire du faux-piqué (alias) ou du bruit chromatique en damier.' },
+  { cat: 'general', name: 'EV', short: 'Exposure Value — chaque +1 EV double la luminosité.', detail: 'L\'EV (valeur d\'exposition) est une unité logarithmique : +1 EV = image deux fois plus lumineuse, -1 EV = deux fois plus sombre. Elle correspond à ce qu\'on appelle couramment un "stop" en photo. Dans ART, les paramètres de plage dynamique (Blanc EV, Noir EV, Gain) et les corrections d\'exposition utilisent cette unité.' },
+  { cat: 'general', name: 'Stop', short: 'Synonyme courant de EV — doublement ou division par deux de la lumière.', detail: 'Un stop correspond à un facteur 2 de lumière. Ouvrir le diaphragme d\'un stop (ex : f/4 → f/2.8) double la lumière reçue. Augmenter le temps de pose d\'un stop (1/250 → 1/125) fait de même. Dans ART, "récupérer 2 stops de hautes lumières" signifie restaurer le détail dans des zones surexposées de 2 EV au-dessus du gris moyen.' },
+  { cat: 'general', name: 'Histogramme', short: 'Graphique représentant la distribution des luminosités dans une image.', detail: 'L\'histogramme montre sur l\'axe horizontal les niveaux de luminosité (noirs à gauche, blancs à droite) et sur l\'axe vertical le nombre de pixels à chaque niveau. Un pic contre le bord droit indique des zones cramées (surexposées). Un pic collé à gauche indique des ombres bouchées. Dans ART, l\'histogramme guide tous les réglages de tonalité.' },
+  { cat: 'general', name: 'LUT', short: 'Look-Up Table — table de correspondance couleur appliquant un look prédéfini.', detail: 'Un fichier .cube ou .3dl qui contient une correspondance mathématique entre les couleurs d\'entrée et de sortie. Utilisé en cinéma pour des looks prédéfinis (émulation pellicule Kodak, Fuji, etc.). Dans ART, le module Correction Couleurs en mode LUT permet d\'appliquer ces fichiers directement sur tes RAWs.' },
+  { cat: 'general', name: 'Non-destructif', short: 'Mode de traitement qui ne modifie jamais le fichier original.', detail: 'Un workflow non-destructif signifie que tous les réglages sont stockés séparément du fichier source. Le RAW original n\'est jamais modifié. À tout moment tu peux annuler, revenir à zéro, ou exporter plusieurs versions différentes depuis le même fichier. ART est entièrement non-destructif grâce aux fichiers .arp.' },
+  { cat: 'expo', name: 'Plage dynamique', short: 'Écart entre la zone la plus sombre et la plus lumineuse qu\'un capteur peut enregistrer simultanément.', detail: 'Exprimée en EV ou en stops. Un capteur moderne peut capturer 12 à 15 stops de plage dynamique. L\'œil humain en perçoit environ 20. Le problème : un écran ne peut en afficher que 8 à 10. Tout le travail du Log Tone Mapping et de la Compression de Plage Dynamique consiste à "faire rentrer" la plage du capteur dans celle de l\'écran, sans perte de détail perceptible.' },
+  { cat: 'expo', name: 'Log Tone Mapping', short: 'Module central d\'ART qui gère la plage dynamique via une courbe logarithmique.', detail: 'Transforme la réponse linéaire du capteur en courbe logarithmique, comme le fait le C-Log ou S-Log en vidéo. Résultat : ombres détaillées ET hautes lumières récupérées simultanément. Le Point Gris Cible (18% par défaut) définit où se positionne la luminosité des tons moyens. Le Blanc EV et le Noir EV définissent l\'étendue haute et basse de la plage récupérée.' },
+  { cat: 'expo', name: 'Hautes Lumières', short: 'Zones lumineuses d\'une image — ciels, reflets, surfaces blanches.', detail: 'Les hautes lumières sont les zones situées dans le tiers supérieur de l\'histogramme. Quand elles dépassent la capacité d\'enregistrement du capteur, elles sont dites "cramées" ou "clippées" — toute information est perdue et la zone apparaît uniformément blanche. ART propose trois modes de reconstruction : Inactif, Blend, et Propagation de la couleur.' },
+  { cat: 'expo', name: 'Clip', short: 'Zone d\'une image où l\'exposition dépasse la capacité du capteur — toute information est perdue.', detail: 'Une zone clippée est uniformément blanche (HL) ou uniformément noire (ombres). Il n\'y a plus aucune information récupérable car le signal a saturé (ou est sous le seuil minimal) du capteur. La reconstruction dans ART (mode Propagation de la couleur) tente d\'interpoler le contenu depuis les zones adjacentes, mais reste une approximation.' },
+  { cat: 'expo', name: 'Point Gris', short: 'Référence de luminosité standard — niveau auquel les tons moyens d\'une scène devraient être rendus.', detail: 'Le gris à 18% de réflectance est la référence standard de mesure d\'exposition en photographie. C\'est la luminosité moyenne d\'une scène naturelle. Dans le Log Tone Mapping d\'ART, le "Point Gris Cible" définit à quelle luminosité seront rendus les tons moyens : 18% = rendu naturel, 22-25% = image plus aérée, 14-16% = look dramatique.' },
+  { cat: 'expo', name: 'Courbe en S', short: 'Forme de courbe tonale classique qui ajoute du contraste.', detail: 'En appliquant une légère forme de S à une courbe tonale, on assombrit les ombres et on éclaircit les hautes lumières simultanément, ce qui augmente le contraste dans les tons moyens. C\'est la courbe la plus utilisée en photographie pour donner du "punch" à une image après le Log Tone Mapping.' },
+  { cat: 'expo', name: 'Dodge & Burn', short: 'Technique consistant à éclaircir (dodge) ou assombrir (burn) des zones spécifiques.', detail: 'Terme issu de la chambre noire argentique. Le dodging consistait à soustraire de la lumière pendant le tirage pour éclaircir, le burning à en ajouter pour assombrir. En numérique, l\'Égaliseur Tonal d\'ART est l\'équivalent du dodge & burn : il agit sur des plages tonales précises sans affecter le reste de l\'image.' },
+  { cat: 'expo', name: 'Compression dynamique', short: 'Réduction locale des écarts de luminosité — fait ressortir le détail dans les ombres et les hautes lumières.', detail: 'Contrairement au Log Tone Mapping qui agit globalement, la compression de plage dynamique analyse des zones locales et réduit les écarts de luminosité à cette échelle. Résultat : même les ombres les plus sombres révèlent leur texture. Le risque d\'un réglage trop fort est un aspect "HDR criard". Dans ART, le paramètre Quantité contrôle l\'intensité, et Détail l\'échelle spatiale d\'analyse.' },
+  { cat: 'couleur', name: 'Balance des Blancs', short: 'Correction de la dominante colorée due à la source lumineuse — mesurée en Kelvin.', detail: 'La lumière naturelle varie en couleur selon la source (soleil, ombre, nuages, tungstène...). La balance des blancs compense cette dominante pour que les zones neutres apparaissent vraiment neutres. En RAW, elle peut être modifiée librement après la prise de vue. La Température (en Kelvin) gère l\'axe chaud/froid ; la Dominante (Tint) gère l\'axe vert/magenta.' },
+  { cat: 'couleur', name: 'Kelvin', short: 'Unité de mesure de la température de couleur d\'une source lumineuse.', detail: 'Paradoxalement, plus la valeur Kelvin est basse, plus l\'image est froide (lumière de bougie ≈ 1800K, lumière du jour ≈ 5500K, ombre ≈ 7000K). Pour la Méditerranée en plein soleil, une valeur de 5100-5400K donne un résultat naturel. Au-delà de 6000K, la photo prend un aspect coucher de soleil artificiel.' },
+  { cat: 'couleur', name: 'HSL', short: 'Teinte / Saturation / Luminance — permet de modifier chaque couleur indépendamment.', detail: 'H = Hue (teinte) : l\'angle sur la roue chromatique. S = Saturation : l\'intensité de la couleur. L = Luminance : la luminosité de la couleur. L\'Égaliseur HSL d\'ART permet d\'agir sur chaque couleur (rouge, orange, jaune, vert, cyan, bleu, violet, magenta) indépendamment sur ces 3 axes. Outil essentiel pour cibler précisément le bleu du ciel ou le cyan de l\'eau.' },
+  { cat: 'couleur', name: 'Saturation', short: 'Intensité ou pureté d\'une couleur — de neutre/gris (0) à couleur pure maximale.', detail: 'La saturation mesure à quel point une couleur est éloignée du gris. Une saturation nulle donne du gris, une saturation maximale donne la couleur la plus pure possible. Dans ART, le module Saturation agit uniformément sur toutes les couleurs de l\'image — risque de rendre les couleurs déjà intenses trop criardes. À utiliser avec modération.' },
+  { cat: 'couleur', name: 'Vibrance', short: 'Saturation intelligente — booste les couleurs peu saturées en protégeant les couleurs déjà intenses.', detail: 'Contrairement à la saturation globale, la Vibrance détecte les couleurs déjà saturées et les protège, en ne boostant que les couleurs ternes. Résultat : une image plus vivante sans zones de couleur criarde. Idéal pour les photos de mer : la Vibrance vivifie les tons ternes sans saturer davantage l\'eau turquoise ou le ciel bleu déjà saturés.' },
+  { cat: 'couleur', name: 'Color Grading', short: 'Attribution d\'une couleur différente aux ombres, tons moyens et hautes lumières pour créer une atmosphère.', detail: 'Technique venue du cinéma consistant à teinter différemment les zones sombres et claires d\'une image. Le look "teal & orange" classique donne des ombres bleu-vert et des hautes lumières orange chaud. Dans ART, le module Correction Couleurs/Tonalité (mode Coefficients TSL) et ses Color Wheels permettent ce type de grading.' },
+  { cat: 'couleur', name: 'Color Wheels', short: 'Roues chromatiques interactives permettant de teinter ombres, tons moyens et hautes lumières indépendamment.', detail: 'Interface graphique en forme de roue chromatique avec un point de contrôle central. Déplacer ce point vers une teinte applique cette couleur à la plage tonale correspondante (Ombres / Tons moyens / Hautes Lumières). Le curseur de luminosité associé agit sur la clarté de la zone. C\'est l\'outil standard du color grading cinématique, présent dans DaVinci Resolve, Premiere Pro, et ART.' },
+  { cat: 'couleur', name: 'RVB', short: 'Rouge Vert Bleu — espace colorimétrique additif de base des écrans.', detail: 'Le modèle de couleur utilisé par les écrans. Chaque pixel est défini par trois valeurs (R, V, B) de 0 à 255 (8 bits). En additionnant R+V+B au maximum, on obtient le blanc. Les Courbes RVB d\'ART permettent d\'ajuster indépendamment la courbe tonale de chaque canal, ce qui modifie à la fois la luminosité et la couleur de l\'image.' },
+  { cat: 'couleur', name: 'Split Toning', short: 'Technique colorimétrique appliquant une teinte aux ombres et une autre aux hautes lumières.', detail: 'Technique classique de look "film" ou "cinéma" : les ombres sont teintées dans une couleur froide (bleu, teal) et les hautes lumières dans une couleur chaude (orange, jaune). Le contraste complémentaire crée une profondeur visuelle et une cohérence atmosphérique. Dans ART, le mode Canaux RVB séparés permet un split toning ultra-précis canal par canal.' },
+  { cat: 'couleur', name: 'Dominante', short: 'Axe vert/magenta de la balance des blancs — corrige les dominantes résiduelles.', detail: 'Après correction de la température (axe chaud/froid), une dominante résiduelle verte ou magenta peut persister. Le curseur Dominante (ou Tint) la corrige. Valeur 1.0 = neutre. Une légère hausse (1.005-1.01) pousse vers le vert, ce qui, avec l\'eau turquoise méditerranéenne, peut donner une teinte "teal" naturelle.' },
+  { cat: 'couleur', name: 'Espace Lab', short: 'Espace colorimétrique qui sépare la luminosité (L) de la couleur (a, b) — proche de la perception humaine.', detail: 'Dans l\'espace Lab, le canal L contient uniquement l\'information de luminosité, et les canaux a et b contiennent l\'information de couleur. Cela permet de traiter le bruit de luminance sans impacter la couleur, et vice-versa. Dans ART, le mode de débruitage en espace Lab donne des résultats plus naturels que le mode RVB sur les images à forts contrastes.' },
+  { cat: 'detail', name: 'Bruit numérique', short: 'Variation aléatoire de luminosité ou de couleur dans une image — analogue au grain argentique.', detail: 'Le bruit numérique a deux composantes : le bruit de luminance (variation de luminosité — proche du grain argentique, souvent esthétique) et le bruit de chrominance (taches colorées rouge/vert/bleu — toujours disgracieuses). Le bruit augmente avec la montée en ISO et lors de la récupération des ombres en post-production.' },
+  { cat: 'detail', name: 'Bruit de luminance', short: 'Variation de luminosité pixel à pixel — ressemble au grain argentique.', detail: 'Ce type de bruit crée des variations de clarté dans les zones uniformes (ciel, zones lisses). Il est souvent accepté voire recherché car il rappelle le grain argentique et donne une texture organique à l\'image. Dans ART, le curseur Luminance du module Lissage gère ce type de bruit — il est recommandé de ne pas le réduire agressivement pour garder le "grain" de l\'eau.' },
+  { cat: 'detail', name: 'Bruit de chrominance', short: 'Taches de couleur parasites (rouge/vert/bleu) — toujours disgracieux, à traiter agressivement.', detail: 'Le bruit de chrominance se manifeste par des pixels isolés de couleur aberrante (rouge dans une zone bleue, vert dans une zone grise). Il n\'a aucune valeur esthétique. Dans ART, la section Chrominance du module Lissage (Réduction de Bruit) le supprime. Traiter la chrominance agressivement ne nuit pas au piqué de l\'image car elle ne contient aucun détail structural.' },
+  { cat: 'detail', name: 'Débruitage', short: 'Algorithme de réduction du bruit numérique dans une image.', detail: 'Dans ART, le module Lissage propose deux modes : Conservatif (préserve les détails fins, idéal pour les basses ISO) et Agressif (réduction plus forte pour les hautes ISO ou les ombres récupérées). L\'espace colorimétrique de traitement (RVB ou Lab) influence la qualité du résultat. La stratégie recommandée : traiter agressivement la chrominance, préserver une partie de la luminance.' },
+  { cat: 'detail', name: 'ISO', short: 'Sensibilité du capteur à la lumière — une valeur élevée amplifie le signal mais aussi le bruit.', detail: 'L\'ISO définit le niveau d\'amplification électronique appliqué au signal du capteur. ISO 100 = sensibilité de base, bruit minimal. ISO 3200+ = signal très amplifié, bruit important. En photo de mer en plein soleil, on reste généralement entre ISO 100 et 400. Les ombres récupérées en post-production avec l\'Égaliseur Tonal révèlent le bruit sous-jacent même à basse ISO.' },
+  { cat: 'detail', name: 'Contraste local', short: 'Renforcement du contraste à l\'échelle des détails et textures, sans affecter la tonalité globale.', detail: 'Agit sur des zones de l\'image de quelques pixels à quelques centaines de pixels — l\'échelle des textures et des contours. Différent du contraste global qui agit sur l\'ensemble de l\'histogramme. Dans ART, le module Contraste Local est distinct de l\'Amplification de Texture : il travaille sur des fréquences spatiales plus larges, donnant de la "présence" à l\'image sans créer de halos.' },
+  { cat: 'detail', name: 'Amplification de texture', short: 'Module ART qui révèle les micro-détails de surface sans amplifier le bruit ni créer de halos.', detail: 'Travaille sur des fréquences spatiales moyennes — ni trop petites (évite d\'amplifier le bruit), ni trop grandes (évite les halos). Idéal pour les strates rocheuses, les écumes de vague, et les textures de l\'eau. Force recommandée : +0.2 à +0.4 pour un résultat naturel. L\'Échelle des Détails permet de cibler micro-textures (0.10-0.20) ou ondulations (0.80+).' },
+  { cat: 'detail', name: 'Halo', short: 'Artefact visuel — auréole claire autour des contrastes forts, produite par un traitement trop agressif.', detail: 'Les halos apparaissent quand un algorithme de netteté ou de débruitage "déborde" au-delà des contours et crée une transition artificielle (frange claire ou sombre). Dans ART, ils peuvent apparaître en mode Propagation de la couleur si l\'Adoucissement est trop bas, ou avec l\'Amplification de Texture si les Itérations sont insuffisantes.' },
+  { cat: 'detail', name: 'Piqué', short: 'Netteté et précision des détails fins dans une image — qualité optique et numérique combinées.', detail: 'Le piqué d\'une image dépend de la qualité optique de l\'objectif, de la mise au point, du temps de pose (flou de bougé), et des algorithmes de dématriçage et d\'amplification de texture. Dans ART, le module Amplification de Texture augmente le piqué perçu sans modifier la mise au point. Une réduction de bruit trop agressive dégrade le piqué.' },
+];
+
+const LEX_CAT_LABELS = { general: 'Général', expo: 'Exposition & Tonalité', couleur: 'Couleur', detail: 'Détail & Netteté' };
+const LEX_CAT_ORDER = ['general', 'expo', 'couleur', 'detail'];
+
+let lexActiveFilter = 'all';
+let lexSearchQ = '';
+
+function lexSetFilter(f, btn) {
+  lexActiveFilter = f;
+  document.querySelectorAll('.lex-cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  lexRender();
+}
+
+function lexFilterAll() {
+  lexSearchQ = document.getElementById('lexSearch').value.toLowerCase();
+  lexRender();
+}
+
+function lexRender() {
+  const list = document.getElementById('lexList');
+  const filtered = LEX_TERMS.filter(t => {
+    const matchCat = lexActiveFilter === 'all' || t.cat === lexActiveFilter;
+    const matchQ = !lexSearchQ || t.name.toLowerCase().includes(lexSearchQ) || t.short.toLowerCase().includes(lexSearchQ) || t.detail.toLowerCase().includes(lexSearchQ);
+    return matchCat && matchQ;
+  });
+
+  if (!filtered.length) {
+    list.innerHTML = '<div style="text-align:center;padding:2rem;color:var(--muted);font-size:14px;">Aucun terme trouvé.</div>';
+    return;
+  }
+
+  const grouped = {};
+  LEX_CAT_ORDER.forEach(c => { grouped[c] = []; });
+  filtered.forEach(t => grouped[t.cat].push(t));
+
+  let html = '';
+  LEX_CAT_ORDER.forEach(cat => {
+    if (!grouped[cat].length) return;
+    if (lexActiveFilter === 'all') html += `<div class="lex-cat-title">${LEX_CAT_LABELS[cat]}</div>`;
+    grouped[cat].forEach(t => {
+      html += `<div class="lex-card" onclick="this.classList.toggle('open')">
+        <div class="lex-card-header">
+          <span class="lex-card-name">${t.name}</span>
+          <span class="lex-badge lex-badge-${t.cat}">${LEX_CAT_LABELS[t.cat]}</span>
+          <span class="lex-chevron">▼</span>
+        </div>
+        <div class="lex-card-short">${t.short}</div>
+        <div class="lex-card-detail">${t.detail}</div>
+      </div>`;
+    });
+  });
+  list.innerHTML = html;
+}
+
+lexRender();
+</script>
