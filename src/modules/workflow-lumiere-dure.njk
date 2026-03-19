@@ -1,0 +1,240 @@
+---
+layout: base.njk
+title: "Lumière Dure & Soleil d'Été — Workflow"
+permalink: '/modules/workflow-lumiere-dure/'
+---
+
+<a class="wf-back" href="{{ '/modules/workflows/' | url }}">← Workflows par genre</a>
+
+<div class="module-header">
+  <div class="module-tag"><div class="tag-dot" style="background:#f59e0b"></div><span style="color:#f59e0b">Lumière Dure</span></div>
+  <h2>Lumière Dure &amp; Soleil d'Été</h2>
+  <div class="subtitle">Dompter la dynamique extrême sans trahir l'intensité lumineuse</div>
+</div>
+
+<div class="blockquote">
+  <strong>L'enjeu central :</strong> la lumière de milieu de journée est la plus agressive qui soit. Hautes lumières cramées dans le ciel et sur l'eau, ombres noires sans détail, contraste brutal qui écrase les tons moyens. Le développement doit <strong>dompter cette dynamique extrême</strong> sans trahir la sensation de chaleur et d'intensité lumineuse que tu avais devant les yeux.
+</div>
+
+<div class="toc">
+  <div class="toc-title">Sommaire</div>
+  <ol>
+    <li><a href="#specificite">Ce qui rend cette lumière spécifique</a></li>
+    <li><a href="#decision">La décision préalable</a></li>
+    <li><a href="#problemes">Problèmes typiques &amp; solutions dans ART</a></li>
+    <li><a href="#modules-cles">Les modules-clés</a></li>
+    <li><a href="#logique">Logique de développement</a></li>
+    <li><a href="#attention">Points d'attention</a></li>
+  </ol>
+</div>
+
+<div class="editorial">
+
+<h3 class="section-title" id="specificite">Ce qui rend cette lumière spécifique</h3>
+
+<p>Entre 11h et 16h en été, particulièrement en bord de mer ou en montagne, la lumière a des caractéristiques qui la rendent techniquement difficile :</p>
+
+<p><strong>Un contraste extrême :</strong> le soleil est haut, la lumière frappe les surfaces directement. Le ciel est blanc-bleu intense, l'eau ou la neige réfléchissent la lumière directement vers l'objectif. Simultanément, les zones à l'ombre — sous un rocher, sous un parasol, dans une ruelle — sont noires sans transition. L'écart entre les zones les plus claires et les plus sombres peut dépasser 10 IL. Aucun capteur ne peut tout capturer d'un coup.</p>
+
+<p><strong>Des hautes lumières particulièrement fragiles :</strong> le ciel blanc d'été, l'écume des vagues, les surfaces mouillées, le sable clair en plein soleil — tous ces éléments saturent facilement les canaux du capteur. Et contrairement aux ombres, les hautes lumières cramées ne se récupèrent pas au-delà de 1 à 2 IL en RAW.</p>
+
+<p><strong>Des couleurs saturées à l'excès :</strong> le bleu de la mer, le bleu du ciel, le jaune du sable — sous ce soleil, tout est poussé à fond. Une saturation supplémentaire en post sonnerait faux et criard.</p>
+
+<h3 class="section-title" id="decision">La décision préalable : que veux-tu faire de cette lumière ?</h3>
+
+<p>Avant tout réglage, cette question détermine tout le workflow.</p>
+
+<div class="insight">
+  <div class="insight-label">Option A — Assumer le contraste</div>
+  <p>Tu conserves les ombres dures, le ciel potentiellement cramé, la sensation d'intensité lumineuse brute. Tu travailles <em>avec</em> la lumière, pas contre. C'est le choix documentaire et le plus fidèle à ce que tu as vécu.</p>
+</div>
+
+<div class="insight">
+  <div class="insight-label">Option B — Dompter la dynamique</div>
+  <p>Tu utilises le Log Tone Mapping pour comprimer les extrêmes — récupérer du détail dans le ciel et déboucher les ombres. Le résultat est plus lisible mais moins "brûlant". Attention : poussé trop loin, ça donne un rendu HDR artificiel qui trahit complètement l'ambiance.</p>
+</div>
+
+<div class="insight">
+  <div class="insight-label">Option C — Hybride (souvent la meilleure)</div>
+  <p>Récupère le ciel et les hautes lumières critiques (là où l'écrêtage détruit l'image), laisse les ombres profondes. Le contraste reste présent, mais les zones cramées sont réparées.</p>
+</div>
+
+<div class="blockquote">
+  <strong>Pour la mer et les paysages côtiers :</strong> l'Option C est souvent la bonne. Le ciel écrasé est rarement voulu, mais les ombres dures sous les rochers participent au caractère de la lumière.
+</div>
+
+<h3 class="section-title" id="problemes">Problèmes typiques &amp; solutions dans ART</h3>
+
+<div class="wf-problem">
+  <div class="wf-problem-title">Le ciel est blanc / cramé — aucun détail</div>
+  <div class="wf-problem-body">
+    <p>Le problème n°1 de cette lumière. Le capteur a saturé les canaux dans les zones les plus lumineuses du ciel.</p>
+    <div class="wf-solution">
+      <div class="wf-solution-label">Dans ART — deux étapes</div>
+      <p>D'abord, vérifie l'histogramme. Si le pic de droite déborde légèrement — il y a peut-être 1 à 2 IL récupérables en RAW. Si le pic est massivement collé — une partie est irrécupérable.</p>
+      <p><strong>Étape 1 — Reconstruction des hautes lumières (module Exposition) :</strong> active le mode <strong>Propagation de la couleur</strong> dans les options de reconstruction des hautes lumières. C'est lui qui va tenter de reconstruire les zones cramées à partir des pixels adjacents encore valides. Adoucissement : 25–35.</p>
+      <p><strong>Étape 2 — Log Tone Mapping :</strong> si l'écart dynamique est extrême (ciel blanc + ombres noires), active le Log Tone Mapping — Automatique, puis ajuste :</p>
+      <ul>
+        <li><code>Blanc EV</code> : baisse pour récupérer le ciel</li>
+        <li><code>Noir EV</code> : monte légèrement pour déboucher les ombres</li>
+        <li><code>Point gris</code> : ajuste la luminosité générale des tons moyens</li>
+      </ul>
+    </div>
+    <div class="blockquote" style="margin-top:12px;">
+      <strong>Attention au piège du Log :</strong> le Log Tone Mapping appliqué trop fort sur cette lumière produit un rendu "carte postale HDR" — les ombres sont ouvertes comme en plein jour, le contraste disparaît, tout semble plat et artificiel. L'objectif n'est pas de tout voir partout — c'est de récupérer les zones critiques tout en conservant le punch de la lumière.
+    </div>
+  </div>
+</div>
+
+<div class="wf-problem">
+  <div class="wf-problem-title">L'écume des vagues / les parties blanches de l'eau sont cramées</div>
+  <div class="wf-problem-body">
+    <p>L'eau en mouvement en plein soleil sature très facilement. C'est souvent un écrêtage partiel — certaines zones de l'écume sont cramées, d'autres non.</p>
+    <div class="wf-solution">
+      <div class="wf-solution-label">Dans ART</div>
+      <ul>
+        <li><strong>Propagation de la couleur</strong> (module Exposition) : en premier, pour reconstruire les zones d'écume cramées.</li>
+        <li><strong>Hautes lumières</strong> de l'Égaliseur Tonal : baisse pour comprimer globalement les tons clairs.</li>
+        <li><strong>Masque local</strong> (Édition Locale) : si seule une partie de l'eau est problématique, un masque de zone sur la surface de l'eau avec une correction des hautes lumières ciblée est plus propre qu'un réglage global qui écrase tout.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="wf-problem">
+  <div class="wf-problem-title">Les ombres sont noires — aucun détail sous les rochers, les parasols, les arbres</div>
+  <div class="wf-problem-body">
+    <p>Les ombres dures de la lumière d'été peuvent être des aplats de noir complets. La question est : veux-tu les déboucher ou les assumer ?</p>
+    <div class="wf-solution">
+      <div class="wf-solution-label">Dans ART — deux approches</div>
+      <p><strong>Si tu veux déboucher :</strong></p>
+      <ul>
+        <li><strong>Ombres</strong> de l'Égaliseur Tonal : monte progressivement</li>
+        <li><strong>Noirs</strong> : ajuste ensuite pour éviter que tout le noir disparaisse</li>
+        <li>Vérifie que le bruit dans les ombres récupérées reste acceptable — en ISO élevé, déboucher des ombres révèle du bruit</li>
+      </ul>
+      <p><strong>Si tu assumes les ombres dures :</strong> ne touche pas aux ombres — laisse-les profondes. C'est cohérent avec la nature de cette lumière. Une ombre noire sous un rocher de Méditerranée est juste. La forcer à s'ouvrir donne un rendu artificiel qui trahit le soleil d'été.</p>
+    </div>
+    <div class="blockquote" style="margin-top:12px;">
+      <strong>La règle des ombres assumées :</strong> si une ombre est entièrement à l'intérieur du cadre sans bords, elle peut être noire. Si l'ombre touche un sujet important (un visage, un détail narratif clé), elle mérite d'être débouchée.
+    </div>
+  </div>
+</div>
+
+<div class="wf-problem">
+  <div class="wf-problem-title">Les couleurs sont agressives — tout crie en même temps</div>
+  <div class="wf-problem-body">
+    <p>Le sable jaune, la mer bleue, le ciel bleu, les vêtements colorés — sous un soleil d'été, les couleurs sont déjà saturées à la prise de vue. Ajouter de la saturation en post est la pire erreur possible.</p>
+    <div class="wf-solution">
+      <div class="wf-solution-label">Dans ART</div>
+      <ul>
+        <li><strong>Saturation globale : ne pas y toucher</strong> — ou baisser légèrement</li>
+        <li><strong>Vibrance</strong> : si les couleurs semblent ternes après avoir compressé les hautes lumières, la vibrance peut redonner de la vie aux tons intermédiaires sans sur-saturer les couleurs déjà intenses</li>
+        <li><strong>HSL</strong> : si le bleu du ciel ou de la mer est trop agressif, baisse la saturation du canal Bleu et/ou Cyan spécifiquement. Idem pour le jaune du sable si besoin.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="wf-problem">
+  <div class="wf-problem-title">L'image manque de profondeur malgré le contraste fort</div>
+  <div class="wf-problem-body">
+    <p>Paradoxalement, une image très contrastée peut sembler plate si le contraste est mal réparti — tout est soit très blanc soit très noir, mais les tons moyens sont écrasés.</p>
+    <div class="wf-solution">
+      <div class="wf-solution-label">Dans ART</div>
+      <ul>
+        <li><strong>Courbes Tonales</strong> : une S-curve qui protège les tons moyens — soulève légèrement les tons clairs <em>sans aller vers le blanc pur</em>, abaisse légèrement les tons sombres <em>sans aller vers le noir pur</em>. L'idée est d'étirer les tons moyens, pas d'écraser les extrêmes.</li>
+        <li><strong>Égaliseur Tonal</strong> : curseur Tons Moyens légèrement vers le haut si l'image semble "creuse" au centre de la dynamique.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="wf-problem">
+  <div class="wf-problem-title">La mer a une couleur artificielle — trop turquoise ou trop bleue</div>
+  <div class="wf-problem-body">
+    <p>Sous un soleil fort, la mer peut saturer les canaux bleu et cyan. La couleur résultante peut sembler irréelle même si elle correspond à la réalité — le capteur exagère ce que l'œil perçoit comme naturel.</p>
+    <div class="wf-solution">
+      <div class="wf-solution-label">Dans ART — HSL</div>
+      <ul>
+        <li><strong>HSL — Bleu</strong> : Teinte légèrement vers le cyan pour un bleu plus naturel, Saturation baissée si trop intense, Luminance peut être baissée pour plus de profondeur</li>
+        <li><strong>HSL — Cyan</strong> : si la mer tire vers le turquoise, baisse légèrement la saturation du Cyan</li>
+        <li><strong>Color Wheels</strong> : des ombres légèrement teal créent un beau contraste avec les hautes lumières chaudes du soleil — c'est cohérent avec la réalité de cette lumière</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<h3 class="section-title" id="modules-cles">Les modules-clés pour la lumière dure d'été</h3>
+
+<table>
+  <tr><th>Rôle</th><th>Module</th><th>Priorité</th></tr>
+  <tr><td>Récupérer les hautes lumières cramées</td><td>Exposition — Propagation couleur</td><td>Toujours en premier</td></tr>
+  <tr><td>Dompter la dynamique extrême</td><td>Log Tone Mapping</td><td>Avec parcimonie — risque HDR</td></tr>
+  <tr><td>Sculpter ombres et HLs</td><td>Égaliseur Tonal</td><td>Après le Log si utilisé</td></tr>
+  <tr><td>Contraste des tons moyens</td><td>Courbes Tonales</td><td>S-curve protectrice</td></tr>
+  <tr><td>Couleurs de mer et de ciel</td><td>HSL — Bleu + Cyan</td><td>Baisser, jamais monter</td></tr>
+  <tr><td>Cibler l'eau séparément</td><td>Édition Locale — Masque de zone</td><td>Si l'eau seule est problématique</td></tr>
+</table>
+
+<h3 class="section-title" id="logique">Logique de développement soleil d'été dans ART</h3>
+
+<div class="wf-steps">
+  <div class="wf-steps-label">Ordre de traitement recommandé</div>
+  <pre>0. Décision préalable
+   → Assumer le contraste ou dompter la dynamique ?
+   → Pour la mer : souvent hybride — récupère le ciel, assume les ombres
+
+1. Exposition — Reconstruction Hautes Lumières
+   → Mode : Propagation de la couleur, Adoucissement 25–35
+   → Avant tout autre réglage — c'est la base
+
+2. Log Tone Mapping (si dynamique très large)
+   → Automatique d'abord
+   → Blanc EV : baisse pour récupérer le ciel
+   → Noir EV : monte légèrement si les ombres sont trop bouchées
+   → Résiste à l'envie de tout ouvrir — garde le punch
+
+3. Égaliseur Tonal
+   → Hautes Lumières : baisse encore si le ciel reste trop blanc
+   → Ombres : selon décision préalable — laisse profondes ou débouche légèrement
+
+4. Courbes Tonales
+   → S-curve douce qui protège les tons moyens
+   → Ne pas pousser les extrêmes — ils sont déjà extrêmes
+
+5. Balance des Blancs
+   → Sous soleil d'été : température souvent correcte (5500–6000K)
+   → Ajuste si la scène tire vers le jaune trop chaud ou le bleu trop froid
+
+6. HSL — couleurs
+   → Bleu : saturation et luminance selon la mer
+   → Cyan : idem
+   → Jaune : si le sable est trop agressif
+   → Ne pas monter la saturation globale
+
+7. Color Wheels (si look méditerranéen voulu)
+   → Ombres légèrement teal — mer et ombres froides
+   → HLs légèrement chaudes — soleil et reflets
+   → Saturation très basse sur les deux (0.05–0.10)
+
+8. Détail en dernier
+   → Texture modérée sur les rochers et l'eau
+   → Contraste Local léger pour la mer si elle manque de présence</pre>
+</div>
+
+<h3 class="section-title" id="attention">Points d'attention spécifiques</h3>
+
+<div class="blockquote">
+  <strong>Exposer à droite à la prise de vue — sans cramer :</strong> sous cette lumière, la tentation est de sous-exposer pour protéger le ciel. Le résultat : des ombres noires et bruyantes impossibles à rattraper. La bonne approche est d'exposer au maximum sans que les hautes lumières critiques (ciel, écume) ne crament. Les hautes lumières spéculaires (reflets directs) peuvent cramer sans problème — les zones de texture (ciel avec nuages, eau animée) doivent rester dans la dynamique.
+</div>
+
+<p><strong>Le filtre polarisant est ton allié à la prise de vue :</strong> un polarisant réduit les reflets sur l'eau, sature la mer, assombrit le ciel bleu — il compresse la dynamique avant même la prise de vue, ce qui facilite considérablement le développement.</p>
+
+<div class="blockquote">
+  <strong>La lumière dure mérite d'être assumée :</strong> beaucoup de grands photographes de mer et de Méditerranée travaillent <em>avec</em> cette lumière brutale plutôt que contre. Les ombres dures sur les galets, le blanc éclatant des façades, le bleu intense de la mer — c'est une esthétique à part entière. Si tu passes 30 minutes à tout corriger pour obtenir un résultat "confortable", demande-toi si tu ne trahis pas la vérité de la scène que tu avais devant toi.
+</div>
+
+<p><strong>Comparer avant/après avec un regard frais :</strong> cette lumière est celle qui pousse le plus facilement à sur-corriger — déboucher trop les ombres, récupérer trop le ciel, finir avec un rendu plat et artificiel qui ne ressemble ni à la réalité ni à une intention artistique. Laisse l'image reposer, reviens avec un œil neuf.</p>
+
+</div>

@@ -1,0 +1,164 @@
+---
+layout: base.njk
+title: 'Paysage & Nature — Workflow'
+permalink: '/modules/workflow-paysage/'
+---
+
+<a class="wf-back" href="{{ '/modules/workflows/' | url }}">← Workflows par genre</a>
+
+<div class="module-header">
+  <div class="module-tag"><div class="tag-dot" style="background:#34d399"></div><span style="color:#34d399">Paysage & Nature</span></div>
+  <h2>Paysage & Nature</h2>
+  <div class="subtitle">Gérer la dynamique extrême sans trahir la matière du terrain</div>
+</div>
+
+<div class="blockquote">
+  <strong>L'enjeu central :</strong> gérer une plage dynamique souvent extrême — ciel surexposé, ombres bouchées — tout en restituant l'ambiance et la matière que tu as perçues sur le terrain.
+</div>
+
+<div class="toc">
+  <div class="toc-title">Sommaire</div>
+  <ol>
+    <li><a href="#specificite">Ce qui rend le paysage spécifique</a></li>
+    <li><a href="#problemes">Problèmes typiques &amp; solutions dans ART</a></li>
+    <li><a href="#modules-cles">Les modules-clés</a></li>
+    <li><a href="#logique">Logique de développement</a></li>
+    <li><a href="#attention">Points d'attention</a></li>
+  </ol>
+</div>
+
+<div class="editorial">
+
+<h3 class="section-title" id="specificite">Ce qui rend le paysage spécifique</h3>
+
+<p>Une scène de paysage classique présente deux problèmes fondamentaux que les appareils photo amplifient et que l'œil humain corrige naturellement :</p>
+
+<ul>
+  <li><strong>L'écart de luminosité ciel/sol</strong> : le ciel peut être 4 à 6 IL plus lumineux que le premier plan. Le capteur, lui, choisit l'un ou l'autre — rarement les deux.</li>
+  <li><strong>La richesse chromatique</strong> : végétation, eau, ciel, lumière chaude — chaque couleur mérite un traitement ciblé, pas un curseur de saturation global.</li>
+</ul>
+
+<p>À cela s'ajoute une exigence de <strong>texture et de détail</strong> que le genre impose : les rochers, l'écorce, l'eau, les nuages doivent avoir de la matière. Le paysage ne pardonne pas un développement mou.</p>
+
+<h3 class="section-title" id="problemes">Problèmes typiques &amp; solutions dans ART</h3>
+
+<div class="wf-problem">
+  <div class="wf-problem-title">Mon ciel est cramé mais le sol est correct</div>
+  <div class="wf-problem-body">
+    <p>C'est le cas le plus fréquent en plein soleil ou contre-jour.</p>
+    <div class="wf-solution">
+      <div class="wf-solution-label">Dans ART</div>
+      <p>C'est la situation idéale pour le <strong>Log Tone Mapping</strong>. Active-le et clique sur "Automatique" — ART va analyser la dynamique et comprimer intelligemment le ciel sans toucher aux ombres de façon agressive. Ensuite affine <code>Blanc EV</code> (abaisse) pour récupérer le ciel, et <code>Noir EV</code> (remonte légèrement) pour ne pas boucher le premier plan.</p>
+    </div>
+  </div>
+</div>
+
+<div class="insight">
+  <div class="insight-label">Clé de lecture</div>
+  <p>Si les deux bords de ton histogramme sont collés ou dépassent, le Log Tone Mapping est la bonne réponse. Si seul le ciel est problématique, l'Égaliseur Tonal avec le curseur Hautes Lumières peut suffire.</p>
+</div>
+
+<div class="wf-problem">
+  <div class="wf-problem-title">L'image est plate, sans profondeur</div>
+  <div class="wf-problem-body">
+    <p>Le RAW brut manque toujours de contraste. La tentation est de pousser le curseur Contraste global — mauvaise idée, il va boucher les ombres simultanément.</p>
+    <div class="wf-solution">
+      <div class="wf-solution-label">Dans ART</div>
+      <p>Utilise la <strong>Courbe Tonale</strong> plutôt que le contraste global. Une courbe en S légère — relève légèrement les tons clairs, abaisse légèrement les tons sombres — crée de la profondeur sans écrêter. Le <strong>Contraste Local</strong> ajoute ensuite de la "présence" aux textures sans toucher à la dynamique globale.</p>
+    </div>
+  </div>
+</div>
+
+<div class="wf-problem">
+  <div class="wf-problem-title">Mes verts sont faux / trop jaunes / pas naturels</div>
+  <div class="wf-problem-body">
+    <p>Le capteur interprète la végétation à sa façon, souvent jaunâtre. La saturation globale aggrave le problème.</p>
+    <div class="wf-solution">
+      <div class="wf-solution-label">Dans ART — Égaliseur de Couleurs (HSL)</div>
+      <p>Travaille les canaux Vert et Jaune séparément :</p>
+      <ul>
+        <li><strong>Teinte</strong> : décale le Vert légèrement vers le cyan pour plus de naturel, ou vers le jaune pour un aspect plus chaud (automne).</li>
+        <li><strong>Saturation</strong> : augmente modérément le Vert, désature légèrement le Jaune pour éviter l'effet "verdure de plastique".</li>
+        <li><strong>Luminance</strong> : monte la luminance du Vert pour des végétations ensoleillées, baisse-la pour des forêts denses et sombres.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="wf-problem">
+  <div class="wf-problem-title">Mon ciel bleu sature ou vire au violet</div>
+  <div class="wf-problem-body">
+    <p>La saturation des bleus est très sensible — un curseur global dérape vite.</p>
+    <div class="wf-solution">
+      <div class="wf-solution-label">Dans ART — HSL</div>
+      <p>Baisse la saturation du Bleu de quelques points, et contrôle la Teinte — souvent un décalage vers le cyan rend le ciel plus naturel. Si la luminance du ciel est trop forte, baisse-la aussi pour donner de la profondeur.</p>
+    </div>
+  </div>
+</div>
+
+<div class="wf-problem">
+  <div class="wf-problem-title">La photo manque de matière, de texture</div>
+  <div class="wf-problem-body">
+    <p>Un paysage de rochers ou d'écorce doit donner l'impression qu'on peut toucher la surface.</p>
+    <div class="wf-solution">
+      <div class="wf-solution-label">Dans ART</div>
+      <p>Le module <strong>Amplification Texture</strong> est fait pour ça. Applique une valeur modérée (0.2 à 0.35) — au-delà, les textures deviennent artificielles. Combine avec le <strong>Contraste Local</strong> pour accentuer les microcontrastes sans sur-accentuer les bords.</p>
+    </div>
+    <div class="blockquote" style="margin-top:12px;">
+      <strong>Ordre impératif :</strong> Texture et Contraste Local toujours en dernier, après avoir stabilisé la tonalité et la couleur. Si tu les appliques tôt, tu devras tout recommencer.
+    </div>
+  </div>
+</div>
+
+<h3 class="section-title" id="modules-cles">Les modules-clés pour le paysage</h3>
+
+<table>
+  <tr><th>Rôle</th><th>Module</th><th>Note</th></tr>
+  <tr><td>Gérer la dynamique</td><td>Log Tone Mapping ⭐</td><td>Incontournable dès que le contraste ciel/sol est fort</td></tr>
+  <tr><td>Sculpter la lumière</td><td>Égaliseur Tonal</td><td>Contrôle fin ombres / HLs sans le Log</td></tr>
+  <tr><td>Donner du contraste</td><td>Courbes Tonales</td><td>Courbe en S — plus propre que le curseur Contraste</td></tr>
+  <tr><td>Cibler les couleurs</td><td>Égaliseur HSL</td><td>Verts, bleus, jaunes — chacun selon le terrain</td></tr>
+  <tr><td>Color grading</td><td>Correction Couleurs</td><td>Ombres teal, HLs chaudes — look cinématique</td></tr>
+  <tr><td>Texture &amp; matière</td><td>Amplification Texture + Contraste Local</td><td>En dernier, dosé</td></tr>
+</table>
+
+<h3 class="section-title" id="logique">Logique de développement paysage dans ART</h3>
+
+<div class="wf-steps">
+  <div class="wf-steps-label">Ordre de traitement recommandé</div>
+  <pre>1. Balance des Blancs
+   → Fixe l'ambiance thermique : froid (bleu) ou chaud (orange/doré)
+   → Ne pas neutraliser systématiquement — la lumière du coucher de soleil est chaude par nature
+
+2. Log Tone Mapping (si plage dynamique large)
+   → Automatique d'abord, puis affiner Blanc EV / Noir EV
+
+3. Exposition + Égaliseur Tonal
+   → Exposition globale, puis sculpting ombres / HLs
+
+4. Courbes Tonales
+   → S-curve légère pour le "peps"
+
+5. HSL — couleur par couleur
+   → Verts, Bleus, Jaunes, Cyans selon le terrain
+
+6. Correction Couleurs (Color Wheels)
+   → Ombres vers teal/bleu froid, HLs légèrement chaudes — le classique paysage contrasté
+
+7. Texture + Contraste Local
+   → En dernier, 0.2–0.35 max</pre>
+</div>
+
+<h3 class="section-title" id="attention">Points d'attention spécifiques au paysage</h3>
+
+<div class="blockquote">
+  <strong>La balance des blancs n'est pas toujours une "correction" :</strong> une photo prise au coucher de soleil a une température chaude — 4500–5500K. Si tu neutralises tout vers 6500K, tu perds ce qui faisait la photo. La question : cette chaleur était-elle là ? Était-elle l'intention ? Si oui, garde-la, voire renforce-la légèrement.
+</div>
+
+<p><strong>Le bruit dans les ombres des paysages de nuit :</strong> en paysage de nuit ou de faible lumière, les ombres sont bruyantes. La réduction de bruit doit être dosée — trop agressive, elle détruit les textures de terrain. Préfère un lissage modéré qui préserve le grain, qui participe à l'ambiance.</p>
+
+<div class="blockquote">
+  <strong>L'élimination de brume — un outil à double tranchant :</strong> le module peut donner de la clarté à une photo brumeuse. Mais utilisé trop fort, il crée des halos et des couleurs artificielles. À utiliser avec parcimonie, rarement au-delà de 0.3.
+</div>
+
+</div>

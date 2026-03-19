@@ -1,0 +1,203 @@
+---
+layout: base.njk
+title: 'Reportage & Street — Workflow'
+permalink: '/modules/workflow-reportage/'
+---
+
+<a class="wf-back" href="{{ '/modules/workflows/' | url }}">← Workflows par genre</a>
+
+<div class="module-header">
+  <div class="module-tag"><div class="tag-dot" style="background:#94a3b8"></div><span style="color:#94a3b8">Reportage & Street</span></div>
+  <h2>Reportage & Street</h2>
+  <div class="subtitle">Préserver l'authenticité du moment, rendre l'image lisible et impactante</div>
+</div>
+
+<div class="blockquote">
+  <strong>L'enjeu central :</strong> la photo a été prise vite, souvent dans des conditions imparfaites. Le développement doit <strong>préserver l'authenticité du moment</strong> tout en rendant l'image lisible et impactante. Ce n'est pas le genre du color grading élaboré.
+</div>
+
+<div class="toc">
+  <div class="toc-title">Sommaire</div>
+  <ol>
+    <li><a href="#specificite">Ce qui rend le reportage spécifique</a></li>
+    <li><a href="#nb">La question du noir &amp; blanc</a></li>
+    <li><a href="#problemes">Problèmes typiques &amp; solutions dans ART</a></li>
+    <li><a href="#modules-cles">Les modules-clés</a></li>
+    <li><a href="#logique">Logique de développement</a></li>
+    <li><a href="#ethique">L'éthique de la retouche en reportage</a></li>
+    <li><a href="#attention">Points d'attention</a></li>
+  </ol>
+</div>
+
+<div class="editorial">
+
+<h3 class="section-title" id="specificite">Ce qui rend le reportage &amp; le street spécifiques</h3>
+
+<p>Le reportage et la photographie de rue partagent une contrainte que les autres genres n'ont pas : <strong>l'image ne peut pas être refaite</strong>. La lumière était ce qu'elle était. L'instant est passé. Le développement ne cherche pas à transformer — il cherche à <strong>révéler ce qui était là</strong>.</p>
+
+<ul>
+  <li><strong>Rapidité</strong> : les paramètres doivent être efficaces, pas élaborés. Un profil de base bien construit vaut mieux que deux heures de color grading.</li>
+  <li><strong>Authenticité</strong> : les tons doivent rester crédibles. Une photo de rue avec un color grading cinématique trop visible perd sa valeur documentaire.</li>
+  <li><strong>Adaptabilité</strong> : chaque image peut avoir des conditions lumineuses radicalement différentes. Pas de preset universel possible — mais des réflexes clairs.</li>
+</ul>
+
+<h3 class="section-title" id="nb">La question du noir &amp; blanc en reportage</h3>
+
+<p>Le noir et blanc n'est pas une option parmi d'autres en reportage — c'est souvent <strong>le choix qui libère l'image de ses contraintes</strong>. Une lumière fluorescente verdâtre, un fond trop coloré, une balance des blancs incohérente d'une image à l'autre : le passage en N&B résout tout ça d'un coup, et concentre le regard sur la lumière, le contraste et le sujet.</p>
+
+<p><strong>Quand passer en N&B :</strong></p>
+<ul>
+  <li>Lumière artificielle mixte difficile à corriger</li>
+  <li>Images à fort contraste naturel (ruelle en plein soleil, contre-jour en ville)</li>
+  <li>Séries où la cohérence colorimétrique est impossible (intérieur/extérieur alternés)</li>
+  <li>Quand l'émotion prime sur la couleur</li>
+</ul>
+
+<div class="insight">
+  <div class="insight-label">Dans ART pour le N&amp;B</div>
+  <p>Utilise le <strong>Mélange des Canaux</strong> ou l'<strong>HSL en désaturant tout</strong> — mais le Mélange des Canaux donne plus de contrôle sur les valeurs tonales de chaque couleur d'origine (les bleus du ciel, les rouges d'un vêtement, etc.).</p>
+</div>
+
+<h3 class="section-title" id="problemes">Problèmes typiques &amp; solutions dans ART</h3>
+
+<div class="wf-problem">
+  <div class="wf-problem-title">La photo est sous-exposée — prise à la volée sans temps de régler</div>
+  <div class="wf-problem-body">
+    <p>Le cas classique du reportage : l'instant saisi, la lumière pas tout à fait au rendez-vous.</p>
+    <div class="wf-solution">
+      <div class="wf-solution-label">Dans ART</div>
+      <p>L'<strong>Exposition</strong> d'abord, puis l'<strong>Égaliseur Tonal</strong> pour déboucher les ombres. En RAW, tu peux récupérer 2 à 3 IL sans dommages si le fichier est bien exposé à la prise de vue. Au-delà, le bruit dans les ombres devient problématique — c'est là que le <strong>Lissage (NR)</strong> intervient, mais avec parcimonie pour ne pas détruire la texture.</p>
+    </div>
+    <div class="blockquote" style="margin-top:12px;">
+      En reportage, le grain assumé est souvent préférable à un lissage agressif. Un bruit visible dans les ombres participe à l'ambiance documentaire.
+    </div>
+  </div>
+</div>
+
+<div class="wf-problem">
+  <div class="wf-problem-title">La lumière artificielle donne une dominante verte ou orange</div>
+  <div class="wf-problem-body">
+    <p>Néons verdâtres, halogènes orangés, mixité lumière naturelle / artificielle dans un même cadre — c'est le cauchemar colorimétrique du street.</p>
+    <div class="wf-solution">
+      <div class="wf-solution-label">Dans ART — deux options</div>
+      <p><strong>Option 1 — Corriger en couleur :</strong> Balance des Blancs + curseur Teinte pour neutraliser la dominante. Puis HSL pour affiner canal par canal.</p>
+      <p><strong>Option 2 — Passer en N&B :</strong> souvent plus rapide et plus efficace quand la correction couleur est trop complexe ou artificielle.</p>
+      <p>La dominante fluorescente (vert/magenta) se corrige avec le <strong>curseur Teinte</strong> de la Balance des Blancs, pas la Température — c'est une distinction importante souvent ratée.</p>
+    </div>
+  </div>
+</div>
+
+<div class="wf-problem">
+  <div class="wf-problem-title">Le contraste est mou — la photo manque de punch</div>
+  <div class="wf-problem-body">
+    <p>Photos prises par temps couvert, dans des conditions de lumière plate.</p>
+    <div class="wf-solution">
+      <div class="wf-solution-label">Dans ART</div>
+      <p>La <strong>Courbe Tonale</strong> avec une S-curve plus marquée que pour le portrait. En reportage, des noirs profonds sont acceptables, voire souhaitables — ils donnent du poids à l'image. L'<strong>Égaliseur Tonal</strong> peut ensuite récupérer localement si certaines ombres s'écrasent trop.</p>
+      <p>En N&B, le contraste est encore plus libre — tu peux aller chercher des noirs très profonds et des blancs très clairs (style photo de presse classique).</p>
+    </div>
+  </div>
+</div>
+
+<div class="wf-problem">
+  <div class="wf-problem-title">L'image est bruyante — ISO élevé en intérieur ou nuit</div>
+  <div class="wf-problem-body">
+    <div class="wf-solution">
+      <div class="wf-solution-label">Dans ART — Lissage (NR)</div>
+      <p>Le Lissage dans ART gère le bruit luminance et couleur séparément. En reportage :</p>
+      <ul>
+        <li><strong>Bruit de chrominance</strong> (taches colorées) : à éliminer — il est disgracieux et ne participe pas à l'ambiance.</li>
+        <li><strong>Bruit de luminance</strong> (grain) : à doser selon l'intention. Un grain homogène peut rester, voire être valorisé.</li>
+      </ul>
+      <p>Évite le mode de lissage le plus agressif — préfère un mode modéré qui réduit le bruit coloré en préservant le grain lumineux.</p>
+    </div>
+  </div>
+</div>
+
+<div class="wf-problem">
+  <div class="wf-problem-title">Les images d'une même série ont des couleurs incohérentes</div>
+  <div class="wf-problem-body">
+    <p>Immanquable en reportage : tu passes d'un intérieur éclairé aux néons à la rue en plein soleil, et ta série ressemble à un patchwork.</p>
+    <div class="wf-solution">
+      <div class="wf-solution-label">Trois stratégies</div>
+      <p><strong>1 — Corriger image par image</strong> pour restituer fidèlement chaque condition lumineuse — c'est le travail documentaire pur.</p>
+      <p><strong>2 — Unifier en N&B</strong> — la série gagne en cohérence sans que tu aies à gérer chaque balance des blancs.</p>
+      <p><strong>3 — Color grading neutre commun</strong> : dans les Color Wheels, applique un léger "filtre" identique sur toutes les images (légère désaturation, ombres légèrement froides) — tu crées une signature visuelle discrète qui unifie la série sans dénaturer les couleurs.</p>
+    </div>
+  </div>
+</div>
+
+<h3 class="section-title" id="modules-cles">Les modules-clés pour le reportage</h3>
+
+<table>
+  <tr><th>Rôle</th><th>Module</th><th>Pourquoi</th></tr>
+  <tr><td>Récupération exposition</td><td>Exposition + Égaliseur Tonal</td><td>Rattrapage des images prises vite</td></tr>
+  <tr><td>Gestion dynamique</td><td>Égaliseur Tonal seul (sans Log)</td><td>Le Log est souvent excessif pour le reportage</td></tr>
+  <tr><td>Contraste documentaire</td><td>Courbes Tonales</td><td>S-curve plus marquée, noirs profonds acceptés</td></tr>
+  <tr><td>Dominantes couleur</td><td>Balance des Blancs (Teinte ++)</td><td>Le curseur Teinte corrige le vert des néons</td></tr>
+  <tr><td>N&amp;B</td><td>Mélange des Canaux</td><td>Contrôle tonal par couleur d'origine</td></tr>
+  <tr><td>Bruit ISO élevé</td><td>Lissage (NR)</td><td>Chrominance à éliminer, luminance à doser</td></tr>
+  <tr><td>Cohérence série</td><td>Profils .arp + Color Wheels neutres</td><td>Unifier sans uniformiser</td></tr>
+</table>
+
+<h3 class="section-title" id="logique">Logique de développement reportage dans ART</h3>
+
+<div class="wf-steps">
+  <div class="wf-steps-label">Ordre de traitement recommandé</div>
+  <pre>1. Triage d'abord — décide du traitement
+   → Couleur ou N&B ? Cette décision change tout le reste.
+   → Si lumière impossible → N&B
+   → Si couleur pertinente au propos → couleur
+
+2. Balance des Blancs
+   → Pour le couleur : corrige la dominante principale
+   → Attention au curseur Teinte pour les dominantes vertes (néons)
+   → Pour le N&B : moins critique — mais corrige quand même avant conversion
+
+3. Exposition + Égaliseur Tonal
+   → Remonte les ombres pour déboucher les zones sombres
+   → Acceptable de laisser des noirs profonds — c'est le reportage, pas le portrait
+
+4. Courbes Tonales
+   → S-curve plus marquée que pour le portrait
+   → Noirs assumés : le point bas de la S peut descendre plus
+
+5. HSL (si couleur)
+   → Correction ciblée des dominantes résiduelles
+   → Pas de color grading visible — rester dans le documentaire
+
+6. Lissage (NR)
+   → Chrominance : réduis
+   → Luminance : laisse si le grain est cohérent avec l'ambiance
+
+7. Si N&B → Mélange des Canaux
+   → Bleus : baisse légèrement pour assombrir le ciel et les ombres
+   → Rouges/Oranges : monte pour éclaircir les peaux
+   → Verts : ajuste selon la présence de végétation dans le cadre</pre>
+</div>
+
+<h3 class="section-title" id="ethique">L'éthique de la retouche en reportage</h3>
+
+<p>Le reportage et le photojournalisme ont une déontologie propre. Les agences (AFP, Reuters, Magnum) interdisent explicitement :</p>
+<ul>
+  <li>L'ajout ou la suppression d'éléments dans le cadre</li>
+  <li>La modification dramatique des couleurs et de l'exposition qui trahit la réalité de la scène</li>
+</ul>
+
+<p>Ce qui est admis : corrections d'exposition, balance des blancs, contraste — dans des limites qui ne trompent pas sur la réalité du moment.</p>
+
+<div class="blockquote">
+  <strong>Dans ART :</strong> reste dans le domaine de ce qu'on ferait en chambre noire argentique. Dodge &amp; burn modéré, contraste raisonnable, couleurs plausibles. Si une image a besoin d'un traitement radical pour "fonctionner", la question à se poser est peut-être si elle doit être publiée.
+</div>
+
+<h3 class="section-title" id="attention">Points d'attention spécifiques au reportage</h3>
+
+<p><strong>La rapidité du workflow :</strong> en reportage, tu traites parfois des dizaines ou centaines d'images. Construis un <strong>profil de base <code>.arp</code></strong> calibré pour tes conditions habituelles (intérieur jour, extérieur ensoleillé, nuit urbaine) et applique-le en batch. Tu n'ajustes manuellement que les images qui en ont vraiment besoin.</p>
+
+<div class="blockquote">
+  <strong>Le grain comme signature :</strong> des photographes comme Magnum ont fait du grain assumé une signature identitaire. En reportage avec des ISOs élevés, considère de ne pas trop lisser — voire d'ajouter un léger grain homogène pour unifier les images d'une série prises à des ISOs différents.
+</div>
+
+<p><strong>Le vignetage naturel :</strong> un léger vignetage (assombrissement des bords) concentre le regard sur le sujet et donne une ambiance "urgente" au reportage. Si ton objectif en crée naturellement, préserve-le plutôt que de le corriger.</p>
+
+</div>

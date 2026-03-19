@@ -1,0 +1,176 @@
+---
+layout: base.njk
+title: 'Portrait — Workflow'
+permalink: '/modules/workflow-portrait/'
+---
+
+<a class="wf-back" href="{{ '/modules/workflows/' | url }}">← Workflows par genre</a>
+
+<div class="module-header">
+  <div class="module-tag"><div class="tag-dot" style="background:#f97316"></div><span style="color:#f97316">Portrait</span></div>
+  <h2>Portrait</h2>
+  <div class="subtitle">La justesse des tons chair avant tout le reste</div>
+</div>
+
+<div class="blockquote">
+  <strong>L'enjeu central :</strong> tout tourne autour des tons chair. Une balance des blancs légèrement fausse, une saturation trop poussée, un contraste trop agressif — et le visage sonne faux. Le reste peut être imparfait. La peau, non.
+</div>
+
+<div class="toc">
+  <div class="toc-title">Sommaire</div>
+  <ol>
+    <li><a href="#specificite">Ce qui rend le portrait spécifique</a></li>
+    <li><a href="#problemes">Problèmes typiques &amp; solutions dans ART</a></li>
+    <li><a href="#modules-cles">Les modules-clés</a></li>
+    <li><a href="#logique">Logique de développement</a></li>
+    <li><a href="#art-vs-affinity">Ce que ART fait — et ce qu'on laisse à Affinity</a></li>
+    <li><a href="#attention">Points d'attention</a></li>
+  </ol>
+</div>
+
+<div class="editorial">
+
+<h3 class="section-title" id="specificite">Ce qui rend le portrait spécifique</h3>
+
+<p>Le portrait est le genre où le spectateur détecte immédiatement quelque chose de "non naturel" — parce que son cerveau reconnaît les visages mieux que tout autre sujet. Un ciel sur-saturé passe inaperçu. Une peau orange ou trop lisse, non.</p>
+
+<p>Trois impératifs gouvernent le développement portrait dans ART :</p>
+<ul>
+  <li><strong>La justesse des tons chair avant tout</strong> — elle passe par la balance des blancs et le HSL (canaux Rouge et Orange)</li>
+  <li><strong>Un contraste doux</strong> — le visage a des volumes qui ne supportent pas une courbe en S agressive</li>
+  <li><strong>La texture de peau préservée</strong> — le lissage doit être minimal en développement RAW ; la retouche locale de peau fine se fait dans Affinity</li>
+</ul>
+
+<h3 class="section-title" id="problemes">Problèmes typiques &amp; solutions dans ART</h3>
+
+<div class="wf-problem">
+  <div class="wf-problem-title">La peau est trop orange / trop rouge</div>
+  <div class="wf-problem-body">
+    <p>C'est le problème le plus courant, souvent causé par une balance des blancs trop chaude ou une saturation globale trop poussée.</p>
+    <div class="wf-solution">
+      <div class="wf-solution-label">Dans ART — Égaliseur HSL</div>
+      <p>Baisse la saturation du canal <strong>Orange</strong> de quelques points (les tons chair sont majoritairement orange-rouge). Ne descends pas trop bas — la peau doit garder sa chaleur. Teste aussi la <strong>Luminance Orange</strong> : l'augmenter légèrement donne de la luminosité au visage sans ajouter de rouge.</p>
+      <p>Si le problème vient de la balance des blancs, recule la Température de 100 à 200K — souvent suffisant.</p>
+    </div>
+    <div class="insight" style="margin-top:12px;">
+      <div class="insight-label">Règle pratique</div>
+      <p>En portrait, la balance des blancs pilote les tons chair. Règle-la d'abord, avant de toucher à la saturation ou à l'HSL.</p>
+    </div>
+  </div>
+</div>
+
+<div class="wf-problem">
+  <div class="wf-problem-title">La peau a l'air terne, sans éclat</div>
+  <div class="wf-problem-body">
+    <p>À l'inverse, une peau sous-exposée ou trop froide semble fatiguée.</p>
+    <div class="wf-solution">
+      <div class="wf-solution-label">Dans ART</div>
+      <p>Légère augmentation de la <strong>Luminance Orange</strong> dans l'HSL — c'est plus subtil que de monter l'exposition globale, et ça cible directement la peau. Ajoute un léger réchauffement de la balance des blancs si la lumière était froide (extérieur ombragé, lumière du nord). Dans les <strong>Color Wheels</strong>, une micro-rotation vers l'orange dans les tons moyens peut suffire.</p>
+    </div>
+  </div>
+</div>
+
+<div class="wf-problem">
+  <div class="wf-problem-title">Le contraste écrase le visage</div>
+  <div class="wf-problem-body">
+    <p>Un contraste global trop fort crée des ombres dures qui durcissent les traits. Le portrait demande un contraste "enveloppant", pas agressif.</p>
+    <div class="wf-solution">
+      <div class="wf-solution-label">Dans ART</div>
+      <p>Évite le curseur Contraste global. Utilise plutôt :</p>
+      <ul>
+        <li>Une <strong>Courbe Tonale</strong> légère : soulève juste un peu les ombres (le point bas de la S-curve reste au-dessus du coin inférieur gauche) — ça "ouvre" les ombres du visage.</li>
+        <li>L'<strong>Égaliseur Tonal</strong> : monte les ombres et les noirs légèrement pour déboucher les zones sombres du visage sans toucher aux hautes lumières.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="wf-problem">
+  <div class="wf-problem-title">Les yeux manquent de présence</div>
+  <div class="wf-problem-body">
+    <p>Les yeux sont le point d'accroche du portrait. S'ils sont ternes, la photo l'est aussi.</p>
+    <div class="wf-solution">
+      <div class="wf-solution-label">Dans ART</div>
+      <p>Difficile à faire de façon précise en développement global — mais tu peux jouer sur le <strong>Contraste Local</strong> pour accentuer les microcontrastes généraux, ce qui bénéficie souvent aux yeux. La retouche locale précise des yeux (éclaircissement, renforcement du regard) est mieux faite dans Affinity après export TIFF.</p>
+    </div>
+  </div>
+</div>
+
+<div class="wf-problem">
+  <div class="wf-problem-title">Le fond est trop présent, le sujet pas assez mis en valeur</div>
+  <div class="wf-problem-body">
+    <p>Le sujet doit être légèrement plus lumineux que le fond si possible.</p>
+    <div class="wf-solution">
+      <div class="wf-solution-label">Dans ART</div>
+      <p>Vérifie l'<strong>Exposition</strong> et l'<strong>Égaliseur Tonal</strong>. Si le fond est problématique (trop saturé, mauvaise couleur), l'HSL te permettra de désaturer spécifiquement sa couleur dominante sans toucher à la peau.</p>
+    </div>
+  </div>
+</div>
+
+<h3 class="section-title" id="modules-cles">Les modules-clés pour le portrait</h3>
+
+<table>
+  <tr><th>Rôle</th><th>Module</th><th>Pourquoi</th></tr>
+  <tr><td>Base des tons chair</td><td>Balance des Blancs</td><td>Réglage n°1 — tout part de là</td></tr>
+  <tr><td>Affinage des tons chair</td><td>HSL — Orange &amp; Rouge</td><td>Saturation et luminance ciblées sur la peau</td></tr>
+  <tr><td>Contraste enveloppant</td><td>Courbes Tonales</td><td>S-curve douce avec ombres relevées</td></tr>
+  <tr><td>Ouverture des ombres</td><td>Égaliseur Tonal</td><td>Déboucher sans brutalité</td></tr>
+  <tr><td>Color grading</td><td>Correction Couleurs (Color Wheels)</td><td>Tons moyens légèrement chauds, ombres légèrement froides</td></tr>
+  <tr><td>Texture peau</td><td>Lissage (NR)</td><td>Minimal — juste pour le bruit, pas pour lisser la peau</td></tr>
+</table>
+
+<h3 class="section-title" id="logique">Logique de développement portrait dans ART</h3>
+
+<div class="wf-steps">
+  <div class="wf-steps-label">Ordre de traitement recommandé</div>
+  <pre>1. Balance des Blancs
+   → C'est le réglage le plus important en portrait
+   → Cherche le point neutre, puis ajuste légèrement selon l'ambiance lumineuse
+   → Lumière chaude (studio, coucher de soleil) : 5000–5800K
+   → Lumière froide (extérieur ombragé, flash) : 6000–6500K puis corriger teinte si besoin
+
+2. Exposition + Égaliseur Tonal
+   → Exposition globale pour placer le visage
+   → Ombres : monte légèrement pour déboucher les zones sombres du visage
+   → HLs : baisse légèrement si la peau est un peu surexposée
+
+3. Courbes Tonales
+   → S-curve TRÈS douce
+   → Point bas (ombres) légèrement relevé — évite les noirs trop profonds sur le visage
+
+4. HSL — Orange et Rouge en priorité
+   → Orange : le canal des tons chair
+   → Saturation Orange : ajuste jusqu'à ce que la peau soit naturelle
+   → Luminance Orange : monte légèrement pour de l'éclat, baisse pour un rendu plus mat
+
+5. Correction Couleurs (Color Wheels)
+   → Tons moyens : légère rotation vers l'orange-chaud
+   → Ombres : légère rotation vers le bleu/violet froid — crée un beau contraste chaud/froid
+
+6. Lissage (NR) — minimal
+   → Seulement pour réduire le bruit visible
+   → Ne pas utiliser pour lisser la peau — c'est le travail d'Affinity</pre>
+</div>
+
+<h3 class="section-title" id="art-vs-affinity">Ce que ART fait — et ce qu'on laisse à Affinity</h3>
+
+<div class="insight">
+  <div class="insight-label">Principe de séparation</div>
+  <p><strong>Dans ART (développement global) :</strong> balance des blancs et tons chair, dynamique et contraste général, color grading de l'ambiance, réduction de bruit modérée.</p>
+  <p style="margin-top:8px;"><strong>Dans Affinity (après export TIFF) :</strong> correction d'imperfections locales, affinement des yeux et du regard, retouche de peau fine si nécessaire, ajustements locaux par zone.</p>
+  <p style="margin-top:8px;">ART pose l'ambiance et corrige les tons chair globalement. Affinity finalise les détails locaux. Ne cherche pas à tout faire dans ART.</p>
+</div>
+
+<h3 class="section-title" id="attention">Points d'attention spécifiques au portrait</h3>
+
+<div class="blockquote">
+  <strong>La netteté en portrait :</strong> le module Amplification Texture est à utiliser avec précaution sur les portraits — accentuer les textures sur un visage peut révéler des imperfections indésirables. Si tu l'utilises, garde des valeurs très basses (0.10–0.15 max).
+</div>
+
+<p><strong>Peaux foncées et balance des blancs :</strong> les peaux foncées sont plus sensibles aux déséquilibres de balance des blancs. Un excès de magenta ou de vert est plus visible que sur les peaux claires. L'outil pipette sur une surface neutre dans le cadre (tissu gris, mur blanc) reste la méthode la plus fiable.</p>
+
+<div class="blockquote">
+  <strong>La cohérence dans une série :</strong> en portrait de studio ou de reportage, la lumière ne change pas d'une image à l'autre. Une fois ta balance des blancs et tes réglages HSL calés sur une image de référence, copie le profil <code>.arp</code> sur les autres — tu gagnes un temps considérable et tu garantis la cohérence de série.
+</div>
+
+</div>

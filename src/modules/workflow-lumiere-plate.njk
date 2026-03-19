@@ -1,0 +1,212 @@
+---
+layout: base.njk
+title: 'Lumière Plate & Faible Contraste — Workflow'
+permalink: '/modules/workflow-lumiere-plate/'
+---
+
+<a class="wf-back" href="{{ '/modules/workflows/' | url }}">← Workflows par genre</a>
+
+<div class="module-header">
+  <div class="module-tag"><div class="tag-dot" style="background:#60a5fa"></div><span style="color:#60a5fa">Lumière Plate</span></div>
+  <h2>Lumière Plate &amp; Faible Contraste</h2>
+  <div class="subtitle">Construire ce que la lumière n'a pas fourni, sans rendre le rendu artificiel</div>
+</div>
+
+<div class="blockquote">
+  <strong>L'enjeu central :</strong> la scène a été photographiée dans une lumière douce, diffuse, sans direction marquée. Le RAW est bien exposé, il n'y a pas de problème technique — mais l'image est molle, sans présence, sans profondeur. Le développement doit <strong>construire ce que la lumière n'a pas fourni</strong>, sans rendre le rendu artificiel.
+</div>
+
+<div class="toc">
+  <div class="toc-title">Sommaire</div>
+  <ol>
+    <li><a href="#specificite">Comprendre ce type d'image</a></li>
+    <li><a href="#difference">La différence avec une photo sombre</a></li>
+    <li><a href="#problemes">Problèmes typiques &amp; solutions dans ART</a></li>
+    <li><a href="#ressource">La lumière plate comme ressource</a></li>
+    <li><a href="#modules-cles">Les modules-clés</a></li>
+    <li><a href="#logique">Logique de développement</a></li>
+  </ol>
+</div>
+
+<div class="editorial">
+
+<h3 class="section-title" id="specificite">Comprendre ce type d'image</h3>
+
+<p>La lumière plate n'est pas un échec — c'est une condition lumineuse avec ses propres qualités et ses propres contraintes. Elle se produit dans plusieurs contextes :</p>
+
+<ul>
+  <li><strong>Temps couvert / ciel voilé</strong> : lumière filtrée par les nuages, pas d'ombres directionnelles, contraste naturel faible, couleurs douces. L'histogramme est concentré au centre, sans pics aux extrêmes.</li>
+  <li><strong>Intérieur diffus</strong> : lumière de fenêtre sans soleil direct, éclairage artificiel homogène. Le sujet est bien éclairé mais "plat" — aucun volume n'est sculpté par la lumière.</li>
+  <li><strong>Brume légère ou atmosphère brumeuse</strong> : la diffusion atmosphérique réduit le contraste en profondeur — les plans éloignés s'éclaircissent et perdent de la saturation.</li>
+</ul>
+
+<p><strong>Ce que ces situations ont en commun :</strong></p>
+<ul>
+  <li>Histogramme centré, ne touchant pas les bords</li>
+  <li>Peu de noirs profonds, peu de hautes lumières franches</li>
+  <li>Image "molle" — elle manque de punch sans être techniquement incorrecte</li>
+  <li>Pas de problème de bruit ou de dynamique excessive</li>
+</ul>
+
+<h3 class="section-title" id="difference">La différence avec une photo sombre</h3>
+
+<p>La photo sombre (faible lumière, ISO élevé, nuit) a un problème de bruit et de récupération d'exposition. La photo à lumière plate n'a pas ces problèmes — <strong>elle est bien exposée</strong>. Ce n'est pas la même chose.</p>
+
+<table>
+  <tr><th></th><th>Lumière plate</th><th>Photo sombre / faible lumière</th></tr>
+  <tr><td>Exposition</td><td>Correcte</td><td>Sous-exposée ou limite</td></tr>
+  <tr><td>Bruit</td><td>Faible ou absent</td><td>Élevé</td></tr>
+  <tr><td>Histogramme</td><td>Centré, étroit</td><td>Décalé à gauche</td></tr>
+  <tr><td>Problème</td><td>Manque de punch</td><td>Bruit + récupération</td></tr>
+  <tr><td>Solution</td><td>Construire le contraste</td><td>Gérer le bruit + exposition</td></tr>
+</table>
+
+<h3 class="section-title" id="problemes">Problèmes typiques &amp; solutions dans ART</h3>
+
+<div class="wf-problem">
+  <div class="wf-problem-title">L'image est molle — elle manque de punch sans raison technique</div>
+  <div class="wf-problem-body">
+    <p>C'est le symptôme central. L'histogramme est correct, les couleurs semblent bonnes, mais l'image n'a aucune présence.</p>
+    <div class="wf-solution">
+      <div class="wf-solution-label">Dans ART — Courbe Tonale (pièce centrale)</div>
+      <p>Sur une image à lumière plate, l'histogramme est concentré au centre — il faut "étaler" la dynamique.</p>
+      <p><strong>Approche naturelle :</strong> S-curve douce qui éclaircit légèrement les tons clairs et assombrit légèrement les tons sombres. L'image gagne en profondeur sans paraître traitée.</p>
+      <p><strong>Approche affirmée :</strong> le point noir de la courbe est décalé vers la droite — les tons les plus sombres de l'image deviennent de vrais noirs. L'effet est plus marqué. À réserver aux images qui peuvent le supporter (scènes avec des zones sombres naturelles).</p>
+    </div>
+    <div class="insight" style="margin-top:12px;">
+      <div class="insight-label">Test pratique</div>
+      <p>Ouvre la Courbe Tonale et déplace le point noir (coin inférieur gauche) vers la droite jusqu'à ce que les zones les plus sombres de l'image aient de la profondeur. Si l'image commence à paraître "forcée", tu es allé trop loin.</p>
+    </div>
+  </div>
+</div>
+
+<div class="wf-problem">
+  <div class="wf-problem-title">Les couleurs sont ternes — ni saturées ni expressives</div>
+  <div class="wf-problem-body">
+    <p>La lumière plate désature les couleurs naturellement.</p>
+    <div class="wf-solution">
+      <div class="wf-solution-label">Dans ART</div>
+      <ul>
+        <li><strong>Vibrance</strong> avant Saturation : la vibrance monte les couleurs les moins saturées sans pousser celles qui le sont déjà. Résultat plus naturel.</li>
+        <li><strong>HSL canal par canal</strong> : plutôt que de tout monter, identifie quelle couleur est le point fort de l'image et travaille uniquement sur elle.</li>
+        <li><strong>Correction Couleurs (Color Wheels)</strong> : un léger color grading donne de la personnalité même à une image plate. Des ombres légèrement froides et des hautes lumières légèrement chaudes créent immédiatement une sensation de profondeur et de séparation tonale.</li>
+      </ul>
+    </div>
+    <div class="blockquote" style="margin-top:12px;">
+      <strong>Piège :</strong> compenser le manque de contraste par de la saturation. Une image plate et très saturée sonne faux — le cerveau perçoit immédiatement l'incohérence entre la lumière douce et les couleurs agressives. Monte la saturation modérément, et travaille le contraste en parallèle.
+    </div>
+  </div>
+</div>
+
+<div class="wf-problem">
+  <div class="wf-problem-title">L'image manque de texture et de matière — les surfaces semblent lisses</div>
+  <div class="wf-problem-body">
+    <p>La lumière diffuse ne sculpte pas les textures. Une surface rugueuse photographiée sous une lumière plate semble lisse. C'est optiquement exact — mais visuellement décevant.</p>
+    <div class="wf-solution">
+      <div class="wf-solution-label">Dans ART</div>
+      <ul>
+        <li><strong>Amplification Texture</strong> : une valeur de 0.20 à 0.35 sur une image à lumière plate peut redonner du grain à une pierre, de la matière à un tissu, de la texture à une surface d'eau calme.</li>
+        <li><strong>Contraste Local</strong> : complète la texture en accentuant les microcontrastes — les petites variations de luminosité qui donnent du volume à une surface.</li>
+      </ul>
+    </div>
+    <div class="insight" style="margin-top:12px;">
+      <div class="insight-label">Ordre impératif</div>
+      <p>Texture et Contraste Local s'appliquent en dernier, après avoir stabilisé la dynamique tonale. Si tu les appliques tôt sur une image plate, tu risques d'amplifier des artefacts invisibles sur une image contrastée.</p>
+    </div>
+  </div>
+</div>
+
+<div class="wf-problem">
+  <div class="wf-problem-title">La brume éclaircit les plans éloignés et aplatit la profondeur</div>
+  <div class="wf-problem-body">
+    <p>La brume ou la diffusion atmosphérique crée une progression de contraste et de saturation qui s'atténue avec la distance — c'est ce qui donne l'impression de profondeur dans les paysages.</p>
+    <div class="wf-solution">
+      <div class="wf-solution-label">Dans ART</div>
+      <ul>
+        <li><strong>Élimination de la Brume</strong> : conçu exactement pour ça. Commence à 0.15–0.20, monte progressivement. Ne pas dépasser 0.30 — au-delà, des artefacts apparaissent et les couleurs deviennent artificielles.</li>
+        <li><strong>Contraste Local</strong> après : la brume retirée, l'image a plus de contraste mais manque encore de présence — le Contraste Local finalise.</li>
+      </ul>
+    </div>
+    <div class="blockquote" style="margin-top:12px;">
+      <strong>Note :</strong> si la brume est esthétique et intentionnelle (ambiance brumeuse, lumière douce voulue), ne pas utiliser l'Élimination de la Brume. Ce module est pour les cas où la brume est un problème, pas une ressource artistique.
+    </div>
+  </div>
+</div>
+
+<div class="wf-problem">
+  <div class="wf-problem-title">Portrait en lumière douce — le visage manque de volume</div>
+  <div class="wf-problem-body">
+    <p>La lumière diffuse efface les volumes du visage. En portrait de studio ou en lumière de fenêtre sans direction, le visage peut sembler "plat" même si l'image est bien exposée.</p>
+    <div class="wf-solution">
+      <div class="wf-solution-label">Dans ART</div>
+      <ul>
+        <li><strong>Courbe Tonale</strong> douce avec ombres légèrement abaissées — crée une subtile séparation entre les zones éclairées et les zones ombragées du visage.</li>
+        <li><strong>Correction Couleurs (Color Wheels)</strong> : ombres légèrement froides, tons moyens légèrement chauds — le contraste chaud/froid remplace le contraste de lumière absent.</li>
+        <li><strong>Contraste Local</strong> très léger (0.10–0.15 max) — accentue les microcontrastes du visage sans durcir les traits.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<h3 class="section-title" id="ressource">La lumière plate comme ressource, pas comme problème</h3>
+
+<p>Un point de vue à ne pas oublier : la lumière diffuse a des qualités intrinsèques que la lumière directe n'a pas.</p>
+<ul>
+  <li>Les couleurs sont plus fidèles — pas de hautes lumières cramées, pas d'ombres dures</li>
+  <li>Les détails sont partout visibles — aucune zone ne disparaît dans l'ombre ou brûle dans la lumière</li>
+  <li>L'ambiance est douce, intime, souvent plus flatteuse pour les portraits</li>
+</ul>
+
+<div class="insight">
+  <div class="insight-label">La bonne question</div>
+  <p>Avant de chercher à "corriger" une image à lumière plate, demande-toi si tu veux vraiment changer cette qualité — ou si tu veux simplement lui donner plus de présence sans trahir son ambiance. C'est toute la différence entre <strong>construire du contraste</strong> (donner de la profondeur sans changer le caractère) et <strong>simuler une lumière directe</strong> (ce qui sonne faux).</p>
+</div>
+
+<h3 class="section-title" id="modules-cles">Les modules-clés pour la lumière plate</h3>
+
+<table>
+  <tr><th>Rôle</th><th>Module</th><th>Note</th></tr>
+  <tr><td>Construire le contraste</td><td>Courbes Tonales</td><td>Central — point noir et S-curve</td></tr>
+  <tr><td>Redonner de la vie aux couleurs</td><td>Vibrance — HSL ciblé</td><td>Vibrance avant Saturation</td></tr>
+  <tr><td>Séparation tonale par couleur</td><td>Correction Couleurs (Color Wheels)</td><td>Ombres froides / HLs chaudes</td></tr>
+  <tr><td>Texture et matière</td><td>Amplification Texture</td><td>En dernier</td></tr>
+  <tr><td>Microcontraste</td><td>Contraste Local</td><td>Complète la texture</td></tr>
+  <tr><td>Brume atmosphérique</td><td>Élimination de la Brume</td><td>Dosé — max 0.30</td></tr>
+</table>
+
+<h3 class="section-title" id="logique">Logique de développement lumière plate dans ART</h3>
+
+<div class="wf-steps">
+  <div class="wf-steps-label">Ordre de traitement recommandé</div>
+  <pre>1. Évaluation préalable
+   → Est-ce que la lumière douce est intentionnelle ? Si oui, travailler avec.
+   → Sinon : l'objectif est de donner de la profondeur sans changer le caractère de la lumière.
+
+2. Exposition + Égaliseur Tonal
+   → L'image est bien exposée — corrections mineures seulement
+   → Vérifier que les blancs ne sont pas cramés et que les noirs ne sont pas bouchés
+
+3. Courbes Tonales — la pièce centrale
+   → Décaler le point noir vers la droite pour asseoir les noirs
+   → S-curve douce pour séparer les tons
+   → Résiste à l'envie d'aller trop loin
+
+4. Correction Couleurs (Color Wheels)
+   → Ombres : légèrement froides (bleu/teal, très subtil)
+   → HLs : légèrement chaudes (orange/jaune, très subtil)
+   → Cette séparation crée la sensation de profondeur que la lumière ne donnait pas
+
+5. Vibrance — HSL ciblé
+   → Monte la vibrance modérément
+   → Identifie la couleur forte de l'image et travaille uniquement sur elle
+
+6. Élimination de la Brume (si applicable)
+   → Seulement si la brume réduit le contraste de façon gênante
+   → 0.15–0.25 max
+
+7. Amplification Texture + Contraste Local
+   → En dernier — doses modérées
+   → Contrôle que les textures ne semblent pas artificielles</pre>
+</div>
+
+</div>

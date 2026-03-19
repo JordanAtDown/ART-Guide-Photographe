@@ -15,6 +15,12 @@ module.exports = [
     ]
   },
   {
+    section: "Workflows par Genre",
+    items: [
+      { id: "workflows", label: "Workflows par genre", url: "/modules/workflows/", color: "#34d399" }
+    ]
+  },
+  {
     section: "Exposition & Tonalité",
     items: [
       { id: "exposition", label: "Exposition", url: "/modules/exposition/", color: "#4a9eff" },
