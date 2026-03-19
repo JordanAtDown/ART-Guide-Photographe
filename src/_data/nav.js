@@ -21,6 +21,12 @@ module.exports = [
     ]
   },
   {
+    section: "Courbes & Outils Tonaux",
+    items: [
+      { id: "courbes", label: "Maîtriser les Courbes", url: "/modules/courbes/", color: "#a78bfa" }
+    ]
+  },
+  {
     section: "Exposition & Tonalité",
     items: [
       { id: "exposition", label: "Exposition", url: "/modules/exposition/", color: "#4a9eff" },

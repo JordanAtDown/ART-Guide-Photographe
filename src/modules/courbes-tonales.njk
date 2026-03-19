@@ -1,0 +1,205 @@
+---
+layout: base.njk
+title: 'Courbes Tonales — Guide Complet'
+permalink: '/modules/courbes-tonales/'
+---
+
+<a class="wf-back" href="{{ '/modules/courbes/' | url }}">← Courbes & Outils Tonaux</a>
+
+<div class="module-header">
+  <div class="module-tag"><div class="tag-dot" style="background:#4a9eff"></div><span style="color:#4a9eff">Tonalité</span></div>
+  <h2>Courbes Tonales</h2>
+  <div class="subtitle">L'outil le plus précis d'ART pour sculpter la lumière — contraste, caractère, look film</div>
+</div>
+
+<div class="blockquote">
+  <strong>Le rôle central :</strong> la courbe tonale définit exactement comment chaque valeur de luminosité du RAW sera reproduite en sortie. Là où un curseur "Contraste" agit uniformément, la courbe te laisse décider que les ombres s'ouvrent, que les tons moyens restent intacts, et que les hautes lumières se compriment — tout ça en une seule courbe.
+</div>
+
+<div class="toc">
+  <div class="toc-title">Sommaire</div>
+  <ol>
+    <li><a href="#lire">Lire une courbe tonale</a></li>
+    <li><a href="#ct1">Courbe Tonale 1 — la principale</a></li>
+    <li><a href="#ct2">Courbe Tonale 2 — l'affinage</a></li>
+    <li><a href="#modes">Les 7 modes de calcul</a></li>
+    <li><a href="#base">Courbe de base — 3 points de départ</a></li>
+    <li><a href="#usages">Cas d'usage concrets</a></li>
+  </ol>
+</div>
+
+<div class="editorial">
+
+<h3 class="section-title" id="lire">Lire une courbe tonale</h3>
+
+<p>Une courbe tonale est un graphe dont l'axe horizontal représente les valeurs d'entrée (le RAW, de gauche = noir à droite = blanc) et l'axe vertical les valeurs de sortie (ce qui sera affiché). La diagonale parfaite = aucune modification : chaque valeur d'entrée est reproduite identiquement en sortie.</p>
+
+<div class="param-grid">
+  <div class="param-item">
+    <div class="param-name">Monter un point</div>
+    <div class="param-range">Sortie > Entrée</div>
+    <div class="param-desc">Les valeurs concernées deviennent plus claires. Monter le milieu de la courbe = éclaircir les tons moyens. Monter le bas = déboucher les ombres.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Descendre un point</div>
+    <div class="param-range">Sortie < Entrée</div>
+    <div class="param-desc">Les valeurs concernées deviennent plus sombres. Descendre le haut de la courbe = compresser les hautes lumières. Descendre le milieu = assombrir les tons moyens.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">S-curve classique</div>
+    <div class="param-range">Point bas descendu + point haut monté</div>
+    <div class="param-desc">Les ombres s'assombrissent, les hautes lumières s'éclaircissent — le contraste augmente. C'est la forme de courbe la plus universelle.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Lift des noirs</div>
+    <div class="param-range">Point en bas à gauche monté</div>
+    <div class="param-desc">Le point noir ne descend plus à 0 — les ombres sont relevées. Donne un look "dégradé" caractéristique du rendu film et des looks cinématiques.</div>
+  </div>
+</div>
+
+<div class="insight">
+  <div class="insight-label">L'histogramme en arrière-plan</div>
+  <p>Dans ART, l'histogramme de l'image s'affiche en arrière-plan de la courbe. C'est un guide précieux : tu vois directement <strong>où se concentrent les pixels</strong> de ton image. Si la majorité des pixels se trouvent entre 30 et 70 (tons moyens), c'est là que ta courbe aura le plus d'impact visuel.</p>
+</div>
+
+<h3 class="section-title" id="ct1">Courbe Tonale 1 — la principale</h3>
+
+<p>CT1 est la courbe de travail principale. C'est ici que se joue l'essentiel : le niveau de contraste général, l'ouverture ou la fermeture des ombres, la protection des hautes lumières.</p>
+
+<div class="param-grid">
+  <div class="param-item">
+    <div class="param-name">Curseur E (Entrée)</div>
+    <div class="param-range">0 → 100 — luminosité dans le RAW</div>
+    <div class="param-desc">Affiche la valeur du point sélectionné sur l'axe horizontal. Permet de positionner le point avec précision sur une plage tonale exacte (ex : E:25 = quart inférieur des ombres).</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Curseur S (Sortie)</div>
+    <div class="param-range">0 → 100 — luminosité en sortie</div>
+    <div class="param-desc">Détermine à quelle valeur sera reproduite la plage E. S > E = éclaircissement, S < E = assombrissement. La différence entre E et S est l'amplitude de ta modification.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Curseur TG (Tangente Gauche)</div>
+    <div class="param-range">Pente à gauche du point</div>
+    <div class="param-desc">Contrôle la transition de la courbe à gauche du point actif. Une TG forte = transition abrupte (contraste marqué dans les tons inférieurs). TG douce = transition progressive et naturelle.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Curseur TD (Tangente Droite)</div>
+    <div class="param-range">Pente à droite du point</div>
+    <div class="param-desc">Idem pour la droite du point. TG et TD indépendants permettent des courbes asymétriques : une transition douce dans les ombres et abrupte dans les tons moyens, par exemple.</div>
+  </div>
+</div>
+
+<div class="blockquote">
+  <strong>Bouton "Courbe Tonale basée sur l'Aperçu" :</strong> ART analyse l'histogramme et propose une courbe automatique. Bon point de départ sur une image difficile — à affiner manuellement ensuite. Ne remplace pas le jugement artistique mais évite de partir de zéro.
+</div>
+
+<h3 class="section-title" id="ct2">Courbe Tonale 2 — l'affinage</h3>
+
+<p>CT2 est une deuxième courbe chaînée après CT1. Elle peut être utilisée pour un second ajustement tonal, ou configurée en <strong>mode saturation</strong> — dans ce cas, la courbe contrôle l'intensité des couleurs en fonction de la luminance.</p>
+
+<div class="param-grid">
+  <div class="param-item">
+    <div class="param-name">CT2 en mode tonal</div>
+    <div class="param-range">Ajustement secondaire</div>
+    <div class="param-desc">Utilise CT2 pour des retouches fines après CT1. Exemple : CT1 gère le contraste général, CT2 compresse légèrement les hautes lumières pour éviter le clip sur un ciel lumineux.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">CT2 en mode saturation</div>
+    <div class="param-range">Saturation liée à la luminance</div>
+    <div class="param-desc">La courbe contrôle la saturation selon la luminance de chaque pixel. Descendre la courbe dans les hautes lumières = désaturer les zones très claires (évite les jaunes cramés). Monter dans les tons moyens = vivifier les couleurs dans les midtones.</div>
+  </div>
+</div>
+
+<div class="insight">
+  <div class="insight-label">Recette classique avec CT2 saturation</div>
+  <p>Courbe légèrement en cloche : <strong>montée dans les tons moyens</strong> (E:40–60 → S légèrement au-dessus), <strong>descente dans les HL</strong> (E:80–100 → S en dessous). Résultat : les couleurs sont vivifiées dans la zone de lecture principale de l'image, et protégées des clips colorés dans les zones très claires.</p>
+</div>
+
+<h3 class="section-title" id="modes">Les 7 modes de calcul</h3>
+
+<p>Le mode détermine <strong>comment la courbe interagit avec la couleur</strong>. Un même mouvement de courbe peut dériver les teintes, amplifier la saturation, ou rester invisible sur les couleurs — selon le mode choisi.</p>
+
+<table>
+  <tr><th>Mode</th><th>Comportement couleur</th><th>Idéal pour</th></tr>
+  <tr><td><strong>Neutre</strong></td><td>Aucune modification colorimétrique — courbe linéaire pure</td><td>Pipeline avec Log Tone Mapping actif, workflows cinématiques</td></tr>
+  <tr><td><strong>Standard</strong></td><td>Simule le rendu JPEG caméra — boost saturation dans les tons moyens</td><td>Point de départ "naturel" rapide</td></tr>
+  <tr><td><strong>Standard Pondérée</strong></td><td>Standard + compression progressive des HL — évite le clip</td><td>Scènes à fort contraste (ciel + ombres)</td></tr>
+  <tr><td><strong>Type Film</strong></td><td>Réponse non-linéaire argentique — ombres douces, HL qui "roulent"</td><td>Portrait, paysage lumière douce, look film</td></tr>
+  <tr><td><strong>Mélange Sat. & Valeur</strong></td><td>Travaille en HSV — sépare luminosité et teinte/saturation</td><td>Augmenter contraste sans drift de teinte (architecture, produits)</td></tr>
+  <tr><td><strong>Luminance</strong></td><td>N'agit que sur la luminance perçue — teinte et saturation intactes</td><td>Ajouter contraste après color grading sans perturber les couleurs</td></tr>
+  <tr><td><strong>Perceptuel</strong></td><td>Modèle CIECAM — respecte la perception humaine des couleurs</td><td>Corrections subtiles "invisibles" — avancé</td></tr>
+</table>
+
+<div class="insight">
+  <div class="insight-label">Quel mode choisir ?</div>
+  <p>Pour 90% des usages : <strong>Luminance</strong> si tu veux du contraste pur sans toucher aux couleurs, <strong>Type Film</strong> si tu veux un look organique et naturel, <strong>Neutre</strong> si tu utilises le Log Tone Mapping. Les autres modes sont des options spécialisées.</p>
+</div>
+
+<h3 class="section-title" id="base">Courbe de base — 3 points de départ</h3>
+
+<p>La courbe de base est appliquée <em>avant</em> tes modifications manuelles. Elle définit le "sol" à partir duquel tu travailles.</p>
+
+<div class="param-grid">
+  <div class="param-item">
+    <div class="param-name">Linéaire</div>
+    <div class="param-range">Aucun présupposé</div>
+    <div class="param-desc">La courbe part droite de coin à coin. Idéale avec le Log Tone Mapping ou quand tu construis ton look de zéro. Associe-la au mode Neutre pour un pipeline totalement sous contrôle.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Atténuation progressive des hautes lumières</div>
+    <div class="param-range">Protection automatique des HL</div>
+    <div class="param-desc">Compression douce des hautes lumières intégrée dès le départ. Très utile pour les ciels lumineux : ça évite le clipping sans avoir à tout gérer manuellement. Bon choix pour le paysage ensoleillé.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Courbe en S progressive</div>
+    <div class="param-range">Contraste intégré dès le départ</div>
+    <div class="param-desc">ART applique une S-curve légère comme base — ombres légèrement abaissées, hautes lumières légèrement compressées. Rendu avec du peps immédiatement, proche du JPEG caméra. Bon pour un workflow rapide sans Log.</div>
+  </div>
+</div>
+
+<h3 class="section-title" id="usages">Cas d'usage concrets</h3>
+
+<div class="wf-problem">
+  <div class="wf-problem-title">S-curve classique — ajouter du contraste et du caractère</div>
+  <div class="wf-problem-body">
+    <div class="wf-solution">
+      <div class="wf-solution-label">Dans ART — CT1</div>
+      <p>Ajoute deux points : <strong>E:25 → S:20</strong> (ombres assombries) et <strong>E:75 → S:80</strong> (hautes lumières éclaircies). La courbe prend une forme de S. Ajuste les tangentes pour rendre la transition plus douce ou plus abrupte selon l'image. En reportage, tu peux aller plus loin sur les ombres ; en portrait, reste plus doux.</p>
+    </div>
+  </div>
+</div>
+
+<div class="wf-problem">
+  <div class="wf-problem-title">Lift filmique — look "mat" avec noirs relevés</div>
+  <div class="wf-problem-body">
+    <div class="wf-solution">
+      <div class="wf-solution-label">Dans ART — CT1</div>
+      <p>Prends le point noir (coin inférieur gauche) et monte-le légèrement : <strong>E:0 → S:8 à 12</strong>. Les noirs ne descendent plus à 0 — les ombres ont une base grise caractéristique du look film dégradé. Combine avec une légère compression des HL (E:100 → S:90) pour amplifier l'effet mat.</p>
+    </div>
+    <div class="blockquote" style="margin-top:12px;">
+      Le lift filmique est plus subtil que tu ne le penses. S:8 peut sembler minuscule sur la courbe mais l'effet sur l'image est immédiatement visible. Commence bas et monte progressivement.
+    </div>
+  </div>
+</div>
+
+<div class="wf-problem">
+  <div class="wf-problem-title">Compresseur hautes lumières — protéger les HL sans le Log</div>
+  <div class="wf-problem-body">
+    <div class="wf-solution">
+      <div class="wf-solution-label">Dans ART — CT1 ou CT2</div>
+      <p>Ajoute un point à <strong>E:85 → S:80</strong> et tire le coin supérieur droit vers <strong>E:100 → S:92</strong>. La courbe s'aplatit dans les hautes lumières — les zones claires se compriment progressivement. À utiliser avec <strong>Mode Standard Pondérée</strong> ou <strong>Neutre</strong> selon le pipeline.</p>
+    </div>
+  </div>
+</div>
+
+<div class="wf-problem">
+  <div class="wf-problem-title">Avec Log Tone Mapping actif — usage de la courbe</div>
+  <div class="wf-problem-body">
+    <div class="wf-solution">
+      <div class="wf-solution-label">Règle d'or</div>
+      <p>Le Log a déjà géré la dynamique. Dans CT1, utilise <strong>Mode Neutre + base Linéaire</strong> et ne trace qu'une S-curve très légère (contraste +10 à +15 max). Une courbe agressive après le Log crée des aplats et perd le bénéfice du tone mapping.</p>
+    </div>
+  </div>
+</div>
+
+</div>

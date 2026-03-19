@@ -1,0 +1,170 @@
+---
+layout: base.njk
+title: 'Color Wheels & Correction — Guide Complet'
+permalink: '/modules/courbes-colorwheels/'
+---
+
+<a class="wf-back" href="{{ '/modules/courbes/' | url }}">← Courbes & Outils Tonaux</a>
+
+<div class="module-header">
+  <div class="module-tag"><div class="tag-dot" style="background:#a78bfa"></div><span style="color:#a78bfa">Color Grading</span></div>
+  <h2>Color Wheels & Correction Couleurs</h2>
+  <div class="subtitle">Color grading par zone tonale — le module DaVinci Resolve d'ART</div>
+</div>
+
+<div class="blockquote">
+  <strong>Le rôle central :</strong> les Color Wheels permettent d'assigner une teinte différente aux ombres, aux tons moyens et aux hautes lumières simultanément. C'est ici que naissent les looks — teal & orange, film Kodak, atmosphère méditerranéenne. Le module "Correction Couleurs/Tonalité" d'ART va plus loin avec 7 algorithmes et un système d'instances empilables.
+</div>
+
+<div class="toc">
+  <div class="toc-title">Sommaire</div>
+  <ol>
+    <li><a href="#roues">Les 3 roues et leurs zones d'action</a></li>
+    <li><a href="#angles">Lire les angles de la roue</a></li>
+    <li><a href="#instances">Correction Couleurs — instances et modes</a></li>
+    <li><a href="#looks">Recettes de looks</a></li>
+    <li><a href="#regles">Règles d'or</a></li>
+  </ol>
+</div>
+
+<div class="editorial">
+
+<h3 class="section-title" id="roues">Les 3 roues et leurs zones d'action</h3>
+
+<p>Chaque roue agit sur une plage tonale distincte de l'image. Le point blanc au centre de chaque roue = neutre, aucune modification. En déplaçant ce point vers une couleur, tu "teintes" la plage tonale correspondante. Le curseur linéaire sous la roue contrôle l'intensité globale.</p>
+
+<div class="param-grid">
+  <div class="param-item">
+    <div class="param-name">Hautes Lumières / Gain</div>
+    <div class="param-range">Zones claires → blancs</div>
+    <div class="param-desc">Affecte les pixels les plus lumineux : ciel clair, écumes, reflets, nuages. Pour un look méditerranéen : push léger vers <strong>jaune-chaud (~55°)</strong>, intensité 0.06–0.10. Donne une chaleur solaire aux zones brillantes sans affecter les ombres.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Ombres / Déboucher</div>
+    <div class="param-range">Zones sombres → noirs</div>
+    <div class="param-desc">Affecte les pixels les plus sombres : rochers dans l'ombre, zones non éclairées. Pour le look cinéma : push vers <strong>cyan-bleu (~200°)</strong>, intensité 0.10–0.15. Les ombres prennent une teinte froide — contraste chaud/froid très cinématique avec les HL chaudes.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Tons Moyens / Gamma</div>
+    <div class="param-range">Zone médiane — 18% gris</div>
+    <div class="param-desc">Affecte la majorité des pixels. C'est la roue la plus influente visuellement. Push très léger vers <strong>teal (~185°)</strong>, intensité 0.04–0.07 max. Unifie l'atmosphère sans "colorier" de façon visible. À régler <strong>en dernier</strong>, après les ombres et les HL.</div>
+  </div>
+</div>
+
+<div class="insight">
+  <div class="insight-label">Le curseur Gamma (2.4)</div>
+  <p>Dans le mode Coefficients TSL, le curseur <strong>Gamma</strong> (défaut 2.4) contrôle où se situe la frontière entre "ombres" et "hautes lumières" pour les roues. Gamma 2.4 = comportement standard sRGB. Valeur haute (3.0+) = les tons moyens basculent davantage vers les "ombres", la roue Ombres devient plus influente. Ne pas modifier sauf besoin précis.</p>
+</div>
+
+<h3 class="section-title" id="angles">Lire les angles de la roue</h3>
+
+<table>
+  <tr><th>Direction</th><th>Angle approx.</th><th>Effet caractéristique</th></tr>
+  <tr><td>Jaune-chaud</td><td>~50–60°</td><td>Lumière solaire, chaleur méditerranéenne dans les HL</td></tr>
+  <tr><td>Orange</td><td>~30°</td><td>Tons chair, lumière golden hour, look film Kodak</td></tr>
+  <tr><td>Vert</td><td>~120°</td><td>Végétation, eau peu profonde verdâtre</td></tr>
+  <tr><td>Cyan / Teal</td><td>~180–195°</td><td>Eau profonde méditerranéenne, ombres fraîches, cinéma</td></tr>
+  <tr><td>Bleu profond</td><td>~220–240°</td><td>Ciel dramatique, ombres nocturnes, look froid</td></tr>
+  <tr><td>Violet</td><td>~270–290°</td><td>Couchers de soleil, look rétro, ombres golden hour</td></tr>
+  <tr><td>Magenta</td><td>~300°</td><td>Look cross-process, ambiance noctambule</td></tr>
+</table>
+
+<h3 class="section-title" id="instances">Correction Couleurs — instances et modes</h3>
+
+<p>Le module "Correction des Couleurs/Tonalités" d'ART va au-delà de simples color wheels — il propose <strong>7 algorithmes différents</strong> et un <strong>système d'instances</strong> qui permettent d'empiler plusieurs corrections indépendantes.</p>
+
+<div class="param-grid">
+  <div class="param-item">
+    <div class="param-name">Système d'instances (calques)</div>
+    <div class="param-range">Boutons + / −</div>
+    <div class="param-desc">Chaque instance est une correction indépendante avec son propre mode et ses propres masques. Instance 1 en Coefficients TSL pour le color grading général, Instance 2 en Canaux RVB pour un ajustement fin. Les instances s'appliquent de haut en bas.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Coefficients TSL</div>
+    <div class="param-range">Mode principal — Color Wheels</div>
+    <div class="param-desc"><strong>Le mode principal pour le color grading.</strong> Les 3 color wheels agissent simultanément sur la teinte ET la luminosité. C'est le mode "DaVinci Resolve Primary" d'ART. Modifier simultanément les 3 roues pour créer un split toning cohérent.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Canaux RVB séparés</div>
+    <div class="param-range">Courbes + sliders R/V/B + wheels</div>
+    <div class="param-desc">Mode avancé : une courbe par canal R, V, B indépendante, plus les color wheels. Permet un split toning ultra-précis. Exemple : lever les ombres du canal B pendant qu'on compresse les HL du R — look film classique.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">LUT</div>
+    <div class="param-range">Fichier .cube / .3dl</div>
+    <div class="param-desc">Applique une LUT externe — fichiers .cube ou .3dl créés dans DaVinci, Dehancer, etc. Permet d'appliquer des émulations de film professionnel (Kodak 2383, Fuji 3510) directement sur tes RAWs.</div>
+  </div>
+</div>
+
+<div class="param-grid">
+  <div class="param-item">
+    <div class="param-name">Neutre</div>
+    <div class="param-range">Point de départ propre</div>
+    <div class="param-desc">Aucun rendu colorimétrique — courbe linéaire. À utiliser avec le Log Tone Mapping actif quand tu veux un contrôle total sans présupposé de rendu.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Standard</div>
+    <div class="param-range">Rendu caméra simulé</div>
+    <div class="param-desc">Similaire au rendu JPEG caméra — légère courbe en S et boost de saturation. Bon point de départ si tu veux retrouver le look "out-of-camera" avant de personnaliser.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Perceptuel</div>
+    <div class="param-range">Une roue globale</div>
+    <div class="param-desc">Approche perceptuelle — une seule roue globale. Les modifications respectent mieux la perception humaine. Idéal pour des corrections subtiles qui doivent rester invisibles.</div>
+  </div>
+</div>
+
+<div class="insight">
+  <div class="insight-label">Masques par instance</div>
+  <p>Chaque instance peut avoir son propre masque — limiter le color grading à une zone précise de l'image. Exemple puissant : une instance pour coloriser le ciel (masque sur les tons bleus du haut), une autre pour les tons chair (masque sur les oranges du premier plan). Le color grading devient chirurgical.</p>
+</div>
+
+<h3 class="section-title" id="looks">Recettes de looks</h3>
+
+<table>
+  <tr><th>Look</th><th>Ombres</th><th>Tons Moyens</th><th>Hautes Lumières</th></tr>
+  <tr><td><strong>Méditerranée Cinématique</strong></td><td>Cyan ~200° / 0.12</td><td>Teal ~185° / 0.06</td><td>Jaune ~55° / 0.08</td></tr>
+  <tr><td><strong>Raw & Minéral</strong></td><td>Bleu ~230° / 0.08</td><td>Neutre / 0</td><td>Neutre / 0</td></tr>
+  <tr><td><strong>Golden Hour</strong></td><td>Violet ~280° / 0.08</td><td>Orange ~35° / 0.05</td><td>Jaune ~45° / 0.12</td></tr>
+  <tr><td><strong>Film Kodak Portra</strong></td><td>Bleu ~220° / 0.06</td><td>Neutre / 0</td><td>Jaune-vert ~70° / 0.07</td></tr>
+  <tr><td><strong>Désaturé Cinéma</strong></td><td>Teal ~190° / 0.10</td><td>Neutre / 0</td><td>Orange ~30° / 0.08</td></tr>
+</table>
+
+<div class="blockquote">
+  <strong>Workflow recommandé pour les instances :</strong><br>
+  Instance 1 — Mode <strong>Coefficients TSL</strong> : color grading principal (ombres teal, HL chaud).<br>
+  Instance 2 — Mode <strong>Canaux RVB séparés</strong> : ajustements fins (lever ombres bleu, compresser HL rouge).<br>
+  Instance 3 — Mode <strong>LUT</strong> (optionnel) : appliquer un look cinéma par-dessus.
+</div>
+
+<h3 class="section-title" id="regles">Règles d'or</h3>
+
+<div class="param-grid">
+  <div class="param-item">
+    <div class="param-name">1 — Opposer ombres et hautes lumières</div>
+    <div class="param-range">Principe fondamental</div>
+    <div class="param-desc">Si les HL sont chaudes (jaune/orange), les ombres doivent être froides (cyan/bleu) — et vice versa. C'est le principe du split toning qui donne de la profondeur et du contraste coloré à l'image.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">2 — Intensités très faibles</div>
+    <div class="param-range">0.05 à 0.15 maximum</div>
+    <div class="param-desc">L'effet paraît subtil à l'écran mais s'accumule. Au-delà de 0.20, l'image "sonne faux". L'œil s'adapte vite — après 10 minutes de travail, tu as besoin de revenir à la version d'origine pour évaluer objectivement.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">3 — Les tons moyens en dernier</div>
+    <div class="param-range">Ordre de travail</div>
+    <div class="param-desc">Règle d'abord les ombres et les HL, puis ajuste les tons moyens pour "coller" l'atmosphère. Les tons moyens sont la roue la plus puissante — un léger push peut unifier toute l'image. À doser avec précaution.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">4 — Comparer sans cesse</div>
+    <div class="param-range">Touche avant/après</div>
+    <div class="param-desc">Le color grading est un outil qui biaise l'œil rapidement. Utilise le bouton avant/après régulièrement pour évaluer l'écart entre l'original et ta retouche. Ce qui paraît "léger" après 30 minutes de travail peut être très chargé vu de l'extérieur.</div>
+  </div>
+</div>
+
+<div class="insight">
+  <div class="insight-label">Coefficients TSL vs TSL pur</div>
+  <p><strong>Coefficients TSL</strong> (mode recommandé) modifie simultanément la teinte ET la luminosité des plages affectées — les ombres deviennent légèrement plus claires ou sombres en plus d'être colorées. <strong>TSL pur</strong> modifie uniquement la couleur sans toucher à la luminosité. Pour un color grading naturel et riche, Coefficients TSL donne des résultats plus proches du film argentique.</p>
+</div>
+
+</div>

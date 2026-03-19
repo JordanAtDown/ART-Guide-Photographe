@@ -1,0 +1,145 @@
+---
+layout: base.njk
+title: 'Contraste Local — Guide Complet'
+permalink: '/modules/courbes-contraste-local/'
+---
+
+<a class="wf-back" href="{{ '/modules/courbes/' | url }}">← Courbes & Outils Tonaux</a>
+
+<div class="module-header">
+  <div class="module-tag"><div class="tag-dot" style="background:#e879a0"></div><span style="color:#e879a0">Détail & Netteté</span></div>
+  <h2>Contraste Local</h2>
+  <div class="subtitle">Présence, profondeur, "mordant" — accentuer les détails à l'échelle de la structure</div>
+</div>
+
+<div class="blockquote">
+  <strong>Le rôle central :</strong> le contraste local augmente le contraste entre zones adjacentes sans modifier l'exposition globale. Il donne une impression de profondeur et de présence à l'image — l'équivalent de la "Clarté" de Lightroom. La clé est de comprendre que contrairement à la netteté, il agit sur les <em>structures</em> de l'image, pas sur les contours fins.
+</div>
+
+<div class="toc">
+  <div class="toc-title">Sommaire</div>
+  <ol>
+    <li><a href="#frequences">Hautes vs basses fréquences spatiales</a></li>
+    <li><a href="#courbe">Lire la courbe de contraste local</a></li>
+    <li><a href="#parametres">Paramètres avancés</a></li>
+    <li><a href="#masques">Utiliser les masques</a></li>
+    <li><a href="#vs-texture">Contraste Local vs Amplification Texture</a></li>
+  </ol>
+</div>
+
+<div class="editorial">
+
+<h3 class="section-title" id="frequences">Hautes vs basses fréquences spatiales</h3>
+
+<p>Une image peut être décomposée en <strong>fréquences spatiales</strong> selon l'échelle des détails :</p>
+
+<div class="param-grid">
+  <div class="param-item">
+    <div class="param-name">Hautes fréquences</div>
+    <div class="param-range">Petits détails, contours fins</div>
+    <div class="param-desc">Texture de la peau, grain du rocher, détails des feuilles, bord net entre deux zones. La netteté (masque flou) et l'Amplification Texture agissent ici. Trop amplifiées = image "crispy", look sur-accentué.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Moyennes fréquences</div>
+    <div class="param-range">Structures, volumes, masses</div>
+    <div class="param-desc">Le relief d'une montagne, la forme d'un visage, la masse des nuages. C'est le domaine du Contraste Local. Il accentue le contraste à cette échelle — les volumes gagnent en définition et en présence.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Basses fréquences</div>
+    <div class="param-range">Lumière globale, dégradés larges</div>
+    <div class="param-desc">Le ciel dégradé du haut vers le bas, l'ombre portée d'un bâtiment. La courbe tonale et l'Égaliseur Tonal agissent à cette échelle. Le Contraste Local n'a pas ou peu d'effet ici.</div>
+  </div>
+</div>
+
+<div class="insight">
+  <div class="insight-label">L'analogie en chambre noire</div>
+  <p>En argentique, le photographe utilisait le dodge & burn pour accentuer localement certaines zones. Le Contraste Local est une version automatisée de cette technique — mais appliquée structurellement à toute l'image selon la luminance locale de chaque pixel.</p>
+</div>
+
+<h3 class="section-title" id="courbe">Lire la courbe de contraste local</h3>
+
+<p>La courbe de Contraste Local a une logique différente des courbes tonales. L'axe horizontal représente la <strong>luminosité locale</strong> du pixel (son entourage), et l'axe vertical représente <strong>l'intensité du contraste appliqué</strong>.</p>
+
+<div class="param-grid">
+  <div class="param-item">
+    <div class="param-name">Courbe neutre</div>
+    <div class="param-range">(0.00, 0.50)(1.00, 0.50) — ligne horizontale</div>
+    <div class="param-desc">La ligne horizontale au milieu (valeur 0.50 en sortie) = aucun effet. C'est le point de départ. Monter la courbe au-dessus de 0.50 = amplifier le contraste local. Descendre en dessous = réduire (effet de lissage).</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Monter la courbe</div>
+    <div class="param-range">Sortie > 0.50</div>
+    <div class="param-desc">Augmente le contraste local — les zones adjacentes se différencient davantage. L'image gagne en "présence" et en profondeur. Trop haut = look HDR criard avec halos visibles aux bords des structures.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Descendre la courbe</div>
+    <div class="param-range">Sortie < 0.50</div>
+    <div class="param-desc">Réduit le contraste local — les zones adjacentes se fondent davantage. Donne un effet de lissage de structure, utile pour adoucir la texture de la peau ou lisser des dégradés difficiles.</div>
+  </div>
+</div>
+
+<div class="insight">
+  <div class="insight-label">Recette pour clarté subtile</div>
+  <p>Ajoute un point à <strong>(0.30, 0.55)</strong> — légèrement au-dessus du centre dans les tons sombres. Et un point à <strong>(0.70, 0.45)</strong> — légèrement en dessous dans les tons clairs. Cette micro S-curve crée un "mordant" qui donne de la présence sans tomber dans le look HDR.</p>
+</div>
+
+<h3 class="section-title" id="parametres">Paramètres avancés</h3>
+
+<div class="param-grid">
+  <div class="param-item">
+    <div class="param-name">Contraste résiduel</div>
+    <div class="param-range">Curseur — impact sur les basses fréquences</div>
+    <div class="param-desc">Contrôle dans quelle mesure le Contraste Local affecte aussi les structures de grande échelle (basses fréquences). À 0 = n'agit que sur les moyennes fréquences (structures). Valeur positive = étend l'effet aux dégradés larges. Généralement à garder bas pour éviter les aplats.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">E / S / TG / TD sur la courbe</div>
+    <div class="param-range">Précision du point de contrôle</div>
+    <div class="param-desc">Comme sur toutes les courbes ART : permet de positionner précisément les points de contrôle. Utile pour cibler un effet uniquement dans les tons sombres (E:0.20–0.40) ou uniquement dans les tons clairs (E:0.60–0.80).</div>
+  </div>
+</div>
+
+<h3 class="section-title" id="masques">Utiliser les masques</h3>
+
+<p>Le Contraste Local appliqué globalement peut donner des résultats indésirables sur certaines zones — halos sur les ciels, texture excessive sur les peaux. Les masques permettent de <strong>limiter l'effet à une zone précise</strong>.</p>
+
+<div class="param-grid">
+  <div class="param-item">
+    <div class="param-name">Masque paramétrique luminance</div>
+    <div class="param-range">Limiter par valeur tonale</div>
+    <div class="param-desc">Restreint l'effet aux zones sombres ou aux zones claires uniquement. Exemple : appliquer le Contraste Local seulement dans les tons moyens (luminance 30–70) pour éviter les halos dans le ciel très clair et les ombres très sombres.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Masque paramétrique couleur</div>
+    <div class="param-range">Limiter par plage de teinte</div>
+    <div class="param-desc">Restreint l'effet à une couleur spécifique. Exemple : appliquer le Contraste Local uniquement sur les tons orange/brun des rochers, sans affecter le ciel bleu ni l'eau turquoise.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Inverser le masque</div>
+    <div class="param-range">Bouton "Inverser"</div>
+    <div class="param-desc">Applique l'effet partout SAUF dans la zone du masque. Utile pour protéger les peaux : masque sur les tons chair + inversion = le Contraste Local s'applique partout sauf sur le visage.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Montrer le masque</div>
+    <div class="param-range">Bouton visualisation</div>
+    <div class="param-desc">Affiche le masque en surimpression colorée pour voir exactement quelles zones sont affectées avant d'appliquer. Indispensable pour vérifier que le masque ne déborde pas sur des zones indésirables.</div>
+  </div>
+</div>
+
+<h3 class="section-title" id="vs-texture">Contraste Local vs Amplification Texture</h3>
+
+<p>Ces deux outils peuvent sembler similaires mais ils agissent à des échelles différentes :</p>
+
+<table>
+  <tr><th></th><th>Contraste Local</th><th>Amplification Texture</th></tr>
+  <tr><td>Échelle</td><td>Moyennes fréquences — structures et volumes</td><td>Hautes fréquences — micro-détails et contours fins</td></tr>
+  <tr><td>Effet visuel</td><td>Profondeur, présence, "clarté"</td><td>Netteté, grain, aspérités de surface</td></tr>
+  <tr><td>Risque</td><td>Halos aux bords des grandes structures, look HDR</td><td>Image "crispy", sur-accentuée, artefacts sur peau</td></tr>
+  <tr><td>Idéal pour</td><td>Paysage, architecture, prise de vue globale</td><td>Texture de pierre, fourrure, tissu, yeux en portrait</td></tr>
+  <tr><td>À éviter sur</td><td>Portrait (peaux), ciel uni</td><td>Peaux, ciels, zones de dégradé</td></tr>
+</table>
+
+<div class="blockquote">
+  <strong>En pratique :</strong> le Contraste Local donne de la "densité" à l'image — cette impression que l'image a du poids. L'Amplification Texture donne de la "mordance" — l'impression qu'on pourrait toucher les surfaces. Les deux ensemble (avec des valeurs modérées) créent une image qui respire, avec une présence photographique forte.
+</div>
+
+</div>

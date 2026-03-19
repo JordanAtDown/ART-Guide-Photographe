@@ -1,0 +1,124 @@
+---
+layout: base.njk
+title: 'Égaliseur de Couleurs — Guide Complet'
+permalink: '/modules/courbes-hsl/'
+---
+
+<a class="wf-back" href="{{ '/modules/courbes/' | url }}">← Courbes & Outils Tonaux</a>
+
+<div class="module-header">
+  <div class="module-tag"><div class="tag-dot" style="background:#f59e0b"></div><span style="color:#f59e0b">Couleur</span></div>
+  <h2>Égaliseur de Couleurs</h2>
+  <div class="subtitle">Contrôle couleur par couleur — ajuster le bleu sans toucher au cyan, le rouge sans toucher à l'orange</div>
+</div>
+
+<div class="blockquote">
+  <strong>Le rôle central :</strong> l'Égaliseur de Couleurs te permet de modifier une teinte précise dans le spectre — sa direction (T), son intensité (S) et sa luminosité (L) — sans affecter les couleurs voisines. C'est la différence entre un réglage global qui décale tout et un scalpel qui n'opère que sur le cyan de l'eau.
+</div>
+
+<div class="toc">
+  <div class="toc-title">Sommaire</div>
+  <ol>
+    <li><a href="#interface">Comprendre l'interface</a></li>
+    <li><a href="#canaux">Les 3 canaux T / S / L</a></li>
+    <li><a href="#parametres">Paramètres de la courbe HSL</a></li>
+    <li><a href="#difference">Différence avec un HSL global</a></li>
+    <li><a href="#recettes">Recettes et réglages pratiques</a></li>
+  </ol>
+</div>
+
+<div class="editorial">
+
+<h3 class="section-title" id="interface">Comprendre l'interface</h3>
+
+<p>L'Égaliseur de Couleurs affiche une <strong>grille avec le spectre chromatique</strong> en abscisse. Chaque colonne correspond à une plage de teinte (rouge, orange, jaune, vert, cyan, bleu, violet, magenta). En ordonnée, tu vois les trois axes de modification T, S et L.</p>
+
+<p>La clé de l'interface : tu n'agis pas sur "toutes les couleurs" mais sur <strong>une plage de teinte précise</strong>. Tu peux monter la saturation du cyan sans changer le bleu d'à côté. C'est ce qui rend cet outil indispensable pour le paysage (eau turquoise séparée du ciel bleu) et le portrait (teint chair séparé des arrière-plans).</p>
+
+<div class="insight">
+  <div class="insight-label">Comparaison avec Lightroom / Capture One</div>
+  <p>L'Égaliseur de Couleurs d'ART est l'équivalent du <strong>HSL/Couleur de Lightroom</strong> ou du <strong>Color Editor de Capture One</strong>. La logique est identique — les noms des axes diffèrent légèrement. Dans ART : T = Teinte (Hue), S = Saturation, L = Luminance.</p>
+</div>
+
+<h3 class="section-title" id="canaux">Les 3 canaux T / S / L</h3>
+
+<table>
+  <tr><th>Canal</th><th>Ce que ça fait</th><th>Exemple pratique</th></tr>
+  <tr><td><strong>T — Teinte</strong></td><td>Décale la couleur vers une teinte voisine sur la roue chromatique</td><td>Cyan T +10 → l'eau glisse vers le bleu-vert. Bleu T -8 → le ciel part vers le violet-bleu profond</td></tr>
+  <tr><td><strong>S — Saturation</strong></td><td>Amplifie ou réduit l'intensité de la couleur concernée</td><td>Cyan S +30 → l'eau méditerranéenne devient plus turquoise. Orange S -20 → les tons chair se désaturent légèrement</td></tr>
+  <tr><td><strong>L — Luminance</strong></td><td>Éclaircit ou assombrit la plage de couleur sans changer sa saturation</td><td>Bleu L -10 → le ciel devient plus lourd, dramatique. Orange L +12 → les rochers s'éclaircissent sans se décolorer</td></tr>
+</table>
+
+<div class="insight">
+  <div class="insight-label">Ordre de travail recommandé</div>
+  <p>Commence par la <strong>Teinte</strong> (T) pour diriger la couleur vers la bonne direction, puis la <strong>Luminance</strong> (L) pour ajuster la valeur tonale, et enfin la <strong>Saturation</strong> (S) pour doser l'intensité. Travailler dans cet ordre évite de se retrouver avec une couleur trop saturée dans une zone tonale indésirable.</p>
+</div>
+
+<h3 class="section-title" id="parametres">Paramètres de la courbe HSL</h3>
+
+<p>Contrairement à un simple curseur par canal, l'Égaliseur d'ART utilise une <strong>courbe sur chaque axe</strong> — tu peux définir une plage de teinte précise avec des bords progressifs.</p>
+
+<div class="param-grid">
+  <div class="param-item">
+    <div class="param-name">E / S — Entrée / Sortie</div>
+    <div class="param-range">Visibles quand un point est sélectionné</div>
+    <div class="param-desc">Fonctionnent comme sur les courbes tonales : E = position dans le spectre (quelle teinte exactement), S = valeur de modification appliquée à cette teinte. Permet un réglage numérique précis au lieu de manipuler la courbe à la souris.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">TG / TD — Tangentes</div>
+    <div class="param-range">Pente gauche et droite du point</div>
+    <div class="param-desc">Contrôlent la progressivité du passage entre la teinte modifiée et ses voisines. Des tangentes douces = transition graduelle, naturelle. Des tangentes abruptes = modification qui s'arrête net à la bordure de la plage sélectionnée.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Lissage</div>
+    <div class="param-range">Paramètre global de la courbe</div>
+    <div class="param-desc">Lisse les transitions entre les points de contrôle. Un lissage élevé évite les artefacts et les ruptures visibles dans le dégradé de couleur. À utiliser si les bords de sélection de couleur produisent des halos ou des lignes visibles.</div>
+  </div>
+</div>
+
+<h3 class="section-title" id="difference">Différence avec un HSL global</h3>
+
+<p>Un réglage Saturation global de +20 amplifie toutes les couleurs de l'image simultanément. L'Égaliseur de Couleurs te permet de <strong>n'amplifier que le cyan</strong> (+32) tout en <strong>désaturant légèrement l'orange</strong> (-18) dans la même opération. C'est la précision qui permet des looks spécifiques sans effets de bord sur le reste de l'image.</p>
+
+<div class="blockquote">
+  <strong>Cas classique :</strong> en portrait, tu veux désaturer légèrement les tons orange (tons chair) pour éviter l'effet "bronzé excessif", mais tu ne veux pas toucher aux jaunes de l'arrière-plan. Avec un réglage global, c'est impossible — avec l'Égaliseur HSL, tu n'agis que sur le canal Orange.
+</div>
+
+<h3 class="section-title" id="recettes">Recettes et réglages pratiques</h3>
+
+<p><strong>Look Méditerranée</strong> — maximiser la séparation eau/ciel/rochers :</p>
+
+<table>
+  <tr><th>Canal</th><th>T</th><th>S</th><th>L</th><th>Effet visuel</th></tr>
+  <tr><td>Bleu</td><td>-8</td><td>+28</td><td>-12</td><td>Ciel bleu profond, dramatique</td></tr>
+  <tr><td>Cyan</td><td>+10</td><td>+32</td><td>+6</td><td>Eau turquoise méditerranéenne</td></tr>
+  <tr><td>Vert</td><td>+5</td><td>-8</td><td>0</td><td>Végétation naturelle, pas criarde</td></tr>
+  <tr><td>Orange</td><td>-5</td><td>-18</td><td>+12</td><td>Rochers : moins brûlés, plus lumineux</td></tr>
+  <tr><td>Jaune</td><td>0</td><td>-12</td><td>+5</td><td>Lumière dorée contrôlée</td></tr>
+</table>
+
+<p><strong>Look Portrait doux</strong> — préserver les tons chair :</p>
+
+<table>
+  <tr><th>Canal</th><th>T</th><th>S</th><th>L</th><th>Effet visuel</th></tr>
+  <tr><td>Orange</td><td>0</td><td>-12</td><td>+8</td><td>Tons chair plus doux, moins saturés</td></tr>
+  <tr><td>Rouge</td><td>+5</td><td>-8</td><td>0</td><td>Réduire les rougeurs résiduelles</td></tr>
+  <tr><td>Jaune</td><td>0</td><td>-10</td><td>+5</td><td>Éclaircir les zones lumineuses du teint</td></tr>
+</table>
+
+<p><strong>N&B préparation</strong> — ajuster les valeurs tonales avant conversion :</p>
+
+<table>
+  <tr><th>Canal</th><th>L uniquement</th><th>Effet en N&B</th></tr>
+  <tr><td>Bleu</td><td>-15</td><td>Ciel plus sombre, dramatique</td></tr>
+  <tr><td>Vert</td><td>+10</td><td>Végétation plus claire</td></tr>
+  <tr><td>Orange</td><td>+15</td><td>Peaux plus claires, lumineuses</td></tr>
+  <tr><td>Rouge</td><td>+8</td><td>Lèvres et rougeurs clarifiées</td></tr>
+</table>
+
+<div class="insight">
+  <div class="insight-label">En N&B, la Teinte n'a plus d'effet</div>
+  <p>En noir et blanc, seul le canal <strong>L (Luminance)</strong> a encore un impact — tu ne décales plus les couleurs, tu contrôles leur valeur grise dans l'image finale. C'est l'équivalent des filtres colorés en argentique : un filtre rouge (L rouge +) éclaircit le ciel rouge, un filtre bleu (L bleu +) éclaircit le ciel bleu.</p>
+</div>
+
+</div>

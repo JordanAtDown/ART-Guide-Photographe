@@ -1,0 +1,139 @@
+---
+layout: base.njk
+title: 'Courbes RVB — Guide Complet'
+permalink: '/modules/courbes-rvb/'
+---
+
+<a class="wf-back" href="{{ '/modules/courbes/' | url }}">← Courbes & Outils Tonaux</a>
+
+<div class="module-header">
+  <div class="module-tag"><div class="tag-dot" style="background:#f59e0b"></div><span style="color:#f59e0b">Couleur</span></div>
+  <h2>Courbes RVB</h2>
+  <div class="subtitle">Manipulation canal par canal — split toning de précision et looks filmiques</div>
+</div>
+
+<div class="blockquote">
+  <strong>Le rôle central :</strong> les courbes RVB permettent d'appliquer une courbe tonale indépendante sur chaque canal de couleur (Rouge, Vert, Bleu). Là où une courbe tonale globale agit sur la luminosité, une courbe RVB crée simultanément un changement de luminosité <em>et</em> de couleur — c'est le mécanisme fondamental derrière tous les looks film.
+</div>
+
+<div class="toc">
+  <div class="toc-title">Sommaire</div>
+  <ol>
+    <li><a href="#principe">Fonctionnement canal par canal</a></li>
+    <li><a href="#effets">Effets par canal — tableau de référence</a></li>
+    <li><a href="#courbe-neutre">Courbe neutre vs courbe modifiée</a></li>
+    <li><a href="#usages">Cas d'usage créatifs</a></li>
+  </ol>
+</div>
+
+<div class="editorial">
+
+<h3 class="section-title" id="principe">Fonctionnement canal par canal</h3>
+
+<p>Une image numérique est composée de trois canaux superposés : Rouge (R), Vert (V) et Bleu (B). La valeur finale d'un pixel est la combinaison de ces trois canaux. En modifiant la courbe d'un seul canal, tu changes simultanément <strong>la luminosité et la teinte</strong> des zones concernées.</p>
+
+<div class="param-grid">
+  <div class="param-item">
+    <div class="param-name">Canal Rouge (R)</div>
+    <div class="param-range">Chaud / Cyan</div>
+    <div class="param-desc">Monter la courbe R = ajouter du rouge, de la chaleur. Descendre = ajouter du cyan (la couleur complémentaire du rouge). Lever les ombres R = ombres légèrement rosées/orangées, caractéristique du film chaud Kodak. Descendre les HL R = hautes lumières moins saturées en rouge, look plus propre.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Canal Vert (V)</div>
+    <div class="param-range">Vert / Magenta</div>
+    <div class="param-desc">Monter la courbe V = ajouter du vert dans les tons concernés. Descendre = ajouter du magenta. Le canal vert influence beaucoup les tons moyens car l'œil est plus sensible au vert. Une légère S-curve sur le canal V amplifie le contraste des tons moyens avec une légère vibrance naturelle.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Canal Bleu (B)</div>
+    <div class="param-range">Froid / Ambre</div>
+    <div class="param-desc">Monter la courbe B = ajouter du bleu, de la fraîcheur. Descendre = ajouter de l'ambre (complémentaire du bleu). C'est le canal le plus utilisé pour les looks cinématiques : lever les ombres B crée le look "teal shadows" caractéristique du cinéma moderne. Descendre les HL B = hautes lumières plus ambrées, split toning classique.</div>
+  </div>
+</div>
+
+<div class="insight">
+  <div class="insight-label">La logique des couleurs complémentaires</div>
+  <p>Chaque canal R, V, B a une couleur complémentaire : Cyan (opposé du Rouge), Magenta (opposé du Vert), Jaune/Ambre (opposé du Bleu). <strong>Monter un canal ajoute sa couleur, descendre ajoute sa complémentaire.</strong> Comprendre cette symétrie te permet de cibler précisément la teinte souhaitée sans essais aléatoires.</p>
+</div>
+
+<h3 class="section-title" id="effets">Effets par canal — tableau de référence</h3>
+
+<table>
+  <tr><th>Canal</th><th>Zone</th><th>Manipulation</th><th>Effet visuel</th></tr>
+  <tr><td>R (Rouge)</td><td>Ombres</td><td>Lever les ombres R</td><td>Ombres légèrement rosées/orangées — look film chaud</td></tr>
+  <tr><td>R (Rouge)</td><td>Hautes lumières</td><td>Compresser les HL R</td><td>HL moins saturées en rouge — look plus neutre et propre</td></tr>
+  <tr><td>R (Rouge)</td><td>Global</td><td>Descendre légèrement</td><td>Dominante cyan/teal sur toute l'image</td></tr>
+  <tr><td>V (Vert)</td><td>Tons moyens</td><td>Légère S-curve V</td><td>Contraste dans les tons moyens, légère vivacité</td></tr>
+  <tr><td>V (Vert)</td><td>Global</td><td>Descendre légèrement</td><td>Dominante magenta discrète — look rétro</td></tr>
+  <tr><td>B (Bleu)</td><td>Ombres</td><td>Lever les ombres B</td><td>Ombres bleutées/teal — look cinéma contemporain</td></tr>
+  <tr><td>B (Bleu)</td><td>Hautes lumières</td><td>Descendre les HL B</td><td>HL plus ambrées/chaudes — split toning chaud/froid classique</td></tr>
+  <tr><td>B (Bleu)</td><td>Global</td><td>Lift global canal B</td><td>Atmosphère froide, nuit, hiver</td></tr>
+</table>
+
+<h3 class="section-title" id="courbe-neutre">Courbe neutre vs courbe modifiée</h3>
+
+<p>Une courbe RVB neutre est une diagonale parfaite — chaque canal reproduit identiquement sa valeur d'entrée en sortie. Dès que tu modifies cette diagonale sur un canal, tu crées à la fois un changement de luminosité ET une teinture colorée.</p>
+
+<div class="param-grid">
+  <div class="param-item">
+    <div class="param-name">Lift des ombres filmique</div>
+    <div class="param-range">Canal B — point bas monté</div>
+    <div class="param-desc">Prends le point noir (coin bas gauche) du canal B et monte-le : E:0 → S:8 à 15. Les ombres ne descendent plus à 0 en bleu — elles ont une base bleutée. Combiné avec les ombres R neutres ou légèrement levées, tu obtiens un look teal profond très cinématique.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Compression HL ambrée</div>
+    <div class="param-range">Canal B — coin haut abaissé</div>
+    <div class="param-desc">Descends le point blanc du canal B : E:100 → S:88 à 92. Les hautes lumières perdent une partie de leur composante bleue — elles deviennent légèrement ambrées/orangées. C'est la "chaleur" des hautes lumières dans le look split toning teal & orange.</div>
+  </div>
+</div>
+
+<div class="blockquote">
+  <strong>Le split toning teal & orange :</strong> lever les ombres du canal B (ombres froides) + descendre les HL du canal B (HL ambrées) + légèrement lever les ombres du canal R. Cette combinaison sur deux ou trois canaux produit le contraste chaud/froid caractéristique du cinéma numérique moderne.
+</div>
+
+<h3 class="section-title" id="usages">Cas d'usage créatifs</h3>
+
+<div class="wf-problem">
+  <div class="wf-problem-title">Look Kodak Portra — film doux et chaud</div>
+  <div class="wf-problem-body">
+    <div class="wf-solution">
+      <div class="wf-solution-label">Recette courbes RVB</div>
+      <p><strong>Canal R :</strong> lever légèrement les ombres (E:0 → S:8) — chaleur dans les tons sombres.<br>
+      <strong>Canal V :</strong> légère S-curve dans les tons moyens (E:30 → S:28, E:70 → S:72).<br>
+      <strong>Canal B :</strong> descendre légèrement les HL (E:100 → S:92) — complémentaire ambrée dans les clairs.<br>
+      Résultat : peaux chaudes, ombres légèrement teintées, hautes lumières dorées.</p>
+    </div>
+  </div>
+</div>
+
+<div class="wf-problem">
+  <div class="wf-problem-title">Look mat désaturé — cinéma européen</div>
+  <div class="wf-problem-body">
+    <div class="wf-solution">
+      <div class="wf-solution-label">Recette courbes RVB</div>
+      <p><strong>Canal R :</strong> comprimer légèrement les HL (E:100 → S:93).<br>
+      <strong>Canal V :</strong> légèrement descendre tout (E:0 → S:4, E:100 → S:95).<br>
+      <strong>Canal B :</strong> lever les ombres (E:0 → S:12) + comprimer les HL (E:100 → S:90).<br>
+      Résultat : ombres teal, HL légèrement ambrées, image "plate" avec du caractère. Combine avec un lift des noirs sur la courbe tonale principale.</p>
+    </div>
+  </div>
+</div>
+
+<div class="wf-problem">
+  <div class="wf-problem-title">Look vintage — rétro dégradé</div>
+  <div class="wf-problem-body">
+    <div class="wf-solution">
+      <div class="wf-solution-label">Recette courbes RVB</div>
+      <p><strong>Canal R :</strong> lever les ombres (E:0 → S:10) + légèrement comprimer les HL.<br>
+      <strong>Canal V :</strong> descendre légèrement (dominante magenta discrète dans les tons moyens).<br>
+      <strong>Canal B :</strong> descendre légèrement (E:100 → S:88) — HL ambrées/jaunies.<br>
+      Résultat : look photo ancienne, teintes chaudes avec un soupçon de magenta, hautes lumières délavées.</p>
+    </div>
+  </div>
+</div>
+
+<div class="insight">
+  <div class="insight-label">Courbes RVB vs Color Wheels</div>
+  <p>Les courbes RVB et les Color Wheels font des choses similaires (colorer les ombres, HL, tons moyens) mais avec une logique différente. Les <strong>courbes RVB</strong> donnent un contrôle précis par plage tonale exacte avec toute la souplesse d'une courbe. Les <strong>Color Wheels</strong> sont plus intuitives visuellement (tu pointes vers une couleur) mais moins précises sur les transitions. En pratique : commence avec les Color Wheels pour trouver l'intention, affine avec les courbes RVB pour la précision.</p>
+</div>
+
+</div>
