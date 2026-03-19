@@ -270,33 +270,33 @@ main {
 }
 .workflow-step {
   display: flex;
-  gap: 20px;
+  gap: 14px;
   position: relative;
 }
 .workflow-step:not(:last-child)::after {
   content: '';
   position: absolute;
-  left: 15px;
-  top: 32px;
+  left: 13px;
+  top: 28px;
   width: 1px;
-  height: calc(100% + 0px);
+  height: 100%;
   background: var(--border);
 }
 .step-num {
-  width: 32px; height: 32px;
+  width: 28px; height: 28px;
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 500;
   flex-shrink: 0;
   position: relative;
   z-index: 1;
 }
 .step-content {
-  padding: 4px 0 28px;
+  padding: 4px 0 14px;
 }
-.step-content h4 { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+.step-content h4 { font-size: 13px; font-weight: 500; margin-bottom: 2px; }
 .step-content p { font-size: 13px; color: var(--muted); }
 .step-notes {
   list-style: none; padding: 0; margin: 6px 0 0 0;
