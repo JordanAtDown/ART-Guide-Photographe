@@ -142,38 +142,80 @@ permalink: '/modules/workflow-reportage/'
 
 <h3 class="section-title" id="logique">Logique de développement reportage dans ART</h3>
 
-<div class="wf-steps">
-  <div class="wf-steps-label">Ordre de traitement recommandé</div>
-  <pre>1. Triage d'abord — décide du traitement
-   → Couleur ou N&B ? Cette décision change tout le reste.
-   → Si lumière impossible → N&B
-   → Si couleur pertinente au propos → couleur
-
-2. Balance des Blancs
-   → Pour le couleur : corrige la dominante principale
-   → Attention au curseur Teinte pour les dominantes vertes (néons)
-   → Pour le N&B : moins critique — mais corrige quand même avant conversion
-
-3. Exposition + Égaliseur Tonal
-   → Remonte les ombres pour déboucher les zones sombres
-   → Acceptable de laisser des noirs profonds — c'est le reportage, pas le portrait
-
-4. Courbes Tonales
-   → S-curve plus marquée que pour le portrait
-   → Noirs assumés : le point bas de la S peut descendre plus
-
-5. HSL (si couleur)
-   → Correction ciblée des dominantes résiduelles
-   → Pas de color grading visible — rester dans le documentaire
-
-6. Lissage (NR)
-   → Chrominance : réduis
-   → Luminance : laisse si le grain est cohérent avec l'ambiance
-
-7. Si N&B → Mélange des Canaux
-   → Bleus : baisse légèrement pour assombrir le ciel et les ombres
-   → Rouges/Oranges : monte pour éclaircir les peaux
-   → Verts : ajuste selon la présence de végétation dans le cadre</pre>
+<div class="workflow">
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(148,163,184,0.15);color:#94a3b8">1</div>
+    <div class="step-content">
+      <h4>Triage — Couleur ou N&amp;B ?</h4>
+      <ul class="step-notes">
+        <li>Cette décision change tout le reste — à prendre en premier</li>
+        <li>Si lumière impossible → <strong>N&amp;B</strong></li>
+        <li>Si couleur pertinente au propos → <strong>couleur</strong></li>
+      </ul>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(148,163,184,0.15);color:#94a3b8">2</div>
+    <div class="step-content">
+      <h4>Balance des Blancs</h4>
+      <ul class="step-notes">
+        <li>Pour la couleur : corrige la dominante principale</li>
+        <li>Attention au curseur <strong>Teinte</strong> pour les dominantes vertes (néons)</li>
+        <li>Pour le N&amp;B : moins critique — mais corrige quand même avant conversion</li>
+      </ul>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(148,163,184,0.15);color:#94a3b8">3</div>
+    <div class="step-content">
+      <h4>Exposition + Égaliseur Tonal</h4>
+      <ul class="step-notes">
+        <li>Remonte les ombres pour déboucher les zones sombres</li>
+        <li>Acceptable de laisser des noirs profonds — c'est le reportage, pas le portrait</li>
+      </ul>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(148,163,184,0.15);color:#94a3b8">4</div>
+    <div class="step-content">
+      <h4>Courbes Tonales</h4>
+      <ul class="step-notes">
+        <li>S-curve plus marquée que pour le portrait</li>
+        <li>Noirs assumés : le point bas de la S peut descendre plus</li>
+      </ul>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(148,163,184,0.15);color:#94a3b8">5</div>
+    <div class="step-content">
+      <h4>HSL <span class="step-tag">si couleur</span></h4>
+      <ul class="step-notes">
+        <li>Correction ciblée des dominantes résiduelles</li>
+        <li>Pas de color grading visible — rester dans le documentaire</li>
+      </ul>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(148,163,184,0.15);color:#94a3b8">6</div>
+    <div class="step-content">
+      <h4>Lissage (NR)</h4>
+      <ul class="step-notes">
+        <li>Chrominance : réduis</li>
+        <li>Luminance : laisse si le grain est cohérent avec l'ambiance</li>
+      </ul>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(148,163,184,0.15);color:#94a3b8">7</div>
+    <div class="step-content">
+      <h4>Mélange des Canaux <span class="step-tag">si N&amp;B</span></h4>
+      <ul class="step-notes">
+        <li>Bleus : baisse légèrement pour assombrir le ciel et les ombres</li>
+        <li>Rouges/Oranges : monte pour éclaircir les peaux</li>
+        <li>Verts : ajuste selon la présence de végétation dans le cadre</li>
+      </ul>
+    </div>
+  </div>
 </div>
 
 <h3 class="section-title" id="ethique">L'éthique de la retouche en reportage</h3>

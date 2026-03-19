@@ -124,29 +124,71 @@ permalink: '/modules/workflow-paysage/'
 
 <h3 class="section-title" id="logique">Logique de développement paysage dans ART</h3>
 
-<div class="wf-steps">
-  <div class="wf-steps-label">Ordre de traitement recommandé</div>
-  <pre>1. Balance des Blancs
-   → Fixe l'ambiance thermique : froid (bleu) ou chaud (orange/doré)
-   → Ne pas neutraliser systématiquement — la lumière du coucher de soleil est chaude par nature
-
-2. Log Tone Mapping (si plage dynamique large)
-   → Automatique d'abord, puis affiner Blanc EV / Noir EV
-
-3. Exposition + Égaliseur Tonal
-   → Exposition globale, puis sculpting ombres / HLs
-
-4. Courbes Tonales
-   → S-curve légère pour le "peps"
-
-5. HSL — couleur par couleur
-   → Verts, Bleus, Jaunes, Cyans selon le terrain
-
-6. Correction Couleurs (Color Wheels)
-   → Ombres vers teal/bleu froid, HLs légèrement chaudes — le classique paysage contrasté
-
-7. Texture + Contraste Local
-   → En dernier, 0.2–0.35 max</pre>
+<div class="workflow">
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(52,211,153,0.15);color:#34d399">1</div>
+    <div class="step-content">
+      <h4>Balance des Blancs</h4>
+      <ul class="step-notes">
+        <li>Fixe l'ambiance thermique : froid (bleu) ou chaud (orange/doré)</li>
+        <li>Ne pas neutraliser systématiquement — la lumière du coucher de soleil est chaude par nature</li>
+      </ul>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(52,211,153,0.15);color:#34d399">2</div>
+    <div class="step-content">
+      <h4>Log Tone Mapping <span class="step-tag">si plage dynamique large</span></h4>
+      <ul class="step-notes">
+        <li>Automatique d'abord, puis affiner <strong>Blanc EV</strong> / <strong>Noir EV</strong></li>
+      </ul>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(52,211,153,0.15);color:#34d399">3</div>
+    <div class="step-content">
+      <h4>Exposition + Égaliseur Tonal</h4>
+      <ul class="step-notes">
+        <li>Exposition globale, puis sculpting ombres / HLs</li>
+      </ul>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(52,211,153,0.15);color:#34d399">4</div>
+    <div class="step-content">
+      <h4>Courbes Tonales</h4>
+      <ul class="step-notes">
+        <li>S-curve légère pour le contraste et la présence</li>
+      </ul>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(52,211,153,0.15);color:#34d399">5</div>
+    <div class="step-content">
+      <h4>HSL — couleur par couleur</h4>
+      <ul class="step-notes">
+        <li>Verts, Bleus, Jaunes, Cyans selon le terrain</li>
+      </ul>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(52,211,153,0.15);color:#34d399">6</div>
+    <div class="step-content">
+      <h4>Correction Couleurs (Color Wheels)</h4>
+      <ul class="step-notes">
+        <li>Ombres vers teal/bleu froid, HLs légèrement chaudes — le classique paysage contrasté</li>
+      </ul>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(52,211,153,0.15);color:#34d399">7</div>
+    <div class="step-content">
+      <h4>Texture + Contraste Local</h4>
+      <ul class="step-notes">
+        <li>En dernier — 0.2–0.35 max</li>
+      </ul>
+    </div>
+  </div>
 </div>
 
 <h3 class="section-title" id="attention">Points d'attention spécifiques au paysage</h3>

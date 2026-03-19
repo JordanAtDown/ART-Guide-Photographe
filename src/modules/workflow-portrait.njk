@@ -121,35 +121,70 @@ permalink: '/modules/workflow-portrait/'
 
 <h3 class="section-title" id="logique">Logique de développement portrait dans ART</h3>
 
-<div class="wf-steps">
-  <div class="wf-steps-label">Ordre de traitement recommandé</div>
-  <pre>1. Balance des Blancs
-   → C'est le réglage le plus important en portrait
-   → Cherche le point neutre, puis ajuste légèrement selon l'ambiance lumineuse
-   → Lumière chaude (studio, coucher de soleil) : 5000–5800K
-   → Lumière froide (extérieur ombragé, flash) : 6000–6500K puis corriger teinte si besoin
-
-2. Exposition + Égaliseur Tonal
-   → Exposition globale pour placer le visage
-   → Ombres : monte légèrement pour déboucher les zones sombres du visage
-   → HLs : baisse légèrement si la peau est un peu surexposée
-
-3. Courbes Tonales
-   → S-curve TRÈS douce
-   → Point bas (ombres) légèrement relevé — évite les noirs trop profonds sur le visage
-
-4. HSL — Orange et Rouge en priorité
-   → Orange : le canal des tons chair
-   → Saturation Orange : ajuste jusqu'à ce que la peau soit naturelle
-   → Luminance Orange : monte légèrement pour de l'éclat, baisse pour un rendu plus mat
-
-5. Correction Couleurs (Color Wheels)
-   → Tons moyens : légère rotation vers l'orange-chaud
-   → Ombres : légère rotation vers le bleu/violet froid — crée un beau contraste chaud/froid
-
-6. Lissage (NR) — minimal
-   → Seulement pour réduire le bruit visible
-   → Ne pas utiliser pour lisser la peau — c'est le travail d'Affinity</pre>
+<div class="workflow">
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(249,115,22,0.15);color:#f97316">1</div>
+    <div class="step-content">
+      <h4>Balance des Blancs</h4>
+      <ul class="step-notes">
+        <li>Réglage le plus important en portrait — tout part de là</li>
+        <li>Lumière chaude (studio, coucher de soleil) : <strong>5000–5800K</strong></li>
+        <li>Lumière froide (extérieur ombragé, flash) : <strong>6000–6500K</strong> puis corriger teinte si besoin</li>
+      </ul>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(249,115,22,0.15);color:#f97316">2</div>
+    <div class="step-content">
+      <h4>Exposition + Égaliseur Tonal</h4>
+      <ul class="step-notes">
+        <li>Exposition globale pour placer le visage</li>
+        <li>Ombres : monte légèrement pour déboucher les zones sombres du visage</li>
+        <li>HLs : baisse légèrement si la peau est un peu surexposée</li>
+      </ul>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(249,115,22,0.15);color:#f97316">3</div>
+    <div class="step-content">
+      <h4>Courbes Tonales</h4>
+      <ul class="step-notes">
+        <li>S-curve <strong>très douce</strong></li>
+        <li>Point bas (ombres) légèrement relevé — évite les noirs trop profonds sur le visage</li>
+      </ul>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(249,115,22,0.15);color:#f97316">4</div>
+    <div class="step-content">
+      <h4>HSL — Orange et Rouge en priorité</h4>
+      <ul class="step-notes">
+        <li><strong>Orange</strong> : le canal des tons chair</li>
+        <li>Saturation Orange : ajuste jusqu'à ce que la peau soit naturelle</li>
+        <li>Luminance Orange : monte légèrement pour de l'éclat, baisse pour un rendu plus mat</li>
+      </ul>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(249,115,22,0.15);color:#f97316">5</div>
+    <div class="step-content">
+      <h4>Correction Couleurs (Color Wheels)</h4>
+      <ul class="step-notes">
+        <li>Tons moyens : légère rotation vers l'orange-chaud</li>
+        <li>Ombres : légère rotation vers le bleu/violet froid — crée un beau contraste chaud/froid</li>
+      </ul>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(249,115,22,0.15);color:#f97316">6</div>
+    <div class="step-content">
+      <h4>Lissage (NR) <span class="step-tag">minimal</span></h4>
+      <ul class="step-notes">
+        <li>Seulement pour réduire le bruit visible</li>
+        <li>Ne pas utiliser pour lisser la peau — c'est le travail d'Affinity</li>
+      </ul>
+    </div>
+  </div>
 </div>
 
 <h3 class="section-title" id="art-vs-affinity">Ce que ART fait — et ce qu'on laisse à Affinity</h3>

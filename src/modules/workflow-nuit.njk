@@ -179,39 +179,87 @@ permalink: '/modules/workflow-nuit/'
 
 <h3 class="section-title" id="logique">Logique de développement nuit dans ART</h3>
 
-<div class="wf-steps">
-  <div class="wf-steps-label">Ordre de traitement recommandé</div>
-  <pre>0. Décision préalable — couleur ou N&B ?
-   → Si balance des blancs impossible ou grain dominant → N&B
-   → Si les couleurs sont l'enjeu de la photo → couleur
-
-1. Bruit d'Impulsion (si longue exposition)
-   → Pixels chauds à éliminer en tout premier
-   → Sur les courtes poses nocturnes à ISO élevé : pas nécessaire
-
-2. Lissage NR
-   → Chrominance : pousse jusqu'à éliminer les taches colorées
-   → Luminance : doux à modéré — le grain peut rester
-
-3. Exposition + Égaliseur Tonal
-   → Monte l'exposition pour que l'image soit lisible
-   → Ombres légèrement remontées — pas trop, les noirs profonds sont voulus
-
-4. Courbes Tonales
-   → S-curve modérée
-   → En N&B : point noir légèrement relevé pour conserver texture dans les ombres
-
-5. Balance des Blancs (si en couleur)
-   → Choisit une source de référence
-   → Teinte : corrige les dominantes vertes des néons si nécessaire
-
-6. HSL (si en couleur)
-   → Réduit les canaux qui "crient" (souvent Orange des lampadaires)
-   → Peut intensifier certains canaux si la palette est intentionnelle
-
-7. Si N&B → Mélange des Canaux
-   → Bleus vers le bas = ciel plus sombre, ambiance plus dramatique
-   → Rouges/Oranges vers le haut = zones éclairées plus lumineuses</pre>
+<div class="workflow">
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(129,140,248,0.15);color:#818cf8">?</div>
+    <div class="step-content">
+      <h4>Décision préalable — Couleur ou N&amp;B ?</h4>
+      <ul class="step-notes">
+        <li>Si balance des blancs impossible ou grain dominant → <strong>N&amp;B</strong></li>
+        <li>Si les couleurs sont l'enjeu de la photo → <strong>couleur</strong></li>
+      </ul>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(129,140,248,0.15);color:#818cf8">1</div>
+    <div class="step-content">
+      <h4>Bruit d'Impulsion <span class="step-tag">si longue exposition</span></h4>
+      <ul class="step-notes">
+        <li>Pixels chauds à éliminer en tout premier</li>
+        <li>Sur les courtes poses nocturnes à ISO élevé : pas nécessaire</li>
+      </ul>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(129,140,248,0.15);color:#818cf8">2</div>
+    <div class="step-content">
+      <h4>Lissage NR</h4>
+      <ul class="step-notes">
+        <li>Chrominance : pousse jusqu'à éliminer les taches colorées</li>
+        <li>Luminance : doux à modéré — le grain peut rester</li>
+      </ul>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(129,140,248,0.15);color:#818cf8">3</div>
+    <div class="step-content">
+      <h4>Exposition + Égaliseur Tonal</h4>
+      <ul class="step-notes">
+        <li>Monte l'exposition pour que l'image soit lisible</li>
+        <li>Ombres légèrement remontées — pas trop, les noirs profonds sont voulus</li>
+      </ul>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(129,140,248,0.15);color:#818cf8">4</div>
+    <div class="step-content">
+      <h4>Courbes Tonales</h4>
+      <ul class="step-notes">
+        <li>S-curve modérée</li>
+        <li>En N&amp;B : point noir légèrement relevé pour conserver la texture dans les ombres</li>
+      </ul>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(129,140,248,0.15);color:#818cf8">5</div>
+    <div class="step-content">
+      <h4>Balance des Blancs <span class="step-tag">si couleur</span></h4>
+      <ul class="step-notes">
+        <li>Choisit une source de référence — la lumière dominante sur le sujet</li>
+        <li>Teinte : corrige les dominantes vertes des néons si nécessaire</li>
+      </ul>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(129,140,248,0.15);color:#818cf8">6</div>
+    <div class="step-content">
+      <h4>HSL <span class="step-tag">si couleur</span></h4>
+      <ul class="step-notes">
+        <li>Réduit les canaux qui "crient" (souvent Orange des lampadaires)</li>
+        <li>Peut intensifier certains canaux si la palette est intentionnelle</li>
+      </ul>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(129,140,248,0.15);color:#818cf8">7</div>
+    <div class="step-content">
+      <h4>Mélange des Canaux <span class="step-tag">si N&amp;B</span></h4>
+      <ul class="step-notes">
+        <li>Bleus vers le bas = ciel plus sombre, ambiance plus dramatique</li>
+        <li>Rouges/Oranges vers le haut = zones éclairées plus lumineuses</li>
+      </ul>
+    </div>
+  </div>
 </div>
 
 <h3 class="section-title" id="attention">Points d'attention spécifiques</h3>

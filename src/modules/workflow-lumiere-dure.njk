@@ -179,48 +179,102 @@ permalink: '/modules/workflow-lumiere-dure/'
 
 <h3 class="section-title" id="logique">Logique de développement soleil d'été dans ART</h3>
 
-<div class="wf-steps">
-  <div class="wf-steps-label">Ordre de traitement recommandé</div>
-  <pre>0. Décision préalable
-   → Assumer le contraste ou dompter la dynamique ?
-   → Pour la mer : souvent hybride — récupère le ciel, assume les ombres
-
-1. Exposition — Reconstruction Hautes Lumières
-   → Mode : Propagation de la couleur, Adoucissement 25–35
-   → Avant tout autre réglage — c'est la base
-
-2. Log Tone Mapping (si dynamique très large)
-   → Automatique d'abord
-   → Blanc EV : baisse pour récupérer le ciel
-   → Noir EV : monte légèrement si les ombres sont trop bouchées
-   → Résiste à l'envie de tout ouvrir — garde le punch
-
-3. Égaliseur Tonal
-   → Hautes Lumières : baisse encore si le ciel reste trop blanc
-   → Ombres : selon décision préalable — laisse profondes ou débouche légèrement
-
-4. Courbes Tonales
-   → S-curve douce qui protège les tons moyens
-   → Ne pas pousser les extrêmes — ils sont déjà extrêmes
-
-5. Balance des Blancs
-   → Sous soleil d'été : température souvent correcte (5500–6000K)
-   → Ajuste si la scène tire vers le jaune trop chaud ou le bleu trop froid
-
-6. HSL — couleurs
-   → Bleu : saturation et luminance selon la mer
-   → Cyan : idem
-   → Jaune : si le sable est trop agressif
-   → Ne pas monter la saturation globale
-
-7. Color Wheels (si look méditerranéen voulu)
-   → Ombres légèrement teal — mer et ombres froides
-   → HLs légèrement chaudes — soleil et reflets
-   → Saturation très basse sur les deux (0.05–0.10)
-
-8. Détail en dernier
-   → Texture modérée sur les rochers et l'eau
-   → Contraste Local léger pour la mer si elle manque de présence</pre>
+<div class="workflow">
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(245,158,11,0.15);color:#f59e0b">?</div>
+    <div class="step-content">
+      <h4>Décision préalable</h4>
+      <ul class="step-notes">
+        <li>Assumer le contraste ou dompter la dynamique ?</li>
+        <li>Pour la mer : souvent <strong>hybride</strong> — récupère le ciel, assume les ombres</li>
+      </ul>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(245,158,11,0.15);color:#f59e0b">1</div>
+    <div class="step-content">
+      <h4>Exposition — Reconstruction Hautes Lumières</h4>
+      <ul class="step-notes">
+        <li>Mode : <strong>Propagation de la couleur</strong>, Adoucissement 25–35</li>
+        <li>Avant tout autre réglage — c'est la base</li>
+      </ul>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(245,158,11,0.15);color:#f59e0b">2</div>
+    <div class="step-content">
+      <h4>Log Tone Mapping <span class="step-tag">si dynamique très large</span></h4>
+      <ul class="step-notes">
+        <li>Automatique d'abord</li>
+        <li><strong>Blanc EV</strong> : baisse pour récupérer le ciel</li>
+        <li><strong>Noir EV</strong> : monte légèrement si les ombres sont trop bouchées</li>
+        <li>Résiste à l'envie de tout ouvrir — garde le punch</li>
+      </ul>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(245,158,11,0.15);color:#f59e0b">3</div>
+    <div class="step-content">
+      <h4>Égaliseur Tonal</h4>
+      <ul class="step-notes">
+        <li>Hautes Lumières : baisse encore si le ciel reste trop blanc</li>
+        <li>Ombres : selon décision préalable — laisse profondes ou débouche légèrement</li>
+      </ul>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(245,158,11,0.15);color:#f59e0b">4</div>
+    <div class="step-content">
+      <h4>Courbes Tonales</h4>
+      <ul class="step-notes">
+        <li>S-curve douce qui protège les tons moyens</li>
+        <li>Ne pas pousser les extrêmes — ils sont déjà extrêmes</li>
+      </ul>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(245,158,11,0.15);color:#f59e0b">5</div>
+    <div class="step-content">
+      <h4>Balance des Blancs</h4>
+      <ul class="step-notes">
+        <li>Sous soleil d'été : température souvent correcte (<strong>5500–6000K</strong>)</li>
+        <li>Ajuste si la scène tire vers le jaune trop chaud ou le bleu trop froid</li>
+      </ul>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(245,158,11,0.15);color:#f59e0b">6</div>
+    <div class="step-content">
+      <h4>HSL — couleurs</h4>
+      <ul class="step-notes">
+        <li>Bleu : saturation et luminance selon la mer</li>
+        <li>Cyan : idem</li>
+        <li>Jaune : si le sable est trop agressif</li>
+        <li>Ne pas monter la saturation globale</li>
+      </ul>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(245,158,11,0.15);color:#f59e0b">7</div>
+    <div class="step-content">
+      <h4>Color Wheels <span class="step-tag">si look méditerranéen</span></h4>
+      <ul class="step-notes">
+        <li>Ombres légèrement teal — mer et ombres froides</li>
+        <li>HLs légèrement chaudes — soleil et reflets</li>
+        <li>Saturation très basse sur les deux (0.05–0.10)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(245,158,11,0.15);color:#f59e0b">8</div>
+    <div class="step-content">
+      <h4>Détail en dernier</h4>
+      <ul class="step-notes">
+        <li>Texture modérée sur les rochers et l'eau</li>
+        <li>Contraste Local léger pour la mer si elle manque de présence</li>
+      </ul>
+    </div>
+  </div>
 </div>
 
 <h3 class="section-title" id="attention">Points d'attention spécifiques</h3>
