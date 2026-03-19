@@ -20,6 +20,21 @@ function closeNav() {
 
 document.querySelectorAll('nav a').forEach(a => a.addEventListener('click', closeNav));
 
+// ─── Bouton retour en haut ───
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('backToTop');
+  if (btn) btn.classList.toggle('visible', window.scrollY > 400);
+});
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.getElementById('backToTop');
+  if (btn) btn.addEventListener('click', scrollToTop);
+});
+
 // ─── Lexique — Données ───
 const LEXIQUE_DATA = {
   'RAW': { short: 'Format de fichier brut du capteur photo.', cat: 'general' },
