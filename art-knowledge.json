@@ -2,8 +2,8 @@
   "meta": {
     "source": "ART Raw Image Processor — Documentation Photographe",
     "version": "1.0",
-    "generated": "2026-03-19T17:45:11.302Z",
-    "total_modules": 22,
+    "generated": "2026-03-19T17:59:31.280Z",
+    "total_modules": 23,
     "description": "Knowledge base extraite des sources Eleventy pour usage par MCP ou tout système de génération de fichiers .arp"
   },
   "modules": [
@@ -1098,6 +1098,85 @@
       ],
       "warnings": [],
       "tables": []
+    },
+    {
+      "id": "mod-regard",
+      "name": "Le Regard du Photographe",
+      "subtitle": "La retouche n'est pas une correction de la réalité — c'est sa traduction visuelle",
+      "category": "Regard & Pratique",
+      "params": [],
+      "tips": [],
+      "warnings": [],
+      "tables": [
+        {
+          "headers": [
+            "Forme de l'histogramme",
+            "Lecture",
+            "Action possible"
+          ],
+          "rows": [
+            [
+              "Pic collé à droite",
+              "Hautes lumières cramées",
+              "Récupérer avec le curseur Hautes Lumières"
+            ],
+            [
+              "Pic collé à gauche",
+              "Ombres bouchées",
+              "Ouvrir les ombres — mais attention au bruit"
+            ],
+            [
+              "Centré, étalé",
+              "Dynamique équilibrée",
+              "Travail de finesse — courbes tonales"
+            ],
+            [
+              "Tout au centre",
+              "Image \"molle\", peu contrastée",
+              "Ajouter du contraste — vérifier l'intention"
+            ],
+            [
+              "Deux pics aux extrêmes",
+              "Forte plage dynamique",
+              "Candidat idéal pour le Log Tone Mapping"
+            ]
+          ]
+        },
+        {
+          "headers": [
+            "Teintes",
+            "Émotions associées",
+            "Usage typique"
+          ],
+          "rows": [
+            [
+              "Chauds (orange, ocre, doré)",
+              "Chaleur, intimité, nostalgie",
+              "Portraits \"golden hour\", ambiances d'automne"
+            ],
+            [
+              "Froids (bleu, cyan, gris)",
+              "Distance, calme, mélancolie",
+              "Paysages nordiques, scènes urbaines nocturnes"
+            ],
+            [
+              "Verts naturels",
+              "Sérénité, vitalité, nature",
+              "Paysages, scènes de plein air"
+            ],
+            [
+              "Désaturés / neutres",
+              "Tension, sobriété, élégance",
+              "Photographie documentaire, noir et blanc partiel"
+            ],
+            [
+              "Contrastes complémentaires (orange/bleu)",
+              "Dynamisme, cinéma, impact",
+              "Color grading type \"cinématique\""
+            ]
+          ]
+        }
+      ]
     },
     {
       "id": "mod-saturation",
