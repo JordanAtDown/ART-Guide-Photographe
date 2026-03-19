@@ -2,8 +2,8 @@
   "meta": {
     "source": "ART Raw Image Processor — Documentation Photographe",
     "version": "1.0",
-    "generated": "2026-03-18T19:42:50.859Z",
-    "total_modules": 21,
+    "generated": "2026-03-19T17:45:11.302Z",
+    "total_modules": 22,
     "description": "Knowledge base extraite des sources Eleventy pour usage par MCP ou tout système de génération de fichiers .arp"
   },
   "modules": [
@@ -706,6 +706,16 @@
       "warnings": [
         "⚠️ **Curseur Adoucissement** (uniquement visible en mode \"Propagation de la couleur\") : valeur recommandée 20–40. En dessous de 10, risque de halo visible à la jonction ciel/horizon. Au-dessus de 60, la reconstruction devient trop étalée et peut affecter des zones qui n'étaient pas surexposées."
       ],
+      "tables": []
+    },
+    {
+      "id": "mod-lexique",
+      "name": "Lexique ART",
+      "subtitle": "35 termes essentiels pour comprendre ART et la photographie numérique",
+      "category": "Référence",
+      "params": [],
+      "tips": [],
+      "warnings": [],
       "tables": []
     },
     {
