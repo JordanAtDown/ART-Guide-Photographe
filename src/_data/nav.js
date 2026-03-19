@@ -11,7 +11,8 @@ module.exports = [
   {
     section: "Regard & Pratique",
     items: [
-      { id: "regard", label: "Le Regard du Photographe", url: "/modules/regard/", color: "#d4a853" }
+      { id: "regard", label: "Le Regard du Photographe", url: "/modules/regard/", color: "#d4a853" },
+      { id: "direction-artistique", label: "Direction Artistique & Looks", url: "/modules/direction-artistique/", color: "#f97316" }
     ]
   },
   {
