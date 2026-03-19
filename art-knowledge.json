@@ -2,8 +2,8 @@
   "meta": {
     "source": "ART Raw Image Processor — Documentation Photographe",
     "version": "1.0",
-    "generated": "2026-03-19T19:33:33.666Z",
-    "total_modules": 29,
+    "generated": "2026-03-19T19:40:00.023Z",
+    "total_modules": 30,
     "description": "Knowledge base extraite des sources Eleventy pour usage par MCP ou tout système de génération de fichiers .arp"
   },
   "modules": [
@@ -1364,6 +1364,85 @@
               "Brume atmosphérique",
               "Élimination de la Brume",
               "Dosé — max 0.30"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mod-workflow-nuit",
+      "name": "Nuit & Longue Exposition",
+      "subtitle": "Préserver l'ambiance nocturne tout en domptant le bruit",
+      "category": "Nuit & Longue Exposition",
+      "params": [],
+      "tips": [],
+      "warnings": [],
+      "tables": [
+        {
+          "headers": [
+            "Reste en couleur si…",
+            "Passe en N&B si…"
+          ],
+          "rows": [
+            [
+              "Les couleurs sont intentionnelles et cohérentes (néons oranges sur fond bleu nuit, lumières chaudes d'une ville)",
+              "La scène mélange des sources lumineuses incompatibles rendant la correction impossible"
+            ],
+            [
+              "La scène a une palette claire et maîtrisable",
+              "L'image tire sa force du contraste et des formes, pas des couleurs"
+            ],
+            [
+              "Tu photographies en longue exposition avec une balance des blancs contrôlée",
+              "Le bruit de chrominance est trop marqué — le N&B l'efface naturellement"
+            ],
+            [
+              "",
+              "Tu fais du street nocturne — le N&B est souvent plus honnête et plus fort"
+            ]
+          ]
+        },
+        {
+          "headers": [
+            "Rôle",
+            "Module",
+            "Priorité"
+          ],
+          "rows": [
+            [
+              "Bruit de chrominance",
+              "Lissage NR — Chrominance",
+              "Toujours — non-négociable"
+            ],
+            [
+              "Bruit de luminance",
+              "Lissage NR — Luminance",
+              "À doser selon l'ambiance"
+            ],
+            [
+              "Pixels chauds (longue expo)",
+              "Bruit d'Impulsion",
+              "Systématique en longue expo"
+            ],
+            [
+              "Balance des blancs impossible",
+              "Mélange des Canaux (N&B)",
+              "Alternative au combat colorimétrique"
+            ],
+            [
+              "Dynamique lumières/ombres",
+              "Égaliseur Tonal",
+              "Avant le Log — plus subtil"
+            ],
+            [
+              "Cas HDR extrême",
+              "Log Tone Mapping",
+              "Avec parcimonie — risque HDR artificiel"
+            ],
+            [
+              "Profondeur N&B",
+              "Courbes Tonales",
+              "Noirs relevés pour texture dans les ombres"
             ]
           ]
         }
