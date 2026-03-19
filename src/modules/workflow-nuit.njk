@@ -1,0 +1,231 @@
+---
+layout: base.njk
+title: 'Nuit & Longue Exposition — Workflow'
+permalink: '/modules/workflow-nuit/'
+---
+
+<a class="wf-back" href="{{ '/modules/workflows/' | url }}">← Workflows par genre</a>
+
+<div class="module-header">
+  <div class="module-tag"><div class="tag-dot" style="background:#818cf8"></div><span style="color:#818cf8">Nuit & Longue Exposition</span></div>
+  <h2>Nuit & Longue Exposition</h2>
+  <div class="subtitle">Préserver l'ambiance nocturne tout en domptant le bruit</div>
+</div>
+
+<div class="blockquote">
+  <strong>L'enjeu central :</strong> ton capteur a travaillé à la limite de ses capacités. Le RAW brut est bruité, les sources lumineuses sont hétérogènes, et la dynamique est souvent inversée par rapport au jour — les lumières ponctuelles cramées, les ombres noires. Le développement doit <strong>préserver l'ambiance nocturne</strong> tout en rendant l'image lisible et en domptant le bruit.
+</div>
+
+<div class="toc">
+  <div class="toc-title">Sommaire</div>
+  <ol>
+    <li><a href="#specificite">Ce qui rend la nuit spécifique</a></li>
+    <li><a href="#decision">La décision fondamentale : couleur ou N&amp;B ?</a></li>
+    <li><a href="#problemes">Problèmes typiques &amp; solutions dans ART</a></li>
+    <li><a href="#modules-cles">Les modules-clés</a></li>
+    <li><a href="#logique">Logique de développement</a></li>
+    <li><a href="#attention">Points d'attention</a></li>
+  </ol>
+</div>
+
+<div class="editorial">
+
+<h3 class="section-title" id="specificite">Ce qui rend la nuit spécifique</h3>
+
+<p>La photographie de nuit regroupe des situations très différentes, mais elles partagent toutes un problème fondamental : <strong>un capteur poussé à ses limites</strong>. ISO élevé, temps de pose long (parfois les deux), sources lumineuses artificielles multiples et incohérentes, plage dynamique inversée.</p>
+
+<p>Trois grandes situations avec leurs logiques propres :</p>
+
+<div class="param-grid" style="margin-top:16px;">
+  <div class="card">
+    <div style="font-size:11px;font-family:var(--mono);text-transform:uppercase;letter-spacing:0.08em;color:var(--accent2);margin-bottom:8px;">Paysage nocturne / longue exposition</div>
+    <p style="font-size:13px;color:var(--muted);line-height:1.6;margin:0;">Temps de pose de plusieurs secondes à plusieurs minutes. ISO modéré à élevé. Bruit thermique, filé de lumières, eau lisse, ciel étoilé éventuellement cramé par la pollution lumineuse.</p>
+  </div>
+  <div class="card">
+    <div style="font-size:11px;font-family:var(--mono);text-transform:uppercase;letter-spacing:0.08em;color:var(--accent2);margin-bottom:8px;">Street de nuit</div>
+    <p style="font-size:13px;color:var(--muted);line-height:1.6;margin:0;">Prise sur le vif, ISO très élevé, pas de contrôle sur la lumière. Mélange de sources : néons, lampadaires, enseignes. Bruit fort, balance des blancs quasi impossible à corriger — souvent l'argument décisif pour le noir et blanc.</p>
+  </div>
+  <div class="card">
+    <div style="font-size:11px;font-family:var(--mono);text-transform:uppercase;letter-spacing:0.08em;color:var(--accent2);margin-bottom:8px;">Portrait en faible lumière</div>
+    <p style="font-size:13px;color:var(--muted);line-height:1.6;margin:0;">Ambiance sombre intentionnelle ou contrainte. Lumière souvent directionnelle (une bougie, une fenêtre, un écran). Le bruit dans les ombres est le problème principal, mais l'ambiance doit être préservée.</p>
+  </div>
+</div>
+
+<h3 class="section-title" id="decision">La décision fondamentale : couleur ou noir et blanc ?</h3>
+
+<p>En photographie de nuit, cette question se pose systématiquement et en premier — avant tout réglage.</p>
+
+<table>
+  <tr><th>Reste en couleur si…</th><th>Passe en N&amp;B si…</th></tr>
+  <tr>
+    <td>Les couleurs sont intentionnelles et cohérentes (néons oranges sur fond bleu nuit, lumières chaudes d'une ville)</td>
+    <td>La scène mélange des sources lumineuses incompatibles rendant la correction impossible</td>
+  </tr>
+  <tr>
+    <td>La scène a une palette claire et maîtrisable</td>
+    <td>L'image tire sa force du contraste et des formes, pas des couleurs</td>
+  </tr>
+  <tr>
+    <td>Tu photographies en longue exposition avec une balance des blancs contrôlée</td>
+    <td>Le bruit de chrominance est trop marqué — le N&amp;B l'efface naturellement</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>Tu fais du street nocturne — le N&amp;B est souvent plus honnête et plus fort</td>
+  </tr>
+</table>
+
+<div class="insight" style="margin-top:16px;">
+  <div class="insight-label">Règle pratique</div>
+  <p>Si tu passes 10 minutes à essayer de corriger une balance des blancs impossible, la photo te dit de passer en N&amp;B.</p>
+</div>
+
+<h3 class="section-title" id="problemes">Problèmes typiques &amp; solutions dans ART</h3>
+
+<div class="wf-problem">
+  <div class="wf-problem-title">L'image est très bruyante — grain envahissant</div>
+  <div class="wf-problem-body">
+    <p>Le problème n°1 de la nuit. ISO élevé = bruit de luminance (grain) + bruit de chrominance (taches colorées).</p>
+    <div class="wf-solution">
+      <div class="wf-solution-label">Dans ART — module Lissage (NR)</div>
+      <p>Deux niveaux à traiter séparément :</p>
+      <ul>
+        <li><strong>Chrominance en premier</strong> — les taches colorées (rouge/vert dans les ombres) sont toujours indésirables. Pousse le curseur de chrominance jusqu'à les éliminer. C'est non-négociable.</li>
+        <li><strong>Luminance ensuite — avec intention</strong> — le grain de luminance est à doser selon l'ambiance voulue. Un grain homogène en street nocturne participe à l'atmosphère documentaire. Ne pas tout lisser.</li>
+      </ul>
+    </div>
+    <div class="blockquote" style="margin-top:12px;">
+      <strong>Équilibre clé :</strong> sur une photo de nuit en couleur, lisse la chrominance agressivement et la luminance modérément. Sur un N&amp;B de nuit, la luminance peut rester — voire être accentuée.
+    </div>
+    <div class="wf-solution" style="margin-top:12px;">
+      <div class="wf-solution-label">Bruit thermique des longues expositions</div>
+      <p>Sur des poses de plusieurs minutes, le capteur chauffe et génère du <strong>bruit thermique</strong> — des pixels chauds isolés, souvent rouges ou blancs, aléatoirement répartis. C'est là qu'intervient le module <strong>Bruit d'Impulsion</strong> : il cible et élimine ces pixels aberrants sans affecter le reste de l'image. À activer systématiquement sur les longues expositions.</p>
+    </div>
+  </div>
+</div>
+
+<div class="wf-problem">
+  <div class="wf-problem-title">Les lumières de ville sont cramées / halos autour des sources</div>
+  <div class="wf-problem-body">
+    <p>Les lampadaires, enseignes et phares créent des zones de surexposition ponctuelle impossibles à récupérer complètement — mais on peut limiter les halos.</p>
+    <div class="wf-solution">
+      <div class="wf-solution-label">Dans ART</div>
+      <ul>
+        <li><strong>Hautes lumières</strong> de l'Égaliseur Tonal : baisse pour compresser sans écrêter davantage</li>
+        <li><strong>Log Tone Mapping</strong> si la dynamique globale est très large (ciel sombre + sources très lumineuses) — attention, le Log peut donner un rendu "HDR" artificiel sur les scènes nocturnes. Utilise-le avec parcimonie, Blanc EV modéré.</li>
+      </ul>
+    </div>
+    <div class="blockquote" style="margin-top:12px;">
+      En longue exposition, les lumières cramées font souvent partie du rendu voulu — les halos de lampadaires sur l'eau sont de l'esthétique, pas une erreur.
+    </div>
+  </div>
+</div>
+
+<div class="wf-problem">
+  <div class="wf-problem-title">La balance des blancs est incohérente — tout semble faux</div>
+  <div class="wf-problem-body">
+    <p>Mélange de sources nocturnes : lampadaires sodium (orange), LED (bleu-blanc), néons (vert/magenta), feux (chaud). Aucune balance des blancs n'est "correcte" pour tout simultanément.</p>
+    <div class="wf-solution">
+      <div class="wf-solution-label">Trois approches</div>
+      <p><strong>1 — Choisir une source de référence</strong> : décide quelle lumière doit sembler naturelle (souvent la lumière dominante sur le sujet principal) et règle la BB sur elle. Le reste sera faux — accepte-le comme partie du rendu.</p>
+      <p><strong>2 — Viser le neutre impossible</strong> : si tu veux un rendu "journalistique" fidèle, la correction sera forcément un compromis. Utilise la pipette sur la zone la plus neutre disponible.</p>
+      <p><strong>3 — Passer en N&amp;B</strong> : élimine le problème à la source. La BB n'a plus d'importance.</p>
+    </div>
+  </div>
+</div>
+
+<div class="wf-problem">
+  <div class="wf-problem-title">L'image manque de profondeur — tout est sombre uniformément</div>
+  <div class="wf-problem-body">
+    <p>Un RAW nocturne bien exposé n'est pas une image noire uniforme. Il contient des nuances dans les ombres, des gradients de lumière, des textures dans les zones éclairées.</p>
+    <div class="wf-solution">
+      <div class="wf-solution-label">Dans ART</div>
+      <ul>
+        <li><strong>Exposition</strong> : monte globalement pour sortir l'image du noir. La nuit n'exige pas une image sombre — elle exige une image <em>lisible avec des noirs profonds</em>.</li>
+        <li><strong>Égaliseur Tonal</strong> : ombres et noirs modérément remontés — pas pour tout déboucher, mais pour révéler la texture dans les zones sombres qui en ont.</li>
+        <li><strong>Courbes Tonales</strong> : en N&amp;B nocturne, la courbe peut avoir les noirs relevés (point bas légèrement au-dessus de 0) pour éviter un aplat de noir sans texture dans les ombres.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="wf-problem">
+  <div class="wf-problem-title">Le ciel étoilé est bruité ET les étoiles manquent de définition</div>
+  <div class="wf-problem-body">
+    <p>Situation particulière de l'astrophotographie légère (non empilée).</p>
+    <div class="wf-solution">
+      <div class="wf-solution-label">Dans ART</div>
+      <ul>
+        <li><strong>Lissage NR</strong> : modes doux — préserve les étoiles (points lumineux ponctuels) tout en lissant le fond de ciel. Les modes trop agressifs confondent les étoiles avec le bruit et les effacent.</li>
+        <li><strong>Amplification Texture</strong> : une valeur légère peut accentuer les étoiles sans amplifier le bruit ambiant — tester avec précaution.</li>
+        <li><strong>Bruit d'Impulsion</strong> : élimine les pixels chauds sans toucher aux étoiles (qui ont un profil différent des artefacts thermiques).</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<h3 class="section-title" id="modules-cles">Les modules-clés pour la nuit</h3>
+
+<table>
+  <tr><th>Rôle</th><th>Module</th><th>Priorité</th></tr>
+  <tr><td>Bruit de chrominance</td><td>Lissage NR — Chrominance</td><td>Toujours — non-négociable</td></tr>
+  <tr><td>Bruit de luminance</td><td>Lissage NR — Luminance</td><td>À doser selon l'ambiance</td></tr>
+  <tr><td>Pixels chauds (longue expo)</td><td>Bruit d'Impulsion</td><td>Systématique en longue expo</td></tr>
+  <tr><td>Balance des blancs impossible</td><td>Mélange des Canaux (N&amp;B)</td><td>Alternative au combat colorimétrique</td></tr>
+  <tr><td>Dynamique lumières/ombres</td><td>Égaliseur Tonal</td><td>Avant le Log — plus subtil</td></tr>
+  <tr><td>Cas HDR extrême</td><td>Log Tone Mapping</td><td>Avec parcimonie — risque HDR artificiel</td></tr>
+  <tr><td>Profondeur N&amp;B</td><td>Courbes Tonales</td><td>Noirs relevés pour texture dans les ombres</td></tr>
+</table>
+
+<h3 class="section-title" id="logique">Logique de développement nuit dans ART</h3>
+
+<div class="wf-steps">
+  <div class="wf-steps-label">Ordre de traitement recommandé</div>
+  <pre>0. Décision préalable — couleur ou N&B ?
+   → Si balance des blancs impossible ou grain dominant → N&B
+   → Si les couleurs sont l'enjeu de la photo → couleur
+
+1. Bruit d'Impulsion (si longue exposition)
+   → Pixels chauds à éliminer en tout premier
+   → Sur les courtes poses nocturnes à ISO élevé : pas nécessaire
+
+2. Lissage NR
+   → Chrominance : pousse jusqu'à éliminer les taches colorées
+   → Luminance : doux à modéré — le grain peut rester
+
+3. Exposition + Égaliseur Tonal
+   → Monte l'exposition pour que l'image soit lisible
+   → Ombres légèrement remontées — pas trop, les noirs profonds sont voulus
+
+4. Courbes Tonales
+   → S-curve modérée
+   → En N&B : point noir légèrement relevé pour conserver texture dans les ombres
+
+5. Balance des Blancs (si en couleur)
+   → Choisit une source de référence
+   → Teinte : corrige les dominantes vertes des néons si nécessaire
+
+6. HSL (si en couleur)
+   → Réduit les canaux qui "crient" (souvent Orange des lampadaires)
+   → Peut intensifier certains canaux si la palette est intentionnelle
+
+7. Si N&B → Mélange des Canaux
+   → Bleus vers le bas = ciel plus sombre, ambiance plus dramatique
+   → Rouges/Oranges vers le haut = zones éclairées plus lumineuses</pre>
+</div>
+
+<h3 class="section-title" id="attention">Points d'attention spécifiques</h3>
+
+<div class="blockquote">
+  <strong>Le grain comme langage :</strong> en photographie de nuit — particulièrement en street — le grain est souvent une composante du rendu, pas un défaut à éliminer. Les grands photographes de nuit (Brassaï, Weegee, Anders Petersen) travaillaient avec un grain massif qui participait au caractère de leurs images. Ne pas chercher à tout lisser au point de plastifier.
+</div>
+
+<p><strong>L'exposition à la prise de vue conditionne tout :</strong> en nuit, la marge de rattrapage est étroite. Une image sous-exposée de nuit révèle un bruit de fond massif quand on remonte l'exposition — c'est bien pire que le jour. L'exposition doit être juste à la prise de vue, ou légèrement surexposée (exposer à droite sans cramer les sources lumineuses ponctuelles).</p>
+
+<div class="blockquote">
+  <strong>La longue exposition et le flou de bougé intentionnel :</strong> les flous d'eau, de circulation, de foule dans une longue exposition ne se traitent pas — ils font partie de l'image. Ne cherche pas à récupérer la netteté dans ces zones. En revanche, la netteté des éléments fixes (bâtiments, rochers) doit être bonne — applique la texture et le contraste local uniquement sur ces zones si nécessaire (masque local).
+</div>
+
+<p><strong>La cohérence d'une série nocturne :</strong> les conditions lumineuses changent rapidement la nuit (heure bleue vs nuit noire, pollution lumineuse selon les quartiers). Sur une série, décide si tu veux une cohérence stricte (même BB, même traitement) ou si tu assumes que chaque image vit dans sa propre ambiance lumineuse.</p>
+
+</div>
