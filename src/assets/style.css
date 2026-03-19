@@ -437,3 +437,90 @@ h3.section-title::after {
   height: 1px;
   background: var(--border);
 }
+
+/* ─── Hamburger button (desktop : caché) ─── */
+.nav-toggle {
+  display: none;
+}
+.nav-overlay {
+  display: none;
+}
+
+/* ─── Responsive mobile ─── */
+@media (max-width: 768px) {
+  /* Bouton hamburger */
+  .nav-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 14px;
+    left: 14px;
+    z-index: 200;
+    width: 40px;
+    height: 40px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-size: 18px;
+    cursor: pointer;
+  }
+
+  /* Overlay sombre derrière la nav */
+  .nav-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 99;
+  }
+  .nav-overlay.open {
+    display: block;
+  }
+
+  /* Container : 1 colonne */
+  .container {
+    grid-template-columns: 1fr;
+  }
+
+  /* Nav slide depuis la gauche */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100vh;
+    z-index: 100;
+    background: var(--bg);
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+  }
+  nav.open {
+    transform: translateX(0);
+  }
+
+  /* Header padding réduit */
+  header {
+    padding: 50px 20px 30px;
+  }
+
+  /* Main padding réduit */
+  main {
+    padding: 24px 16px;
+    max-width: 100%;
+  }
+
+  /* Grilles en 1 colonne */
+  .home-grid {
+    grid-template-columns: 1fr;
+  }
+  .preset-grid {
+    grid-template-columns: 1fr;
+  }
+  .workflow {
+    grid-template-columns: 1fr;
+  }
+  .param-grid {
+    grid-template-columns: 1fr;
+  }
+}
