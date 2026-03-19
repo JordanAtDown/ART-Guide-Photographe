@@ -292,6 +292,8 @@ main {
   flex-shrink: 0;
   position: relative;
   z-index: 1;
+  background: color-mix(in srgb, var(--wf-color, var(--accent2)) 14%, transparent);
+  color: var(--wf-color, var(--accent2));
 }
 .step-content {
   padding: 4px 0 14px;
