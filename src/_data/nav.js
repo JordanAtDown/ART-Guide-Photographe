@@ -20,9 +20,9 @@ module.exports = [
     items: [
       { id: "pipeline", label: "Pipeline de traitement RAW", url: "/modules/pipeline/", color: "#00d4aa" },
       { id: "ordremodules", label: "Méthodologie de traitement", url: "/modules/ordremodules/", color: "#00d4aa" },
-      { id: "workflow-complet", label: "Workflow complet", url: "/modules/workflow-complet/", color: "#22d3ee" },
+      { id: "workflow-complet", label: "Pipeline de développement", url: "/modules/workflow-complet/", color: "#22d3ee" },
       { id: "workflows", label: "Adapter son développement", url: "/modules/workflows/", color: "#34d399" },
-      { id: "art-affinity", label: "ART → Affinity : le pont", url: "/modules/art-affinity/", color: "#c084fc" }
+      { id: "art-affinity", label: "ART vers Affinity", url: "/modules/art-affinity/", color: "#c084fc" }
     ]
   },
   {
