@@ -1,0 +1,418 @@
+---
+layout: base.njk
+title: 'Diagnostiquer une photo'
+permalink: '/modules/diagnostiquer/'
+---
+
+<style>
+/* ─── Widget diagnostic ─── */
+.diag-wrap { font-size: 14px; color: var(--text); margin: 20px 0; }
+.diag-step { display: none; }
+.diag-step.diag-active { display: block; }
+.diag-step h4 { font-size: 14px; font-weight: 500; color: var(--text); margin: 0 0 6px; }
+.diag-q { font-size: 13px; color: var(--muted); margin: 0 0 14px; line-height: 1.6; }
+.diag-choices { display: flex; flex-direction: column; gap: 6px; }
+.diag-btn {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg3);
+  cursor: pointer; text-align: left;
+  color: var(--text); font-size: 13px; line-height: 1.5;
+  transition: border-color 0.15s, background 0.15s;
+  width: 100%;
+}
+.diag-btn:hover { border-color: #38bdf8; background: rgba(56,189,248,0.04); }
+.diag-btn-label { font-weight: 500; font-size: 12px; font-family: var(--mono); color: var(--muted); white-space: nowrap; min-width: 18px; margin-top: 1px; }
+.diag-bread { font-size: 11px; font-family: var(--mono); color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; }
+.diag-result { border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; background: var(--bg3); }
+.diag-result-tag { display: inline-block; font-size: 11px; font-weight: 500; font-family: var(--mono); padding: 2px 9px; border-radius: 99px; margin-bottom: 8px; letter-spacing: 0.03em; }
+.diag-tag-expo    { background: rgba(74,158,255,0.15);  color: #4a9eff; }
+.diag-tag-couleur { background: rgba(245,158,11,0.15); color: #f59e0b; }
+.diag-tag-contraste { background: rgba(96,165,250,0.13); color: #60a5fa; }
+.diag-tag-detail  { background: rgba(232,121,160,0.15); color: #e879a0; }
+.diag-tag-autre   { background: rgba(107,114,128,0.15); color: #6b7280; }
+.diag-result h5 { font-size: 14px; font-weight: 500; color: var(--text); margin: 0 0 6px; }
+.diag-result p { font-size: 13px; color: var(--muted); margin: 0 0 10px; line-height: 1.6; }
+.diag-mods { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+.diag-mod {
+  font-size: 11px; font-family: var(--mono);
+  padding: 2px 9px; border-radius: 99px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.03);
+  color: var(--muted);
+  text-decoration: none;
+  transition: border-color 0.15s, color 0.15s;
+}
+.diag-mod:hover { border-color: #38bdf8; color: var(--text); }
+.diag-mod.diag-primary { background: rgba(74,158,255,0.12); color: #4a9eff; border-color: rgba(74,158,255,0.35); font-weight: 500; }
+.diag-back {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 12px; color: var(--muted); cursor: pointer;
+  margin-top: 12px; padding: 4px 0;
+  background: none; border: none; text-align: left;
+  transition: color 0.15s;
+}
+.diag-back:hover { color: var(--text); }
+.diag-back-row { display: flex; flex-direction: column; gap: 4px; }
+.diag-reset { display: none; margin-top: 16px; }
+.diag-reset.diag-active { display: block; }
+</style>
+
+<div class="module-header">
+  <div class="module-tag"><div class="tag-dot" style="background:#38bdf8"></div><span style="color:#38bdf8">Regard & Pratique</span></div>
+  <h2>Diagnostiquer une photo</h2>
+  <div class="subtitle">Tu ouvres un RAW et quelque chose cloche. Pars du symptôme — arrive au bon module.</div>
+</div>
+
+<div class="blockquote">
+  Deux entrées : tu <strong>vois</strong> quelque chose qui ne va pas mais tu ne sais pas le nommer → utilise l'arbre interactif. Tu sais déjà nommer le problème → descends directement à la section de référence.
+</div>
+
+<div class="toc">
+  <div class="toc-title">Sommaire</div>
+  <ol>
+    <li><a href="#arbre">Arbre de décision — je ne sais pas d'où vient le problème</a></li>
+    <li><a href="#reference">Référence par problème — je sais ce qui ne va pas</a></li>
+    <li><a href="#tableau">Tableau de référence rapide</a></li>
+  </ol>
+</div>
+
+<div class="editorial">
+
+<h3 class="section-title" id="arbre">Arbre de décision</h3>
+<p style="font-size:13px;color:var(--muted);margin-bottom:16px;line-height:1.6;">Regarde l'image. Choisis la description qui correspond à ce que tu vois — l'arbre t'oriente vers la bonne famille de problèmes, puis te donne le module à actionner en premier.</p>
+
+<div class="diag-wrap">
+
+  <div id="ds0" class="diag-step diag-active">
+    <h4>Quel type de problème tu observes ?</h4>
+    <p class="diag-q">La première description qui correspond à ce que tu vois t'oriente vers la bonne famille.</p>
+    <div class="diag-choices">
+      <button class="diag-btn" onclick="diagGo('ds1')"><span class="diag-btn-label">A</span><span>Certaines zones ont perdu leurs détails — blanc pur sans information, ou noir bouché sans texture</span></button>
+      <button class="diag-btn" onclick="diagGo('ds2')"><span class="diag-btn-label">B</span><span>La couleur semble fausse — dominante froide, chaude, verte, ou teintes qui ne sonnent pas juste</span></button>
+      <button class="diag-btn" onclick="diagGo('ds3')"><span class="diag-btn-label">C</span><span>L'image manque de présence — exposition correcte, couleurs ok, mais c'est plat, sans impact</span></button>
+      <button class="diag-btn" onclick="diagGo('ds4')"><span class="diag-btn-label">D</span><span>La qualité pixel est dégradée — grain excessif, flou, halos, surfaces plastifiées</span></button>
+      <button class="diag-btn" onclick="diagGo('ds5')"><span class="diag-btn-label">E</span><span>Autre chose — distorsion, vignette, brume, franges colorées sur les contours</span></button>
+    </div>
+  </div>
+
+  <div id="ds1" class="diag-step">
+    <div class="diag-bread">Exposition / dynamique</div>
+    <h4>Le problème est plutôt…</h4>
+    <div class="diag-choices">
+      <button class="diag-btn" onclick="diagShow('dr1a')"><span class="diag-btn-label">A</span><span>Ciel cramé / hautes lumières sans détail</span></button>
+      <button class="diag-btn" onclick="diagShow('dr1b')"><span class="diag-btn-label">B</span><span>Ombres bouchées / noirs sans texture</span></button>
+      <button class="diag-btn" onclick="diagShow('dr1c')"><span class="diag-btn-label">C</span><span>Image globalement sous-exposée — tout est sombre</span></button>
+      <button class="diag-btn" onclick="diagShow('dr1d')"><span class="diag-btn-label">D</span><span>Image globalement surexposée — tout est pâle</span></button>
+      <button class="diag-btn" onclick="diagShow('dr1e')"><span class="diag-btn-label">E</span><span>Ciel trop clair ET premier plan trop sombre — les deux en même temps</span></button>
+    </div>
+    <button class="diag-back" onclick="diagGo('ds0')">← Retour</button>
+  </div>
+
+  <div id="ds2" class="diag-step">
+    <div class="diag-bread">Couleur / dominantes</div>
+    <h4>La dominante est plutôt…</h4>
+    <div class="diag-choices">
+      <button class="diag-btn" onclick="diagShow('dr2a')"><span class="diag-btn-label">A</span><span>Trop froide — tout tire vers le bleu ou le cyan</span></button>
+      <button class="diag-btn" onclick="diagShow('dr2b')"><span class="diag-btn-label">B</span><span>Trop chaude — tout tire vers l'orange ou le jaune</span></button>
+      <button class="diag-btn" onclick="diagShow('dr2c')"><span class="diag-btn-label">C</span><span>Dominante verte — teinte verdâtre sur tout ou une zone</span></button>
+      <button class="diag-btn" onclick="diagShow('dr2d')"><span class="diag-btn-label">D</span><span>Dominante magenta / rosée</span></button>
+      <button class="diag-btn" onclick="diagShow('dr2e')"><span class="diag-btn-label">E</span><span>Les couleurs sont là mais fausses — verts pas naturels, tons chair bizarres</span></button>
+      <button class="diag-btn" onclick="diagShow('dr2f')"><span class="diag-btn-label">F</span><span>Couleurs ternes et désaturées — manque de vie</span></button>
+      <button class="diag-btn" onclick="diagShow('dr2g')"><span class="diag-btn-label">G</span><span>Couleurs criardes — trop saturées, agressives</span></button>
+    </div>
+    <button class="diag-back" onclick="diagGo('ds0')">← Retour</button>
+  </div>
+
+  <div id="ds3" class="diag-step">
+    <div class="diag-bread">Contraste / rendu</div>
+    <h4>L'image est plutôt…</h4>
+    <div class="diag-choices">
+      <button class="diag-btn" onclick="diagShow('dr3a')"><span class="diag-btn-label">A</span><span>Molle, plate, sans profondeur — manque de punch général</span></button>
+      <button class="diag-btn" onclick="diagShow('dr3b')"><span class="diag-btn-label">B</span><span>Trop contrastée — ombres écrasées ou hautes lumières brûlées par le contraste</span></button>
+      <button class="diag-btn" onclick="diagShow('dr3c')"><span class="diag-btn-label">C</span><span>Correcte globalement mais les surfaces manquent de matière / texture</span></button>
+      <button class="diag-btn" onclick="diagShow('dr3d')"><span class="diag-btn-label">D</span><span>Halos visibles autour des contours — effet de relief artificiel</span></button>
+    </div>
+    <button class="diag-back" onclick="diagGo('ds0')">← Retour</button>
+  </div>
+
+  <div id="ds4" class="diag-step">
+    <div class="diag-bread">Détail / bruit / netteté</div>
+    <h4>Le problème ressemble à…</h4>
+    <div class="diag-choices">
+      <button class="diag-btn" onclick="diagShow('dr4a')"><span class="diag-btn-label">A</span><span>Grain excessif — bruit visible sur toute l'image</span></button>
+      <button class="diag-btn" onclick="diagShow('dr4b')"><span class="diag-btn-label">B</span><span>Taches colorées dans les ombres (points rouges / verts / bleus)</span></button>
+      <button class="diag-btn" onclick="diagShow('dr4c')"><span class="diag-btn-label">C</span><span>Image floue — manque de netteté global</span></button>
+      <button class="diag-btn" onclick="diagShow('dr4d')"><span class="diag-btn-label">D</span><span>Surfaces plastifiées — peau ou textures trop lisses, aspect artificiel</span></button>
+    </div>
+    <button class="diag-back" onclick="diagGo('ds0')">← Retour</button>
+  </div>
+
+  <div id="ds5" class="diag-step">
+    <div class="diag-bread">Autres problèmes</div>
+    <h4>Tu observes…</h4>
+    <div class="diag-choices">
+      <button class="diag-btn" onclick="diagShow('dr5a')"><span class="diag-btn-label">A</span><span>Vignette trop prononcée — coins sombres indésirables</span></button>
+      <button class="diag-btn" onclick="diagShow('dr5b')"><span class="diag-btn-label">B</span><span>Distorsion géométrique — lignes droites courbées</span></button>
+      <button class="diag-btn" onclick="diagShow('dr5c')"><span class="diag-btn-label">C</span><span>Franges colorées sur les contours à fort contraste</span></button>
+      <button class="diag-btn" onclick="diagShow('dr5d')"><span class="diag-btn-label">D</span><span>Brume ou voile atmosphérique sur toute l'image</span></button>
+    </div>
+    <button class="diag-back" onclick="diagGo('ds0')">← Retour</button>
+  </div>
+
+  <div id="diag-result-box" class="diag-reset">
+    <div class="diag-result" id="diag-result-content"></div>
+    <div class="diag-back-row">
+      <button class="diag-back" onclick="diagBackToCategory()">← Autre problème du même type</button>
+      <button class="diag-back" onclick="diagGo('ds0')">← Tout recommencer</button>
+    </div>
+  </div>
+
+</div>
+
+<h3 class="section-title" id="reference">Référence — je sais ce qui ne va pas</h3>
+
+<h4 style="font-size:13px;font-family:var(--mono);text-transform:uppercase;letter-spacing:0.06em;color:#4a9eff;margin:20px 0 12px;">Exposition &amp; Dynamique</h4>
+
+<div class="param-grid">
+  <div class="param-item">
+    <div class="param-name">Ciel cramé / hautes lumières sans détail</div>
+    <div class="param-range">L'histogramme déborde à droite</div>
+    <div class="param-desc">Si seulement les HLs : curseur <strong>Hautes lumières</strong> de l'Égaliseur Tonal, tiré vers le bas. Si toute la dynamique est problématique : <strong>Log Tone Mapping</strong> → Automatique, puis affine <em>Blanc EV</em> vers le bas. En dernier recours : <strong>Compression Plage Dynamique</strong>.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Ombres bouchées / noirs sans texture</div>
+    <div class="param-range">L'histogramme déborde à gauche</div>
+    <div class="param-desc">Curseur <strong>Ombres</strong> ou <strong>Noirs</strong> de l'Égaliseur Tonal, tiré vers le haut. Si le débouchage crée du bruit : active le <strong>Lissage (NR)</strong> après. Déboucher des ombres révèle toujours du bruit numérique — c'est normal.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Image globalement sous-exposée</div>
+    <div class="param-range">Histogramme concentré à gauche</div>
+    <div class="param-desc">1. Curseur <strong>Exposition</strong> — remonte globalement. 2. <strong>Égaliseur Tonal</strong> pour sculpter ombres / HLs / noirs séparément. 3. Vérifie que le Lissage NR est actif si du bruit est apparu.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Image globalement surexposée</div>
+    <div class="param-range">Histogramme concentré à droite</div>
+    <div class="param-desc">1. Curseur <strong>Exposition</strong> — baisse globalement. 2. <strong>Hautes lumières</strong> et <strong>Blancs</strong> de l'Égaliseur Tonal pour ramener les tons clairs. 3. Vérifie que les noirs ne sont pas trop bouchés après correction.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Ciel trop clair ET premier plan trop sombre</div>
+    <div class="param-range">Plage dynamique trop large pour le capteur</div>
+    <div class="param-desc">Cas d'usage central du <strong>Log Tone Mapping</strong>. Active, clique "Automatique", puis affine : <em>Blanc EV</em> (plafond HLs), <em>Noir EV</em> (plancher ombres), <em>Point gris</em> (luminosité globale des tons moyens).</div>
+  </div>
+</div>
+
+<h4 style="font-size:13px;font-family:var(--mono);text-transform:uppercase;letter-spacing:0.06em;color:#f59e0b;margin:28px 0 12px;">Couleur &amp; Dominantes</h4>
+
+<div class="param-grid">
+  <div class="param-item">
+    <div class="param-name">Trop froide / bleue / cyanée</div>
+    <div class="param-range">Balance des blancs trop froide</div>
+    <div class="param-desc"><strong>Balance des Blancs</strong> — augmente la Température (vers le jaune/orange). Si la dominante est cyan plutôt que bleue : joue sur le curseur <strong>Teinte</strong> (vers le magenta). Affinage fin : HSL canal Bleu — baisse la saturation.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Trop chaude / orange / jaunâtre</div>
+    <div class="param-range">Balance des blancs trop chaude</div>
+    <div class="param-desc"><strong>Balance des Blancs</strong> — baisse la Température (vers le bleu). En portrait, HSL canal Orange — baisse la saturation de quelques points. Ne pas aller trop loin : les tons chair ont besoin de chaleur.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Dominante verte</div>
+    <div class="param-range">Lumière fluorescente ou néon</div>
+    <div class="param-desc"><strong>Balance des Blancs</strong> — curseur <strong>Teinte vers le magenta</strong> (droite). C'est la Teinte, pas la Température, qui corrige le vert des néons — erreur fréquente. Affinage : HSL canal Vert — baisse saturation.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Dominante magenta / rosée</div>
+    <div class="param-range">Lumière mixte ou correction verte excessive</div>
+    <div class="param-desc"><strong>Balance des Blancs</strong> — curseur <strong>Teinte vers le vert</strong> (gauche). Affinage : HSL canal Rouge — baisse légèrement la saturation.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Couleurs fausses canal par canal</div>
+    <div class="param-range">BB correcte mais rendu faux</div>
+    <div class="param-desc"><strong>Égaliseur HSL</strong> : l'outil le plus chirurgical. Travaille Teinte, Saturation et Luminance pour chaque couleur séparément. Fréquent sur verts végétation, bleus ciel, tons chair selon le capteur.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Couleurs ternes / désaturées</div>
+    <div class="param-range">RAW plat ou lumière diffuse</div>
+    <div class="param-desc">Préfère la <strong>Vibrance</strong> à la Saturation globale — elle protège les tons chair. <strong>HSL</strong> : cible les couleurs spécifiques à renforcer. <strong>Color Wheels</strong> : un léger grading redonner de la vie sans sursaturer.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Couleurs criardes / trop saturées</div>
+    <div class="param-range">Sur-saturation ou preset trop fort</div>
+    <div class="param-desc"><strong>Saturation / Vibrance</strong> : baisse les deux. <strong>HSL</strong> : identifie le canal qui "crie" (souvent Orange, Rouge ou Bleu) et baisse sa saturation spécifiquement. Pour les ciels violets : HSL canal Bleu — décale la Teinte vers le cyan.</div>
+  </div>
+</div>
+
+<h4 style="font-size:13px;font-family:var(--mono);text-transform:uppercase;letter-spacing:0.06em;color:#60a5fa;margin:28px 0 12px;">Contraste &amp; Rendu</h4>
+
+<div class="param-grid">
+  <div class="param-item">
+    <div class="param-name">Image molle / manque de punch</div>
+    <div class="param-range">Plage tonale étroite, histogramme centré</div>
+    <div class="param-desc"><strong>Courbes Tonales</strong> — courbe en S légère : soulève les tons clairs, abaisse les tons sombres. Évite le curseur Contraste global — il écrase les ombres et crâme les HLs simultanément. <strong>Contraste Local</strong> pour ajouter de la présence sans modifier la dynamique globale.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Trop contrastée / ombres écrasées</div>
+    <div class="param-range">Courbe trop agressive</div>
+    <div class="param-desc"><strong>Égaliseur Tonal</strong> — curseurs Ombres et Noirs vers le haut pour déboucher. <strong>Courbes Tonales</strong> — relève le point bas de la courbe sans toucher aux tons moyens. Vérifie que le Log Tone Mapping n'est pas actif avec des réglages extrêmes.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Manque de texture / surfaces plates</div>
+    <div class="param-range">Pas assez de microcontraste</div>
+    <div class="param-desc"><strong>Amplification Texture</strong> — valeur modérée, 0.15 à 0.30. <strong>Contraste Local</strong> — renforce les transitions de luminosité à l'échelle locale. Ces deux modules s'appliquent <em>en dernier</em>, après avoir stabilisé exposition et couleur.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Halos autour des contours</div>
+    <div class="param-range">Contraste Local ou texture trop forts</div>
+    <div class="param-desc">Baisse la valeur du <strong>Contraste Local</strong>. Vérifie le module <strong>Lissage</strong> — certains modes créent des halos si poussés fort. Reviens à une valeur conservatrice et augmente progressivement.</div>
+  </div>
+</div>
+
+<h4 style="font-size:13px;font-family:var(--mono);text-transform:uppercase;letter-spacing:0.06em;color:#e879a0;margin:28px 0 12px;">Détail, Bruit &amp; Netteté</h4>
+
+<div class="param-grid">
+  <div class="param-item">
+    <div class="param-name">Grain / bruit excessif</div>
+    <div class="param-range">ISO élevé ou ombres débouchées</div>
+    <div class="param-desc"><strong>Lissage (NR)</strong> — distingue bruit de <em>chrominance</em> (taches colorées — toujours à traiter) et bruit de <em>luminance</em> (grain — à doser selon intention). Commence par éliminer le bruit de chrominance.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Taches colorées dans les ombres</div>
+    <div class="param-range">Bruit de chrominance</div>
+    <div class="param-desc"><strong>Lissage (NR)</strong> — paramètre <strong>Chrominance</strong> en priorité. Le bruit de chrominance se traite toujours, contrairement au bruit de luminance qui est un choix artistique.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Image floue</div>
+    <div class="param-range">Flou de MAP, de bougé, ou RAW non accentué</div>
+    <div class="param-desc">Si RAW non accentué : <strong>Amplification Texture</strong> + <strong>Contraste Local</strong> à doses modérées. Si flou de bougé ou de mise au point : ART ne peut pas récupérer un flou optique. Ne pousse pas la texture pour "compenser" — tu créeras des artefacts.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Surfaces plastifiées</div>
+    <div class="param-range">Lissage NR trop agressif</div>
+    <div class="param-desc">Baisse les valeurs du <strong>Lissage (NR)</strong> — en particulier le paramètre <strong>Luminance</strong>. Change de mode de lissage si le mode actuel est trop destructif. En portrait, le lissage fin de peau se fait dans Affinity, pas dans ART.</div>
+  </div>
+</div>
+
+<h4 style="font-size:13px;font-family:var(--mono);text-transform:uppercase;letter-spacing:0.06em;color:#6b7280;margin:28px 0 12px;">Autres problèmes courants</h4>
+
+<div class="param-grid">
+  <div class="param-item">
+    <div class="param-name">Vignette indésirable</div>
+    <div class="param-range">Vignettage optique ou effet accidentel</div>
+    <div class="param-desc">Module <strong>Correction de l'objectif</strong> — active le profil de correction automatique si c'est un vignettage optique. Si c'est un effet appliqué manuellement : cherche un curseur vignettage actif dans les modules et remet-le à zéro.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Distorsion géométrique</div>
+    <div class="param-range">Barillet ou coussinet optique</div>
+    <div class="param-desc">Module <strong>Correction de l'objectif</strong> — active le profil de correction automatique. La correction peut être significative sur les grands angles et les focales très courtes.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Franges colorées sur les contours</div>
+    <div class="param-range">Aberration chromatique</div>
+    <div class="param-desc">Module <strong>Correction de l'objectif</strong> — case <strong>Aberration chromatique</strong>. Si les franges persistent : correction manuelle canal par canal. Typique en contre-jour ou sur des contours très contrastés.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Brume atmosphérique / voile</div>
+    <div class="param-range">Pollution lumineuse ou brume</div>
+    <div class="param-desc">Module <strong>Élimination de la Brume</strong> — démarre à 0.15–0.20, augmente progressivement. Ne pas dépasser 0.30–0.35 : au-delà, les couleurs deviennent artificielles et des halos apparaissent. Combine avec un léger Contraste Local après.</div>
+  </div>
+</div>
+
+<h3 class="section-title" id="tableau">Tableau de référence rapide</h3>
+
+<table>
+  <tr><th>Symptôme</th><th>Module principal</th><th>Module secondaire</th></tr>
+  <tr><td>Ciel cramé</td><td>Égaliseur Tonal — HLs</td><td>Log Tone Mapping</td></tr>
+  <tr><td>Ombres bouchées</td><td>Égaliseur Tonal — Ombres</td><td>Lissage NR (bruit révélé)</td></tr>
+  <tr><td>Trop sous-exposé</td><td>Exposition</td><td>Égaliseur Tonal</td></tr>
+  <tr><td>Trop surexposé</td><td>Exposition</td><td>Égaliseur Tonal</td></tr>
+  <tr><td>Dynamique ciel/sol</td><td>Log Tone Mapping</td><td>—</td></tr>
+  <tr><td>Trop froid / bleu</td><td>Balance des Blancs (Température)</td><td>HSL — Bleu</td></tr>
+  <tr><td>Trop chaud / orange</td><td>Balance des Blancs (Température)</td><td>HSL — Orange</td></tr>
+  <tr><td>Dominante verte</td><td>Balance des Blancs (Teinte)</td><td>HSL — Vert</td></tr>
+  <tr><td>Couleurs fausses par canal</td><td>Égaliseur HSL</td><td>—</td></tr>
+  <tr><td>Couleurs ternes</td><td>Vibrance / Saturation</td><td>HSL ciblé</td></tr>
+  <tr><td>Couleurs criardes</td><td>Saturation — baisse</td><td>HSL — canal concerné</td></tr>
+  <tr><td>Image molle</td><td>Courbes Tonales (S-curve)</td><td>Contraste Local</td></tr>
+  <tr><td>Contraste excessif</td><td>Égaliseur Tonal — Ombres</td><td>Courbes Tonales</td></tr>
+  <tr><td>Manque de texture</td><td>Amplification Texture</td><td>Contraste Local</td></tr>
+  <tr><td>Halos sur contours</td><td>Contraste Local — baisse</td><td>Lissage — mode moins agressif</td></tr>
+  <tr><td>Grain / bruit</td><td>Lissage NR — Luminance</td><td>—</td></tr>
+  <tr><td>Taches colorées</td><td>Lissage NR — Chrominance</td><td>—</td></tr>
+  <tr><td>Peau plastifiée</td><td>Lissage NR — baisse</td><td>—</td></tr>
+  <tr><td>Vignettage</td><td>Correction objectif</td><td>—</td></tr>
+  <tr><td>Distorsion géométrique</td><td>Correction objectif</td><td>—</td></tr>
+  <tr><td>Franges chromatiques</td><td>Correction objectif — aber. chroma.</td><td>—</td></tr>
+  <tr><td>Brume atmosphérique</td><td>Élimination de la Brume</td><td>Contraste Local</td></tr>
+</table>
+
+</div>
+
+<script>
+const diagResults = {
+  dr1a:{tag:'diag-tag-expo',label:'Exposition',title:'Hautes lumières cramées',desc:"L'information est perdue au-delà d'un certain seuil. En RAW, 1 à 2 IL sont récupérables selon le capteur.",modules:[{n:'Égaliseur Tonal — Hautes lumières',u:'egaliseurtonal',p:true},{n:'Log Tone Mapping',u:'logtonemapping',p:false},{n:'Compression Plage Dyn.',u:'compressiondyn',p:false}]},
+  dr1b:{tag:'diag-tag-expo',label:'Exposition',title:'Ombres bouchées',desc:"Remonte les ombres dans l'Égaliseur Tonal. Attention : déboucher révèle du bruit numérique — active le Lissage NR ensuite.",modules:[{n:'Égaliseur Tonal — Ombres / Noirs',u:'egaliseurtonal',p:true},{n:'Lissage NR (bruit révélé)',u:'lissage',p:false}]},
+  dr1c:{tag:'diag-tag-expo',label:'Exposition',title:'Image sous-exposée globalement',desc:"Commence par l'Exposition globale, puis sculpte avec l'Égaliseur Tonal pour éviter d'écrêter les hautes lumières.",modules:[{n:'Exposition',u:'exposition',p:true},{n:'Égaliseur Tonal — Ombres / HLs',u:'egaliseurtonal',p:false}]},
+  dr1d:{tag:'diag-tag-expo',label:'Exposition',title:'Image surexposée globalement',desc:"Baisse l'Exposition, puis récupère les hautes lumières et les blancs séparément.",modules:[{n:'Exposition',u:'exposition',p:true},{n:'Égaliseur Tonal — HLs / Blancs',u:'egaliseurtonal',p:false}]},
+  dr1e:{tag:'diag-tag-expo',label:'Exposition',title:'Plage dynamique trop large',desc:"Cas d'usage central du Log Tone Mapping. Clique Automatique, puis affine Blanc EV et Noir EV.",modules:[{n:'Log Tone Mapping',u:'logtonemapping',p:true},{n:'Égaliseur Tonal (affinage)',u:'egaliseurtonal',p:false}]},
+  dr2a:{tag:'diag-tag-couleur',label:'Couleur',title:'Dominante froide / bleue',desc:"La Balance des Blancs est le premier réglage. Si la dominante est cyan, joue aussi sur le curseur Teinte.",modules:[{n:'Balance des Blancs — Température ↑',u:'balanceblancs',p:true},{n:'HSL — Bleu (saturation)',u:'eqcouleurs',p:false}]},
+  dr2b:{tag:'diag-tag-couleur',label:'Couleur',title:'Dominante chaude / orange',desc:"Baisse la Température. En portrait, méfie-toi de trop refroidir — les tons chair ont besoin de chaleur.",modules:[{n:'Balance des Blancs — Température ↓',u:'balanceblancs',p:true},{n:'HSL — Orange (saturation)',u:'eqcouleurs',p:false}]},
+  dr2c:{tag:'diag-tag-couleur',label:'Couleur',title:'Dominante verte',desc:"C'est le curseur Teinte (pas la Température) qui corrige les dominantes vertes des néons. Erreur fréquente.",modules:[{n:'Balance des Blancs — Teinte vers Magenta',u:'balanceblancs',p:true},{n:'HSL — Vert (saturation)',u:'eqcouleurs',p:false}]},
+  dr2d:{tag:'diag-tag-couleur',label:'Couleur',title:'Dominante magenta / rosée',desc:"Inverse du vert. Décale la Teinte vers le vert.",modules:[{n:'Balance des Blancs — Teinte vers Vert',u:'balanceblancs',p:true},{n:'HSL — Rouge (saturation légère)',u:'eqcouleurs',p:false}]},
+  dr2e:{tag:'diag-tag-couleur',label:'Couleur',title:'Couleurs fausses canal par canal',desc:"L'HSL est l'outil chirurgical. Travaille Teinte, Saturation et Luminance pour chaque couleur séparément.",modules:[{n:'Égaliseur HSL — canal par canal',u:'eqcouleurs',p:true},{n:'Mélange des Canaux (cas avancés)',u:'melange',p:false}]},
+  dr2f:{tag:'diag-tag-couleur',label:'Couleur',title:'Couleurs ternes / désaturées',desc:"Préfère la Vibrance à la Saturation globale — elle protège les tons chair et les couleurs déjà bien saturées.",modules:[{n:'Saturation / Vibrance',u:'saturation',p:true},{n:'HSL — canaux ciblés',u:'eqcouleurs',p:false},{n:'Correction Couleurs (Color Wheels)',u:'correctioncouleurs',p:false}]},
+  dr2g:{tag:'diag-tag-couleur',label:'Couleur',title:'Couleurs criardes / trop saturées',desc:"Identifie le canal coupable dans l'HSL plutôt que de tout baisser globalement.",modules:[{n:'Saturation / Vibrance — baisse',u:'saturation',p:true},{n:'HSL — canal concerné',u:'eqcouleurs',p:false}]},
+  dr3a:{tag:'diag-tag-contraste',label:'Contraste',title:'Image molle, manque de punch',desc:"La Courbe en S est plus propre que le curseur Contraste global qui bouche les ombres et crâme les HLs ensemble.",modules:[{n:'Courbes Tonales — S-curve légère',u:'courbestonales',p:true},{n:'Contraste Local (microcontraste)',u:'contrastelocal',p:false}]},
+  dr3b:{tag:'diag-tag-contraste',label:'Contraste',title:'Trop contrastée',desc:"Relève les ombres dans l'Égaliseur Tonal et adoucis la courbe tonale pour ouvrir les zones sombres.",modules:[{n:'Égaliseur Tonal — Ombres / Noirs',u:'egaliseurtonal',p:true},{n:'Courbes Tonales — relève le point bas',u:'courbestonales',p:false}]},
+  dr3c:{tag:'diag-tag-contraste',label:'Contraste',title:'Manque de texture / matière',desc:"Ces modules s'appliquent en dernier, après exposition et couleur. Dos modérés — 0.15 à 0.30 max.",modules:[{n:'Amplification Texture',u:'texture',p:true},{n:'Contraste Local',u:'contrastelocal',p:false}]},
+  dr3d:{tag:'diag-tag-contraste',label:'Contraste',title:'Halos sur les contours',desc:"Sur-application du Contraste Local ou du Lissage. Baisse les valeurs et change de mode si nécessaire.",modules:[{n:'Contraste Local — baisse la valeur',u:'contrastelocal',p:true},{n:'Lissage — mode moins agressif',u:'lissage',p:false}]},
+  dr4a:{tag:'diag-tag-detail',label:'Détail',title:'Grain / bruit excessif',desc:"Distingue bruit de chrominance (taches colorées — toujours à traiter) et bruit de luminance (grain — à doser selon intention).",modules:[{n:'Lissage NR — Chrominance (priorité)',u:'lissage',p:true},{n:'Lissage NR — Luminance (au goût)',u:'lissage',p:false}]},
+  dr4b:{tag:'diag-tag-detail',label:'Détail',title:'Taches colorées dans les ombres',desc:"C'est du bruit de chrominance. Le paramètre Chrominance du Lissage NR est fait exactement pour ça.",modules:[{n:'Lissage NR — Chrominance',u:'lissage',p:true}]},
+  dr4c:{tag:'diag-tag-detail',label:'Détail',title:'Image floue',desc:"Si c'est un flou de mise au point ou de bougé, ART ne peut pas le récupérer. Si c'est un RAW non accentué, Texture + Contraste Local aident partiellement.",modules:[{n:'Amplification Texture (si RAW non accentué)',u:'texture',p:true},{n:'Contraste Local',u:'contrastelocal',p:false}]},
+  dr4d:{tag:'diag-tag-detail',label:'Détail',title:'Surfaces plastifiées',desc:"Lissage NR trop agressif. Baisse la valeur Luminance. En portrait, le lissage fin de peau se fait dans Affinity, pas dans ART.",modules:[{n:'Lissage NR — Luminance (baisse)',u:'lissage',p:true}]},
+  dr5a:{tag:'diag-tag-autre',label:'Autre',title:'Vignette indésirable',desc:"Si optique : Correction objectif avec profil auto. Si appliquée manuellement : cherche un curseur vignettage actif dans les modules.",modules:[{n:'Correction objectif — profil auto',u:'',p:true}]},
+  dr5b:{tag:'diag-tag-autre',label:'Autre',title:'Distorsion géométrique',desc:"La correction de profil d'objectif corrige barillet et coussinet automatiquement pour la plupart des objectifs courants.",modules:[{n:'Correction objectif — profil auto',u:'',p:true}]},
+  dr5c:{tag:'diag-tag-autre',label:'Autre',title:'Aberration chromatique / franges',desc:"Le module Correction objectif a un paramètre dédié. Si les franges résistent, correction manuelle canal par canal.",modules:[{n:'Correction objectif — Aberration chromatique',u:'',p:true}]},
+  dr5d:{tag:'diag-tag-autre',label:'Autre',title:'Brume atmosphérique',desc:"Commence doucement — l'élimination de la brume crée des halos si poussé trop fort. Max 0.30 en général.",modules:[{n:'Élimination de la Brume (0.15–0.30)',u:'eliminationbrume',p:true},{n:'Contraste Local (après)',u:'contrastelocal',p:false}]}
+};
+
+const diagCategoryMap = {dr1a:'ds1',dr1b:'ds1',dr1c:'ds1',dr1d:'ds1',dr1e:'ds1',dr2a:'ds2',dr2b:'ds2',dr2c:'ds2',dr2d:'ds2',dr2e:'ds2',dr2f:'ds2',dr2g:'ds2',dr3a:'ds3',dr3b:'ds3',dr3c:'ds3',dr3d:'ds3',dr4a:'ds4',dr4b:'ds4',dr4c:'ds4',dr4d:'ds4',dr5a:'ds5',dr5b:'ds5',dr5c:'ds5',dr5d:'ds5'};
+const BASE = '/ART-Guide-Photographe/modules/';
+let diagCurrent = null;
+
+function diagGo(id) {
+  document.querySelectorAll('.diag-step').forEach(function(s){ s.classList.remove('diag-active'); });
+  document.getElementById('diag-result-box').classList.remove('diag-active');
+  var t = document.getElementById(id);
+  if (t) t.classList.add('diag-active');
+}
+
+function diagShow(rid) {
+  diagCurrent = rid;
+  var r = diagResults[rid];
+  if (!r) return;
+  document.querySelectorAll('.diag-step').forEach(function(s){ s.classList.remove('diag-active'); });
+  var mods = r.modules.map(function(m) {
+    var cls = 'diag-mod' + (m.p ? ' diag-primary' : '');
+    if (m.u) {
+      return '<a class="' + cls + '" href="' + BASE + m.u + '/">' + m.n + '</a>';
+    }
+    return '<span class="' + cls + '">' + m.n + '</span>';
+  }).join('');
+  document.getElementById('diag-result-content').innerHTML =
+    '<span class="diag-result-tag ' + r.tag + '">' + r.label + '</span>' +
+    '<h5>' + r.title + '</h5>' +
+    '<p>' + r.desc + '</p>' +
+    '<div class="diag-mods">' + mods + '</div>';
+  document.getElementById('diag-result-box').classList.add('diag-active');
+}
+
+function diagBackToCategory() {
+  if (diagCurrent && diagCategoryMap[diagCurrent]) {
+    diagGo(diagCategoryMap[diagCurrent]);
+  } else {
+    diagGo('ds0');
+  }
+}
+</script>

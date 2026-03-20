@@ -12,6 +12,7 @@ module.exports = [
     section: "Regard & Pratique",
     items: [
       { id: "regard", label: "Le Regard du Photographe", url: "/modules/regard/", color: "#d4a853" },
+      { id: "diagnostiquer", label: "Diagnostiquer une photo", url: "/modules/diagnostiquer/", color: "#38bdf8" },
       { id: "direction-artistique", label: "Direction Artistique & Looks", url: "/modules/direction-artistique/", color: "#f97316" }
     ]
   },
