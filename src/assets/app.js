@@ -90,7 +90,68 @@ const LEXIQUE_DATA = {
   'Piqué': { short: 'Netteté et précision des détails fins — qualité optique et numérique combinées.', cat: 'detail' },
 };
 
-// ─── Lexique — Tooltips au survol ───
+// ─── Liens Modules ART ───
+const MODULE_LINKS = {
+  'Log Tone Mapping':              '/ART-Guide-Photographe/modules/logtonemapping/',
+  'Égaliseur Tonal':               '/ART-Guide-Photographe/modules/egaliseurtonal/',
+  'Courbes Tonales':               '/ART-Guide-Photographe/modules/courbestonales/',
+  'Compression de Plage Dynamique':'/ART-Guide-Photographe/modules/compressiondyn/',
+  'Compression Dynamique':         '/ART-Guide-Photographe/modules/compressiondyn/',
+  'Balance des Blancs':            '/ART-Guide-Photographe/modules/balanceblancs/',
+  'Égaliseur de Couleurs':         '/ART-Guide-Photographe/modules/eqcouleurs/',
+  'Color Wheels':                  '/ART-Guide-Photographe/modules/correctioncouleurs/',
+  'Correction Couleurs':           '/ART-Guide-Photographe/modules/correctioncouleurs/',
+  'Mélange des Canaux':            '/ART-Guide-Photographe/modules/melange/',
+  'Courbes RVB':                   '/ART-Guide-Photographe/modules/courbesrvb/',
+  'Amplification de Texture':      '/ART-Guide-Photographe/modules/texture/',
+  'Amplification Texture':         '/ART-Guide-Photographe/modules/texture/',
+  'Contraste Local':               '/ART-Guide-Photographe/modules/contrastelocal/',
+  'Lissage Local':                 '/ART-Guide-Photographe/modules/lissagelocal/',
+  "Bruit d'Impulsion":             '/ART-Guide-Photographe/modules/bruitimpulsion/',
+  'Élimination de la Brume':       '/ART-Guide-Photographe/modules/eliminationbrume/',
+};
+
+function initModuleLinks() {
+  const currentPath = window.location.pathname;
+  const main = document.querySelector('main');
+  if (!main) return;
+
+  const terms = Object.keys(MODULE_LINKS).sort((a, b) => b.length - a.length);
+
+  const walker = document.createTreeWalker(main, NodeFilter.SHOW_TEXT, {
+    acceptNode(n) {
+      const tag = n.parentElement.tagName;
+      if (['CODE', 'SCRIPT', 'STYLE', 'A', 'BUTTON', 'INPUT'].includes(tag)) return NodeFilter.FILTER_REJECT;
+      if (n.parentElement.closest('h2, .lex-card, script')) return NodeFilter.FILTER_REJECT;
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  });
+
+  const nodes = [];
+  while (walker.nextNode()) nodes.push(walker.currentNode);
+
+  nodes.forEach(node => {
+    let html = node.textContent;
+    let changed = false;
+    terms.forEach(term => {
+      const url = MODULE_LINKS[term];
+      // Ne pas lier si on est déjà sur cette page
+      if (currentPath.endsWith(url.replace('/ART-Guide-Photographe', ''))) return;
+      if (!html.includes(term)) return;
+      const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const re = new RegExp(`(?<![\\wÀ-öø-ÿ])${escaped}(?![\\wÀ-öø-ÿ])`, 'g');
+      const newHtml = html.replace(re, `<a class="module-link" href="${url}">${term}</a>`);
+      if (newHtml !== html) { html = newHtml; changed = true; }
+    });
+    if (changed) {
+      const span = document.createElement('span');
+      span.innerHTML = html;
+      node.parentNode.replaceChild(span, node);
+    }
+  });
+}
+
+// ─── Lexique — Tooltips au clic ───
 function initLexiqueTooltips() {
   const tooltip = document.getElementById('lexiqueTooltip');
   if (!tooltip) return;
@@ -120,10 +181,8 @@ function initLexiqueTooltips() {
       if (!html.includes(term)) return;
       const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
       const re = new RegExp(`(?<![\\wÀ-öø-ÿ])${escaped}(?![\\wÀ-öø-ÿ])`, 'g');
-      if (re.test(html)) {
-        html = html.replace(re, `<span class="lexique-term" data-term="${term}">${term}</span>`);
-        changed = true;
-      }
+      const newHtml = html.replace(re, `<span class="lexique-term" data-term="${term}">${term}</span>`);
+      if (newHtml !== html) { html = newHtml; changed = true; }
     });
     if (changed) {
       const span = document.createElement('span');
@@ -169,4 +228,7 @@ function initLexiqueTooltips() {
   });
 }
 
-document.addEventListener('DOMContentLoaded', initLexiqueTooltips);
+document.addEventListener('DOMContentLoaded', () => {
+  initModuleLinks();
+  initLexiqueTooltips();
+});
