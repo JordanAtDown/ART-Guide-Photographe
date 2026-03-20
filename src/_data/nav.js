@@ -16,7 +16,7 @@ module.exports = [
     ]
   },
   {
-    section: "Méthode & Workflow",
+    section: "Méthodologie & Pipeline",
     items: [
       { id: "pipeline", label: "Pipeline de traitement RAW", url: "/modules/pipeline/", color: "#34d399" },
       { id: "ordremodules", label: "Méthodologie de traitement", url: "/modules/ordremodules/", color: "#34d399" },
