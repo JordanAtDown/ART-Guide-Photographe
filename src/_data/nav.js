@@ -3,8 +3,6 @@ module.exports = [
     section: "Vue d'ensemble",
     items: [
       { id: "home", label: "Accueil", url: "/", color: "#4a9eff" },
-      { id: "pipeline", label: "Pipeline de traitement", url: "/modules/pipeline/", color: "#00d4aa" },
-      { id: "ordremodules", label: "Workflow de traitement", url: "/modules/ordremodules/", color: "#00d4aa" },
       { id: "lexique", label: "Lexique", url: "/modules/lexique/", color: "#6b7280" }
     ]
   },
@@ -17,9 +15,12 @@ module.exports = [
     ]
   },
   {
-    section: "Workflows par Genre",
+    section: "Méthode & Workflow",
     items: [
-      { id: "workflows", label: "Workflows par genre", url: "/modules/workflows/", color: "#34d399" }
+      { id: "pipeline", label: "Pipeline de traitement", url: "/modules/pipeline/", color: "#00d4aa" },
+      { id: "ordremodules", label: "Workflow de traitement", url: "/modules/ordremodules/", color: "#00d4aa" },
+      { id: "workflows", label: "Workflows par genre", url: "/modules/workflows/", color: "#34d399" },
+      { id: "art-affinity", label: "ART → Affinity : le pont", url: "/modules/art-affinity/", color: "#c084fc" }
     ]
   },
   {
