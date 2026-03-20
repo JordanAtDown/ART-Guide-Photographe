@@ -2,8 +2,8 @@
   "meta": {
     "source": "ART Raw Image Processor — Documentation Photographe",
     "version": "1.0",
-    "generated": "2026-03-20T13:08:15.665Z",
-    "total_modules": 41,
+    "generated": "2026-03-20T13:21:44.044Z",
+    "total_modules": 46,
     "description": "Knowledge base extraite des sources Eleventy pour usage par MCP ou tout système de génération de fichiers .arp"
   },
   "modules": [
@@ -2251,6 +2251,400 @@
               "Texture",
               "Force",
               "+0.25"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mod-masques-parametrique",
+      "name": "Masque Paramétrique",
+      "subtitle": "Sélection automatique par luminosité ou couleur — sans dessiner, sans peindre.",
+      "category": "Masque Intelligent",
+      "params": [
+        {
+          "name": "Plage de sélection",
+          "range": "Défini par deux curseurs min/max",
+          "description": "Tu définis les valeurs basses et hautes de la plage. Les pixels entre ces valeurs sont sélectionnés. La transition vers les zones non sélectionnées peut être adoucie."
+        },
+        {
+          "name": "Zone de transition",
+          "range": "Bords doux ou nets",
+          "description": "Un feathering sur les bords de la plage évite les transitions abruptes entre zones sélectionnées et non sélectionnées. Toujours utiliser un feathering non-nul."
+        },
+        {
+          "name": "Pipette de sélection",
+          "range": "Clique sur la zone cible",
+          "description": "Clique sur la couleur à cibler dans l'aperçu. Choisis une zone représentative — ni la plus lumineuse ni la plus sombre de la couleur visée, mais une teinte moyenne."
+        },
+        {
+          "name": "Tolérance / Rayon",
+          "range": "Étendue de la sélection colorimétrique",
+          "description": "Une tolérance faible sélectionne uniquement les pixels très proches de l'échantillon. Une tolérance élevée attrape plus de nuances. Commence faible, augmente si la sélection manque des zones."
+        },
+        {
+          "name": "Adoucissement",
+          "range": "Transitions aux bords de la sélection",
+          "description": "Atténue la frontière entre les pixels sélectionnés et non sélectionnés. Évite les bords durs sur les zones de couleur mixte (ciel avec nuages, peau avec reflets)."
+        },
+        {
+          "name": "Zone + Paramétrique",
+          "range": "Géométrie + valeurs",
+          "description": "Un dégradé linéaire qui cible le ciel, affiné par une sélection de luminance pour n'affecter que les hautes lumières du ciel — et non les zones intermédiaires à la frontière ciel/horizon."
+        },
+        {
+          "name": "Pinceau + Couleur",
+          "range": "Grossier + précis",
+          "description": "Tu peins grossièrement la zone d'un visage, puis le masque par similarité de couleur affine la sélection pour ne cibler que les tons chair — excluant automatiquement les vêtements ou le fond de même luminosité."
+        },
+        {
+          "name": "Ciel bleu trop saturé",
+          "range": "Paysage — fréquent sur grand angle",
+          "description": "Calque local : Correction Couleur/Ton Masque : Similarité couleur → pipette sur le bleu du ciel Tolérance modérée pour inclure les nuances de bleu Réglage : baisse la saturation dans le calque Résultat : seulement le bleu du ciel est désaturé"
+        },
+        {
+          "name": "Récupérer du détail dans les ombres uniquement",
+          "range": "Paysage, reportage, intérieur",
+          "description": "Calque local : Correction Couleur/Ton Masque : Paramétrique luminance → sélectionne tons sombres (0–80) Feathering sur les bords de la plage Réglage : monte les ombres dans le calque Résultat : seules les ombres sont affectées, les tons moyens restent intacts"
+        },
+        {
+          "name": "Ajuster les tons chair sans toucher au reste",
+          "range": "Portrait",
+          "description": "Calque local : Correction Couleur/Ton Masque : Similarité couleur → pipette sur la peau du visage Tolérance faible pour ne pas attraper les vêtements orangés Réglage : ajustement des tons chair (teinte, saturation) Résultat : seulement les zones de peau sont ajustées"
+        }
+      ],
+      "tips": [
+        {
+          "label": "L'avantage clé",
+          "content": "Le masque par luminance suit le contenu de l'image. Si tu copie le profil sur une autre image de la série avec des ombres différentes, le masque s'adapte automatiquement — pas besoin de re-dessiner."
+        }
+      ],
+      "warnings": [],
+      "tables": [
+        {
+          "headers": [
+            "Cas",
+            "Plage de luminance à cibler"
+          ],
+          "rows": [
+            [
+              "Déboucher les ombres uniquement",
+              "Tons sombres : 0–80"
+            ],
+            [
+              "Récupérer les hautes lumières",
+              "Tons clairs : 180–255"
+            ],
+            [
+              "Agir sur les tons moyens seulement",
+              "Tons moyens : 80–180"
+            ],
+            [
+              "Ciel surexposé (nuages inclus)",
+              "Tons très clairs : 200–255"
+            ]
+          ]
+        },
+        {
+          "headers": [
+            "Cas",
+            "Couleur à échantillonner"
+          ],
+          "rows": [
+            [
+              "Désaturer le ciel bleu",
+              "Bleu moyen du ciel, pas dans les nuages"
+            ],
+            [
+              "Ajuster les tons chair",
+              "Peau du visage en zone de mi-lumière"
+            ],
+            [
+              "Intensifier la végétation",
+              "Vert moyen de l'herbe ou du feuillage"
+            ],
+            [
+              "Corriger l'eau turquoise",
+              "Zone centrale de l'eau, évite reflets blancs"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mod-masques-pinceau",
+      "name": "Masque Pinceau",
+      "subtitle": "Peint à la main — pour tout ce qu'aucune forme géométrique ne peut délimiter.",
+      "category": "Masque Forme Libre",
+      "params": [
+        {
+          "name": "Visage et portrait",
+          "range": "Le cas d'usage classique",
+          "description": "Déboucher sélectivement les ombres d'un visage sans toucher au fond. Accentuer les yeux. Réchauffer les tons chair sans affecter les vêtements."
+        },
+        {
+          "name": "Sujet dans une foule",
+          "range": "Isoler une personne précise",
+          "description": "Quand le sujet n'est pas séparable par sa couleur ou sa luminosité, le pinceau est le seul moyen de l'isoler visuellement avec précision."
+        },
+        {
+          "name": "Végétation et formes organiques",
+          "range": "Herbe, feuillage, rochers",
+          "description": "Accentuer la texture d'un premier plan rocheux sans affecter le ciel. Renforcer la couleur d'une zone de végétation spécifique."
+        },
+        {
+          "name": "Corrections ponctuelles de zones",
+          "range": "Quand le problème est localisé",
+          "description": "Une zone d'ombre trop sombre dans un coin, une zone de lumière trop crue sur un vêtement — tout problème localisé qui ne correspond pas à une forme géométrique."
+        },
+        {
+          "name": "Approche en deux passes",
+          "range": "Rapide puis précis",
+          "description": "**Passe 1 :** grande taille, dureté basse — couvre rapidement la zone principale. **Passe 2 :** taille réduite — affine les bords et les zones délicates."
+        },
+        {
+          "name": "Visualiser le masque",
+          "range": "Indispensable pour vérifier",
+          "description": "ART permet d'afficher le masque en surimpression colorée. Active cette vue pour voir précisément les zones peintes et détecter les trous ou débordements."
+        },
+        {
+          "name": "Dureté selon le contexte",
+          "range": "Organique vs architectural",
+          "description": "Visage, végétation, cheveux → dureté 0–20 Bords d'un bâtiment, d'un vêtement à texture nette → dureté 40–60 Ne dépasse jamais 80 — un bord de masque trop net se voit toujours."
+        },
+        {
+          "name": "Visage sous-exposé par rapport au fond",
+          "range": "Portrait — le classique",
+          "description": "Calque local : Correction Couleur/Ton Masque : Pinceau → peint sur le visage uniquement Dureté basse sur les bords de la peau, normal sur les cheveux Réglage : monte l'exposition dans le calque Résultat : le visage s'éclaircit, le fond reste intact"
+        },
+        {
+          "name": "Texture d'un premier plan spécifique",
+          "range": "Paysage — rochers, herbe",
+          "description": "Calque local : Amplification Texture Masque : Pinceau → peint sur les rochers du premier plan Évite le ciel et les zones douces Réglage : texture modérée dans le calque Résultat : les rochers ont de la matière, le reste reste doux"
+        }
+      ],
+      "tips": [],
+      "warnings": [],
+      "tables": [
+        {
+          "headers": [
+            "Paramètre",
+            "Ce qu'il contrôle",
+            "Conseil pratique"
+          ],
+          "rows": [
+            [
+              "**Taille**",
+              "Diamètre du pinceau",
+              "Grande taille pour déblayer rapidement les grandes zones, petite pour les bords précis"
+            ],
+            [
+              "**Dureté**",
+              "Netteté des bords du pinceau",
+              "Commence toujours à dureté basse pour les sujets organiques — les bords nets révèlent le masque"
+            ],
+            [
+              "**Opacité**",
+              "Intensité de la peinture",
+              "Une opacité partielle permet des transitions graduelles — peindre plusieurs fois sur une zone accumule l'effet"
+            ],
+            [
+              "**Effacer**",
+              "Mode soustraction",
+              "Efface les zones peintes par erreur. Alterne entre peindre et effacer pour affiner les bords"
+            ],
+            [
+              "**Inverser**",
+              "Inverse la zone d'action",
+              "Peins la zone à exclure plutôt que la zone à modifier — utile si la zone à préserver est plus petite"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mod-masques-smart",
+      "name": "SMART — Masques IA",
+      "subtitle": "Segmentation automatique basée sur Segment Anything 2 — pour les sélections impossibles à faire manuellement.",
+      "category": "IA — SAM2",
+      "params": [
+        {
+          "name": "Cheveux complexes",
+          "range": "Portrait avec fond chargé",
+          "description": "Un pinceau ne peut pas isoler proprement des cheveux fins sur un fond qui partage des teintes similaires. SMART segmente le sujet avec précision en quelques secondes."
+        },
+        {
+          "name": "Sujet dans une foule",
+          "range": "Reportage, événementiel",
+          "description": "Isoler une personne précise dans une scène complexe où les couleurs et luminosités se mélangent — impossible au pinceau avec précision, trivial pour SAM2."
+        },
+        {
+          "name": "Végétation aux contours irréguliers",
+          "range": "Arbres, buissons, feuillage",
+          "description": "Des formes impossibles à tracer manuellement de façon propre. SAM2 reconnaît la végétation comme objet et la segmente indépendamment du fond."
+        },
+        {
+          "name": "Séparation ciel / horizon complexe",
+          "range": "Panoramas, toits, montages dentelées",
+          "description": "Quand la ligne d'horizon est découpée par des toits, des arbres ou des reliefs — un dégradé linéaire ne suffit plus. SMART segmente le ciel précisément en suivant tous les contours."
+        },
+        {
+          "name": "Objectif",
+          "range": "Isoler le sujet du fond",
+          "description": "Réchauffer les tons chair du sujet sans affecter le fond — impossible au pinceau si le fond partage des teintes similaires à la peau."
+        },
+        {
+          "name": "Déroulé",
+          "range": "5 étapes",
+          "description": "Ouvrir l'image dans ART, développement global terminé Lancer SMART via User Commands Cliquer sur le sujet dans SMART → SAM2 segmente Exporter et importer le masque dans ART Attacher le masque à un calque Correction Couleur/Ton, ajuster"
+        }
+      ],
+      "tips": [],
+      "warnings": [
+        "SMART est un outil séparé d'ART. Son installation nécessite :",
+        "Consulte la **documentation officielle ART sur les outils IA** pour la procédure d'installation complète : artraweditor.github.io/AItools"
+      ],
+      "tables": []
+    },
+    {
+      "id": "mod-masques-zone",
+      "name": "Masque de Zone",
+      "subtitle": "Rectangle, polygone ou dégradé linéaire — la solution naturelle pour les zones à contours définis.",
+      "category": "Masque Géométrique",
+      "params": [
+        {
+          "name": "Ciel / sol",
+          "range": "Problème le plus fréquent en paysage",
+          "description": "Un dégradé linéaire horizontal est la solution naturelle. Assombrir le ciel ou déboucher le sol sans toucher à l'autre zone."
+        },
+        {
+          "name": "Coins de l'image",
+          "range": "Vignettage contrôlé",
+          "description": "Assombrir un coin ou une bordure pour ramener l'attention vers le sujet. Plus précis qu'un vignettage global."
+        },
+        {
+          "name": "Zones rectilignes",
+          "range": "Architecture, fenêtres, panneaux",
+          "description": "Un sujet rectangulaire dans l'image — une fenêtre trop lumineuse, un mur trop sombre, un panneau à recadrer en luminosité."
+        },
+        {
+          "name": "Masses irrégulières mais prévisibles",
+          "range": "Toitures, masses d'arbres, horizons droits",
+          "description": "Le polygone permet de tracer une forme aux bords nets sur des zones dont les contours ne sont pas des lignes droites mais restent dessinables."
+        },
+        {
+          "name": "Direction",
+          "range": "Haut/bas · Gauche/droite · Diagonal",
+          "description": "L'orientation du dégradé. Pour un ciel, horizontal vers le bas. Pour une source de lumière latérale, vertical. La direction correspond à comment la lumière change dans la scène."
+        },
+        {
+          "name": "Zone de transition",
+          "range": "Étroite → abrupte · Large → douce",
+          "description": "L'étendue de la zone de fondu entre plein effet et aucun effet. Plus la transition est large, plus l'effet est discret et naturel. Commence toujours large, réduis si nécessaire."
+        },
+        {
+          "name": "Ciel trop clair, sol bien exposé",
+          "range": "Paysage — cas le plus fréquent",
+          "description": "Calque local : Correction Couleur/Ton Masque : Zone → Dégradé linéaire du haut vers le milieu Réglage : baisse l'exposition dans le calque Résultat : le ciel s'assombrit progressivement, le sol reste intact"
+        },
+        {
+          "name": "Vignettage directionnel",
+          "range": "Portrait, mise en valeur du sujet",
+          "description": "Calque local : Correction Couleur/Ton Masque : Zone → Rectangle inversé (agit sur les bords) Réglage : baisse légère de l'exposition Résultat : les bords s'assombrissent, le centre reste lumineux"
+        },
+        {
+          "name": "Assombrir une source de lumière latérale",
+          "range": "Intérieur, contre-jour partiel",
+          "description": "Calque local : Correction Couleur/Ton Masque : Zone → Dégradé linéaire vertical depuis le côté lumineux Réglage : baisse hautes lumières + exposition Résultat : équilibre latéral sans toucher au sujet central"
+        }
+      ],
+      "tips": [
+        {
+          "label": "Règle de base",
+          "content": "Une transition trop abrupte révèle le masque — l'œil voit la ligne. Toujours commencer avec une zone de transition large et la resserrer uniquement si l'effet manque de précision."
+        }
+      ],
+      "warnings": [],
+      "tables": [
+        {
+          "headers": [
+            "Paramètre",
+            "Ce qu'il contrôle",
+            "Conseil"
+          ],
+          "rows": [
+            [
+              "Transition / Feather",
+              "Douceur des bords du masque",
+              "Toujours non-nul — un masque à bords durs révèle immédiatement sa présence"
+            ],
+            [
+              "Inverser",
+              "Inverse la zone d'action",
+              "Pratique si la zone à préserver est plus petite que la zone à modifier"
+            ],
+            [
+              "Opacité du calque",
+              "Intensité globale de l'effet",
+              "Réduire l'opacité est souvent plus naturel que réduire les réglages un par un"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mod-masques",
+      "name": "Masques & Édition Locale",
+      "subtitle": "Appliquer un réglage à une zone précise — ciel, ombre, sujet — sans toucher au reste.",
+      "category": "Courbes & Masques",
+      "params": [
+        {
+          "name": "Plusieurs instances",
+          "range": "",
+          "description": "Tu peux avoir deux corrections couleur avec des masques différents — une pour le ciel, une pour le sol — chacune avec ses propres réglages."
+        },
+        {
+          "name": "Ordre d'application",
+          "range": "",
+          "description": "Les calques s'appliquent dans l'ordre — le premier modifie l'image, le deuxième agit sur le résultat du premier. Réfléchis à l'ordre si les masques se chevauchent."
+        },
+        {
+          "name": "Après le pipeline global",
+          "range": "",
+          "description": "Les calques locaux s'appliquent **après** le pipeline global (exposition, couleur, détail). Ils agissent sur l'image déjà développée — d'où la règle : régler le global d'abord."
+        }
+      ],
+      "tips": [
+        {
+          "label": "Ce qu'on laisse à Affinity",
+          "content": "Si l'opération nécessite de modifier des pixels individuels (correction de poussières, retouche peau fine, détourage pour composition), c'est le travail d'Affinity après export TIFF. Si c'est un ajustement de luminosité, couleur ou texture sur une zone délimitée, c'est le travail de l'édition locale ART."
+        }
+      ],
+      "warnings": [
+        "Chercher à faire en édition locale ce qu'un bon réglage global aurait résolu. L'édition locale est faite pour les **différences entre zones** d'une même image — pas pour compenser un développement global mal calibré. Si tu te retrouves à couvrir toute l'image avec des masques, repars sur le pipeline global."
+      ],
+      "tables": [
+        {
+          "headers": [
+            "Module local",
+            "Ce qu'il fait sur la zone masquée"
+          ],
+          "rows": [
+            [
+              "Correction Couleur/Ton",
+              "Color grading, exposition, courbes — sur une zone"
+            ],
+            [
+              "Lissage",
+              "Réduction de bruit, flou, grain — sur une zone"
+            ],
+            [
+              "Contraste Local",
+              "Microcontraste et présence — sur une zone"
+            ],
+            [
+              "Amplification Texture",
+              "Texture et netteté — sur une zone"
             ]
           ]
         }
