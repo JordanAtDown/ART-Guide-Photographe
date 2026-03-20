@@ -48,7 +48,6 @@ module.exports = [
       { id: "saturation", label: "Saturation / Vibrance", url: "/modules/saturation/", color: "#f59e0b" },
       { id: "eqcouleurs", label: "Égaliseur de Couleurs (HSL)", url: "/modules/eqcouleurs/", color: "#f59e0b" },
       { id: "correctioncouleurs", label: "Correction Couleurs/Ton. ⭐", url: "/modules/correctioncouleurs/", color: "#f59e0b" },
-      { id: "colorwheels", label: "Guide Color Wheels", url: "/modules/colorwheels/", color: "#f59e0b" },
       { id: "melange", label: "Mélange des Canaux", url: "/modules/melange/", color: "#f59e0b" },
       { id: "courbesrvb", label: "Courbes RVB", url: "/modules/courbesrvb/", color: "#f59e0b" }
     ]
