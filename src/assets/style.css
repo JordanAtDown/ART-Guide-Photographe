@@ -308,6 +308,16 @@ main {
   color: var(--border); font-family: var(--mono); font-size: 11px;
 }
 .step-notes li strong { color: var(--text); }
+/* Override .editorial cascade when .workflow is inside .editorial */
+.editorial .step-content h4 {
+  font-size: 13px; font-weight: 500; color: var(--text);
+  margin: 0 0 2px; font-family: var(--mono);
+}
+.editorial .step-notes {
+  padding-left: 0; padding-right: 0;
+  margin: 4px 0 0 0;
+}
+.editorial .step-notes li { margin: 0; }
 .step-tag {
   display: inline-block; font-size: 10px; font-family: var(--mono);
   padding: 1px 7px; border-radius: 99px;
