@@ -132,26 +132,39 @@ function initLexiqueTooltips() {
     }
   });
 
-  // Événements tooltip
-  document.addEventListener('mouseover', e => {
+  // Événements tooltip — clic pour ouvrir/fermer
+  let activeTermEl = null;
+
+  function termSlug(name) {
+    return name.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
+  }
+
+  document.addEventListener('click', e => {
     const term = e.target.closest('.lexique-term');
-    if (!term) { tooltip.classList.remove('visible'); return; }
-    const data = LEXIQUE_DATA[term.dataset.term];
-    if (!data) return;
-    tooltip.querySelector('.ltt-name').textContent = term.dataset.term;
-    tooltip.querySelector('.ltt-short').textContent = data.short;
-    tooltip.classList.add('visible');
-  });
-  document.addEventListener('mousemove', e => {
-    // Éviter que le tooltip déborde à droite/bas
-    const x = Math.min(e.clientX + 14, window.innerWidth - 295);
-    const y = Math.min(e.clientY + 14, window.innerHeight - 120);
-    tooltip.style.left = x + 'px';
-    tooltip.style.top = y + 'px';
-  });
-  document.addEventListener('mouseout', e => {
-    if (!e.relatedTarget || !e.relatedTarget.closest('.lexique-term')) {
+    if (term) {
+      e.stopPropagation();
+      if (activeTermEl === term && tooltip.classList.contains('visible')) {
+        tooltip.classList.remove('visible');
+        activeTermEl = null;
+        return;
+      }
+      const data = LEXIQUE_DATA[term.dataset.term];
+      if (!data) return;
+      activeTermEl = term;
+      tooltip.querySelector('.ltt-name').textContent = term.dataset.term;
+      tooltip.querySelector('.ltt-short').textContent = data.short;
+      tooltip.querySelector('.ltt-link').href = '/ART-Guide-Photographe/modules/lexique/#lex-' + termSlug(term.dataset.term);
+
+      // Positionnement sous le terme cliqué
+      const rect = term.getBoundingClientRect();
+      const x = Math.min(rect.left, window.innerWidth - 295);
+      const y = Math.min(rect.bottom + 8, window.innerHeight - 130);
+      tooltip.style.left = x + 'px';
+      tooltip.style.top = y + 'px';
+      tooltip.classList.add('visible');
+    } else if (!e.target.closest('#lexiqueTooltip')) {
       tooltip.classList.remove('visible');
+      activeTermEl = null;
     }
   });
 }

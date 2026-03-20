@@ -623,13 +623,13 @@ h3.section-title:hover .section-top-link { opacity: 1; }
 }
 .lex-card.open .lex-card-detail { display: block; }
 
-/* ─── Lexique — Termes survolables ─── */
+/* ─── Lexique — Termes cliquables ─── */
 .lexique-term {
   border-bottom: 1px dashed rgba(107,114,128,0.6);
-  cursor: help;
+  cursor: pointer;
 }
 
-/* ─── Lexique — Tooltip flottant ─── */
+/* ─── Lexique — Popup au clic ─── */
 .lexique-tooltip {
   position: fixed;
   z-index: 1000;
@@ -638,15 +638,16 @@ h3.section-title:hover .section-top-link { opacity: 1; }
   border-radius: 10px;
   padding: 12px 14px;
   max-width: 280px;
-  pointer-events: none;
+  pointer-events: auto;
   opacity: 0;
-  transition: opacity 0.12s;
+  transition: opacity 0.15s;
   box-shadow: 0 8px 24px rgba(0,0,0,0.45);
 }
 .lexique-tooltip.visible { opacity: 1; }
 .ltt-name { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 4px; font-family: var(--mono); }
 .ltt-short { font-size: 12px; color: var(--muted); line-height: 1.5; }
-.ltt-link { font-size: 11px; color: var(--accent); margin-top: 8px; font-family: var(--mono); }
+.ltt-link { display: block; font-size: 11px; color: var(--accent); margin-top: 8px; font-family: var(--mono); text-decoration: none; }
+.ltt-link:hover { text-decoration: underline; }
 
 /* ─── Bouton retour en haut ─── */
 .back-to-top {

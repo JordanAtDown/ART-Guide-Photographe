@@ -104,7 +104,8 @@ function lexRender() {
     if (!grouped[cat].length) return;
     if (lexActiveFilter === 'all') html += `<div class="lex-cat-title">${LEX_CAT_LABELS[cat]}</div>`;
     grouped[cat].forEach(t => {
-      html += `<div class="lex-card" onclick="this.classList.toggle('open')">
+      const slug = t.name.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
+      html += `<div class="lex-card" id="lex-${slug}" onclick="this.classList.toggle('open')">
         <div class="lex-card-header">
           <span class="lex-card-name">${t.name}</span>
           <span class="lex-badge lex-badge-${t.cat}">${LEX_CAT_LABELS[t.cat]}</span>
