@@ -2,7 +2,7 @@
   "meta": {
     "source": "ART Raw Image Processor — Documentation Photographe",
     "version": "1.0",
-    "generated": "2026-03-20T13:36:14.967Z",
+    "generated": "2026-03-20T13:37:50.993Z",
     "total_modules": 46,
     "description": "Knowledge base extraite des sources Eleventy pour usage par MCP ou tout système de génération de fichiers .arp"
   },
@@ -11,7 +11,7 @@
       "id": "mod-art-affinity",
       "name": "ART vers Affinity",
       "subtitle": "Quoi faire où, et pourquoi — la logique du partage de travail entre les deux logiciels.",
-      "category": "Méthode & Workflow",
+      "category": "Méthodologie & Pipeline",
       "params": [
         {
           "name": "ART — Développeur RAW",
@@ -2690,7 +2690,7 @@
       "id": "mod-ordremodules",
       "name": "Méthodologie de traitement",
       "subtitle": "La séquence qui donne les meilleurs résultats à chaque fois",
-      "category": "Méthode & Workflow",
+      "category": "Méthodologie & Pipeline",
       "params": [],
       "tips": [
         {
@@ -2709,7 +2709,7 @@
       "id": "mod-pipeline",
       "name": "Pipeline de Traitement",
       "subtitle": "Comprendre l'ordre dans lequel ART traite tes données RAW",
-      "category": "Méthode & Workflow",
+      "category": "Méthodologie & Pipeline",
       "params": [],
       "tips": [
         {
@@ -2860,7 +2860,7 @@
       "id": "mod-workflow-complet",
       "name": "Pipeline de développement",
       "subtitle": "De l'import à l'export final — la méthode qui garantit un flux non-destructif et un temps investi proportionnel à la valeur de chaque image.",
-      "category": "Méthode & Workflow",
+      "category": "Méthodologie & Pipeline",
       "params": [
         {
           "name": "Import",
@@ -3453,7 +3453,7 @@
       "id": "mod-workflows",
       "name": "Adapter son développement au genre",
       "subtitle": "Même pipeline de base, intentions radicalement différentes.",
-      "category": "Méthode & Workflow",
+      "category": "Méthodologie & Pipeline",
       "params": [],
       "tips": [],
       "warnings": [],
