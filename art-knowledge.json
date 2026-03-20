@@ -2,11 +2,122 @@
   "meta": {
     "source": "ART Raw Image Processor — Documentation Photographe",
     "version": "1.0",
-    "generated": "2026-03-20T06:37:14.072Z",
-    "total_modules": 38,
+    "generated": "2026-03-20T06:42:48.473Z",
+    "total_modules": 39,
     "description": "Knowledge base extraite des sources Eleventy pour usage par MCP ou tout système de génération de fichiers .arp"
   },
   "modules": [
+    {
+      "id": "mod-art-affinity",
+      "name": "ART → Affinity : le pont",
+      "subtitle": "Quoi faire où, et pourquoi — la logique du partage de travail entre les deux logiciels.",
+      "category": "Méthode & Workflow",
+      "params": [
+        {
+          "name": "ART — Développeur RAW",
+          "range": "Travaille sur les données brutes du capteur",
+          "description": "Toute la richesse du fichier RAW est disponible. Ses forces : Dynamique étendue — récupération HLs et ombres depuis le RAW Corrections globales et locales propres (masques ART) Color grading sur les données linéaires Réduction de bruit avant dématriçage Non-destructif par nature — modifiable à l'infini"
+        },
+        {
+          "name": "Affinity — Éditeur pixel",
+          "range": "Travaille sur l'image aplatie après développement",
+          "description": "Précision pixel et outils de composition. Ses forces : Retouche locale au niveau du pixel (tampon, correcteur) Sélections précises — lasso, pinceau de sélection, sélection intelligente Calques et compositions multi-images Corrections fines qu'un curseur RAW ne peut pas faire Export avec gestion fine des profils ICC"
+        },
+        {
+          "name": "Exposition et dynamique",
+          "range": "Log Tone Mapping · Égaliseur Tonal · récupération HLs",
+          "description": "Impossible à refaire proprement sur un TIFF aplati. Le RAW contient des données que l'export détruit. C'est la priorité absolue à finaliser dans ART."
+        },
+        {
+          "name": "Balance des blancs",
+          "range": "Température · Teinte",
+          "description": "Une fois exporté en TIFF, la balance des blancs est cuite dans les pixels. La corriger dans Affinity implique des ajustements de courbes qui dégradent la qualité."
+        },
+        {
+          "name": "Color grading global",
+          "range": "Color Wheels · HSL · virage partiel ombres/HLs",
+          "description": "Sur le RAW, ces réglages agissent sur les données linéaires — le rendu est plus propre et plus prévisible. Sur TIFF, tu travailles sur des données déjà gamma-encodées."
+        },
+        {
+          "name": "Réduction de bruit",
+          "range": "Lissage NR — Chrominance et Luminance",
+          "description": "Le Lissage NR d'ART agit sur le RAW avant dématriçage complet — c'est là qu'il est le plus efficace. La réduction de bruit sur TIFF dans Affinity est moins propre et moins puissante."
+        },
+        {
+          "name": "Corrections d'objectif",
+          "range": "Distorsion · Aberration chromatique · Vignettage",
+          "description": "Sur le RAW, ces corrections sont mathématiquement exactes. Sur un TIFF, elles impliquent une interpolation supplémentaire qui dégrade légèrement la netteté."
+        },
+        {
+          "name": "Édition locale globale",
+          "range": "Masques ART — zones par luminance, couleur, géométrie",
+          "description": "Si tu as besoin d'ajuster une zone globalement (ciel plus sombre, ombres du premier plan débouchées), fais-le avec les masques ART. C'est plus propre que de recréer le même effet dans Affinity."
+        },
+        {
+          "name": "Corrections ponctuelles",
+          "range": "Dust spots · imperfections · éléments indésirables",
+          "description": "Tampon de clonage, correcteur de zones, suppression de poussières capteur. ART a un outil basique — pour des corrections précises et nombreuses, Affinity est beaucoup plus efficace."
+        },
+        {
+          "name": "Recadrage final",
+          "range": "Rapport imposé · redressement d'horizon fin",
+          "description": "Si tu veux un recadrage précis avec rapport imposé (format impression, réseaux sociaux), Affinity le gère de façon plus confortable. Le redressement d'horizon peut aussi être affiné ici."
+        },
+        {
+          "name": "Retouche de peau fine",
+          "range": "Pinceau correcteur · Liquéfier · calques locaux",
+          "description": "La retouche qui va au-delà d'un simple lissage global — correction d'imperfections, homogénéisation locale des tons — appartient à Affinity. ART peut lisser globalement (Lissage NR) mais ne peut pas travailler au niveau du pixel."
+        },
+        {
+          "name": "Sélections ultra-précises",
+          "range": "Lasso · pinceau de sélection · sélection intelligente",
+          "description": "Pour une sélection chirurgicale — les yeux d'un portrait, un bijou, une zone aux contours très complexes — les outils d'Affinity donnent une précision inatteignable dans ART. Exemples : éclaircir les iris, corriger une couleur localisée."
+        },
+        {
+          "name": "Compositions et assemblages",
+          "range": "Panoramas · HDR manuel · focus stacking",
+          "description": "Tout ce qui nécessite de combiner plusieurs images. ART développe les RAWs séparément, Affinity assemble le résultat final."
+        },
+        {
+          "name": "Format : TIFF 16-bit",
+          "range": "Toujours — sans exception",
+          "description": "Le TIFF 16-bit préserve toute la précision tonale du développement RAW. Un JPEG perd de l'information dès l'export — inutilisable pour une retouche sérieuse. Le PNG 16-bit est une alternative mais le TIFF reste le standard."
+        },
+        {
+          "name": "Espace colorimétrique",
+          "range": "Adobe RGB — recommandé pour la plupart des usages",
+          "description": "**Adobe RGB** : bon équilibre — plus large que sRGB (couvre bien les imprimantes professionnelles), plus gérable que ProPhoto (couleurs dans une gamme affichable sur un écran calibré). **ProPhoto RGB** : si tu vas imprimer et veux garder la gamme maximale — mais tu travailles sur des données que tu ne vois pas parfaitement à l'écran. **sRGB** : uniquement si l'image est destinée directement au web sans retouche dans Affinity."
+        },
+        {
+          "name": "Profondeur de bits",
+          "range": "16-bit pour le transfert · 8-bit pour la destination finale",
+          "description": "**16-bit** toujours pour le transfert ART → Affinity. Affinity peut travailler en 16-bit et préserve cette précision tout au long de la retouche. N'exporte en **8-bit** que pour la destination finale (web, réseaux sociaux) depuis Affinity."
+        },
+        {
+          "name": "Re-corriger l'exposition globalement",
+          "range": "",
+          "description": "Si l'exposition n'est pas bonne sur le TIFF, retourne dans ART et corrige-la là. Une correction d'exposition dans Affinity sur un TIFF 8-bit crée des bandes de couleur (postérisation). Même en 16-bit, c'est moins propre que sur le RAW."
+        },
+        {
+          "name": "Re-faire la balance des blancs",
+          "range": "",
+          "description": "Une correction de balance des blancs dans Affinity implique de jouer sur des courbes RVB — c'est lourd, imprécis et dégradant comparé à un curseur de température dans ART."
+        },
+        {
+          "name": "Réduire le bruit",
+          "range": "",
+          "description": "Si tu n'as pas réduit le bruit dans ART et que tu t'en rends compte dans Affinity — retourne dans ART. La réduction de bruit sur TIFF est toujours moins efficace que sur RAW."
+        },
+        {
+          "name": "Modifier le color grading globalement",
+          "range": "",
+          "description": "Un nouveau color grading appliqué dans Affinity s'empile sur celui fait dans ART — tu ne sais plus ce que tu fais, les résultats sont imprévisibles. Si le color grading ART ne te satisfait pas, modifie-le dans ART."
+        }
+      ],
+      "tips": [],
+      "warnings": [],
+      "tables": []
+    },
     {
       "id": "mod-balanceblancs",
       "name": "Balance des Blancs",
