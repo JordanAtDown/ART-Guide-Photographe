@@ -2,8 +2,8 @@
   "meta": {
     "source": "ART Raw Image Processor — Documentation Photographe",
     "version": "1.0",
-    "generated": "2026-03-19T20:41:39.358Z",
-    "total_modules": 37,
+    "generated": "2026-03-20T06:37:14.072Z",
+    "total_modules": 38,
     "description": "Knowledge base extraite des sources Eleventy pour usage par MCP ou tout système de génération de fichiers .arp"
   },
   "modules": [
@@ -1123,6 +1123,257 @@
         "⚠️ **Avec le Log Tone Mapping actif**, la courbe tonale intervient APRÈS lui dans le pipeline. Utilise Mode **Neutre** + base **Linéaire** et n'applique qu'une S-curve très légère (contraste +10 à +15 max) — le Log a déjà géré l'essentiel de la dynamique."
       ],
       "tables": []
+    },
+    {
+      "id": "mod-diagnostiquer",
+      "name": "Diagnostiquer une photo",
+      "subtitle": "Tu ouvres un RAW et quelque chose cloche. Pars du symptôme — arrive au bon module.",
+      "category": "Regard & Pratique",
+      "params": [
+        {
+          "name": "Ciel cramé / hautes lumières sans détail",
+          "range": "L'histogramme déborde à droite",
+          "description": "Si seulement les HLs : curseur **Hautes lumières** de l'Égaliseur Tonal, tiré vers le bas. Si toute la dynamique est problématique : **Log Tone Mapping** → Automatique, puis affine Blanc EV vers le bas. En dernier recours : **Compression Plage Dynamique**."
+        },
+        {
+          "name": "Ombres bouchées / noirs sans texture",
+          "range": "L'histogramme déborde à gauche",
+          "description": "Curseur **Ombres** ou **Noirs** de l'Égaliseur Tonal, tiré vers le haut. Si le débouchage crée du bruit : active le **Lissage (NR)** après. Déboucher des ombres révèle toujours du bruit numérique — c'est normal."
+        },
+        {
+          "name": "Image globalement sous-exposée",
+          "range": "Histogramme concentré à gauche",
+          "description": "1. Curseur **Exposition** — remonte globalement. 2. **Égaliseur Tonal** pour sculpter ombres / HLs / noirs séparément. 3. Vérifie que le Lissage NR est actif si du bruit est apparu."
+        },
+        {
+          "name": "Image globalement surexposée",
+          "range": "Histogramme concentré à droite",
+          "description": "1. Curseur **Exposition** — baisse globalement. 2. **Hautes lumières** et **Blancs** de l'Égaliseur Tonal pour ramener les tons clairs. 3. Vérifie que les noirs ne sont pas trop bouchés après correction."
+        },
+        {
+          "name": "Ciel trop clair ET premier plan trop sombre",
+          "range": "Plage dynamique trop large pour le capteur",
+          "description": "Cas d'usage central du **Log Tone Mapping**. Active, clique \"Automatique\", puis affine : Blanc EV (plafond HLs), Noir EV (plancher ombres), Point gris (luminosité globale des tons moyens)."
+        },
+        {
+          "name": "Trop froide / bleue / cyanée",
+          "range": "Balance des blancs trop froide",
+          "description": "**Balance des Blancs** — augmente la Température (vers le jaune/orange). Si la dominante est cyan plutôt que bleue : joue sur le curseur **Teinte** (vers le magenta). Affinage fin : HSL canal Bleu — baisse la saturation."
+        },
+        {
+          "name": "Trop chaude / orange / jaunâtre",
+          "range": "Balance des blancs trop chaude",
+          "description": "**Balance des Blancs** — baisse la Température (vers le bleu). En portrait, HSL canal Orange — baisse la saturation de quelques points. Ne pas aller trop loin : les tons chair ont besoin de chaleur."
+        },
+        {
+          "name": "Dominante verte",
+          "range": "Lumière fluorescente ou néon",
+          "description": "**Balance des Blancs** — curseur **Teinte vers le magenta** (droite). C'est la Teinte, pas la Température, qui corrige le vert des néons — erreur fréquente. Affinage : HSL canal Vert — baisse saturation."
+        },
+        {
+          "name": "Dominante magenta / rosée",
+          "range": "Lumière mixte ou correction verte excessive",
+          "description": "**Balance des Blancs** — curseur **Teinte vers le vert** (gauche). Affinage : HSL canal Rouge — baisse légèrement la saturation."
+        },
+        {
+          "name": "Couleurs fausses canal par canal",
+          "range": "BB correcte mais rendu faux",
+          "description": "**Égaliseur HSL** : l'outil le plus chirurgical. Travaille Teinte, Saturation et Luminance pour chaque couleur séparément. Fréquent sur verts végétation, bleus ciel, tons chair selon le capteur."
+        },
+        {
+          "name": "Couleurs ternes / désaturées",
+          "range": "RAW plat ou lumière diffuse",
+          "description": "Préfère la **Vibrance** à la Saturation globale — elle protège les tons chair. **HSL** : cible les couleurs spécifiques à renforcer. **Color Wheels** : un léger grading redonner de la vie sans sursaturer."
+        },
+        {
+          "name": "Couleurs criardes / trop saturées",
+          "range": "Sur-saturation ou preset trop fort",
+          "description": "**Saturation / Vibrance** : baisse les deux. **HSL** : identifie le canal qui \"crie\" (souvent Orange, Rouge ou Bleu) et baisse sa saturation spécifiquement. Pour les ciels violets : HSL canal Bleu — décale la Teinte vers le cyan."
+        },
+        {
+          "name": "Image molle / manque de punch",
+          "range": "Plage tonale étroite, histogramme centré",
+          "description": "**Courbes Tonales** — courbe en S légère : soulève les tons clairs, abaisse les tons sombres. Évite le curseur Contraste global — il écrase les ombres et crâme les HLs simultanément. **Contraste Local** pour ajouter de la présence sans modifier la dynamique globale."
+        },
+        {
+          "name": "Trop contrastée / ombres écrasées",
+          "range": "Courbe trop agressive",
+          "description": "**Égaliseur Tonal** — curseurs Ombres et Noirs vers le haut pour déboucher. **Courbes Tonales** — relève le point bas de la courbe sans toucher aux tons moyens. Vérifie que le Log Tone Mapping n'est pas actif avec des réglages extrêmes."
+        },
+        {
+          "name": "Manque de texture / surfaces plates",
+          "range": "Pas assez de microcontraste",
+          "description": "**Amplification Texture** — valeur modérée, 0.15 à 0.30. **Contraste Local** — renforce les transitions de luminosité à l'échelle locale. Ces deux modules s'appliquent en dernier, après avoir stabilisé exposition et couleur."
+        },
+        {
+          "name": "Halos autour des contours",
+          "range": "Contraste Local ou texture trop forts",
+          "description": "Baisse la valeur du **Contraste Local**. Vérifie le module **Lissage** — certains modes créent des halos si poussés fort. Reviens à une valeur conservatrice et augmente progressivement."
+        },
+        {
+          "name": "Grain / bruit excessif",
+          "range": "ISO élevé ou ombres débouchées",
+          "description": "**Lissage (NR)** — distingue bruit de chrominance (taches colorées — toujours à traiter) et bruit de luminance (grain — à doser selon intention). Commence par éliminer le bruit de chrominance."
+        },
+        {
+          "name": "Taches colorées dans les ombres",
+          "range": "Bruit de chrominance",
+          "description": "**Lissage (NR)** — paramètre **Chrominance** en priorité. Le bruit de chrominance se traite toujours, contrairement au bruit de luminance qui est un choix artistique."
+        },
+        {
+          "name": "Image floue",
+          "range": "Flou de MAP, de bougé, ou RAW non accentué",
+          "description": "Si RAW non accentué : **Amplification Texture** + **Contraste Local** à doses modérées. Si flou de bougé ou de mise au point : ART ne peut pas récupérer un flou optique. Ne pousse pas la texture pour \"compenser\" — tu créeras des artefacts."
+        },
+        {
+          "name": "Surfaces plastifiées",
+          "range": "Lissage NR trop agressif",
+          "description": "Baisse les valeurs du **Lissage (NR)** — en particulier le paramètre **Luminance**. Change de mode de lissage si le mode actuel est trop destructif. En portrait, le lissage fin de peau se fait dans Affinity, pas dans ART."
+        },
+        {
+          "name": "Vignette indésirable",
+          "range": "Vignettage optique ou effet accidentel",
+          "description": "Module **Correction de l'objectif** — active le profil de correction automatique si c'est un vignettage optique. Si c'est un effet appliqué manuellement : cherche un curseur vignettage actif dans les modules et remet-le à zéro."
+        },
+        {
+          "name": "Distorsion géométrique",
+          "range": "Barillet ou coussinet optique",
+          "description": "Module **Correction de l'objectif** — active le profil de correction automatique. La correction peut être significative sur les grands angles et les focales très courtes."
+        },
+        {
+          "name": "Franges colorées sur les contours",
+          "range": "Aberration chromatique",
+          "description": "Module **Correction de l'objectif** — case **Aberration chromatique**. Si les franges persistent : correction manuelle canal par canal. Typique en contre-jour ou sur des contours très contrastés."
+        },
+        {
+          "name": "Brume atmosphérique / voile",
+          "range": "Pollution lumineuse ou brume",
+          "description": "Module **Élimination de la Brume** — démarre à 0.15–0.20, augmente progressivement. Ne pas dépasser 0.30–0.35 : au-delà, les couleurs deviennent artificielles et des halos apparaissent. Combine avec un léger Contraste Local après."
+        }
+      ],
+      "tips": [],
+      "warnings": [],
+      "tables": [
+        {
+          "headers": [
+            "Symptôme",
+            "Module principal",
+            "Module secondaire"
+          ],
+          "rows": [
+            [
+              "Ciel cramé",
+              "Égaliseur Tonal — HLs",
+              "Log Tone Mapping"
+            ],
+            [
+              "Ombres bouchées",
+              "Égaliseur Tonal — Ombres",
+              "Lissage NR (bruit révélé)"
+            ],
+            [
+              "Trop sous-exposé",
+              "Exposition",
+              "Égaliseur Tonal"
+            ],
+            [
+              "Trop surexposé",
+              "Exposition",
+              "Égaliseur Tonal"
+            ],
+            [
+              "Dynamique ciel/sol",
+              "Log Tone Mapping",
+              "—"
+            ],
+            [
+              "Trop froid / bleu",
+              "Balance des Blancs (Température)",
+              "HSL — Bleu"
+            ],
+            [
+              "Trop chaud / orange",
+              "Balance des Blancs (Température)",
+              "HSL — Orange"
+            ],
+            [
+              "Dominante verte",
+              "Balance des Blancs (Teinte)",
+              "HSL — Vert"
+            ],
+            [
+              "Couleurs fausses par canal",
+              "Égaliseur HSL",
+              "—"
+            ],
+            [
+              "Couleurs ternes",
+              "Vibrance / Saturation",
+              "HSL ciblé"
+            ],
+            [
+              "Couleurs criardes",
+              "Saturation — baisse",
+              "HSL — canal concerné"
+            ],
+            [
+              "Image molle",
+              "Courbes Tonales (S-curve)",
+              "Contraste Local"
+            ],
+            [
+              "Contraste excessif",
+              "Égaliseur Tonal — Ombres",
+              "Courbes Tonales"
+            ],
+            [
+              "Manque de texture",
+              "Amplification Texture",
+              "Contraste Local"
+            ],
+            [
+              "Halos sur contours",
+              "Contraste Local — baisse",
+              "Lissage — mode moins agressif"
+            ],
+            [
+              "Grain / bruit",
+              "Lissage NR — Luminance",
+              "—"
+            ],
+            [
+              "Taches colorées",
+              "Lissage NR — Chrominance",
+              "—"
+            ],
+            [
+              "Peau plastifiée",
+              "Lissage NR — baisse",
+              "—"
+            ],
+            [
+              "Vignettage",
+              "Correction objectif",
+              "—"
+            ],
+            [
+              "Distorsion géométrique",
+              "Correction objectif",
+              "—"
+            ],
+            [
+              "Franges chromatiques",
+              "Correction objectif — aber. chroma.",
+              "—"
+            ],
+            [
+              "Brume atmosphérique",
+              "Élimination de la Brume",
+              "Contraste Local"
+            ]
+          ]
+        }
+      ]
     },
     {
       "id": "mod-direction-artistique",
