@@ -2,8 +2,8 @@
   "meta": {
     "source": "ART Raw Image Processor — Documentation Photographe",
     "version": "1.0",
-    "generated": "2026-03-20T06:42:48.473Z",
-    "total_modules": 39,
+    "generated": "2026-03-20T06:53:29.976Z",
+    "total_modules": 40,
     "description": "Knowledge base extraite des sources Eleventy pour usage par MCP ou tout système de génération de fichiers .arp"
   },
   "modules": [
@@ -2451,6 +2451,231 @@
       ],
       "warnings": [],
       "tables": []
+    },
+    {
+      "id": "mod-workflow-complet",
+      "name": "Workflow complet de traitement",
+      "subtitle": "De l'import à l'export final — la méthode qui garantit un flux non-destructif et un temps investi proportionnel à la valeur de chaque image.",
+      "category": "Méthode & Workflow",
+      "params": [
+        {
+          "name": "Import",
+          "range": "Les RAW arrivent dans ARW/ du mois correspondant",
+          "description": "Vérifier que le nommage est correct (convention de l'appareil ou renommage batch si nécessaire). Aucun traitement à ce stade."
+        },
+        {
+          "name": "Tri",
+          "range": "Une seule fois, juste après l'import",
+          "description": "C'est le moment le plus important du workflow — une mauvaise notation en amont gaspille du temps en aval. Méthode recommandée : Vue plein écran rapide — première lecture émotionnelle Élimination des images techniquement irrécupérables Attribution des étoiles selon la grille ci-dessus Pas besoin d'hésiter — la note peut toujours être revue avant le développement"
+        },
+        {
+          "name": "★★★★★ et ★★★★",
+          "range": "Développement complet",
+          "description": "Pipeline dans l'ordre : Balance des Blancs Reconstruction Hautes Lumières (mode Propagation si nécessaire) Log Tone Mapping (si dynamique large) Exposition + Égaliseur Tonal Courbes Tonales HSL — ajustements couleur par canal Correction Couleurs (Color Wheels) — color grading Édition Locale (masques) — si ajustements zonaux nécessaires Amplification Texture + Contraste Local Lissage NR (bruit) Pour les ★★★★★ : la direction artistique est réfléchie avant de commencer. Voir Direction Artistique & Looks. **Export :** TIFF 16-bit AdobeRGB → Affinity. **Marquer en Bleu** après export."
+        },
+        {
+          "name": "★★★",
+          "range": "Développement soigné, simplifié",
+          "description": "Pipeline allégé — on se concentre sur les réglages qui font vraiment la différence : Balance des Blancs Exposition + Égaliseur Tonal Courbes Tonales (S-curve légère) HSL si une couleur pose problème Lissage NR si bruit visible Pas de color grading élaboré, pas d'édition locale sauf problème spécifique. **Export :** TIFF 16-bit si retouche fine nécessaire, sinon JPEG direct depuis ART. **Marquer en Bleu** après export."
+        },
+        {
+          "name": "★★ et ★",
+          "range": "Preset + export direct",
+          "description": "Appliquer un preset de base calibré pour les conditions de prise de vue (lumière du jour, intérieur, nuit). Vérifier l'exposition, ajuster si vraiment nécessaire. Export JPEG direct. **Marquer directement en Vert** — pas d'étape Affinity. Construis tes presets à partir de tes développements complets les plus réussis — un preset ★★ doit ressembler à ton style, pas à un filtre générique."
+        },
+        {
+          "name": "Cohérence de série",
+          "range": "Même événement · mêmes conditions lumineuses",
+          "description": "Développe une image de référence en premier Copie le profil .arp sur les autres images via le batch ART Ajuste individuellement les images qui s'écartent de la référence C'est la méthode la plus rapide pour garantir une cohérence colorimétrique sur un grand volume."
+        }
+      ],
+      "tips": [
+        {
+          "label": "La note décide du temps investi",
+          "content": "Une ★★★★★ peut justifier 30 minutes de développement minutieux. Une ★ ne mérite pas plus de 30 secondes. Le système de notation est l'outil de gestion du temps le plus important du workflow."
+        },
+        {
+          "label": "Flux dans Affinity",
+          "content": "1. Ouvrir le TIFF 16-bit AdobeRGB depuis ARW/ → **Marquer en Violet dans digiKam** 2. Retouches dans l'ordre : dust spots → recadrage → retouche locale 3. Sauvegarder le .af (même nom que le RAW) 4. Export JPEG final dans ARW/ (même nom, extension .jpg) 5. **Marquer en Vert dans digiKam**"
+        }
+      ],
+      "warnings": [
+        "On ne développe pas, on n'exporte pas, on ne touche à rien d'autre que la notation et les métadonnées.",
+        "Exposition globale · Balance des blancs · Color grading global · Réduction de bruit — pour tout ça, retourner dans ART, corriger le .arp, ré-exporter. C'est toujours plus propre que corriger sur le TIFF.",
+        "Exporter en sRGB depuis ART pour ensuite ouvrir dans Affinity. Tu perds de la gamme avant même de commencer la retouche. Exporte toujours en AdobeRGB pour Affinity, convertis en sRGB uniquement à l'export final depuis Affinity."
+      ],
+      "tables": [
+        {
+          "headers": [
+            "Note",
+            "Intention",
+            "Ce que ça signifie"
+          ],
+          "rows": [
+            [
+              "**★★★★★**",
+              "Image forte",
+              "Développement complet + direction artistique + retouche fine possible"
+            ],
+            [
+              "**★★★★**",
+              "Très bonne image",
+              "Développement complet"
+            ],
+            [
+              "**★★★**",
+              "Image utile",
+              "Développement soigné, simplifié si nécessaire"
+            ],
+            [
+              "**★★**",
+              "Documentaire / archive",
+              "Traitement en lot avec preset"
+            ],
+            [
+              "**★**",
+              "Souvenir / contexte",
+              "Preset rapide, export direct JPEG"
+            ]
+          ]
+        },
+        {
+          "headers": [
+            "Couleur",
+            "État",
+            "Action qui déclenche le changement"
+          ],
+          "rows": [
+            [
+              "— aucune —",
+              "Non traitée",
+              "À l'import"
+            ],
+            [
+              "Jaune**",
+              "En cours de développement",
+              "Dès qu'on ouvre le RAW dans ART"
+            ],
+            [
+              "Bleu**",
+              "RAW développé",
+              "Après export TIFF ou validation du développement"
+            ],
+            [
+              "Violet**",
+              "Retouche en cours",
+              "Dès qu'on ouvre le TIFF dans Affinity"
+            ],
+            [
+              "Vert**",
+              "Finalisée",
+              "Après export JPEG final"
+            ]
+          ]
+        },
+        {
+          "headers": [
+            "Opération",
+            "Pourquoi Affinity et pas ART"
+          ],
+          "rows": [
+            [
+              "Dust spots, poussières capteur",
+              "Précision pixel, tampon de clonage"
+            ],
+            [
+              "Recadrage final précis",
+              "Format d'impression ou réseaux sociaux"
+            ],
+            [
+              "Retouche de peau fine",
+              "Travail pixel par pixel, pinceau correcteur"
+            ],
+            [
+              "Sélections ultra-précises",
+              "Outils de sélection IA, lasso, baguette"
+            ],
+            [
+              "Compositions / assemblages",
+              "Multi-images, calques, panoramas"
+            ]
+          ]
+        },
+        {
+          "headers": [
+            "Destination",
+            "Format",
+            "Espace colorimétrique",
+            "Profondeur"
+          ],
+          "rows": [
+            [
+              "Web / réseaux sociaux",
+              "JPEG",
+              "sRGB",
+              "8-bit"
+            ],
+            [
+              "Impression labo",
+              "JPEG ou TIFF",
+              "AdobeRGB ou profil labo",
+              "16-bit si TIFF"
+            ],
+            [
+              "Impression personnelle",
+              "TIFF",
+              "AdobeRGB ou ProPhoto",
+              "16-bit"
+            ],
+            [
+              "Archive / livraison client",
+              "TIFF",
+              "AdobeRGB",
+              "16-bit"
+            ],
+            [
+              "Partage numérique général",
+              "JPEG",
+              "sRGB",
+              "8-bit"
+            ]
+          ]
+        },
+        {
+          "headers": [
+            "Priorité",
+            "Fichiers",
+            "Pourquoi"
+          ],
+          "rows": [
+            [
+              "Critique**",
+              ".arw + .arw.arp",
+              "Le RAW + son développement = tout le travail — irremplaçables"
+            ],
+            [
+              "Important**",
+              ".arw.xmp",
+              "Métadonnées, notation, tags digiKam"
+            ],
+            [
+              "Important**",
+              ".af",
+              "Travail Affinity non-destructif"
+            ],
+            [
+              "Secondaire**",
+              ".tif",
+              "Reproductible depuis ART à tout moment"
+            ],
+            [
+              "Secondaire**",
+              ".jpg",
+              "Reproductible depuis le TIFF ou ART"
+            ]
+          ]
+        }
+      ]
     },
     {
       "id": "mod-workflow-lumiere-dure",
