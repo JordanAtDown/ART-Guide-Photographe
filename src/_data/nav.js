@@ -2,7 +2,7 @@ module.exports = [
   {
     section: "Vue d'ensemble",
     items: [
-      { id: "home", label: "Accueil", url: "/", color: "#4a9eff" },
+      { id: "home", label: "Accueil", url: "/", color: "#6b7280" },
       { id: "lexique", label: "Lexique", url: "/modules/lexique/", color: "#6b7280" }
     ]
   },
@@ -11,18 +11,18 @@ module.exports = [
     items: [
       { id: "regard", label: "Le Regard du Photographe", url: "/modules/regard/", color: "#d4a853" },
       { id: "erreurs-regard", label: "Erreurs du regard non formé", url: "/modules/erreurs-regard/", color: "#d4a853" },
-      { id: "diagnostiquer", label: "Diagnostiquer une photo", url: "/modules/diagnostiquer/", color: "#38bdf8" },
-      { id: "direction-artistique", label: "Direction Artistique & Looks", url: "/modules/direction-artistique/", color: "#f97316" }
+      { id: "diagnostiquer", label: "Diagnostiquer une photo", url: "/modules/diagnostiquer/", color: "#d4a853" },
+      { id: "direction-artistique", label: "Direction Artistique & Looks", url: "/modules/direction-artistique/", color: "#d4a853" }
     ]
   },
   {
     section: "Méthode & Workflow",
     items: [
-      { id: "pipeline", label: "Pipeline de traitement RAW", url: "/modules/pipeline/", color: "#00d4aa" },
-      { id: "ordremodules", label: "Méthodologie de traitement", url: "/modules/ordremodules/", color: "#00d4aa" },
-      { id: "workflow-complet", label: "Pipeline de développement", url: "/modules/workflow-complet/", color: "#22d3ee" },
+      { id: "pipeline", label: "Pipeline de traitement RAW", url: "/modules/pipeline/", color: "#34d399" },
+      { id: "ordremodules", label: "Méthodologie de traitement", url: "/modules/ordremodules/", color: "#34d399" },
+      { id: "workflow-complet", label: "Pipeline de développement", url: "/modules/workflow-complet/", color: "#34d399" },
       { id: "workflows", label: "Adapter son développement", url: "/modules/workflows/", color: "#34d399" },
-      { id: "art-affinity", label: "ART vers Affinity", url: "/modules/art-affinity/", color: "#c084fc" }
+      { id: "art-affinity", label: "ART vers Affinity", url: "/modules/art-affinity/", color: "#34d399" }
     ]
   },
   {
