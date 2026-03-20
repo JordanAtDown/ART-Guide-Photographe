@@ -2,7 +2,7 @@
   "meta": {
     "source": "ART Raw Image Processor — Documentation Photographe",
     "version": "1.0",
-    "generated": "2026-03-20T13:27:41.465Z",
+    "generated": "2026-03-20T13:34:26.472Z",
     "total_modules": 46,
     "description": "Knowledge base extraite des sources Eleventy pour usage par MCP ou tout système de génération de fichiers .arp"
   },
@@ -1490,7 +1490,7 @@
       "id": "mod-direction-artistique",
       "name": "Direction Artistique & Looks",
       "subtitle": "Corriger une photo, c'est technique. Lui donner une vision, c'est artistique.",
-      "category": "Direction Artistique",
+      "category": "Regard & Pratique",
       "params": [
         {
           "name": "La Correction",
@@ -2690,7 +2690,7 @@
       "id": "mod-ordremodules",
       "name": "Méthodologie de traitement",
       "subtitle": "La séquence qui donne les meilleurs résultats à chaque fois",
-      "category": "Méthodologie",
+      "category": "Méthode & Workflow",
       "params": [],
       "tips": [
         {
@@ -2709,7 +2709,7 @@
       "id": "mod-pipeline",
       "name": "Pipeline de Traitement",
       "subtitle": "Comprendre l'ordre dans lequel ART traite tes données RAW",
-      "category": "Architecture",
+      "category": "Méthode & Workflow",
       "params": [],
       "tips": [
         {
@@ -3453,7 +3453,7 @@
       "id": "mod-workflows",
       "name": "Adapter son développement au genre",
       "subtitle": "Même pipeline de base, intentions radicalement différentes.",
-      "category": "Workflows par Genre",
+      "category": "Méthode & Workflow",
       "params": [],
       "tips": [],
       "warnings": [],
