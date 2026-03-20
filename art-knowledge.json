@@ -2,14 +2,14 @@
   "meta": {
     "source": "ART Raw Image Processor — Documentation Photographe",
     "version": "1.0",
-    "generated": "2026-03-20T13:24:35.107Z",
+    "generated": "2026-03-20T13:27:41.465Z",
     "total_modules": 46,
     "description": "Knowledge base extraite des sources Eleventy pour usage par MCP ou tout système de génération de fichiers .arp"
   },
   "modules": [
     {
       "id": "mod-art-affinity",
-      "name": "ART → Affinity : le pont",
+      "name": "ART vers Affinity",
       "subtitle": "Quoi faire où, et pourquoi — la logique du partage de travail entre les deux logiciels.",
       "category": "Méthode & Workflow",
       "params": [
@@ -2858,7 +2858,7 @@
     },
     {
       "id": "mod-workflow-complet",
-      "name": "Workflow complet de traitement",
+      "name": "Pipeline de développement",
       "subtitle": "De l'import à l'export final — la méthode qui garantit un flux non-destructif et un temps investi proportionnel à la valeur de chaque image.",
       "category": "Méthode & Workflow",
       "params": [
