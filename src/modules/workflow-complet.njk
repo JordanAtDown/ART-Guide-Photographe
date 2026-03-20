@@ -1,0 +1,331 @@
+---
+layout: base.njk
+title: 'Workflow complet de traitement'
+permalink: '/modules/workflow-complet/'
+---
+
+<div class="module-header">
+  <div class="module-tag"><div class="tag-dot" style="background:#22d3ee"></div><span style="color:#22d3ee">Méthode & Workflow</span></div>
+  <h2>Workflow complet de traitement</h2>
+  <div class="subtitle">De l'import à l'export final — la méthode qui garantit un flux non-destructif et un temps investi proportionnel à la valeur de chaque image.</div>
+</div>
+
+<div class="blockquote">
+  Chaque image passe par le même système : une note décide du temps investi, une couleur indique où en est le traitement, un dossier unique contient tous les fichiers. Aucune ambiguïté, aucune perte, à n'importe quel stade et des années plus tard.
+</div>
+
+<div class="toc">
+  <div class="toc-title">Sommaire</div>
+  <ol>
+    <li><a href="#flux">Vue d'ensemble du flux</a></li>
+    <li><a href="#arborescence">Arborescence et nommage des fichiers</a></li>
+    <li><a href="#notation">Le système de notation — la valeur photographique</a></li>
+    <li><a href="#couleurs">Le suivi d'avancement par couleur</a></li>
+    <li><a href="#etape1">Étape 1 — Import et tri dans digiKam</a></li>
+    <li><a href="#etape2">Étape 2 — Développement dans ART</a></li>
+    <li><a href="#etape3">Étape 3 — Retouche dans Affinity</a></li>
+    <li><a href="#etape4">Étape 4 — Export final</a></li>
+    <li><a href="#sauvegarde">Ce qu'il faut sauvegarder</a></li>
+  </ol>
+</div>
+
+<div class="editorial">
+
+<h3 class="section-title" id="flux">Vue d'ensemble du flux</h3>
+
+<div class="workflow">
+
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(107,114,128,0.14);color:#6b7280">📷</div>
+    <div class="step-content">
+      <h4>Appareil photo</h4>
+      <p>Les fichiers RAW quittent la carte mémoire vers le dossier <code>ARW/</code> du mois correspondant.</p>
+    </div>
+  </div>
+
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(245,158,11,0.14);color:#f59e0b">DGK</div>
+    <div class="step-content">
+      <h4>digiKam — Tri &amp; notation</h4>
+      <ul class="step-notes">
+        <li>Attribution des étoiles selon la valeur photographique (une seule fois)</li>
+        <li>Élimination des images techniquement irrécupérables</li>
+        <li>Pas de développement à cette étape — uniquement la notation</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(0,212,170,0.14);color:#00d4aa">ART</div>
+    <div class="step-content">
+      <h4>Développement RAW dans ART</h4>
+      <ul class="step-notes">
+        <li>Réglages stockés dans <code>.arw.arp</code> — non-destructif</li>
+        <li>★★★★★ / ★★★★ → pipeline complet + direction artistique</li>
+        <li>★★★ → pipeline allégé ciblé</li>
+        <li>★★ / ★ → preset + export JPEG direct <span class="step-tag">fin du flux</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(34,211,238,0.14);color:#22d3ee">EXP</div>
+    <div class="step-content">
+      <h4>Export TIFF 16-bit AdobeRGB</h4>
+      <p>Pour les images ★★★ et plus qui nécessitent une retouche fine dans Affinity.</p>
+    </div>
+  </div>
+
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(192,132,252,0.14);color:#c084fc">AFN</div>
+    <div class="step-content">
+      <h4>Retouche fine dans Affinity</h4>
+      <ul class="step-notes">
+        <li>Dust spots, recadrage, retouche peau, sélections précises</li>
+        <li>Sauvegarde <code>.af</code> — travail non-destructif Affinity</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(52,211,153,0.14);color:#34d399">FIN</div>
+    <div class="step-content">
+      <h4>Export final &amp; archivage</h4>
+      <ul class="step-notes">
+        <li>JPEG sRGB → web / réseaux sociaux</li>
+        <li>TIFF AdobeRGB → impression / livraison client</li>
+        <li>Marquer en Vert dans digiKam</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<h3 class="section-title" id="arborescence">Arborescence et nommage des fichiers</h3>
+
+<pre style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:16px;font-size:12px;line-height:1.8;overflow-x:auto;color:var(--muted);"><code>Année/
+└── Mois/
+    └── ARW/
+        ├── .arw          ← RAW originaux — ne jamais toucher
+        ├── .arw.arp      ← Profil ART (développement non-destructif)
+        ├── .arw.xmp      ← Métadonnées (notation digiKam, tags)
+        ├── .tif          ← Export TIFF 16-bit depuis ART
+        ├── .af           ← Fichier de travail Affinity
+        └── .jpg          ← JPEG final livrable</code></pre>
+
+<div class="insight">
+  <div class="insight-label">Règle absolue</div>
+  <p>Les RAW restent toujours dans <code>ARW/</code>. On ne les déplace jamais, on ne les renomme jamais. Tout le reste (<code>.arp</code>, <code>.xmp</code>, <code>.tif</code>, <code>.af</code>, <code>.jpg</code>) porte <strong>exactement le même nom</strong> que le RAW correspondant, sans suffixe ajouté.</p>
+</div>
+
+<pre style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:16px;font-size:11px;line-height:1.9;overflow-x:auto;color:var(--muted);margin-top:0;"><code>PHOTO_2024_07_15-14_32_01.arw        ← original, intouchable
+PHOTO_2024_07_15-14_32_01.arw.arp   ← développement ART
+PHOTO_2024_07_15-14_32_01.arw.xmp   ← métadonnées digiKam
+PHOTO_2024_07_15-14_32_01.tif       ← export TIFF si retouche fine
+PHOTO_2024_07_15-14_32_01.af        ← travail Affinity si besoin
+PHOTO_2024_07_15-14_32_01.jpg       ← livrable final</code></pre>
+
+<p style="font-size:13px;color:var(--muted);line-height:1.6;">Ce nommage strict garantit qu'à tout moment tu peux retrouver le RAW d'un JPEG, ou le profil ART d'un TIFF, sans chercher. Et dans 5 ans, tu seras content de ne pas avoir 47 fichiers <code>_final_v2_VRAI-FINAL.jpg</code>.</p>
+
+<h3 class="section-title" id="notation">Le système de notation — la valeur photographique</h3>
+
+<p style="font-size:13px;color:var(--muted);margin-bottom:16px;line-height:1.6;">Les étoiles évaluent la <strong>valeur photographique</strong> de l'image, pas son état de traitement. Elles se donnent au tri, avant tout développement, et ne changent pas ensuite.</p>
+
+<table>
+  <tr><th>Note</th><th>Intention</th><th>Ce que ça signifie</th></tr>
+  <tr><td><strong>★★★★★</strong></td><td>Image forte</td><td>Développement complet + direction artistique + retouche fine possible</td></tr>
+  <tr><td><strong>★★★★</strong></td><td>Très bonne image</td><td>Développement complet</td></tr>
+  <tr><td><strong>★★★</strong></td><td>Image utile</td><td>Développement soigné, simplifié si nécessaire</td></tr>
+  <tr><td><strong>★★</strong></td><td>Documentaire / archive</td><td>Traitement en lot avec preset</td></tr>
+  <tr><td><strong>★</strong></td><td>Souvenir / contexte</td><td>Preset rapide, export direct JPEG</td></tr>
+</table>
+
+<div class="tip">
+  <div class="tip-label">La note décide du temps investi</div>
+  <p>Une ★★★★★ peut justifier 30 minutes de développement minutieux. Une ★ ne mérite pas plus de 30 secondes. Le système de notation est l'outil de gestion du temps le plus important du workflow.</p>
+</div>
+
+<h3 class="section-title" id="couleurs">Le suivi d'avancement par couleur</h3>
+
+<p style="font-size:13px;color:var(--muted);margin-bottom:16px;line-height:1.6;">Les couleurs dans digiKam indiquent <strong>où en est l'image dans le flux</strong>, pas sa valeur. Elles changent au fil du traitement.</p>
+
+<table>
+  <tr><th>Couleur</th><th>État</th><th>Action qui déclenche le changement</th></tr>
+  <tr><td><span style="color:var(--muted);font-family:var(--mono);font-size:12px;">— aucune —</span></td><td>Non traitée</td><td>À l'import</td></tr>
+  <tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f59e0b;vertical-align:middle;margin-right:6px;"></span><strong style="color:#f59e0b;">Jaune</strong></td><td>En cours de développement</td><td>Dès qu'on ouvre le RAW dans ART</td></tr>
+  <tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#4a9eff;vertical-align:middle;margin-right:6px;"></span><strong style="color:#4a9eff;">Bleu</strong></td><td>RAW développé</td><td>Après export TIFF ou validation du développement</td></tr>
+  <tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#a78bfa;vertical-align:middle;margin-right:6px;"></span><strong style="color:#a78bfa;">Violet</strong></td><td>Retouche en cours</td><td>Dès qu'on ouvre le TIFF dans Affinity</td></tr>
+  <tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#34d399;vertical-align:middle;margin-right:6px;"></span><strong style="color:#34d399;">Vert</strong></td><td>Finalisée</td><td>Après export JPEG final</td></tr>
+</table>
+
+<div class="insight">
+  <div class="insight-label">Usage pratique</div>
+  <p>En filtrant par couleur dans digiKam, tu vois immédiatement ce qui est à traiter (aucune couleur), ce qui est en cours (jaune), ce qui attend Affinity (bleu), et ce qui est terminé (vert). Pas besoin de mémoriser où tu en es.</p>
+</div>
+
+<h3 class="section-title" id="etape1">Étape 1 — Import et tri dans digiKam</h3>
+
+<div class="param-grid">
+  <div class="param-item">
+    <div class="param-name">Import</div>
+    <div class="param-range">Les RAW arrivent dans ARW/ du mois correspondant</div>
+    <div class="param-desc">
+      Vérifier que le nommage est correct (convention de l'appareil ou renommage batch si nécessaire). Aucun traitement à ce stade.
+    </div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Tri</div>
+    <div class="param-range">Une seule fois, juste après l'import</div>
+    <div class="param-desc">
+      C'est le moment le plus important du workflow — une mauvaise notation en amont gaspille du temps en aval. Méthode recommandée :
+      <ol style="margin:8px 0 0 16px;padding:0;font-size:12px;color:var(--muted);line-height:1.9;">
+        <li>Vue plein écran rapide — première lecture émotionnelle</li>
+        <li>Élimination des images techniquement irrécupérables</li>
+        <li>Attribution des étoiles selon la grille ci-dessus</li>
+        <li>Pas besoin d'hésiter — la note peut toujours être revue avant le développement</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<div class="warning">
+  <div class="warning-label">Ce qu'on ne fait pas à cette étape</div>
+  <p>On ne développe pas, on n'exporte pas, on ne touche à rien d'autre que la notation et les métadonnées.</p>
+</div>
+
+<h3 class="section-title" id="etape2">Étape 2 — Développement dans ART</h3>
+
+<p style="font-size:13px;color:var(--muted);margin-bottom:4px;line-height:1.6;">ART travaille de façon non-destructive — le RAW original n'est jamais modifié. Tous les réglages sont stockés dans le fichier <code>.arp</code> qui vit à côté du RAW. <strong>Marquer en Jaune dans digiKam</strong> dès qu'on commence à travailler une image.</p>
+
+<div class="param-grid">
+
+  <div class="param-item">
+    <div class="param-name">★★★★★ et ★★★★</div>
+    <div class="param-range">Développement complet</div>
+    <div class="param-desc">
+      Pipeline dans l'ordre :
+      <ol style="margin:8px 0 0 16px;padding:0;font-size:12px;color:var(--muted);line-height:1.9;">
+        <li>Balance des Blancs</li>
+        <li>Reconstruction Hautes Lumières (mode Propagation si nécessaire)</li>
+        <li>Log Tone Mapping (si dynamique large)</li>
+        <li>Exposition + Égaliseur Tonal</li>
+        <li>Courbes Tonales</li>
+        <li>HSL — ajustements couleur par canal</li>
+        <li>Correction Couleurs (Color Wheels) — color grading</li>
+        <li>Édition Locale (masques) — si ajustements zonaux nécessaires</li>
+        <li>Amplification Texture + Contraste Local</li>
+        <li>Lissage NR (bruit)</li>
+      </ol>
+      <p style="margin-top:8px;font-size:12px;">Pour les ★★★★★ : la direction artistique est réfléchie <em>avant</em> de commencer. Voir <a href="{{ '/modules/direction-artistique/' | url }}" style="color:var(--accent);">Direction Artistique &amp; Looks</a>.</p>
+      <p style="margin-top:4px;font-size:12px;"><strong>Export :</strong> TIFF 16-bit AdobeRGB → Affinity. <strong>Marquer en Bleu</strong> après export.</p>
+    </div>
+  </div>
+
+  <div class="param-item">
+    <div class="param-name">★★★</div>
+    <div class="param-range">Développement soigné, simplifié</div>
+    <div class="param-desc">
+      Pipeline allégé — on se concentre sur les réglages qui font vraiment la différence :
+      <ol style="margin:8px 0 0 16px;padding:0;font-size:12px;color:var(--muted);line-height:1.9;">
+        <li>Balance des Blancs</li>
+        <li>Exposition + Égaliseur Tonal</li>
+        <li>Courbes Tonales (S-curve légère)</li>
+        <li>HSL si une couleur pose problème</li>
+        <li>Lissage NR si bruit visible</li>
+      </ol>
+      <p style="margin-top:8px;font-size:12px;">Pas de color grading élaboré, pas d'édition locale sauf problème spécifique.</p>
+      <p style="margin-top:4px;font-size:12px;"><strong>Export :</strong> TIFF 16-bit si retouche fine nécessaire, sinon JPEG direct depuis ART. <strong>Marquer en Bleu</strong> après export.</p>
+    </div>
+  </div>
+
+  <div class="param-item">
+    <div class="param-name">★★ et ★</div>
+    <div class="param-range">Preset + export direct</div>
+    <div class="param-desc">
+      Appliquer un preset de base calibré pour les conditions de prise de vue (lumière du jour, intérieur, nuit). Vérifier l'exposition, ajuster si vraiment nécessaire. Export JPEG direct.
+      <p style="margin-top:8px;font-size:12px;"><strong>Marquer directement en Vert</strong> — pas d'étape Affinity.</p>
+      <p style="margin-top:4px;font-size:12px;">Construis tes presets à partir de tes développements complets les plus réussis — un preset ★★ doit ressembler à ton style, pas à un filtre générique.</p>
+    </div>
+  </div>
+
+  <div class="param-item">
+    <div class="param-name">Cohérence de série</div>
+    <div class="param-range">Même événement · mêmes conditions lumineuses</div>
+    <div class="param-desc">
+      <ol style="margin:4px 0 0 16px;padding:0;font-size:12px;color:var(--muted);line-height:1.9;">
+        <li>Développe une image de référence en premier</li>
+        <li>Copie le profil <code>.arp</code> sur les autres images via le batch ART</li>
+        <li>Ajuste individuellement les images qui s'écartent de la référence</li>
+      </ol>
+      <p style="margin-top:8px;font-size:12px;">C'est la méthode la plus rapide pour garantir une cohérence colorimétrique sur un grand volume.</p>
+    </div>
+  </div>
+
+</div>
+
+<h3 class="section-title" id="etape3">Étape 3 — Retouche dans Affinity</h3>
+
+<p style="font-size:13px;color:var(--muted);margin-bottom:16px;line-height:1.6;">Uniquement pour les images ★★★ et plus qui le nécessitent.</p>
+
+<table>
+  <tr><th>Opération</th><th>Pourquoi Affinity et pas ART</th></tr>
+  <tr><td>Dust spots, poussières capteur</td><td>Précision pixel, tampon de clonage</td></tr>
+  <tr><td>Recadrage final précis</td><td>Format d'impression ou réseaux sociaux</td></tr>
+  <tr><td>Retouche de peau fine</td><td>Travail pixel par pixel, pinceau correcteur</td></tr>
+  <tr><td>Sélections ultra-précises</td><td>Outils de sélection IA, lasso, baguette</td></tr>
+  <tr><td>Compositions / assemblages</td><td>Multi-images, calques, panoramas</td></tr>
+</table>
+
+<div class="warning">
+  <div class="warning-label">Ce qu'on ne refait PAS dans Affinity</div>
+  <p>Exposition globale · Balance des blancs · Color grading global · Réduction de bruit — pour tout ça, retourner dans ART, corriger le <code>.arp</code>, ré-exporter. C'est toujours plus propre que corriger sur le TIFF.</p>
+</div>
+
+<div class="tip">
+  <div class="tip-label">Flux dans Affinity</div>
+  <p>1. Ouvrir le TIFF 16-bit AdobeRGB depuis <code>ARW/</code> → <strong>Marquer en Violet dans digiKam</strong><br>
+  2. Retouches dans l'ordre : dust spots → recadrage → retouche locale<br>
+  3. Sauvegarder le <code>.af</code> (même nom que le RAW)<br>
+  4. Export JPEG final dans <code>ARW/</code> (même nom, extension <code>.jpg</code>)<br>
+  5. <strong>Marquer en Vert dans digiKam</strong></p>
+</div>
+
+<h3 class="section-title" id="etape4">Étape 4 — Export final</h3>
+
+<table>
+  <tr><th>Destination</th><th>Format</th><th>Espace colorimétrique</th><th>Profondeur</th></tr>
+  <tr><td>Web / réseaux sociaux</td><td>JPEG</td><td>sRGB</td><td>8-bit</td></tr>
+  <tr><td>Impression labo</td><td>JPEG ou TIFF</td><td>AdobeRGB ou profil labo</td><td>16-bit si TIFF</td></tr>
+  <tr><td>Impression personnelle</td><td>TIFF</td><td>AdobeRGB ou ProPhoto</td><td>16-bit</td></tr>
+  <tr><td>Archive / livraison client</td><td>TIFF</td><td>AdobeRGB</td><td>16-bit</td></tr>
+  <tr><td>Partage numérique général</td><td>JPEG</td><td>sRGB</td><td>8-bit</td></tr>
+</table>
+
+<div class="warning">
+  <div class="warning-label">À ne jamais faire</div>
+  <p>Exporter en sRGB depuis ART pour ensuite ouvrir dans Affinity. Tu perds de la gamme avant même de commencer la retouche. Exporte toujours en AdobeRGB pour Affinity, convertis en sRGB uniquement à l'export final depuis Affinity.</p>
+</div>
+
+<h3 class="section-title" id="sauvegarde">Ce qu'il faut sauvegarder — par priorité</h3>
+
+<table>
+  <tr><th>Priorité</th><th>Fichiers</th><th>Pourquoi</th></tr>
+  <tr><td><strong style="color:#e879a0;">Critique</strong></td><td><code>.arw</code> + <code>.arw.arp</code></td><td>Le RAW + son développement = tout le travail — irremplaçables</td></tr>
+  <tr><td><strong style="color:#f59e0b;">Important</strong></td><td><code>.arw.xmp</code></td><td>Métadonnées, notation, tags digiKam</td></tr>
+  <tr><td><strong style="color:#f59e0b;">Important</strong></td><td><code>.af</code></td><td>Travail Affinity non-destructif</td></tr>
+  <tr><td><strong style="color:#6b7280;">Secondaire</strong></td><td><code>.tif</code></td><td>Reproductible depuis ART à tout moment</td></tr>
+  <tr><td><strong style="color:#6b7280;">Secondaire</strong></td><td><code>.jpg</code></td><td>Reproductible depuis le TIFF ou ART</td></tr>
+</table>
+
+<div class="insight">
+  <div class="insight-label">Résumé de la logique</div>
+  <p>Les <strong>étoiles</strong> = valeur photographique → décident du temps investi.<br>
+  Les <strong>couleurs</strong> = état d'avancement → permettent de savoir où en est chaque image.<br>
+  Les <strong>dossiers</strong> = transformation réelle des fichiers → tout dans <code>ARW/</code>, même nom.<br>
+  <strong>ART</strong> = tout le développement RAW, non-destructif.<br>
+  <strong>Affinity</strong> = finitions pixel uniquement, ce qu'ART ne peut pas faire.<br>
+  <strong>digiKam</strong> = tri, notation, suivi — ne touche jamais aux pixels.</p>
+  <p style="margin-top:10px;">Le système garantit qu'à tout moment tu peux répondre à ces trois questions : <em>quelle est la valeur de cette image ?</em> (les étoiles) — <em>où en est le traitement ?</em> (la couleur) — <em>où est chaque fichier ?</em> (le dossier et le nommage).</p>
+</div>
+
+</div>
