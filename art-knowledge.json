@@ -2,8 +2,8 @@
   "meta": {
     "source": "ART Raw Image Processor — Documentation Photographe",
     "version": "1.0",
-    "generated": "2026-03-20T06:53:29.976Z",
-    "total_modules": 40,
+    "generated": "2026-03-20T13:08:15.665Z",
+    "total_modules": 41,
     "description": "Knowledge base extraite des sources Eleventy pour usage par MCP ou tout système de génération de fichiers .arp"
   },
   "modules": [
@@ -1877,6 +1877,16 @@
           ]
         }
       ]
+    },
+    {
+      "id": "mod-erreurs-regard",
+      "name": "Erreurs courantes du regard non formé",
+      "subtitle": "Ces erreurs sont universelles — tout photographe les traverse. Les identifier, c'est déjà commencer à les dépasser.",
+      "category": "Regard & Pratique",
+      "params": [],
+      "tips": [],
+      "warnings": [],
+      "tables": []
     },
     {
       "id": "mod-exposition",
