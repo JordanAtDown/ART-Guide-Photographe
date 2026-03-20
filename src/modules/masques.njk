@@ -1,0 +1,178 @@
+---
+layout: base.njk
+title: 'Masques & Édition Locale'
+permalink: '/modules/masques/'
+---
+
+<div class="module-header">
+  <div class="module-tag"><div class="tag-dot" style="background:#a78bfa"></div><span style="color:#a78bfa">Courbes &amp; Masques</span></div>
+  <h2>Masques &amp; Édition Locale</h2>
+  <div class="subtitle">Appliquer un réglage à une zone précise — ciel, ombre, sujet — sans toucher au reste.</div>
+</div>
+
+<p style="font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:4px;">
+  Les modules globaux d'ART agissent sur <strong>toute l'image</strong>. L'édition locale te permet d'appliquer un réglage à <strong>une zone précise</strong>. Chaque masque est attaché à un module de traitement local — le masque ne décide pas ce qu'on fait, il décide <em>où</em> on le fait.
+</p>
+
+<div class="wf-grid">
+
+  <a class="wf-card" href="{{ '/modules/masques-zone/' | url }}" style="--wf-color: #4a9eff">
+    <div class="wf-card-top">
+      <span class="wf-icon">▭</span>
+      <span class="wf-section-tag" style="color:#4a9eff">Géométrique</span>
+    </div>
+    <h3>Masque de Zone</h3>
+    <p class="wf-enjeu">Rectangle, polygone ou dégradé linéaire dessiné sur l'image. La solution naturelle pour ciel/sol, vignettage contrôlé, ou toute zone à contours rectilignes.</p>
+    <div class="wf-chips">
+      <span class="wf-chip">Dégradé linéaire</span>
+      <span class="wf-chip">Rectangle</span>
+      <span class="wf-chip">Polygone</span>
+    </div>
+    <div class="wf-card-cta">Voir le masque →</div>
+  </a>
+
+  <a class="wf-card" href="{{ '/modules/masques-pinceau/' | url }}" style="--wf-color: #f59e0b">
+    <div class="wf-card-top">
+      <span class="wf-icon">✏️</span>
+      <span class="wf-section-tag" style="color:#f59e0b">Forme libre</span>
+    </div>
+    <h3>Masque Pinceau</h3>
+    <p class="wf-enjeu">Peint à la main sur l'image. Pour isoler un sujet aux contours irréguliers — un visage, un arbre, une personne dans une foule — là où aucune forme géométrique ne suffit.</p>
+    <div class="wf-chips">
+      <span class="wf-chip">Dureté variable</span>
+      <span class="wf-chip">Opacité</span>
+      <span class="wf-chip">Inverser</span>
+    </div>
+    <div class="wf-card-cta">Voir le masque →</div>
+  </a>
+
+  <a class="wf-card" href="{{ '/modules/masques-parametrique/' | url }}" style="--wf-color: #e879a0">
+    <div class="wf-card-top">
+      <span class="wf-icon">⚙️</span>
+      <span class="wf-section-tag" style="color:#e879a0">Intelligent</span>
+    </div>
+    <h3>Masque Paramétrique</h3>
+    <p class="wf-enjeu">Sélectionne automatiquement des pixels par luminosité ou couleur. Aucun dessin — tu définis des plages de valeurs et ART fait la sélection. Idéal pour les ombres, les ciels bleus, les tons chair.</p>
+    <div class="wf-chips">
+      <span class="wf-chip">Par luminance</span>
+      <span class="wf-chip">Par couleur</span>
+      <span class="wf-chip">Robuste en série</span>
+    </div>
+    <div class="wf-card-cta">Voir le masque →</div>
+  </a>
+
+  <a class="wf-card" href="{{ '/modules/masques-smart/' | url }}" style="--wf-color: #10b981">
+    <div class="wf-card-top">
+      <span class="wf-icon">🤖</span>
+      <span class="wf-section-tag" style="color:#10b981">IA — SAM2</span>
+    </div>
+    <h3>SMART — Masques IA</h3>
+    <p class="wf-enjeu">Outil externe basé sur Segment Anything 2 (Meta). Isole n'importe quel objet reconnaissable avec une précision impossible à atteindre manuellement — cheveux, végétation, foules.</p>
+    <div class="wf-chips">
+      <span class="wf-chip">Segmentation IA</span>
+      <span class="wf-chip">SAM2</span>
+      <span class="wf-chip">Import ART</span>
+    </div>
+    <div class="wf-card-cta">Voir l'outil →</div>
+  </a>
+
+</div>
+
+<div class="editorial">
+
+<h3 class="section-title">Comprendre le modèle d'ART — modules locaux + masques</h3>
+
+<p>Dans ART, l'édition locale fonctionne différemment de Photoshop ou Affinity. Il n'existe pas de "masque global" appliqué ensuite à n'importe quel réglage. Ici, <strong>chaque masque est attaché à un module de traitement local</strong>.</p>
+
+<table>
+  <tr><th>Module local</th><th>Ce qu'il fait sur la zone masquée</th></tr>
+  <tr><td>Correction Couleur/Ton</td><td>Color grading, exposition, courbes — sur une zone</td></tr>
+  <tr><td>Lissage</td><td>Réduction de bruit, flou, grain — sur une zone</td></tr>
+  <tr><td>Contraste Local</td><td>Microcontraste et présence — sur une zone</td></tr>
+  <tr><td>Amplification Texture</td><td>Texture et netteté — sur une zone</td></tr>
+</table>
+
+<h3 class="section-title">Les calques d'ajustement — la logique de superposition</h3>
+
+<p>Chaque module de traitement local crée un calque d'ajustement — une couche d'effet indépendante.</p>
+
+<div class="param-grid">
+  <div class="param-item">
+    <div class="param-name">Plusieurs instances</div>
+    <div class="param-desc">Tu peux avoir deux corrections couleur avec des masques différents — une pour le ciel, une pour le sol — chacune avec ses propres réglages.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Ordre d'application</div>
+    <div class="param-desc">Les calques s'appliquent dans l'ordre — le premier modifie l'image, le deuxième agit sur le résultat du premier. Réfléchis à l'ordre si les masques se chevauchent.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Après le pipeline global</div>
+    <div class="param-desc">Les calques locaux s'appliquent <strong>après</strong> le pipeline global (exposition, couleur, détail). Ils agissent sur l'image déjà développée — d'où la règle : régler le global d'abord.</div>
+  </div>
+</div>
+
+<h3 class="section-title">Stratégie générale — comment aborder l'édition locale</h3>
+
+<div class="workflow">
+
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(74,158,255,0.14);color:#4a9eff">1</div>
+    <div class="step-content">
+      <h4>Développement global d'abord</h4>
+      <p>Exposition, couleur, détail — réglages globaux corrects. L'édition locale ne compense pas un pipeline global mal calibré.</p>
+    </div>
+  </div>
+
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(74,158,255,0.14);color:#4a9eff">2</div>
+    <div class="step-content">
+      <h4>Identifier ce qui résiste au traitement global</h4>
+      <ul class="step-notes">
+        <li><em>"Le ciel est bon mais les ombres du premier plan sont bouchées"</em></li>
+        <li><em>"Le sujet est bien exposé mais le fond distrait"</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(245,158,11,0.14);color:#f59e0b">3</div>
+    <div class="step-content">
+      <h4>Choisir le type de masque selon le problème</h4>
+      <ul class="step-notes">
+        <li>Géométrique → <strong>masque de zone</strong></li>
+        <li>Forme libre et organique → <strong>pinceau</strong></li>
+        <li>Défini par ses valeurs → <strong>paramétrique</strong></li>
+        <li>Complexe et précis → <strong>SMART + import</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(232,121,160,0.14);color:#e879a0">4</div>
+    <div class="step-content">
+      <h4>Appliquer le réglage dans le module local</h4>
+      <p>Ajustement minimal — juste assez pour corriger, pas plus. L'excès révèle le masque.</p>
+    </div>
+  </div>
+
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(107,114,128,0.14);color:#6b7280">5</div>
+    <div class="step-content">
+      <h4>Vérifier les transitions</h4>
+      <p>Le masque doit être invisible — pas de halo, pas de ligne de démarcation. Si tu vois la limite du masque, adoucis les bords ou réduis l'intensité du réglage.</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="warning">
+  <div class="warning-label">Le piège le plus courant</div>
+  <p>Chercher à faire en édition locale ce qu'un bon réglage global aurait résolu. L'édition locale est faite pour les <strong>différences entre zones</strong> d'une même image — pas pour compenser un développement global mal calibré. Si tu te retrouves à couvrir toute l'image avec des masques, repars sur le pipeline global.</p>
+</div>
+
+<div class="tip">
+  <div class="tip-label">Ce qu'on laisse à Affinity</div>
+  <p>Si l'opération nécessite de modifier des pixels individuels (correction de poussières, retouche peau fine, détourage pour composition), c'est le travail d'Affinity après export TIFF. Si c'est un ajustement de luminosité, couleur ou texture sur une zone délimitée, c'est le travail de l'édition locale ART.</p>
+</div>
+
+</div>

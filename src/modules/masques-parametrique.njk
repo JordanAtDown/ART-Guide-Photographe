@@ -1,0 +1,159 @@
+---
+layout: base.njk
+title: 'Masque Paramétrique'
+permalink: '/modules/masques-parametrique/'
+---
+
+<div class="wf-back">
+  <a href="{{ '/modules/masques/' | url }}">← Masques &amp; Édition Locale</a>
+</div>
+
+<div class="module-header">
+  <div class="module-tag"><div class="tag-dot" style="background:#e879a0"></div><span style="color:#e879a0">Masque Intelligent</span></div>
+  <h2>Masque Paramétrique</h2>
+  <div class="subtitle">Sélection automatique par luminosité ou couleur — sans dessiner, sans peindre.</div>
+</div>
+
+<div class="blockquote">
+  Le masque paramétrique est le plus robuste des masques ART en travail de série. La sélection s'adapte à chaque image — pas besoin de redessiner quand tu copies un profil <code>.arp</code> sur 50 photos de la même session.
+</div>
+
+<div class="toc">
+  <div class="toc-title">Sommaire</div>
+  <ol>
+    <li><a href="#luminance">Masque par luminance</a></li>
+    <li><a href="#couleur">Masque par similarité de couleur</a></li>
+    <li><a href="#combiner">Combiner les deux</a></li>
+    <li><a href="#exemples">Cas d'usage typiques</a></li>
+  </ol>
+</div>
+
+<div class="editorial">
+
+<h3 class="section-title" id="luminance">Masque par luminance</h3>
+
+<p>Sélectionne les pixels selon leur niveau de clarté. Tu définis une plage de valeurs (0 = noir pur, 255 = blanc pur) et le masque s'applique uniquement aux pixels dans cette plage.</p>
+
+<div class="param-grid">
+  <div class="param-item">
+    <div class="param-name">Plage de sélection</div>
+    <div class="param-range">Défini par deux curseurs min/max</div>
+    <div class="param-desc">Tu définis les valeurs basses et hautes de la plage. Les pixels entre ces valeurs sont sélectionnés. La transition vers les zones non sélectionnées peut être adoucie.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Zone de transition</div>
+    <div class="param-range">Bords doux ou nets</div>
+    <div class="param-desc">Un feathering sur les bords de la plage évite les transitions abruptes entre zones sélectionnées et non sélectionnées. Toujours utiliser un feathering non-nul.</div>
+  </div>
+</div>
+
+<table>
+  <tr><th>Cas</th><th>Plage de luminance à cibler</th></tr>
+  <tr><td>Déboucher les ombres uniquement</td><td>Tons sombres : 0–80</td></tr>
+  <tr><td>Récupérer les hautes lumières</td><td>Tons clairs : 180–255</td></tr>
+  <tr><td>Agir sur les tons moyens seulement</td><td>Tons moyens : 80–180</td></tr>
+  <tr><td>Ciel surexposé (nuages inclus)</td><td>Tons très clairs : 200–255</td></tr>
+</table>
+
+<div class="tip">
+  <div class="tip-label">L'avantage clé</div>
+  <p>Le masque par luminance suit le contenu de l'image. Si tu copie le profil sur une autre image de la série avec des ombres différentes, le masque s'adapte automatiquement — pas besoin de re-dessiner.</p>
+</div>
+
+<h3 class="section-title" id="couleur">Masque par similarité de couleur</h3>
+
+<p>Tu cliques sur un échantillon de couleur dans l'image, et ART sélectionne tous les pixels similaires dans toute l'image. La "similarité" est réglable — plus large pour attraper plus de nuances, plus étroite pour cibler précisément.</p>
+
+<div class="param-grid">
+  <div class="param-item">
+    <div class="param-name">Pipette de sélection</div>
+    <div class="param-range">Clique sur la zone cible</div>
+    <div class="param-desc">Clique sur la couleur à cibler dans l'aperçu. Choisis une zone représentative — ni la plus lumineuse ni la plus sombre de la couleur visée, mais une teinte moyenne.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Tolérance / Rayon</div>
+    <div class="param-range">Étendue de la sélection colorimétrique</div>
+    <div class="param-desc">Une tolérance faible sélectionne uniquement les pixels très proches de l'échantillon. Une tolérance élevée attrape plus de nuances. Commence faible, augmente si la sélection manque des zones.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Adoucissement</div>
+    <div class="param-range">Transitions aux bords de la sélection</div>
+    <div class="param-desc">Atténue la frontière entre les pixels sélectionnés et non sélectionnés. Évite les bords durs sur les zones de couleur mixte (ciel avec nuages, peau avec reflets).</div>
+  </div>
+</div>
+
+<table>
+  <tr><th>Cas</th><th>Couleur à échantillonner</th></tr>
+  <tr><td>Désaturer le ciel bleu</td><td>Bleu moyen du ciel, pas dans les nuages</td></tr>
+  <tr><td>Ajuster les tons chair</td><td>Peau du visage en zone de mi-lumière</td></tr>
+  <tr><td>Intensifier la végétation</td><td>Vert moyen de l'herbe ou du feuillage</td></tr>
+  <tr><td>Corriger l'eau turquoise</td><td>Zone centrale de l'eau, évite reflets blancs</td></tr>
+</table>
+
+<h3 class="section-title" id="combiner">Combiner luminance et couleur</h3>
+
+<p>Les deux types peuvent se combiner au sein d'un même calque pour des sélections encore plus précises :</p>
+
+<div class="param-grid">
+  <div class="param-item">
+    <div class="param-name">Zone + Paramétrique</div>
+    <div class="param-range">Géométrie + valeurs</div>
+    <div class="param-desc">Un dégradé linéaire qui cible le ciel, affiné par une sélection de luminance pour n'affecter que les hautes lumières du ciel — et non les zones intermédiaires à la frontière ciel/horizon.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Pinceau + Couleur</div>
+    <div class="param-range">Grossier + précis</div>
+    <div class="param-desc">Tu peins grossièrement la zone d'un visage, puis le masque par similarité de couleur affine la sélection pour ne cibler que les tons chair — excluant automatiquement les vêtements ou le fond de même luminosité.</div>
+  </div>
+</div>
+
+<div class="insight">
+  <div class="insight-label">La puissance des masques combinés</div>
+  <p>Cette combinaison permet d'atteindre des sélections que ni les formes géométriques ni la couleur seule ne permettraient. C'est la technique la plus avancée de l'édition locale ART — réservée aux cas où un seul type de masque ne suffit pas.</p>
+</div>
+
+<h3 class="section-title" id="exemples">Cas d'usage typiques</h3>
+
+<div class="param-grid">
+  <div class="param-item">
+    <div class="param-name">Ciel bleu trop saturé</div>
+    <div class="param-range">Paysage — fréquent sur grand angle</div>
+    <div class="param-desc">
+      <ol style="margin:6px 0 0 16px;padding:0;font-size:12px;color:var(--muted);line-height:1.9;">
+        <li>Calque local : Correction Couleur/Ton</li>
+        <li>Masque : Similarité couleur → pipette sur le bleu du ciel</li>
+        <li>Tolérance modérée pour inclure les nuances de bleu</li>
+        <li>Réglage : baisse la saturation dans le calque</li>
+        <li>Résultat : seulement le bleu du ciel est désaturé</li>
+      </ol>
+    </div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Récupérer du détail dans les ombres uniquement</div>
+    <div class="param-range">Paysage, reportage, intérieur</div>
+    <div class="param-desc">
+      <ol style="margin:6px 0 0 16px;padding:0;font-size:12px;color:var(--muted);line-height:1.9;">
+        <li>Calque local : Correction Couleur/Ton</li>
+        <li>Masque : Paramétrique luminance → sélectionne tons sombres (0–80)</li>
+        <li>Feathering sur les bords de la plage</li>
+        <li>Réglage : monte les ombres dans le calque</li>
+        <li>Résultat : seules les ombres sont affectées, les tons moyens restent intacts</li>
+      </ol>
+    </div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Ajuster les tons chair sans toucher au reste</div>
+    <div class="param-range">Portrait</div>
+    <div class="param-desc">
+      <ol style="margin:6px 0 0 16px;padding:0;font-size:12px;color:var(--muted);line-height:1.9;">
+        <li>Calque local : Correction Couleur/Ton</li>
+        <li>Masque : Similarité couleur → pipette sur la peau du visage</li>
+        <li>Tolérance faible pour ne pas attraper les vêtements orangés</li>
+        <li>Réglage : ajustement des tons chair (teinte, saturation)</li>
+        <li>Résultat : seulement les zones de peau sont ajustées</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+</div>

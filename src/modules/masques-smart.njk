@@ -1,0 +1,139 @@
+---
+layout: base.njk
+title: 'SMART — Masques IA'
+permalink: '/modules/masques-smart/'
+---
+
+<div class="wf-back">
+  <a href="{{ '/modules/masques/' | url }}">← Masques &amp; Édition Locale</a>
+</div>
+
+<div class="module-header">
+  <div class="module-tag"><div class="tag-dot" style="background:#10b981"></div><span style="color:#10b981">IA — SAM2</span></div>
+  <h2>SMART — Masques IA</h2>
+  <div class="subtitle">Segmentation automatique basée sur Segment Anything 2 — pour les sélections impossibles à faire manuellement.</div>
+</div>
+
+<div class="blockquote">
+  SMART est un outil externe créé par Alberto Griggio (le développeur d'ART) basé sur le modèle <strong>Segment Anything 2</strong> (SAM2) de Meta. Il analyse l'image et isole n'importe quel objet reconnaissable avec une précision que les masques manuels ne peuvent pas atteindre pour des formes complexes.
+</div>
+
+<div class="toc">
+  <div class="toc-title">Sommaire</div>
+  <ol>
+    <li><a href="#quand">Quand SMART change tout</a></li>
+    <li><a href="#fonctionnement">Comment ça fonctionne</a></li>
+    <li><a href="#installation">Note d'installation</a></li>
+    <li><a href="#workflow">Workflow typique</a></li>
+  </ol>
+</div>
+
+<div class="editorial">
+
+<h3 class="section-title" id="quand">Quand SMART change tout</h3>
+
+<p>Il y a des situations où aucun masque manuel ne peut atteindre la précision nécessaire. SMART résout exactement ces cas :</p>
+
+<div class="param-grid">
+  <div class="param-item">
+    <div class="param-name">Cheveux complexes</div>
+    <div class="param-range">Portrait avec fond chargé</div>
+    <div class="param-desc">Un pinceau ne peut pas isoler proprement des cheveux fins sur un fond qui partage des teintes similaires. SMART segmente le sujet avec précision en quelques secondes.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Sujet dans une foule</div>
+    <div class="param-range">Reportage, événementiel</div>
+    <div class="param-desc">Isoler une personne précise dans une scène complexe où les couleurs et luminosités se mélangent — impossible au pinceau avec précision, trivial pour SAM2.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Végétation aux contours irréguliers</div>
+    <div class="param-range">Arbres, buissons, feuillage</div>
+    <div class="param-desc">Des formes impossibles à tracer manuellement de façon propre. SAM2 reconnaît la végétation comme objet et la segmente indépendamment du fond.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Séparation ciel / horizon complexe</div>
+    <div class="param-range">Panoramas, toits, montages dentelées</div>
+    <div class="param-desc">Quand la ligne d'horizon est découpée par des toits, des arbres ou des reliefs — un dégradé linéaire ne suffit plus. SMART segmente le ciel précisément en suivant tous les contours.</div>
+  </div>
+</div>
+
+<h3 class="section-title" id="fonctionnement">Comment ça fonctionne</h3>
+
+<div class="workflow">
+
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(16,185,129,0.14);color:#10b981">1</div>
+    <div class="step-content">
+      <h4>Lancer SMART depuis ART</h4>
+      <p>ART peut lancer SMART directement via le système de <strong>User Commands</strong> si la configuration est en place. L'image courante est envoyée à SMART.</p>
+    </div>
+  </div>
+
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(16,185,129,0.14);color:#10b981">2</div>
+    <div class="step-content">
+      <h4>Sélectionner l'objet dans SMART</h4>
+      <p>Dans l'interface SMART, tu cliques sur l'objet à segmenter — ou tu traces un rectangle grossier autour de lui. SAM2 analyse l'image et génère un masque précis de l'objet.</p>
+    </div>
+  </div>
+
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(16,185,129,0.14);color:#10b981">3</div>
+    <div class="step-content">
+      <h4>Exporter le masque</h4>
+      <p>SMART exporte le masque de segmentation dans un format directement compatible avec ART.</p>
+    </div>
+  </div>
+
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(16,185,129,0.14);color:#10b981">4</div>
+    <div class="step-content">
+      <h4>Importer dans ART</h4>
+      <p>Dans ART, ce masque importé est utilisé comme n'importe quel masque dans un calque local — tu lui attaches un module (Correction Couleur/Ton, Texture, etc.) et tu règles l'effet.</p>
+    </div>
+  </div>
+
+</div>
+
+<h3 class="section-title" id="installation">Note d'installation</h3>
+
+<div class="warning">
+  <div class="warning-label">Outil séparé nécessitant une installation</div>
+  <p>SMART est un outil séparé d'ART. Son installation nécessite :</p>
+  <ul>
+    <li>Python installé sur le système</li>
+    <li>Le téléchargement du modèle SAM2 (Meta)</li>
+    <li>La configuration des User Commands dans ART pour que SMART soit accessible depuis l'interface</li>
+  </ul>
+  <p style="margin-top:8px;">Consulte la <strong>documentation officielle ART sur les outils IA</strong> pour la procédure d'installation complète : <a href="https://artraweditor.github.io/AItools" style="color:var(--accent);" target="_blank" rel="noopener">artraweditor.github.io/AItools</a></p>
+</div>
+
+<h3 class="section-title" id="workflow">Workflow typique — Portrait avec fond complexe</h3>
+
+<div class="param-grid">
+  <div class="param-item">
+    <div class="param-name">Objectif</div>
+    <div class="param-range">Isoler le sujet du fond</div>
+    <div class="param-desc">Réchauffer les tons chair du sujet sans affecter le fond — impossible au pinceau si le fond partage des teintes similaires à la peau.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Déroulé</div>
+    <div class="param-range">5 étapes</div>
+    <div class="param-desc">
+      <ol style="margin:6px 0 0 16px;padding:0;font-size:12px;color:var(--muted);line-height:1.9;">
+        <li>Ouvrir l'image dans ART, développement global terminé</li>
+        <li>Lancer SMART via User Commands</li>
+        <li>Cliquer sur le sujet dans SMART → SAM2 segmente</li>
+        <li>Exporter et importer le masque dans ART</li>
+        <li>Attacher le masque à un calque Correction Couleur/Ton, ajuster</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<div class="insight">
+  <div class="insight-label">Quand ne pas utiliser SMART</div>
+  <p>Pour les cas simples — un ciel, une zone d'ombre, une correction géométrique — les masques de zone ou paramétriques sont plus rapides et ne nécessitent pas de lancer un outil externe. SMART est réservé aux situations où la précision de segmentation est vraiment nécessaire et non atteignable autrement.</p>
+</div>
+
+</div>

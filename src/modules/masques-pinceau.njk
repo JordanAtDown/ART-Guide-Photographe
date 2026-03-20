@@ -1,0 +1,132 @@
+---
+layout: base.njk
+title: 'Masque Pinceau'
+permalink: '/modules/masques-pinceau/'
+---
+
+<div class="wf-back">
+  <a href="{{ '/modules/masques/' | url }}">← Masques &amp; Édition Locale</a>
+</div>
+
+<div class="module-header">
+  <div class="module-tag"><div class="tag-dot" style="background:#f59e0b"></div><span style="color:#f59e0b">Masque Forme Libre</span></div>
+  <h2>Masque Pinceau</h2>
+  <div class="subtitle">Peint à la main — pour tout ce qu'aucune forme géométrique ne peut délimiter.</div>
+</div>
+
+<div class="blockquote">
+  Dans ART, le pinceau définit directement la zone d'action d'un module local. Fonctionnellement similaire à un masque peint dans Affinity, mais attaché à un seul module — il n'existe pas en dehors de lui.
+</div>
+
+<div class="toc">
+  <div class="toc-title">Sommaire</div>
+  <ol>
+    <li><a href="#quand">Quand l'utiliser</a></li>
+    <li><a href="#parametres">Paramètres du pinceau</a></li>
+    <li><a href="#technique">Technique de peinture</a></li>
+    <li><a href="#exemples">Cas d'usage typiques</a></li>
+  </ol>
+</div>
+
+<div class="editorial">
+
+<h3 class="section-title" id="quand">Quand l'utiliser</h3>
+
+<div class="param-grid">
+  <div class="param-item">
+    <div class="param-name">Visage et portrait</div>
+    <div class="param-range">Le cas d'usage classique</div>
+    <div class="param-desc">Déboucher sélectivement les ombres d'un visage sans toucher au fond. Accentuer les yeux. Réchauffer les tons chair sans affecter les vêtements.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Sujet dans une foule</div>
+    <div class="param-range">Isoler une personne précise</div>
+    <div class="param-desc">Quand le sujet n'est pas séparable par sa couleur ou sa luminosité, le pinceau est le seul moyen de l'isoler visuellement avec précision.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Végétation et formes organiques</div>
+    <div class="param-range">Herbe, feuillage, rochers</div>
+    <div class="param-desc">Accentuer la texture d'un premier plan rocheux sans affecter le ciel. Renforcer la couleur d'une zone de végétation spécifique.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Corrections ponctuelles de zones</div>
+    <div class="param-range">Quand le problème est localisé</div>
+    <div class="param-desc">Une zone d'ombre trop sombre dans un coin, une zone de lumière trop crue sur un vêtement — tout problème localisé qui ne correspond pas à une forme géométrique.</div>
+  </div>
+</div>
+
+<h3 class="section-title" id="parametres">Paramètres du pinceau</h3>
+
+<table>
+  <tr><th>Paramètre</th><th>Ce qu'il contrôle</th><th>Conseil pratique</th></tr>
+  <tr><td><strong>Taille</strong></td><td>Diamètre du pinceau</td><td>Grande taille pour déblayer rapidement les grandes zones, petite pour les bords précis</td></tr>
+  <tr><td><strong>Dureté</strong></td><td>Netteté des bords du pinceau</td><td>Commence toujours à dureté basse pour les sujets organiques — les bords nets révèlent le masque</td></tr>
+  <tr><td><strong>Opacité</strong></td><td>Intensité de la peinture</td><td>Une opacité partielle permet des transitions graduelles — peindre plusieurs fois sur une zone accumule l'effet</td></tr>
+  <tr><td><strong>Effacer</strong></td><td>Mode soustraction</td><td>Efface les zones peintes par erreur. Alterne entre peindre et effacer pour affiner les bords</td></tr>
+  <tr><td><strong>Inverser</strong></td><td>Inverse la zone d'action</td><td>Peins la zone à <em>exclure</em> plutôt que la zone à modifier — utile si la zone à préserver est plus petite</td></tr>
+</table>
+
+<h3 class="section-title" id="technique">Technique de peinture</h3>
+
+<div class="param-grid">
+  <div class="param-item">
+    <div class="param-name">Approche en deux passes</div>
+    <div class="param-range">Rapide puis précis</div>
+    <div class="param-desc">
+      <strong>Passe 1 :</strong> grande taille, dureté basse — couvre rapidement la zone principale.<br>
+      <strong>Passe 2 :</strong> taille réduite — affine les bords et les zones délicates.
+    </div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Visualiser le masque</div>
+    <div class="param-range">Indispensable pour vérifier</div>
+    <div class="param-desc">ART permet d'afficher le masque en surimpression colorée. Active cette vue pour voir précisément les zones peintes et détecter les trous ou débordements.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Dureté selon le contexte</div>
+    <div class="param-range">Organique vs architectural</div>
+    <div class="param-desc">
+      Visage, végétation, cheveux → dureté 0–20<br>
+      Bords d'un bâtiment, d'un vêtement à texture nette → dureté 40–60<br>
+      Ne dépasse jamais 80 — un bord de masque trop net se voit toujours.
+    </div>
+  </div>
+</div>
+
+<div class="insight">
+  <div class="insight-label">Limite du pinceau</div>
+  <p>Le pinceau est efficace pour des zones de taille moyenne avec des contours raisonnablement définissables. Pour des cheveux sur un fond complexe, de la végétation à petits détails, ou un sujet dans une scène très chargée — considère <a href="{{ '/modules/masques-smart/' | url }}" style="color:var(--accent);">SMART (masques IA)</a> qui atteint une précision impossible à la main.</p>
+</div>
+
+<h3 class="section-title" id="exemples">Cas d'usage typiques</h3>
+
+<div class="param-grid">
+  <div class="param-item">
+    <div class="param-name">Visage sous-exposé par rapport au fond</div>
+    <div class="param-range">Portrait — le classique</div>
+    <div class="param-desc">
+      <ol style="margin:6px 0 0 16px;padding:0;font-size:12px;color:var(--muted);line-height:1.9;">
+        <li>Calque local : Correction Couleur/Ton</li>
+        <li>Masque : Pinceau → peint sur le visage uniquement</li>
+        <li>Dureté basse sur les bords de la peau, normal sur les cheveux</li>
+        <li>Réglage : monte l'exposition dans le calque</li>
+        <li>Résultat : le visage s'éclaircit, le fond reste intact</li>
+      </ol>
+    </div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Texture d'un premier plan spécifique</div>
+    <div class="param-range">Paysage — rochers, herbe</div>
+    <div class="param-desc">
+      <ol style="margin:6px 0 0 16px;padding:0;font-size:12px;color:var(--muted);line-height:1.9;">
+        <li>Calque local : Amplification Texture</li>
+        <li>Masque : Pinceau → peint sur les rochers du premier plan</li>
+        <li>Évite le ciel et les zones douces</li>
+        <li>Réglage : texture modérée dans le calque</li>
+        <li>Résultat : les rochers ont de la matière, le reste reste doux</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+</div>

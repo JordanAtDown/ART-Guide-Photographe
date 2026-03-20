@@ -1,0 +1,142 @@
+---
+layout: base.njk
+title: 'Masque de Zone'
+permalink: '/modules/masques-zone/'
+---
+
+<div class="wf-back">
+  <a href="{{ '/modules/masques/' | url }}">← Masques &amp; Édition Locale</a>
+</div>
+
+<div class="module-header">
+  <div class="module-tag"><div class="tag-dot" style="background:#4a9eff"></div><span style="color:#4a9eff">Masque Géométrique</span></div>
+  <h2>Masque de Zone</h2>
+  <div class="subtitle">Rectangle, polygone ou dégradé linéaire — la solution naturelle pour les zones à contours définis.</div>
+</div>
+
+<div class="blockquote">
+  Le masque de zone est l'équivalent numérique du filtre dégradé gris utilisé en photographie argentique pour équilibrer ciel et sol. Simple, rapide, et souvent suffisant.
+</div>
+
+<div class="toc">
+  <div class="toc-title">Sommaire</div>
+  <ol>
+    <li><a href="#quand">Quand l'utiliser</a></li>
+    <li><a href="#degrade">Le dégradé linéaire — l'outil le plus utilisé</a></li>
+    <li><a href="#rectangle">Rectangle et polygone</a></li>
+    <li><a href="#parametres">Paramètres clés</a></li>
+    <li><a href="#exemples">Cas d'usage typiques</a></li>
+  </ol>
+</div>
+
+<div class="editorial">
+
+<h3 class="section-title" id="quand">Quand l'utiliser</h3>
+
+<div class="param-grid">
+  <div class="param-item">
+    <div class="param-name">Ciel / sol</div>
+    <div class="param-range">Problème le plus fréquent en paysage</div>
+    <div class="param-desc">Un dégradé linéaire horizontal est la solution naturelle. Assombrir le ciel ou déboucher le sol sans toucher à l'autre zone.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Coins de l'image</div>
+    <div class="param-range">Vignettage contrôlé</div>
+    <div class="param-desc">Assombrir un coin ou une bordure pour ramener l'attention vers le sujet. Plus précis qu'un vignettage global.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Zones rectilignes</div>
+    <div class="param-range">Architecture, fenêtres, panneaux</div>
+    <div class="param-desc">Un sujet rectangulaire dans l'image — une fenêtre trop lumineuse, un mur trop sombre, un panneau à recadrer en luminosité.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Masses irrégulières mais prévisibles</div>
+    <div class="param-range">Toitures, masses d'arbres, horizons droits</div>
+    <div class="param-desc">Le polygone permet de tracer une forme aux bords nets sur des zones dont les contours ne sont pas des lignes droites mais restent dessinables.</div>
+  </div>
+</div>
+
+<h3 class="section-title" id="degrade">Le dégradé linéaire — l'outil le plus utilisé</h3>
+
+<p>Le dégradé linéaire crée une transition progressive entre "pleine intensité" et "aucun effet". C'est le plus utilisé des masques de zone parce qu'il mime naturellement la façon dont les conditions lumineuses changent dans une scène.</p>
+
+<div class="param-grid">
+  <div class="param-item">
+    <div class="param-name">Direction</div>
+    <div class="param-range">Haut/bas · Gauche/droite · Diagonal</div>
+    <div class="param-desc">L'orientation du dégradé. Pour un ciel, horizontal vers le bas. Pour une source de lumière latérale, vertical. La direction correspond à comment la lumière change dans la scène.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Zone de transition</div>
+    <div class="param-range">Étroite → abrupte · Large → douce</div>
+    <div class="param-desc">L'étendue de la zone de fondu entre plein effet et aucun effet. Plus la transition est large, plus l'effet est discret et naturel. Commence toujours large, réduis si nécessaire.</div>
+  </div>
+</div>
+
+<div class="tip">
+  <div class="tip-label">Règle de base</div>
+  <p>Une transition trop abrupte révèle le masque — l'œil voit la ligne. Toujours commencer avec une zone de transition large et la resserrer uniquement si l'effet manque de précision.</p>
+</div>
+
+<h3 class="section-title" id="rectangle">Rectangle et polygone</h3>
+
+<p><strong>Le rectangle</strong> délimite une zone carrée ou rectangulaire avec des bords adoucis. Utile pour cibler un élément architecturel, une fenêtre, une zone précise sans déborder. Le rayon d'adoucissement des coins contrôle la douceur de la transition.</p>
+
+<p><strong>Le polygone</strong> permet de tracer une forme à plusieurs points — plus flexible que le rectangle pour des zones aux contours irréguliers mais définis. Clique pour poser des points, double-clic pour fermer la forme. La douceur des bords s'ajuste ensuite.</p>
+
+<div class="insight">
+  <div class="insight-label">Polygone vs Pinceau</div>
+  <p>Utilise le polygone quand la forme de la zone est traçable en quelques clics avec des contours nets — une toiture, un mur, un bâtiment. Utilise le pinceau quand la zone a des contours organiques et imprévisibles — un visage, de la végétation, les bords d'une personne.</p>
+</div>
+
+<h3 class="section-title" id="parametres">Paramètres clés</h3>
+
+<table>
+  <tr><th>Paramètre</th><th>Ce qu'il contrôle</th><th>Conseil</th></tr>
+  <tr><td>Transition / Feather</td><td>Douceur des bords du masque</td><td>Toujours non-nul — un masque à bords durs révèle immédiatement sa présence</td></tr>
+  <tr><td>Inverser</td><td>Inverse la zone d'action</td><td>Pratique si la zone à préserver est plus petite que la zone à modifier</td></tr>
+  <tr><td>Opacité du calque</td><td>Intensité globale de l'effet</td><td>Réduire l'opacité est souvent plus naturel que réduire les réglages un par un</td></tr>
+</table>
+
+<h3 class="section-title" id="exemples">Cas d'usage typiques</h3>
+
+<div class="param-grid">
+  <div class="param-item">
+    <div class="param-name">Ciel trop clair, sol bien exposé</div>
+    <div class="param-range">Paysage — cas le plus fréquent</div>
+    <div class="param-desc">
+      <ol style="margin:6px 0 0 16px;padding:0;font-size:12px;color:var(--muted);line-height:1.9;">
+        <li>Calque local : Correction Couleur/Ton</li>
+        <li>Masque : Zone → Dégradé linéaire du haut vers le milieu</li>
+        <li>Réglage : baisse l'exposition dans le calque</li>
+        <li>Résultat : le ciel s'assombrit progressivement, le sol reste intact</li>
+      </ol>
+    </div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Vignettage directionnel</div>
+    <div class="param-range">Portrait, mise en valeur du sujet</div>
+    <div class="param-desc">
+      <ol style="margin:6px 0 0 16px;padding:0;font-size:12px;color:var(--muted);line-height:1.9;">
+        <li>Calque local : Correction Couleur/Ton</li>
+        <li>Masque : Zone → Rectangle inversé (agit sur les bords)</li>
+        <li>Réglage : baisse légère de l'exposition</li>
+        <li>Résultat : les bords s'assombrissent, le centre reste lumineux</li>
+      </ol>
+    </div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Assombrir une source de lumière latérale</div>
+    <div class="param-range">Intérieur, contre-jour partiel</div>
+    <div class="param-desc">
+      <ol style="margin:6px 0 0 16px;padding:0;font-size:12px;color:var(--muted);line-height:1.9;">
+        <li>Calque local : Correction Couleur/Ton</li>
+        <li>Masque : Zone → Dégradé linéaire vertical depuis le côté lumineux</li>
+        <li>Réglage : baisse hautes lumières + exposition</li>
+        <li>Résultat : équilibre latéral sans toucher au sujet central</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+</div>

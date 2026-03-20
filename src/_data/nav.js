@@ -18,17 +18,18 @@ module.exports = [
   {
     section: "Méthode & Workflow",
     items: [
-      { id: "pipeline", label: "Pipeline de traitement", url: "/modules/pipeline/", color: "#00d4aa" },
-      { id: "ordremodules", label: "Workflow de traitement", url: "/modules/ordremodules/", color: "#00d4aa" },
+      { id: "pipeline", label: "Pipeline de traitement RAW", url: "/modules/pipeline/", color: "#00d4aa" },
+      { id: "ordremodules", label: "Méthodologie de traitement", url: "/modules/ordremodules/", color: "#00d4aa" },
       { id: "workflow-complet", label: "Workflow complet", url: "/modules/workflow-complet/", color: "#22d3ee" },
       { id: "workflows", label: "Workflows par genre", url: "/modules/workflows/", color: "#34d399" },
       { id: "art-affinity", label: "ART → Affinity : le pont", url: "/modules/art-affinity/", color: "#c084fc" }
     ]
   },
   {
-    section: "Courbes & Outils Tonaux",
+    section: "Courbes & Masques",
     items: [
-      { id: "courbes", label: "Maîtriser les Courbes", url: "/modules/courbes/", color: "#a78bfa" }
+      { id: "courbes", label: "Maîtriser les Courbes", url: "/modules/courbes/", color: "#a78bfa" },
+      { id: "masques", label: "Masques & Édition Locale", url: "/modules/masques/", color: "#a78bfa" }
     ]
   },
   {
@@ -66,12 +67,6 @@ module.exports = [
     section: "Effets spéciaux",
     items: [
       { id: "eliminationbrume", label: "Élimination de la Brume", url: "/modules/eliminationbrume/", color: "#e879a0" }
-    ]
-  },
-  {
-    section: "Looks & Presets",
-    items: [
-      { id: "looks", label: "3 Looks Méditerranée", url: "/modules/looks/", color: "#a78bfa" }
     ]
   }
 ];
