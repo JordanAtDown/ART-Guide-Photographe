@@ -2,7 +2,7 @@
   "meta": {
     "source": "ART Raw Image Processor — Documentation Photographe",
     "version": "1.0",
-    "generated": "2026-03-21T07:23:32.710Z",
+    "generated": "2026-03-21T07:58:45.845Z",
     "total_modules": 55,
     "description": "Knowledge base extraite des sources Eleventy pour usage par MCP ou tout système de génération de fichiers .arp"
   },
@@ -430,6 +430,10 @@
         {
           "label": "Bonnes pratiques — workflow recommandé",
           "content": "**Instance 1** — Mode **Coefficients TSL** : color grading principal (ombres teal, HL chaud). **Instance 2** — Mode **Canaux RVB séparés** : ajustements fins canal par canal (lever ombres bleu, compresser HL rouge). **Instance 3** — Mode **LUT** (optionnel) : appliquer un look cinéma par-dessus. Toujours travailler avec des valeurs **subtiles** sur les wheels — intensité 0.05 à 0.15 max. L'œil s'adapte vite, ce qui paraît subtil à l'écran sera visible à l'impression."
+        },
+        {
+          "label": "Tu maîtrises l'outil — et maintenant ?",
+          "content": "Savoir manipuler les Color Wheels ne dit pas encore vers quelle teinte orienter tes ombres, ni pourquoi le contraste complémentaire orange/teal fonctionne si bien. La page Direction Artistique traduit les principes d'harmonie chromatique en recettes concrètes, look par look. Direction Artistique & Looks →"
         }
       ],
       "warnings": [
@@ -1785,6 +1789,10 @@
         {
           "label": "Recette paysage marin avec voile atmosphérique",
           "content": "1. Activer **Élimination de la Brume**, Mode **Luminosité**. 2. Monter la courbe Force modérément — vérifier que les collines lointaines retrouvent du contraste sans que les rochers au premier plan deviennent trop \"durs\". 3. Ajuster **Correction Point Noir** à 10–20 pour redonner de la densité aux ombres. 4. Si trop agressif sur les premiers plans : ajouter un **masque de zone** pour limiter l'effet aux lointains uniquement."
+        },
+        {
+          "label": "Astuce workflow",
+          "content": "Après avoir réduit la brume, l'image peut paraître légèrement plate — la brume éliminée laisse une compression tonale résiduelle. Un léger Contraste Local (valeur 0.10–0.20) restitue la présence et la profondeur sans recréer de voile."
         }
       ],
       "warnings": [
@@ -2655,6 +2663,10 @@
           "content": "ISO bas (100–400), plein soleil : Mode **Conservatif**, Luminance **0.10**, Chrominance auto **1.00**, Lissage final Niv. détails **60**. Ombres récupérées (+40 Égaliseur) : Mode **Agressif / Lab**, Luminance **0.35**, Niveau détails **0.40**, Chrominance Maître **25**."
         },
         {
+          "label": "Un cas particulier — les taches colorées isolées",
+          "content": "Si tu constates non pas du grain généralisé mais des points isolés (rouges, verts, blancs) dans les zones sombres — notamment sur les poses longues ou aux ISO élevés — ce n'est pas du bruit de chrominance classique. C'est du bruit d'impulsion, qui se traite avec un module dédié. Bruit d'Impulsion →"
+        },
+        {
           "label": "Modes avancés",
           "content": "Le module Lissage propose également **8 modes de traitement local** (Guidé, Gaussien, Halo Diffus, Outils Non-Locaux, Wavelets, Flou de Mouvement, Flou d'Objectif, Ajouter du Bruit) chacun avec ses propres paramètres et applicable avec un masque de zone. Ces modes permettent d'aller bien au-delà du simple débruitage : bokeh créatif, grain film, flou atmosphérique, etc. → Voir le module Lissage — 8 Modes Détail pour la documentation complète."
         }
@@ -2784,6 +2796,10 @@
         {
           "label": "Réglage de départ recommandé pour paysage marin",
           "content": "Clique **Automatique** d'abord — ART analyse ton histogramme et propose des valeurs. Puis ajuste : Blanc EV à **2.0-2.2** (moins de compression HL), Noir EV à **-10 / -11** (ombres plus riches), Régularisation à **50-60**, Point gris à **18-20**."
+        },
+        {
+          "label": "Dans quel contexte l'utiliser ?",
+          "content": "Le Log Tone Mapping intervient en réponse à des symptômes précis — ciel cramé, dynamique trop large, contre-jour non gérable. Si tu pars d'un problème visuel plutôt que d'un module, l'outil de diagnostic t'orientera directement ici. Diagnostiquer une photo →"
         }
       ],
       "warnings": [],
@@ -3333,6 +3349,10 @@
         {
           "label": "Point clé",
           "content": "ART traite les données dans un ordre fixe en interne, même si tu peux activer les modules dans n'importe quel ordre. Connaître ce pipeline t'évite des surprises : une modif en amont peut changer le résultat d'un module en aval."
+        },
+        {
+          "label": "Et en pratique ?",
+          "content": "Ce pipeline est l'architecture interne du moteur ART. Pour savoir dans quel ordre actionner les modules lors d'un développement réel — Méthodologie de traitement →"
         }
       ],
       "warnings": [],
@@ -3435,6 +3455,10 @@
         {
           "label": "Point de vue photographe",
           "content": "Ce module est spécialement conçu pour les textures — il travaille sur des fréquences spatiales moyennes (les détails de surface) sans amplifier le bruit (petites fréquences) ni créer de halos (grandes fréquences). Sur ta photo de rochers et d'eau, c'est lui qui va \"réveiller\" la texture des strates rocheuses et le mouvement de l'eau."
+        },
+        {
+          "label": "À combiner avec le Contraste Local",
+          "content": "L'Amplification Texture agit à l'échelle des micro-détails (grain de peau, texture de roche, fil de tissu). Le Contraste Local agit à l'échelle méso — les transitions de luminosité entre zones, qui donnent \"du punch\" et de la profondeur à l'image. Les deux se complètent et s'utilisent ensemble, toujours en dernier dans le pipeline. Contraste Local →"
         }
       ],
       "warnings": [],
