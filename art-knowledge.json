@@ -2,8 +2,8 @@
   "meta": {
     "source": "ART Raw Image Processor — Documentation Photographe",
     "version": "1.0",
-    "generated": "2026-03-20T19:32:29.405Z",
-    "total_modules": 46,
+    "generated": "2026-03-21T07:13:55.129Z",
+    "total_modules": 55,
     "description": "Knowledge base extraite des sources Eleventy pour usage par MCP ou tout système de génération de fichiers .arp"
   },
   "modules": [
@@ -1936,6 +1936,624 @@
       "tables": []
     },
     {
+      "id": "mod-histogramme-contraste",
+      "name": "🌫️ Image molle — peu contrastée",
+      "subtitle": "Tout au centre — la plage tonale n'est pas utilisée, l'image manque de corps.",
+      "category": "Analyse, Courbes & Masques",
+      "params": [
+        {
+          "name": "Brume et brouillard",
+          "range": "",
+          "description": "L'atmosphère diffuse la lumière et \"remonte\" les noirs. Impossible d'avoir de vrais noirs dans une scène brumeuse — c'est la physique."
+        },
+        {
+          "name": "Temps couvert uniforme",
+          "range": "",
+          "description": "Ciel blanc, lumière plate, pas d'ombres portées. La scène manque naturellement de plage dynamique."
+        },
+        {
+          "name": "RAW non développé",
+          "range": "",
+          "description": "Un fichier RAW brut sans profil d'entrée peut avoir un histogramme aplati — c'est normal, le profil d'entrée est censé l'étirer."
+        },
+        {
+          "name": "Scène intrinsèquement plate",
+          "range": "",
+          "description": "Certaines scènes (intérieur avec lumière douce et diffuse, studio avec fond gris) ont une faible dynamique naturelle."
+        }
+      ],
+      "tips": [],
+      "warnings": [
+        "En étirant trop une plage tonale initialement étroite, tu amplifie aussi tout ce qu'elle contenait de défauts : bruit dans les ombres, artefacts de compression, transitions de couleur abruptes. Si l'image semble \"craquer\" ou \"griller\" après les réglages de contraste, c'est que la plage d'origine ne contenait pas suffisamment d'information pour supporter cette amplitude."
+      ],
+      "tables": [
+        {
+          "headers": [
+            "Action",
+            "Effet sur l'histogramme",
+            "Risque associé"
+          ],
+          "rows": [
+            [
+              "Baisser les Noirs",
+              "La partie gauche s'étend, ancre les ombres",
+              "Bruit dans les zones débouchées"
+            ],
+            [
+              "Monter les Blancs",
+              "La partie droite s'étend, ouvre les HLs",
+              "Clipping si on va trop loin"
+            ],
+            [
+              "Courbe en S",
+              "Compression aux extrêmes, étirement au centre",
+              "Écrasement des ombres et HLs si trop prononcée"
+            ],
+            [
+              "Élimination de Brume",
+              "Étire toute la plage de manière adaptative",
+              "Artefacts sur les ciels ou zones uniformes si trop fort"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mod-histogramme-dominante",
+      "name": "🎨 Canaux RVB décalés",
+      "subtitle": "Les courbes rouge, verte, bleue ne se superposent pas — dominante colorée détectée.",
+      "category": "Analyse, Courbes & Masques",
+      "params": [
+        {
+          "name": "Dominante parasite",
+          "range": "",
+          "description": "Balance des blancs incorrecte en capture (néons verdâtres, flash non calibré). Les tons chair ont une teinte anormale, les zones blanches ne sont pas neutres. À corriger."
+        },
+        {
+          "name": "Dominante intentionnelle",
+          "range": "",
+          "description": "Chaleur d'un coucher de soleil, froid d'une scène hivernale, ambiance colorée d'un lieu. La dominante contribue à l'atmosphère. La \"corriger\" tuerait l'image."
+        }
+      ],
+      "tips": [],
+      "warnings": [
+        "Une correction de balance des blancs dans un logiciel de retouche pixel (Affinity, Photoshop) opère sur les données déjà converties, avec une précision limitée et des artefacts potentiels. En RAW dans ART, tu agis sur les données brutes — la correction est propre, sans dégradation. C'est la règle absolue du workflow RAW → TIFF : tout ce qui relève de la balance des blancs et des dominantes se règle dans ART."
+      ],
+      "tables": [
+        {
+          "headers": [
+            "Canal décalé à droite",
+            "Dominante résultante",
+            "Scènes typiques"
+          ],
+          "rows": [
+            [
+              "Rouge** décalé à droite des autres",
+              "Dominante chaude — orange, rouge, ambre",
+              "Lumière tungstène, coucher de soleil, bougie"
+            ],
+            [
+              "Vert** décalé à droite des autres",
+              "Dominante verdâtre",
+              "Néons, fluorescents, végétation très présente"
+            ],
+            [
+              "Bleu** décalé à droite des autres",
+              "Dominante froide — cyan, bleu",
+              "Lumière de flash, ombre, ciel bleu, lumière du jour"
+            ],
+            [
+              "Canaux très écartés entre eux",
+              "Dominante forte, couleurs saturées artificiellement",
+              "Balance des blancs incorrecte en capture"
+            ]
+          ]
+        },
+        {
+          "headers": [
+            "Action",
+            "Dominante possible",
+            "Solution"
+          ],
+          "rows": [
+            [
+              "Saturation globale forte",
+              "Tous les canaux s'écartent selon leurs valeurs initiales",
+              "Surveiller l'histogramme RVB pendant l'opération"
+            ],
+            [
+              "Virage partiel ombres (Color Wheels)",
+              "Dominante dans les ombres selon la direction du virage",
+              "Normal si intentionnel — vérifier la cohérence globale"
+            ],
+            [
+              "Courbes RVB asymétriques",
+              "Dominante liée à l'amplification d'un canal",
+              "Comparer les courbes — s'assurer que les canaux restent cohérents"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mod-histogramme-dynamique",
+      "name": "📷 Forte plage dynamique",
+      "subtitle": "Deux bosses aux extrêmes — la scène dépasse la plage dynamique confortable du capteur.",
+      "category": "Analyse, Courbes & Masques",
+      "params": [
+        {
+          "name": "Contre-jour",
+          "range": "",
+          "description": "Sujet sombre sur fond lumineux — ciel, fenêtre, source de lumière. La silhouette et le fond sont aux deux extrêmes de la plage."
+        },
+        {
+          "name": "Intérieur + fenêtre",
+          "range": "",
+          "description": "L'intérieur sombre et la fenêtre lumineuse coexistent dans le même cadre. L'écart peut dépasser 8 à 10 IL."
+        },
+        {
+          "name": "Paysage ciel + sol",
+          "range": "",
+          "description": "Ciel lumineux et sol ombragé. Fréquent en montagne, en plaine avec ciel contrasté, au lever/coucher du soleil."
+        },
+        {
+          "name": "Scène HDR urbaine",
+          "range": "",
+          "description": "Sources lumineuses (lampadaires, enseignes) dans un environnement sombre. L'écart dynamique est extrême."
+        }
+      ],
+      "tips": [
+        {
+          "label": "Workflow conseillé pour une forte dynamique",
+          "content": "1. Activer le Log TM et trouver un équilibre global → 2. Vérifier les indicateurs de clipping dans les deux directions → 3. Affiner ombres et HLs via l'Égaliseur Tonal → 4. Appliquer le color grading → 5. Valider l'histogramme final avant export."
+        }
+      ],
+      "warnings": [],
+      "tables": []
+    },
+    {
+      "id": "mod-histogramme-equilibre",
+      "name": "✅ Histogramme équilibré",
+      "subtitle": "Exposition correcte — la matière est là, l'intention peut s'exprimer.",
+      "category": "Analyse, Courbes & Masques",
+      "params": [
+        {
+          "name": "Courbes tonales",
+          "range": "",
+          "description": "Ajouter une légère S-curve pour renforcer le contraste sans perdre de détails aux extrêmes. Les données sont présentes — profite-en."
+        },
+        {
+          "name": "Égaliseur Tonal",
+          "range": "",
+          "description": "Travailler séparément les ombres et les hautes lumières pour guider le regard vers le sujet principal."
+        },
+        {
+          "name": "Log Tone Mapping",
+          "range": "",
+          "description": "Si la scène a de la dynamique malgré l'équilibre global, le Log TM permet d'affiner la répartition sans forcer sur les curseurs globaux."
+        },
+        {
+          "name": "Color grading",
+          "range": "",
+          "description": "Données présentes dans les ombres ET les HLs — le split toning (ombres froides, HLs chaudes) fonctionne avec toute son amplitude."
+        }
+      ],
+      "tips": [
+        {
+          "label": "Bonne pratique",
+          "content": "Avant d'agir sur les curseurs, confirme visuellement que l'image correspond à l'histogramme : est-ce que les zones sombres ont de la texture ? Les hautes lumières gardent-elles du détail ? Un histogramme équilibré avec des zones visuellement problématiques peut indiquer un contraste très localisé invisible à l'échelle globale."
+        }
+      ],
+      "warnings": [],
+      "tables": [
+        {
+          "headers": [
+            "Variante",
+            "Signal",
+            "Action"
+          ],
+          "rows": [
+            [
+              "Courbe légèrement décalée à droite",
+              "ETTR — exposition optimisée pour le RAW",
+              "Parfait. Baisser légèrement l'Exposition si nécessaire"
+            ],
+            [
+              "Canaux RVB légèrement décalés",
+              "Légère dominante colorée",
+              "Affiner la Balance des Blancs"
+            ],
+            [
+              "Colline très plate, étalée",
+              "Bonne dynamique, bon signal",
+              "Ajouter du contraste via courbe en S"
+            ],
+            [
+              "Pic très étroit au centre",
+              "Scène à faible dynamique (brume, ciel couvert)",
+              "Voir Image molle"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mod-histogramme-hautes-lumieres",
+      "name": "⚠️ Hautes lumières cramées",
+      "subtitle": "Le pic colle à droite — des informations sont perdues ou partiellement récupérables depuis le RAW.",
+      "category": "Analyse, Courbes & Masques",
+      "params": [
+        {
+          "name": "Saturation trop poussée",
+          "range": "",
+          "description": "Un canal peut clipper seul quand la saturation force ses valeurs au maximum. Résultat : teinte artificielle dans les HLs."
+        },
+        {
+          "name": "Virage chaud dans les HLs",
+          "range": "",
+          "description": "Pousser les HLs vers l'orange augmente le canal rouge — qui peut clipper si les HLs étaient déjà élevées. Surveiller le canal rouge séparément."
+        },
+        {
+          "name": "Vérification finale",
+          "range": "",
+          "description": "Avant l'export, toujours revérifier l'histogramme et les zébrures après le color grading. Un réglage subtil peut avoir créé du clipping sans que l'œil le remarque."
+        }
+      ],
+      "tips": [
+        {
+          "label": "Technique — La récupération par canaux",
+          "content": "Si un seul canal clippe, les Courbes RVB peuvent aider : en baissant légèrement le canal problématique dans les hautes valeurs, tu récupères la désaturation artificielle causée par le déséquilibre entre canaux. Ce n'est pas de la récupération d'information — c'est une correction de l'apparence de la zone brûlée."
+        }
+      ],
+      "warnings": [
+        "Activer les **indicateurs de clipping dans ART** (zébrures hautes lumières). Ne jamais se fier à l'œil seul pour détecter le clipping — un écran légèrement sombre peut masquer un clipping réel. L'indicateur, lui, ne ment pas."
+      ],
+      "tables": [
+        {
+          "headers": [
+            "Situation",
+            "Signal visuel",
+            "Récupérabilité"
+          ],
+          "rows": [
+            [
+              "**Un seul canal clippe** (ex. rouge)",
+              "Zone avec dominante colorée étrange (magenta, cyan...)",
+              "Partielle — les deux autres canaux ont encore de l'info"
+            ],
+            [
+              "**Deux canaux clippent**",
+              "Zone très désaturée et pâle",
+              "Limitée — un canal restant"
+            ],
+            [
+              "**Trois canaux clippent**",
+              "Blanc pur, sans détail",
+              "Nulle — données RAW absentes"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mod-histogramme-highkey",
+      "name": "☀️ High Key — Clé claire",
+      "subtitle": "Masse à droite — distinguer le High Key maîtrisé de la surexposition.",
+      "category": "Analyse, Courbes & Masques",
+      "params": [
+        {
+          "name": "Hautes lumières — surveiller le clipping",
+          "range": "",
+          "description": "Le curseur Hautes Lumières (Highlights) permet d'affiner sans laisser cramer. Aller jusqu'au bord sans y coller — l'espace entre la courbe et le bord droit, c'est ton marge de manœuvre."
+        },
+        {
+          "name": "Noirs — ajouter juste assez de présence",
+          "range": "",
+          "description": "Un léger ancrage des noirs (même minimal) empêche l'image de paraître \"sans air\" ou lavée. Une touche de noir quelque part guide l'œil et donne de la profondeur à la luminosité générale."
+        },
+        {
+          "name": "Balance des Blancs — température neutre ou légèrement chaude",
+          "range": "",
+          "description": "Le High Key de portrait fonctionne bien avec une balance neutre à légèrement chaude. Éviter le froid qui peut rendre l'image clinique."
+        },
+        {
+          "name": "Saturation — retenue",
+          "range": "",
+          "description": "Dans un contexte High Key, une saturation forte risque de faire clipper les canaux les plus chargés. Préférer la Vibrance qui agit sur les couleurs peu saturées en épargnant les hautes lumières déjà lumineuses."
+        }
+      ],
+      "tips": [
+        {
+          "label": "High Key et impression",
+          "content": "Sur papier, les hautes lumières qui paraissent légères à l'écran peuvent s'imprimer très proches du blanc du papier — et perdre toute subtilité. Prévoir une légère correction si la destination est l'impression : baisser légèrement les HLs par rapport au rendu écran."
+        }
+      ],
+      "warnings": [],
+      "tables": [
+        {
+          "headers": [
+            "",
+            "High Key maîtrisé",
+            "Surexposition à corriger"
+          ],
+          "rows": [
+            [
+              "**Le bord droit**",
+              "La courbe approche sans toucher — pas de clipping",
+              "Paroi verticale contre le bord — clipping HLs"
+            ],
+            [
+              "**Les hautes lumières**",
+              "Riches, subtiles, avec des dégradés fins et du détail",
+              "Brûlées, blanches pures, sans texture"
+            ],
+            [
+              "**L'intention**",
+              "Visible — portrait lumineux, neige, ambiance printanière",
+              "Absente — image simplement trop claire"
+            ],
+            [
+              "**Les ombres**",
+              "Absentes ou minimes — c'est voulu",
+              "Présentes mais trop claires elles aussi"
+            ]
+          ]
+        },
+        {
+          "headers": [
+            "Scène",
+            "Particularité",
+            "Point de vigilance"
+          ],
+          "rows": [
+            [
+              "Portrait blanc sur fond blanc",
+              "Peu de contraste entre sujet et fond — l'éclairage doit séparer les deux",
+              "Texture de la peau peut disparaître si les HLs clippent"
+            ],
+            [
+              "Neige, plages blanches",
+              "L'appareil sous-expose souvent automatiquement (gris moyen)",
+              "Surcompenser à la prise de vue pour exposer correctement"
+            ],
+            [
+              "Product shot fond blanc",
+              "Le fond doit clipper (blanc pur) mais le produit ne doit pas",
+              "Surveiller les canaux du produit séparément du fond"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mod-histogramme-lowkey",
+      "name": "🌑 Low Key — Clé sombre",
+      "subtitle": "Masse à gauche — distinguer l'intention dramatique de la sous-exposition.",
+      "category": "Analyse, Courbes & Masques",
+      "params": [
+        {
+          "name": "Noirs — valider sans écraser",
+          "range": "",
+          "description": "Les noirs peuvent aller profond — mais veiller à ce que les ombres riches gardent leur texture. Un léger ajustement du curseur Noirs vers le haut peut révéler de la matière sans trahir l'ambiance."
+        },
+        {
+          "name": "Contraste local — la clé",
+          "range": "",
+          "description": "Le Contraste Local agit sur les microcontrastes dans les zones sombres sans toucher à la valeur globale d'exposition. Il \"réveille\" les détails dans les ombres sans les déboucher."
+        },
+        {
+          "name": "Grain — ami du Low Key",
+          "range": "",
+          "description": "Un grain léger dans les ombres est souvent bénéfique en clé sombre — il empêche les aplats de paraître artificiels et ancre l'image dans une esthétique photographique."
+        },
+        {
+          "name": "Color grading — froids ou neutres",
+          "range": "",
+          "description": "Les ombres bleues ou cyan renforcent une ambiance nocturne ou froide. Les ombres chaudes (brun, orange) évoquent la bougie, l'intimité. Un virage partiel dans les ombres via les Color Wheels structure l'atmosphère."
+        }
+      ],
+      "tips": [
+        {
+          "label": "Clés sombres et exports",
+          "content": "Les images en clé sombre sont très sensibles aux variations d'affichage — un écran trop lumineux ou mal calibré peut masquer des zones complètement noires qui s'avèrent bouchées sur un autre écran. Vérifier avec l'histogramme et les zébrures d'ombres avant l'export. En impression, les noirs ont tendance à encore s'assombrir selon le support."
+        }
+      ],
+      "warnings": [],
+      "tables": [
+        {
+          "headers": [
+            "",
+            "Low Key réussi",
+            "Sous-exposition à corriger"
+          ],
+          "rows": [
+            [
+              "**Les ombres**",
+              "Riches en texture, différenciées",
+              "Bouchées, sans détail, aplaties"
+            ],
+            [
+              "**Le bord gauche**",
+              "N'est pas une paroi verticale — la courbe décroît progressivement",
+              "Paroi verticale abrupte — clipping ombres"
+            ],
+            [
+              "**L'intention**",
+              "Visible — portrait dramatique, ambiance nuit, chiaroscuro",
+              "Absente — image simplement trop sombre"
+            ],
+            [
+              "**Les hautes lumières**",
+              "Souvent absentes ou très restreintes — c'est voulu",
+              "Présentes mais elles aussi trop basses"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mod-histogramme-ombres",
+      "name": "⚠️ Ombres bouchées",
+      "subtitle": "Le pic colle à gauche — les noirs ont absorbé les détails des zones sombres.",
+      "category": "Analyse, Courbes & Masques",
+      "params": [
+        {
+          "name": "Ordre conseillé",
+          "range": "",
+          "description": "1. Déboucher les ombres → 2. Vérifier le bruit → 3. Appliquer le Lissage NR si nécessaire. Ne jamais réduire le bruit avant d'avoir fini les réglages d'exposition."
+        },
+        {
+          "name": "Limites acceptables",
+          "range": "",
+          "description": "Récupérer 1 à 2 IL d'ombres donne généralement un résultat acceptable avec un bon module NR. Au-delà, le compromis bruit/détail devient difficile à gérer."
+        },
+        {
+          "name": "ISO et capteur",
+          "range": "",
+          "description": "La récupérabilité des ombres dépend directement de l'ISO de capture et de la qualité du capteur. Un ISO 3200 laisse beaucoup moins de marge qu'un ISO 400."
+        }
+      ],
+      "tips": [
+        {
+          "label": "Technique — Masque de luminance pour cibler les ombres",
+          "content": "Plutôt que d'agir globalement sur les ombres, un masque paramétrique par luminance permet de cibler précisément les pixels sombres et d'y appliquer séparément le débouchage et la réduction de bruit — sans affecter les tons clairs qui n'en ont pas besoin."
+        }
+      ],
+      "warnings": [
+        "La différence se voit dans les détails : si les zones sombres ont de la **texture visible** même dans les noirs, c'est une clé sombre réussie. Si le bord gauche est une paroi verticale sans aucune variation, les ombres sont bouchées — les données sont perdues."
+      ],
+      "tables": [
+        {
+          "headers": [
+            "Cause",
+            "Signal supplémentaire",
+            "Nature du problème"
+          ],
+          "rows": [
+            [
+              "Sous-exposition générale",
+              "Image globalement sombre, tons moyens bas",
+              "Problème technique — données manquantes"
+            ],
+            [
+              "Contraste global trop fort",
+              "HLs correctes, creux brutal dans les ombres",
+              "Traitement excessif — données présentes mais écrasées"
+            ],
+            [
+              "Low Key intentionnel",
+              "Image artistiquement sombre, texture visible",
+              "Intention — voir Clé sombre"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mod-histogramme",
+      "name": "L'Histogramme dans ART",
+      "subtitle": "Lire et utiliser l'outil de mesure le plus fiable du développement RAW.",
+      "category": "Analyse, Courbes & Masques",
+      "params": [],
+      "tips": [],
+      "warnings": [],
+      "tables": [
+        {
+          "headers": [
+            "Courbe",
+            "Ce qu'elle représente"
+          ],
+          "rows": [
+            [
+              "Rouge**",
+              "Canal Rouge"
+            ],
+            [
+              "Verte**",
+              "Canal Vert"
+            ],
+            [
+              "Grise remplie**",
+              "Luminance globale (luma)"
+            ]
+          ]
+        },
+        {
+          "headers": [
+            "Ce qu'il ignore",
+            "Ce que ça implique"
+          ],
+          "rows": [
+            [
+              "La **répartition spatiale** des pixels",
+              "Un histogramme équilibré peut masquer un ciel brûlé et un sol bouché simultanément"
+            ],
+            [
+              "La **qualité des couleurs**",
+              "Un histogramme centré ne garantit pas une belle couleur"
+            ],
+            [
+              "Le **rendu final sur support**",
+              "Impression, écran web — relatif à l'espace de sortie configuré dans ART"
+            ],
+            [
+              "L'**intention artistique**",
+              "Un histogramme \"mauvais\" techniquement peut être une excellente photo"
+            ]
+          ]
+        },
+        {
+          "headers": [
+            "Ce que tu vois",
+            "Ce que ça signifie",
+            "Première action"
+          ],
+          "rows": [
+            [
+              "Pic collé à droite",
+              "Hautes lumières cramées",
+              "Baisser Exposition ou Log TM"
+            ],
+            [
+              "Pic collé à gauche",
+              "Ombres bouchées",
+              "Remonter Noirs ou Ombres"
+            ],
+            [
+              "Deux pics aux extrêmes",
+              "Forte plage dynamique",
+              "Log Tone Mapping"
+            ],
+            [
+              "Centré, étalé",
+              "Dynamique équilibrée",
+              "Affinage — courbes tonales"
+            ],
+            [
+              "Tout au centre",
+              "Image molle",
+              "Étirer les tons (Noirs + Blancs)"
+            ],
+            [
+              "Masse à gauche",
+              "Clé sombre ou sous-expo",
+              "Vérifier les ombres"
+            ],
+            [
+              "Masse à droite",
+              "Clé claire ou sur-expo",
+              "Vérifier le clipping"
+            ],
+            [
+              "Canaux RVB décalés",
+              "Dominante colorée",
+              "Balance des Blancs"
+            ]
+          ]
+        }
+      ]
+    },
+    {
       "id": "mod-lexique",
       "name": "Lexique ART",
       "subtitle": "35 termes essentiels pour comprendre ART et la photographie numérique",
@@ -2729,40 +3347,6 @@
       "tips": [],
       "warnings": [],
       "tables": [
-        {
-          "headers": [
-            "Forme de l'histogramme",
-            "Lecture",
-            "Action possible"
-          ],
-          "rows": [
-            [
-              "Pic collé à droite",
-              "Hautes lumières cramées",
-              "Récupérer avec le curseur Hautes Lumières"
-            ],
-            [
-              "Pic collé à gauche",
-              "Ombres bouchées",
-              "Ouvrir les ombres — mais attention au bruit"
-            ],
-            [
-              "Centré, étalé",
-              "Dynamique équilibrée",
-              "Travail de finesse — courbes tonales"
-            ],
-            [
-              "Tout au centre",
-              "Image \"molle\", peu contrastée",
-              "Ajouter du contraste — vérifier l'intention"
-            ],
-            [
-              "Deux pics aux extrêmes",
-              "Forte plage dynamique",
-              "Candidat idéal pour le Log Tone Mapping"
-            ]
-          ]
-        },
         {
           "headers": [
             "Teintes",
