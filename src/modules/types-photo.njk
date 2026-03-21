@@ -13,6 +13,756 @@ permalink: "/modules/types-photo/"
   <div class="subtitle">Chaque genre a sa propre grammaire, ses propres outils, son propre état d'esprit</div>
 </div>
 
+<h3 class="section-title" style="margin-top:0">Pense-bête Terrain — Sony α7 II</h3>
+
+<style>
+#pb-root {
+  font-family: var(--mono);
+  padding: 0 0 2rem;
+  max-width: 720px;
+}
+#pb-root * { box-sizing: border-box; }
+#pb-root .pb-header {
+  border-bottom: .5px solid var(--border);
+  padding: 0 0 1rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}
+#pb-root .pb-header-label {
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+#pb-root .pb-header-title {
+  font-family: var(--serif);
+  font-size: 20px;
+  color: var(--text);
+}
+#pb-root .pb-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 20px;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+#pb-root .pb-crumb {
+  font-size: 11px;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color .15s;
+}
+#pb-root .pb-crumb:hover { color: var(--text); }
+#pb-root .pb-crumb-sep { font-size: 10px; color: var(--muted); }
+#pb-root .pb-crumb-active { color: #9ca3af; cursor: default; }
+#pb-root .pb-step, #pb-root .pb-result { animation: pbi .2s ease; }
+@keyframes pbi { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+#pb-root .pb-question {
+  font-family: var(--serif);
+  font-size: 17px;
+  color: var(--text);
+  margin-bottom: 1.25rem;
+  line-height: 1.4;
+}
+#pb-root .pb-choices {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 8px;
+  margin-bottom: 1rem;
+}
+#pb-root .pb-choice {
+  background: var(--bg);
+  border: .5px solid var(--border);
+  border-radius: 6px;
+  padding: 12px 14px;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color .15s, background .15s;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-family: var(--mono);
+}
+#pb-root .pb-choice:hover {
+  border-color: var(--accent3);
+  background: var(--bg2);
+}
+#pb-root .pb-choice-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: var(--bg2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+#pb-root .pb-choice-icon svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: #9ca3af;
+  stroke-width: 1.5;
+}
+#pb-root .pb-choice-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  display: block;
+  margin-bottom: 2px;
+}
+#pb-root .pb-choice-sub { font-size: 11px; color: var(--muted); }
+#pb-root .pb-back {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--muted);
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: .5rem;
+  font-family: var(--mono);
+  transition: color .15s;
+}
+#pb-root .pb-back:hover { color: var(--text); }
+#pb-root .pb-result-banner {
+  background: var(--bg2);
+  border: .5px solid var(--border);
+  border-left: 2px solid var(--accent3);
+  border-radius: 0 6px 6px 0;
+  padding: 10px 14px;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#pb-root .pb-result-banner-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: rgba(245,158,11,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+#pb-root .pb-result-banner-icon svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: var(--accent3);
+  stroke-width: 1.5;
+}
+#pb-root .pb-result-banner-title {
+  font-family: var(--serif);
+  font-size: 16px;
+  color: var(--text);
+}
+#pb-root .pb-result-banner-sub { font-size: 11px; color: var(--muted); margin-top: 1px; }
+#pb-root .pb-section-label {
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+  margin-top: 1.2rem;
+}
+#pb-root .pb-section-label:first-of-type { margin-top: 0; }
+#pb-root .pb-settings-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+  margin-bottom: .25rem;
+}
+#pb-root .pb-setting {
+  background: var(--bg);
+  border: .5px solid var(--border);
+  border-radius: 6px;
+  padding: 9px 12px;
+}
+#pb-root .pb-setting-key {
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: .05em;
+  display: block;
+  margin-bottom: 3px;
+}
+#pb-root .pb-setting-val { font-size: 13px; font-weight: 500; color: var(--text); }
+#pb-root .pb-setting-val.amber { color: var(--accent3); }
+#pb-root .pb-setting-val.teal { color: var(--accent2); }
+#pb-root .pb-tips { display: flex; flex-direction: column; gap: 6px; }
+#pb-root .pb-tip {
+  font-size: 12px;
+  color: #9ca3af;
+  line-height: 1.5;
+  padding-left: 12px;
+  border-left: 1.5px solid var(--border);
+}
+#pb-root .pb-tip strong { color: var(--text); font-weight: 500; }
+#pb-root .pb-filters { display: flex; flex-wrap: wrap; gap: 6px; }
+#pb-root .pb-filter-tag {
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: .5px solid var(--border);
+  color: #9ca3af;
+  background: var(--bg2);
+}
+#pb-root .pb-filter-tag.yes {
+  background: rgba(0,212,170,0.1);
+  border-color: var(--accent2);
+  color: var(--accent2);
+}
+#pb-root .pb-filter-tag.opt {
+  background: rgba(245,158,11,0.1);
+  border-color: var(--accent3);
+  color: var(--accent3);
+}
+#pb-root .pb-filter-tag.no {
+  background: var(--bg2);
+  color: var(--muted);
+  text-decoration: line-through;
+}
+#pb-root .pb-restart-row { margin-top: 1.5rem; display: flex; gap: 8px; }
+#pb-root .pb-restart {
+  font-family: var(--mono);
+  font-size: 11px;
+  background: none;
+  border: .5px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 14px;
+  cursor: pointer;
+  color: #9ca3af;
+  transition: background .15s;
+}
+#pb-root .pb-restart:hover { background: var(--bg2); }
+</style>
+
+<div id="pb-root">
+  <div class="pb-breadcrumb" id="breadcrumb"></div>
+  <div id="pb-content"></div>
+</div>
+
+<script>
+(function() {
+const IC = {
+  landscape: `<path d="M2 14l4-4 3 3 4-5 5 6H2z"/><path d="M16 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>`,
+  portrait:  `<circle cx="8" cy="6" r="3"/><path d="M2 20c0-4 2.7-7 6-7s6 3 6 7"/>`,
+  street:    `<path d="M3 9l3-3h12l3 3v9H3V9z"/><path d="M9 18v-5h6v5"/>`,
+  action:    `<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>`,
+  astro:     `<path d="M12 2a9 9 0 1 0 9 9M12 2v4M12 2l3 3M12 2l-3 3"/>`,
+  macro:     `<circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M8 11h6M11 8v6"/>`,
+  archi:     `<path d="M3 21h18M3 7l9-4 9 4M4 7v14M20 7v14M10 21V11h4v10"/>`,
+  longexp:   `<circle cx="12" cy="12" r="10"/><path d="M12 8v4l2 2"/><path d="M4.5 4.5l1.5 1.5M19.5 4.5l-1.5 1.5"/>`,
+  sun:       `<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>`,
+  cloud:     `<path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9z"/>`,
+  golden:    `<path d="M17 18a2 2 0 0 0-2-2H9m8 2a2 2 0 0 1 2 2H3a2 2 0 0 1 2-2m12 0V9a6 6 0 1 0-12 0v9M9 21h6"/>`,
+  contrast:  `<circle cx="12" cy="12" r="10"/><path d="M12 2v20" stroke-dasharray="3 2"/>`,
+  naturalwin:`<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>`,
+  studio:    `<circle cx="12" cy="12" r="1"/><path d="M4 12a8 8 0 0 1 8-8M20 12a8 8 0 0 1-8 8M4 12h2M18 12h2M12 4v2M12 18v2"/>`,
+  evening:   `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>`,
+  streetday: `<path d="M3 9l3-3h12l3 3v9H3V9z"/><path d="M9 18v-5h6v5"/><circle cx="19" cy="5" r="2"/><path d="M19 3v1M19 8v1M22 5h-1M17 5h-1"/>`,
+  streetnight:`<path d="M3 9l3-3h12l3 3v9H3V9z"/><path d="M9 18v-5h6v5"/><path d="M17 4a3 3 0 0 0 0 6"/>`,
+  water:     `<path d="M3 18s2-4 6-4 6 4 9 4M3 12s2-3 5-3 5 2 8 2M3 6s3-2 6-2 5 2 7 2"/>`,
+  city:      `<path d="M3 21h18M3 7l4-4h10l4 4v14H3z"/><path d="M9 21v-6h6v6M9 7h.01M15 7h.01M9 12h.01M15 12h.01"/>`,
+  file:      `<path d="M5 12h14M12 5l7 7-7 7"/>`,
+  lightpaint:`<path d="M9.663 17h4.673M12 3v1m6.364 1.636-.707.707M21 12h-1M4 12H3m3.343-5.657-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 0 14 18.469V19a2 2 0 1 1-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>`,
+};
+
+const svg = id => `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">${IC[id] || IC.landscape}</svg>`;
+
+const TREE = {
+  id: 'root', label: 'Genre',
+  question: 'Quel type de scène vas-tu photographier ?',
+  choices: [
+    {
+      id: 'landscape', icon: 'landscape', name: 'Paysage', sub: 'Nature, eau, montagne',
+      node: {
+        label: 'Lumière', question: 'Quelle est la condition lumineuse sur place ?',
+        choices: [
+          {
+            id: 'land-golden', icon: 'golden', name: 'Golden / Blue hour', sub: '±1h lever ou coucher',
+            result: {
+              title: 'Paysage — Golden Hour', sub: 'Lumière rasante et chaude', icon: 'golden',
+              settings: [
+                {k:'Mode', v:'M ou A', c:'amber'}, {k:'Ouverture', v:'f/8–f/11', c:''},
+                {k:'ISO', v:'100 (trépied)', c:''}, {k:'Vitesse', v:'Calculée / Bulb', c:''},
+                {k:'Mise au point', v:'AF-S ou MF', c:''}, {k:'Balance blancs', v:'Daylight 5500K', c:'teal'}
+              ],
+              filters: [{t:'CPL', s:'yes'}, {t:'ND64–1000', s:'opt'}, {t:'GND', s:'opt'}],
+              tips: [
+                'Cherche un <strong>premier plan fort</strong> — rochers, herbe, reflet.',
+                'Arrive 20 min avant pour composer. La lumière est courte.',
+                'Essaie dos et face au soleil — deux images très différentes.',
+                'Dans ART : active le <strong>Log Tone Mapping → Auto</strong> pour la dynamique ciel/sol.'
+              ]
+            }
+          },
+          {
+            id: 'land-sun', icon: 'sun', name: 'Plein soleil', sub: 'Midi ou ciel dégagé',
+            result: {
+              title: 'Paysage — Plein Soleil', sub: 'Lumière dure, contraste fort', icon: 'sun',
+              settings: [
+                {k:'Mode', v:'A', c:''}, {k:'Ouverture', v:'f/8–f/11', c:''},
+                {k:'ISO', v:'100', c:''}, {k:'Vitesse', v:'1/250–1/1000s', c:''},
+                {k:'Mise au point', v:'AF-S / MF trépied', c:''}, {k:'Balance blancs', v:'Daylight ou AWB', c:''}
+              ],
+              filters: [{t:'CPL', s:'yes'}, {t:'ND1000', s:'opt'}, {t:'GND dur', s:'opt'}],
+              tips: [
+                'Midi = lumière sans intérêt pour la plupart des paysages — repère les angles.',
+                'CPL fortement recommandé pour intensifier le ciel et l\'eau.',
+                'ND1000 si tu veux une <strong>pose longue</strong> malgré la lumière intense.',
+                'Préfère architecture et patterns — la lumière dure révèle les géométries.'
+              ]
+            }
+          },
+          {
+            id: 'land-cloud', icon: 'cloud', name: 'Ciel couvert', sub: 'Lumière diffuse',
+            result: {
+              title: 'Paysage — Ciel Couvert', sub: 'Lumière douce et homogène', icon: 'cloud',
+              settings: [
+                {k:'Mode', v:'A', c:''}, {k:'Ouverture', v:'f/8', c:''},
+                {k:'ISO', v:'Auto 100–1600', c:''}, {k:'Vitesse min', v:'1/60s main levée', c:''},
+                {k:'Mise au point', v:'AF-S', c:''}, {k:'Balance blancs', v:'Cloudy 6500K', c:'teal'}
+              ],
+              filters: [{t:'CPL', s:'opt'}, {t:'ND', s:'no'}, {t:'GND', s:'no'}],
+              tips: [
+                'Idéal pour <strong>forêts, cascades, mousse</strong> — lumière douce et saturée.',
+                'Exclure le ciel du cadre ou le traiter comme aplat neutre.',
+                'Les couleurs sont fidèles et profondes sous couvert.',
+                'La pose longue peut être accessible sans ND (moins de lumière).'
+              ]
+            }
+          },
+          {
+            id: 'land-hdr', icon: 'contrast', name: 'Fort contraste', sub: 'Ciel clair, sol sombre',
+            result: {
+              title: 'Paysage — Fort Contraste HDR', sub: 'Plage dynamique > 13 EV', icon: 'contrast',
+              settings: [
+                {k:'Mode', v:'M', c:'amber'}, {k:'Ouverture', v:'f/8–f/11', c:''},
+                {k:'ISO', v:'100', c:''}, {k:'Exposition', v:'Pour le sol', c:'amber'},
+                {k:'Mise au point', v:'MF sur trépied', c:''}, {k:'SteadyShot', v:'Off (trépied)', c:''}
+              ],
+              filters: [{t:'GND', s:'yes'}, {t:'CPL', s:'opt'}, {t:'ND', s:'no'}],
+              tips: [
+                '<strong>Expose pour le sol</strong> — le ciel se récupère avec le Log TM dans ART.',
+                'GND = solution optimale en amont, avant la prise de vue.',
+                'Dans ART : Log TM → Auto → baisser Blanc EV pour le ciel.',
+                'Bracket (–2/0/+2 EV) si la dynamique est extrême — fusion HDR en post.'
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      id: 'portrait', icon: 'portrait', name: 'Portrait', sub: 'Humain, animal',
+      node: {
+        label: 'Contexte', question: 'Quelle est la situation de prise de vue ?',
+        choices: [
+          {
+            id: 'port-nat', icon: 'landscape', name: 'Extérieur naturel', sub: 'Lumière naturelle',
+            result: {
+              title: 'Portrait — Extérieur', sub: 'Lumière naturelle ambiante', icon: 'portrait',
+              settings: [
+                {k:'Mode', v:'A', c:'amber'}, {k:'Ouverture', v:'f/1.8–f/2.8', c:'amber'},
+                {k:'ISO', v:'Auto 100–3200', c:''}, {k:'Vitesse min', v:'1/125s', c:''},
+                {k:'Zone AF', v:'Spot flexible S', c:'teal'}, {k:'Mode AF', v:'AF-S / AF-C', c:''}
+              ],
+              filters: [{t:'CPL', s:'no'}, {t:'ND', s:'no'}],
+              tips: [
+                'Ombre douce (sous arbre, mur) > plein soleil frontal en toutes circonstances.',
+                'Golden hour : lumière chaude + direction — portrait idéal.',
+                'Contre-jour + fill flash léger — halo naturel + sujet débouché.',
+                'Focale : <strong>85mm f/1.8</strong> = optimal. 50mm = polyvalent. Évite < 35mm.'
+              ]
+            }
+          },
+          {
+            id: 'port-win', icon: 'naturalwin', name: 'Fenêtre / Intérieur', sub: 'Lumière indirecte',
+            result: {
+              title: 'Portrait — Fenêtre', sub: 'Lumière naturelle directionnelle', icon: 'naturalwin',
+              settings: [
+                {k:'Mode', v:'A', c:''}, {k:'Ouverture', v:'f/1.8–f/2.8', c:'amber'},
+                {k:'ISO', v:'Auto 400–6400', c:''}, {k:'Vitesse min', v:'1/125s', c:''},
+                {k:'Zone AF', v:'Spot flexible S', c:'teal'}, {k:'Balance blancs', v:'Cloudy ou +200K', c:'teal'}
+              ],
+              filters: [{t:'Aucun', s:'opt'}],
+              tips: [
+                '<strong>Sujet face à la fenêtre</strong> — lumière frontale très douce.',
+                'Sujet à 45° — schéma Rembrandt ou Loop naturel.',
+                'Carton blanc côté ombre = réflecteur gratuit et efficace.',
+                'Éteins les lumières artificielles — elles créent une dominante colorée.'
+              ]
+            }
+          },
+          {
+            id: 'port-studio', icon: 'studio', name: 'Studio / Flash', sub: 'Lumière contrôlée',
+            result: {
+              title: 'Portrait — Studio Flash', sub: 'Exposition fixe, ISO plancher', icon: 'studio',
+              settings: [
+                {k:'Mode', v:'M (Manuel)', c:'amber'}, {k:'Ouverture', v:'f/5.6–f/8', c:''},
+                {k:'ISO', v:'100', c:''}, {k:'Vitesse', v:'1/160s–1/200s', c:'teal'},
+                {k:'Zone AF', v:'Spot flexible S', c:''}, {k:'Balance blancs', v:'Flash 5500K', c:'teal'}
+              ],
+              filters: [{t:'Aucun', s:'opt'}],
+              tips: [
+                'Vitesse max sync flash A7 II = <strong>1/250s</strong> — rester en dessous.',
+                'Ratio 3:1 (principale / remplissage) — rendu naturel.',
+                'Loop lighting à 30° = schéma le plus universel et flatteur.',
+                'Rembrandt à 45° — triangle sous l\'œil — look dramatique.'
+              ]
+            }
+          },
+          {
+            id: 'port-eve', icon: 'evening', name: 'Soir / Basse lumière', sub: 'Ambiance nocturne',
+            result: {
+              title: 'Portrait — Basse Lumière', sub: 'ISO élevé assumé', icon: 'evening',
+              settings: [
+                {k:'Mode', v:'A', c:''}, {k:'Ouverture', v:'f/1.4–f/2.0', c:'amber'},
+                {k:'ISO', v:'Auto 800–6400', c:'amber'}, {k:'Vitesse min', v:'1/60s (IBIS)', c:''},
+                {k:'Zone AF', v:'Spot flexible S', c:''}, {k:'Mode AF', v:'AF-S ou MF', c:''}
+              ],
+              filters: [{t:'Aucun', s:'opt'}],
+              tips: [
+                'ISO 3200–6400 sur A7 II reste <strong>exploitable</strong> — ne pas hésiter.',
+                'Cherche les sources ambiantes (réverbère, vitrine, bougie).',
+                'Le grain à haute sensibilité est un choix artistique — assume-le.',
+                'En basse lumière : MF + focus peaking si l\'AF hésite.'
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      id: 'street', icon: 'street', name: 'Street / Reportage', sub: 'Urbain, candide',
+      node: {
+        label: 'Lumière', question: 'Tu photographies de jour ou de nuit ?',
+        choices: [
+          {
+            id: 'street-day', icon: 'streetday', name: 'De jour', sub: 'Lumière naturelle',
+            result: {
+              title: 'Street — Jour', sub: 'Réactivité et discrétion', icon: 'streetday',
+              settings: [
+                {k:'Mode', v:'A ou P', c:''}, {k:'Ouverture', v:'f/5.6–f/8', c:''},
+                {k:'ISO', v:'Auto 100–1600', c:''}, {k:'Vitesse min', v:'1/250s', c:'amber'},
+                {k:'Zone AF', v:'Centre ou Spot', c:''}, {k:'Mode AF', v:'AF-S ou hyperfocale', c:''}
+              ],
+              filters: [{t:'CPL', s:'opt'}, {t:'ND', s:'no'}],
+              tips: [
+                'Technique hyperfocale : MF à ~3m, f/8 — tout net de 1.5m à ∞, sans AF.',
+                '<strong>Son déclencheur</strong> : Menu → Appareil 2 → Son → Off pour la discrétion.',
+                '28–50mm = angle proche du regard naturel, moins intimidant.',
+                'Déclenche sur une scène préparée — attends que le sujet entre dans le cadre.'
+              ]
+            }
+          },
+          {
+            id: 'street-night', icon: 'streetnight', name: 'De nuit', sub: 'Lumières artificielles',
+            result: {
+              title: 'Street — Nuit', sub: 'Ambiance urbaine, sources mixtes', icon: 'streetnight',
+              settings: [
+                {k:'Mode', v:'A', c:''}, {k:'Ouverture', v:'f/1.8–f/2.8', c:'amber'},
+                {k:'ISO', v:'Auto 1600–12800', c:'amber'}, {k:'Vitesse min', v:'1/60s (IBIS)', c:'teal'},
+                {k:'Zone AF', v:'Centre ou Spot', c:''}, {k:'Balance blancs', v:'AWB ou 3200K', c:'teal'}
+              ],
+              filters: [{t:'Aucun', s:'opt'}],
+              tips: [
+                'L\'IBIS permet de descendre à <strong>1/30–1/60s</strong> main levée — profites-en.',
+                'ISO 6400–12800 : le grain renforce l\'atmosphère nocturne — assume-le.',
+                'Cherche les zones de contraste lumière/ombre pour des silhouettes dramatiques.',
+                'AWB peut créer des dominantes sous les néons — teste 3200K pour uniformiser.'
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      id: 'action', icon: 'action', name: 'Action / Sport', sub: 'Mouvement rapide',
+      result: {
+        title: 'Action / Sport', sub: 'Figer le mouvement', icon: 'action',
+        settings: [
+          {k:'Mode', v:'S ou M', c:''}, {k:'Vitesse', v:'1/500–1/2000s', c:'amber'},
+          {k:'Ouverture', v:'Max disponible', c:''}, {k:'ISO', v:'Auto 100–6400', c:''},
+          {k:'Zone AF', v:'Zone ou Large', c:'teal'}, {k:'Mode AF', v:'AF-C obligatoire', c:'amber'}
+        ],
+        filters: [{t:'Aucun', s:'opt'}],
+        tips: [
+          '<strong>AF-C</strong> : maintenir le demi-appui pour suivre le sujet en continu.',
+          'Rafale Hi (5 im/s) : déclenche sur 0.5s, pas sur l\'instant isolé.',
+          'Pré-focus sur la zone où le sujet va arriver — anticipe la trajectoire.',
+          'L\'AF tracking du A7 II est correct mais limité — compense par le positionnement.'
+        ]
+      }
+    },
+    {
+      id: 'longexp', icon: 'longexp', name: 'Longue exposition', sub: 'Poses longues, filé de lumière',
+      node: {
+        label: 'Sujet', question: 'Quel est le sujet de ta longue exposition ?',
+        choices: [
+          {
+            id: 'le-water', icon: 'water', name: 'Eau / Cascade', sub: 'Mer, rivière, chute',
+            result: {
+              title: 'Longue Expo — Eau', sub: 'Effet soyeux ou miroir', icon: 'water',
+              settings: [
+                {k:'Mode', v:'M (Manuel)', c:'amber'}, {k:'Ouverture', v:'f/8–f/11', c:''},
+                {k:'ISO', v:'100', c:''}, {k:'Vitesse', v:'0.5s–30s', c:'amber'},
+                {k:'SteadyShot', v:'Off (trépied)', c:'teal'}, {k:'Retardateur', v:'2s ou télécommande', c:'teal'}
+              ],
+              filters: [{t:'ND64', s:'yes'}, {t:'ND1000', s:'opt'}, {t:'CPL', s:'opt'}, {t:'GND', s:'opt'}],
+              tips: [
+                'Formule ND : durée × facteur ND (ex : 1/250s × 1000 = 4s).',
+                'Eau lisse → 5–30s · Eau filée mais texturée → 0.5–3s — à toi de choisir l\'intention.',
+                '<strong>SteadyShot Off</strong> sur trépied — les micro-corrections parasitent la longue pose.',
+                'CPL + ND en combinaison : élimine les reflets ET permet la pose longue.'
+              ]
+            }
+          },
+          {
+            id: 'le-sky', icon: 'cloud', name: 'Nuages filés', sub: 'Ciel en mouvement',
+            result: {
+              title: 'Longue Expo — Nuages', sub: 'Stries de ciel, atmosphère dynamique', icon: 'cloud',
+              settings: [
+                {k:'Mode', v:'M (Manuel)', c:'amber'}, {k:'Ouverture', v:'f/8–f/11', c:''},
+                {k:'ISO', v:'100', c:''}, {k:'Vitesse', v:'30s–4 min', c:'amber'},
+                {k:'SteadyShot', v:'Off (trépied)', c:'teal'}, {k:'Retardateur', v:'2s ou télécommande', c:'teal'}
+              ],
+              filters: [{t:'ND1000', s:'yes'}, {t:'ND400', s:'opt'}, {t:'GND', s:'opt'}],
+              tips: [
+                'ND1000 minimum pour des poses > 30s en plein jour.',
+                'Pour 4–10 min : empile ND1000 + ND64 ou utilise un ND variable.',
+                'Les nuages doivent se déplacer — vent nécessaire sinon l\'effet est invisible.',
+                'Compose avec un premier plan statique fort pour le contraste dynamique/statique.'
+              ]
+            }
+          },
+          {
+            id: 'le-city', icon: 'city', name: 'Architecture nocturne', sub: 'Blue hour, bâtiments éclairés',
+            result: {
+              title: 'Longue Expo — Architecture Nuit', sub: 'Blue hour et lumières artificielles', icon: 'city',
+              settings: [
+                {k:'Mode', v:'M (Manuel)', c:'amber'}, {k:'Ouverture', v:'f/8', c:''},
+                {k:'ISO', v:'100–400', c:''}, {k:'Vitesse', v:'5s–60s', c:'amber'},
+                {k:'Balance blancs', v:'3200K–4000K', c:'teal'}, {k:'SteadyShot', v:'Off (trépied)', c:'teal'}
+              ],
+              filters: [{t:'Aucun', s:'opt'}, {t:'ND si blue hour', s:'opt'}],
+              tips: [
+                '<strong>Blue hour</strong> = meilleur moment : équilibre lumière naturelle et artificielle.',
+                'f/8 au lieu de f/16 : évite la diffraction, conserve le piqué maximum.',
+                'Teste plusieurs poses (5s / 30s / 60s) — les lumières intéressantes changent.',
+                'Netteté : utilise le zoom du viseur électronique sur un détail lointain pour la MAP.'
+              ]
+            }
+          },
+          {
+            id: 'le-file', icon: 'file', name: 'Filé de circulation', sub: 'Traînées de phares',
+            result: {
+              title: 'Longue Expo — Filé de Lumière', sub: 'Traînées de phares, circulation', icon: 'file',
+              settings: [
+                {k:'Mode', v:'M (Manuel)', c:'amber'}, {k:'Ouverture', v:'f/8–f/11', c:''},
+                {k:'ISO', v:'100', c:''}, {k:'Vitesse', v:'10s–60s', c:'amber'},
+                {k:'Heure', v:'Juste après le coucher', c:'teal'}, {k:'SteadyShot', v:'Off (trépied)', c:'teal'}
+              ],
+              filters: [{t:'Aucun', s:'opt'}, {t:'ND si encore lumineux', s:'opt'}],
+              tips: [
+                'Juste après le coucher du soleil = ciel encore bleu, phares allumés — idéal.',
+                'Plus la pose est longue, plus les traînées sont denses — tester 15s / 30s / 60s.',
+                'Choisir un angle avec un flux constant de véhicules (virage, carrefour, pont).',
+                '<strong>Plusieurs poses courtes</strong> — empilement en post peut remplacer une seule très longue.'
+              ]
+            }
+          },
+          {
+            id: 'le-light', icon: 'lightpaint', name: 'Light painting', sub: 'Dessin avec une source lumineuse',
+            result: {
+              title: 'Longue Expo — Light Painting', sub: 'Créer avec une torche ou LED', icon: 'lightpaint',
+              settings: [
+                {k:'Mode', v:'M (Manuel)', c:'amber'}, {k:'Ouverture', v:'f/8', c:''},
+                {k:'ISO', v:'100–400', c:''}, {k:'Vitesse', v:'Bulb (10s–60s)', c:'amber'},
+                {k:'Déclenchement', v:'Télécommande', c:'teal'}, {k:'Ambiance', v:'Noir quasi total', c:''}
+              ],
+              filters: [{t:'Aucun', s:'opt'}],
+              tips: [
+                'Mode Bulb : tiens le déclencheur ouvert le temps voulu (via télécommande).',
+                'Toi et la source lumineuse <strong>ne devez pas être statiques</strong> — sinon tu apparais dans l\'image.',
+                'Pratique dans l\'obscurité presque totale — pas de lumière parasite.',
+                'Compose d\'abord avec la torche allumée pour la MAP avant d\'éteindre toutes les lumières.'
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      id: 'astro', icon: 'astro', name: 'Astro / Nuit', sub: 'Étoiles, voie lactée',
+      result: {
+        title: 'Astrophotographie', sub: 'Nuit noire, trépied obligatoire', icon: 'astro',
+        settings: [
+          {k:'Mode', v:'M (Manuel)', c:'amber'}, {k:'Ouverture', v:'f/1.4–f/2.8', c:'amber'},
+          {k:'ISO', v:'3200–12800', c:'amber'}, {k:'Vitesse max', v:'500 ÷ focale (s)', c:'teal'},
+          {k:'Mise au point', v:'MF + focus peaking', c:'teal'}, {k:'SteadyShot', v:'Off (trépied)', c:''}
+        ],
+        filters: [{t:'Aucun', s:'opt'}],
+        tips: [
+          'Règle 500 : 28mm → 17s max · 20mm → 25s max · 50mm → 10s max.',
+          'MAP étoiles : MF → zoom viseur → pointer étoile brillante → affiner.',
+          'Retardateur 2s ou télécommande — zéro vibration au déclenchement.',
+          'Conditions : nouvelle lune · site classe Bortle ≤3 · 15–20 min d\'adaptation.'
+        ]
+      }
+    },
+    {
+      id: 'macro', icon: 'macro', name: 'Macro', sub: 'Détail, insecte, fleur',
+      result: {
+        title: 'Macro / Détail', sub: 'PDC extrêmement faible', icon: 'macro',
+        settings: [
+          {k:'Mode', v:'A ou M', c:''}, {k:'Ouverture', v:'f/8–f/16', c:'amber'},
+          {k:'ISO', v:'100 (trépied)', c:''}, {k:'Vitesse', v:'1/200s main levée', c:''},
+          {k:'Mise au point', v:'MF + bague ou AF', c:'teal'}, {k:'Retardateur', v:'2s ou télécommande', c:''}
+        ],
+        filters: [{t:'Aucun', s:'opt'}],
+        tips: [
+          'Déplace-toi physiquement vers/loin du sujet pour la MAP — plus précis que la bague.',
+          '<strong>Focus peaking</strong> : rouge ou jaune pour voir la zone nette en temps réel.',
+          'Ciel couvert = lumière douce idéale — évite le soleil direct (ombres dures).',
+          'Focus stacking si tu veux plus de profondeur — plusieurs prises + fusion en post.'
+        ]
+      }
+    },
+    {
+      id: 'archi', icon: 'archi', name: 'Architecture', sub: 'Bâtiment, intérieur',
+      result: {
+        title: 'Architecture', sub: 'Lignes droites, perspectives', icon: 'archi',
+        settings: [
+          {k:'Mode', v:'A', c:''}, {k:'Ouverture', v:'f/8–f/11', c:''},
+          {k:'ISO', v:'100 (jour) / Auto soir', c:''}, {k:'Niveau', v:'Activer +++', c:'amber'},
+          {k:'Grille', v:'3×3 dans viseur', c:''}, {k:'Vitesse', v:'Auto / trépied soir', c:''}
+        ],
+        filters: [{t:'CPL', s:'opt'}, {t:'ND', s:'no'}],
+        tips: [
+          '<strong>Blue hour</strong> : équilibre parfait lumière naturelle / artificielle.',
+          'Pointer horizontalement (reculer) évite la convergence des lignes verticales.',
+          'Correction perspective dans ART : Transformation → Correction géométrique.',
+          'Intérieur sombre : trépied + ISO auto 100–3200 + vitesse lente.'
+        ]
+      }
+    }
+  ]
+};
+
+let history = [], currentNode = TREE;
+
+function renderBreadcrumb() {
+  const bc = document.getElementById('breadcrumb');
+  if (!history.length) { bc.innerHTML = ''; return; }
+  let h = `<span class="pb-crumb" onclick="pbGoHome()">Accueil</span>`;
+  history.forEach((item, i) => {
+    h += `<span class="pb-crumb-sep">›</span>`;
+    if (i < history.length - 1)
+      h += `<span class="pb-crumb" onclick="pbGoBreadcrumb(${i})">${item.label}</span>`;
+    else
+      h += `<span class="pb-crumb pb-crumb-active">${item.label}</span>`;
+  });
+  bc.innerHTML = h;
+}
+
+function renderStep(node) {
+  const el = document.getElementById('pb-content');
+  let h = `<div class="pb-step"><div class="pb-question">${node.question}</div><div class="pb-choices">`;
+  node.choices.forEach(c => {
+    h += `<button class="pb-choice" onclick="pbChoose('${c.id}')">
+      <div class="pb-choice-icon">${svg(c.icon)}</div>
+      <div class="pb-choice-text">
+        <span class="pb-choice-name">${c.name}</span>
+        <span class="pb-choice-sub">${c.sub}</span>
+      </div>
+    </button>`;
+  });
+  h += `</div>`;
+  if (history.length) h += `<button class="pb-back" onclick="pbGoBack()">← Retour</button>`;
+  h += `</div>`;
+  el.innerHTML = h;
+}
+
+function renderResult(r) {
+  const el = document.getElementById('pb-content');
+  let h = `<div class="pb-result">`;
+  h += `<div class="pb-result-banner">
+    <div class="pb-result-banner-icon">${svg(r.icon)}</div>
+    <div>
+      <div class="pb-result-banner-title">${r.title}</div>
+      <div class="pb-result-banner-sub">${r.sub}</div>
+    </div>
+  </div>`;
+  h += `<div class="pb-section-label">Réglages Sony α7 II</div><div class="pb-settings-grid">`;
+  r.settings.forEach(s => {
+    h += `<div class="pb-setting">
+      <span class="pb-setting-key">${s.k}</span>
+      <span class="pb-setting-val ${s.c || ''}">${s.v}</span>
+    </div>`;
+  });
+  h += `</div>`;
+  if (r.filters && r.filters.length) {
+    h += `<div class="pb-section-label">Filtres</div><div class="pb-filters">`;
+    r.filters.forEach(f => {
+      const lbl = f.s === 'yes' ? '✓ ' + f.t : f.s === 'opt' ? '○ ' + f.t : '✕ ' + f.t;
+      h += `<span class="pb-filter-tag ${f.s}">${lbl}</span>`;
+    });
+    h += `</div>`;
+  }
+  h += `<div class="pb-section-label" style="margin-top:1.25rem">À retenir sur le terrain</div>
+        <div class="pb-tips">`;
+  r.tips.forEach(t => { h += `<div class="pb-tip">${t}</div>`; });
+  h += `</div>
+    <div class="pb-restart-row">
+      <button class="pb-restart" onclick="pbGoBack()">← Retour</button>
+      <button class="pb-restart" onclick="pbGoHome()">↺ Recommencer</button>
+    </div>
+  </div>`;
+  el.innerHTML = h;
+}
+
+window.pbChoose = function(id) {
+  const choices = currentNode.choices || [];
+  const choice = choices.find(c => c.id === id);
+  if (!choice) return;
+  history.push({label: choice.name, nodeRef: currentNode});
+  if (choice.result) { renderBreadcrumb(); renderResult(choice.result); return; }
+  if (choice.node) { currentNode = choice.node; renderBreadcrumb(); renderStep(currentNode); }
+};
+
+window.pbGoBack = function() {
+  if (!history.length) return;
+  const prev = history.pop();
+  currentNode = prev.nodeRef;
+  renderBreadcrumb(); renderStep(currentNode);
+};
+
+window.pbGoHome = function() {
+  history = []; currentNode = TREE;
+  renderBreadcrumb(); renderStep(currentNode);
+};
+
+window.pbGoBreadcrumb = function(idx) {
+  const prev = history[idx];
+  history = history.slice(0, idx);
+  currentNode = prev.nodeRef;
+  renderBreadcrumb(); renderStep(currentNode);
+};
+
+renderStep(currentNode);
+})();
+</script>
+
+<hr>
+
 <div class="intro-quote">
   Connaître les genres, c'est savoir dans quel état d'esprit entrer.
 </div>
