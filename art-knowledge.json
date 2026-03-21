@@ -2,8 +2,8 @@
   "meta": {
     "source": "ART Raw Image Processor — Documentation Photographe",
     "version": "1.0",
-    "generated": "2026-03-21T09:11:18.274Z",
-    "total_modules": 61,
+    "generated": "2026-03-21T13:24:47.344Z",
+    "total_modules": 63,
     "description": "Knowledge base extraite des sources Eleventy pour usage par MCP ou tout système de génération de fichiers .arp"
   },
   "modules": [
@@ -3862,6 +3862,16 @@
       "tables": []
     },
     {
+      "id": "mod-pense-bete-terrain",
+      "name": "Pense-bête Terrain — Sony α7 II",
+      "subtitle": "Réglages optimaux par situation en quelques clics",
+      "category": "Photographie & Terrain",
+      "params": [],
+      "tips": [],
+      "warnings": [],
+      "tables": []
+    },
+    {
       "id": "mod-philosophie-photo",
       "name": "L'Art et la Philosophie de la Photographie",
       "subtitle": "Comprendre ce que signifie vraiment photographier",
@@ -4663,6 +4673,218 @@
               "Ombre sous ciel bleu",
               "7000–9000 K",
               "Froid, bleuté"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mod-types-photo",
+      "name": "Les Genres Photographiques — Trouver sa Pratique",
+      "subtitle": "Chaque genre a sa propre grammaire, ses propres outils, son propre état d'esprit",
+      "category": "Photographie & Terrain",
+      "params": [
+        {
+          "name": "Moment",
+          "range": "Golden/Blue hour, orage, brume",
+          "description": "1h après lever, 1h avant coucher — la lumière rasante sculpte le relief et chauffe les tons."
+        },
+        {
+          "name": "Équipement",
+          "range": "Trépied + grand-angle",
+          "description": "Trépied indispensable. Grand-angle 16–35mm pour l'espace, téléobjectif pour comprimer la perspective."
+        },
+        {
+          "name": "Profondeur de champ",
+          "range": "f/8–f/11",
+          "description": "Netteté de bout en bout — du premier plan à l'horizon. f/8 est souvent le pic de netteté des optiques."
+        },
+        {
+          "name": "Exposition",
+          "range": "Souvent longue",
+          "description": "Poses longues pour eau lisse, nuages filés. Nécessite un ND en plein jour."
+        },
+        {
+          "name": "Focale",
+          "range": "28–50mm",
+          "description": "Proche du champ visuel naturel — moins intimidant, intégration dans la scène."
+        },
+        {
+          "name": "Mode",
+          "range": "A ou P + ISO auto",
+          "description": "Vitesse minimale 1/250s pour figer les passants. Réactivité avant tout."
+        },
+        {
+          "name": "Focal",
+          "range": "16–24mm ou téléobjectif",
+          "description": "Grand-angle pour embrasser l'espace entier · Téléobjectif pour comprimer et extraire des détails géométriques."
+        },
+        {
+          "name": "Moment",
+          "range": "Blue hour",
+          "description": "Équilibre parfait entre lumière extérieure naturelle et éclairage artificiel des bâtiments."
+        },
+        {
+          "name": "Focale",
+          "range": "200–600mm",
+          "description": "Téléobjectif long pour ne pas déranger le sujet — distance de sécurité et discrétion."
+        },
+        {
+          "name": "Vitesse",
+          "range": "1/500–1/2000s",
+          "description": "Rapide pour figer les mouvements — un oiseau en vol exige souvent 1/1000s minimum."
+        },
+        {
+          "name": "AF",
+          "range": "AF-C + zone Large",
+          "description": "Suivi continu. Zone large pour maintenir le sujet même en déplacement imprévisible."
+        },
+        {
+          "name": "Positionnement",
+          "range": "Se positionner avant",
+          "description": "Anticiper le comportement — se placer sur la trajectoire probable et attendre que le sujet vienne."
+        },
+        {
+          "name": "Rapport de reproduction",
+          "range": "1:1 minimum",
+          "description": "1cm réel = 1cm sur le capteur. Au-delà de 1:1 = macrophotographie extrême."
+        },
+        {
+          "name": "Profondeur de champ",
+          "range": "Quelques millimètres",
+          "description": "Extrêmement faible à courte distance. Trépied ou IBIS du A7 II indispensable."
+        },
+        {
+          "name": "Lumière",
+          "range": "Douce ou diffusée",
+          "description": "Ciel couvert idéal. Éclairage additionnel souvent nécessaire : diffuseur, ring flash."
+        },
+        {
+          "name": "Focus stacking",
+          "range": "Plusieurs prises + fusion",
+          "description": "Pour plus de profondeur : plusieurs expositions à MAP décalée → fusion en post."
+        },
+        {
+          "name": "Ouverture",
+          "range": "Maximale — f/1.4–f/2.8",
+          "description": "Tout ce qui capte de la lumière est précieux. Pas de compromis sur l'ouverture en astro."
+        },
+        {
+          "name": "ISO",
+          "range": "3200–12800",
+          "description": "Élevé assumé. Le bruit numérique est préférable aux étoiles filées ou à la sous-exposition."
+        },
+        {
+          "name": "Règle des 500",
+          "range": "500 ÷ focale = durée max (s)",
+          "description": "28mm → 17s max · 20mm → 25s max · 50mm → 10s max. Au-delà : filé d'étoiles."
+        },
+        {
+          "name": "Conditions",
+          "range": "Nouvelle lune, Bortle ≤3",
+          "description": "Nuit noire éloignée de la pollution lumineuse. 15–20 min d'adaptation à l'obscurité."
+        },
+        {
+          "name": "Approche minimaliste",
+          "range": "Un objectif polyvalent",
+          "description": "24–70mm ou 28–200mm — tout couvrir sans changer d'objectif. Le Sony A7 II est compact pour un plein format."
+        },
+        {
+          "name": "Narration",
+          "range": "Penser en séquences",
+          "description": "Une bonne série raconte une histoire : l'arrivée, les habitants, les lieux, les détails, les moments. Pas des photos isolées."
+        }
+      ],
+      "tips": [
+        {
+          "label": "Ce qui fait une bonne photo de paysage",
+          "content": "Un **premier plan fort** qui ancre l'image · Une **lumière directionnelle** qui sculpte le relief · Un **sujet clair** (qu'est-ce qui est l'élément principal ?) · Une **météo intéressante**."
+        },
+        {
+          "label": "Workflow Sony A7 II",
+          "content": "Mode **A** (priorité ouverture) à f/8–f/11 · ISO 100 (trépied) · **Log Tone Mapping** pour les scènes à fort contraste ciel/sol · RAW obligatoire · Filtre **polarisant** pour ciels et eau · Filtre **ND** si poses longues."
+        },
+        {
+          "label": "Workflow Sony A7 II",
+          "content": "Mode **A** à f/1.8–f/2.8 selon la profondeur souhaitée · ISO 100–1600 selon la lumière · Zone AF : **Spot flexible S** sur l'œil le plus proche · Vitesse minimum : 1/125s (statique) à 1/500s (mobile)."
+        },
+        {
+          "label": "La technique hyperfocale",
+          "content": "Régler manuellement la MAP à la **distance hyperfocale** — tout net de la moitié de cette distance à l'infini. Pour un 28mm à f/8 : hyperfocale ≈ 3m → tout net de 1.5m à l'infini. Plus besoin d'AF, déclenchement instantané."
+        },
+        {
+          "label": "Corriger la perspective convergente",
+          "content": "Pointer vers le haut avec un grand-angle fait converger les lignes verticales. Solutions : — **Reculer** pour pointer horizontalement + recadrage en post — Correction dans ART : **Transformation → Correction géométrique** — Objectif tilt-shift (spécialisé, coûteux)"
+        },
+        {
+          "label": "Sony A7 II et le téléobjectif",
+          "content": "L'A7 II est **compatible avec les objectifs à monture A via adaptateur LA-EA3/LA-EA4** — accès à toute la gamme Minolta/Sony A (souvent moins coûteux). Avec l'adaptateur LA-EA4, l'AF est motorisé et fonctionnel."
+        },
+        {
+          "label": "Alternatives à l'objectif macro dédié",
+          "content": "**Tubes-allonge** (bagues macro) : augmentent le rapport de reproduction des objectifs existants, peu coûteux, perdent l'AF. **Bonnettes macro** : se vissent devant l'objectif, moins de qualité optique mais légères et pratiques."
+        },
+        {
+          "label": "Mise au point sur les étoiles",
+          "content": "Passe en **MF** · Active le **Focus Peaking** ou le zoom du viseur électronique · Pointe vers une étoile brillante · Affine jusqu'à ce qu'elle soit un point net · Verrouille la MAP (ruban adhésif sur la bague ou note la position)."
+        }
+      ],
+      "warnings": [],
+      "tables": [
+        {
+          "headers": [
+            "Type de portrait",
+            "Description"
+          ],
+          "rows": [
+            [
+              "**Portrait serré**",
+              "Visage, expressions — proximité psychologique maximale"
+            ],
+            [
+              "**Portrait en buste**",
+              "Des épaules au-dessus — standard professionnel"
+            ],
+            [
+              "**Portrait en pied**",
+              "Le sujet entier avec contexte — narration plus large"
+            ],
+            [
+              "**Portrait environnemental**",
+              "Le sujet dans son lieu de vie ou de travail"
+            ],
+            [
+              "**Portrait de rue (candide)**",
+              "Consenti ou non, dans l'espace public"
+            ]
+          ]
+        },
+        {
+          "headers": [
+            "Lumière",
+            "Effet",
+            "Usage"
+          ],
+          "rows": [
+            [
+              "Douce (ciel voilé, indirecte)",
+              "Ombres douces, peau lisse, ambiance intime",
+              "Portrait universel, femme, enfant"
+            ],
+            [
+              "Dure (soleil direct)",
+              "Ombres marquées, caractère, texture",
+              "Portrait masculin, personnage fort"
+            ],
+            [
+              "Ratio 2:1",
+              "Doux et naturel",
+              "Portrait flatteur, commercial"
+            ],
+            [
+              "Ratio 4:1–6:1",
+              "Dramatique",
+              "Portrait artistique, caractère fort"
             ]
           ]
         }
