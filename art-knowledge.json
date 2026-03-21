@@ -2,7 +2,7 @@
   "meta": {
     "source": "ART Raw Image Processor — Documentation Photographe",
     "version": "1.0",
-    "generated": "2026-03-21T07:58:45.845Z",
+    "generated": "2026-03-21T08:20:27.900Z",
     "total_modules": 55,
     "description": "Knowledge base extraite des sources Eleventy pour usage par MCP ou tout système de génération de fichiers .arp"
   },
@@ -2564,7 +2564,7 @@
     {
       "id": "mod-lexique",
       "name": "Lexique ART",
-      "subtitle": "35 termes essentiels pour comprendre ART et la photographie numérique",
+      "subtitle": "26 termes essentiels pour comprendre ART et la photographie numérique",
       "category": "Référence",
       "params": [],
       "tips": [],
