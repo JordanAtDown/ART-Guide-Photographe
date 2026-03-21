@@ -1,3 +1,11 @@
+// ─── Thème clair / sombre ───
+function toggleTheme() {
+  var current = document.documentElement.getAttribute('data-theme');
+  var next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+}
+
 function filterNav(query) {
   const q = query.toLowerCase();
   document.querySelectorAll('nav a').forEach(a => {
