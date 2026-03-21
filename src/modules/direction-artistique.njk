@@ -89,12 +89,12 @@ permalink: '/modules/direction-artistique/'
   <div class="param-item">
     <div class="param-name">Axe 1 — Dynamique tonale</div>
     <div class="param-range">Comment les ombres et HLs se comportent</div>
-    <div class="param-desc">Sont-elles dures ou douces ? Les noirs sont-ils profonds ou relevés ? Les blancs sont-ils lumineux ou contenus ?<br><strong>Dans ART :</strong> Courbes Tonales + Égaliseur Tonal</div>
+    <div class="param-desc">Sont-elles dures ou douces ? Les noirs sont-ils profonds ou relevés ? Les blancs sont-ils lumineux ou contenus ?<br><strong>Dans ART :</strong> <a href="{{ '/modules/courbestonales/' | url }}" style="color:var(--accent)">Courbes Tonales</a> + <a href="{{ '/modules/egaliseurtonal/' | url }}" style="color:var(--accent)">Égaliseur Tonal</a></div>
   </div>
   <div class="param-item">
     <div class="param-name">Axe 2 — Palette chromatique</div>
     <div class="param-range">Quelles couleurs dominent par zone tonale</div>
-    <div class="param-desc">Les ombres tirent-elles vers le froid ou le chaud ? Les HLs sont-elles neutres ou colorées ?<br><strong>Dans ART :</strong> Color Wheels + Balance des Blancs + HSL</div>
+    <div class="param-desc">Les ombres tirent-elles vers le froid ou le chaud ? Les HLs sont-elles neutres ou colorées ?<br><strong>Dans ART :</strong> <a href="{{ '/modules/correctioncouleurs/' | url }}" style="color:var(--accent)">Color Wheels</a> + <a href="{{ '/modules/balanceblancs/' | url }}" style="color:var(--accent)">Balance des Blancs</a> + <a href="{{ '/modules/eqcouleurs/' | url }}" style="color:var(--accent)">HSL</a></div>
   </div>
   <div class="param-item">
     <div class="param-name">Axe 3 — Texture et matière</div>
@@ -160,9 +160,9 @@ permalink: '/modules/direction-artistique/'
       <p style="font-size:13px;color:var(--muted);line-height:1.6;margin:0 0 6px;"><strong style="color:var(--text)">Courbes Tonales :</strong> S-curve marquée, noirs profonds. L'image doit avoir du punch et de la séparation tonale.</p>
       <p style="font-size:13px;color:var(--muted);line-height:1.6;margin:0 0 10px;"><strong style="color:var(--text)">HSL :</strong> canal Bleu — sature légèrement + baisse la luminance pour des ombres plus riches.</p>
       <div class="wf-chips">
-        <span class="wf-chip look-chip-key">Color Wheels ⭐</span>
+        <a class="wf-chip look-chip-key" href="{{ '/modules/correctioncouleurs/' | url }}" style="text-decoration:none">Color Wheels ⭐</a>
         <span class="wf-chip">Courbes Tonales</span>
-        <span class="wf-chip">HSL — Bleu</span>
+        <a class="wf-chip" href="{{ '/modules/eqcouleurs/' | url }}" style="text-decoration:none">HSL — Bleu</a>
         <span class="wf-chip">Égaliseur Tonal</span>
       </div>
       <div class="look-needs"><strong>Ce dont l'image a besoin :</strong> zones d'ombres significatives (le teal doit avoir de la matière), sujets chauds (personnes, bâtiments, sable). Ne fonctionne pas sur des images très uniformes ou très sombres.</div>
@@ -201,8 +201,8 @@ permalink: '/modules/direction-artistique/'
       <p style="font-size:13px;color:var(--muted);line-height:1.6;margin:0 0 10px;"><strong style="color:var(--text)">Balance des Blancs :</strong> légèrement plus chaud que la neutralité — les films argentiques ont généralement un rendu légèrement chaud.</p>
       <div class="wf-chips">
         <span class="wf-chip look-chip-key">Courbes Tonales ⭐</span>
-        <span class="wf-chip">Color Wheels</span>
-        <span class="wf-chip">HSL — saturation</span>
+        <a class="wf-chip" href="{{ '/modules/correctioncouleurs/' | url }}" style="text-decoration:none">Color Wheels</a>
+        <a class="wf-chip" href="{{ '/modules/eqcouleurs/' | url }}" style="text-decoration:none">HSL — saturation</a>
         <span class="wf-chip">Balance des Blancs</span>
         <span class="wf-chip">Grain (Affinity)</span>
       </div>
@@ -242,7 +242,7 @@ permalink: '/modules/direction-artistique/'
       <div class="wf-chips">
         <span class="wf-chip look-chip-key">Balance des Blancs ⭐</span>
         <span class="wf-chip">Égaliseur Tonal</span>
-        <span class="wf-chip">HSL (corrections ciblées)</span>
+        <a class="wf-chip" href="{{ '/modules/eqcouleurs/' | url }}" style="text-decoration:none">HSL (corrections ciblées)</a>
         <span class="wf-chip">Courbes Tonales douces</span>
       </div>
       <div class="look-needs"><strong>Ce look révèle :</strong> la qualité à la prise de vue. Si la lumière était bonne, la composition forte, l'instant juste — ce look met tout en valeur sans artifice.</div>
@@ -281,7 +281,7 @@ permalink: '/modules/direction-artistique/'
       <div class="wf-chips">
         <span class="wf-chip look-chip-key">Courbes Tonales ⭐</span>
         <span class="wf-chip">Mélange Canaux (N&amp;B)</span>
-        <span class="wf-chip">HSL — désaturation</span>
+        <a class="wf-chip" href="{{ '/modules/eqcouleurs/' | url }}" style="text-decoration:none">HSL — désaturation</a>
         <span class="wf-chip">Égaliseur Tonal</span>
       </div>
       <div class="look-needs"><strong>Ce dont l'image a besoin :</strong> une lumière naturellement contrastée (lumière directe, contre-jour, ombre et lumière marquées). Ce look amplifie — il ne crée pas.</div>
@@ -318,9 +318,9 @@ permalink: '/modules/direction-artistique/'
       <p style="font-size:13px;color:var(--muted);line-height:1.6;margin:0 0 6px;"><strong style="color:var(--text)">Exposition :</strong> légèrement en dessous — intentionnellement sombre. Égaliseur Tonal : ombres légèrement remontées pour qu'elles ne se bouchent pas.</p>
       <p style="font-size:13px;color:var(--muted);line-height:1.6;margin:0 0 10px;"><strong style="color:var(--text)">HSL :</strong> réduis la saturation globale. Si une couleur doit dominer (un bleu de ciel, un rouge de lumière artificielle), laisse-la et désature tout le reste.</p>
       <div class="wf-chips">
-        <span class="wf-chip look-chip-key">Color Wheels ⭐</span>
+        <a class="wf-chip look-chip-key" href="{{ '/modules/correctioncouleurs/' | url }}" style="text-decoration:none">Color Wheels ⭐</a>
         <span class="wf-chip">Exposition</span>
-        <span class="wf-chip">HSL — désaturation</span>
+        <a class="wf-chip" href="{{ '/modules/eqcouleurs/' | url }}" style="text-decoration:none">HSL — désaturation</a>
         <span class="wf-chip">Courbes Tonales</span>
       </div>
       <div class="look-needs"><strong>Ce dont l'image a besoin :</strong> scène avec zones sombres significatives, lumière directionnelle. Très efficace sur nocturne, intérieur, reportage intimiste.</div>
@@ -358,8 +358,8 @@ permalink: '/modules/direction-artistique/'
       <p style="font-size:13px;color:var(--muted);line-height:1.6;margin:0 0 10px;"><strong style="color:var(--text)">HSL :</strong> Orange — sature légèrement + monte la luminance. Jaune — idem. Rouge — légèrement désaturé pour éviter que les peaux tirent vers le rouge brûlé.</p>
       <div class="wf-chips">
         <span class="wf-chip look-chip-key">Balance des Blancs ⭐</span>
-        <span class="wf-chip">Color Wheels</span>
-        <span class="wf-chip">HSL — Orange/Jaune</span>
+        <a class="wf-chip" href="{{ '/modules/correctioncouleurs/' | url }}" style="text-decoration:none">Color Wheels</a>
+        <a class="wf-chip" href="{{ '/modules/eqcouleurs/' | url }}" style="text-decoration:none">HSL — Orange/Jaune</a>
         <span class="wf-chip">Log TM (si dynamique large)</span>
       </div>
       <div class="look-needs"><strong>Note :</strong> ce look est l'un des rares où la réalité justifie l'exagération. Amplifier est ici légitime — l'intention est de restituer ce que l'œil percevait.</div>

@@ -9,6 +9,11 @@ permalink: '/modules/logtonemapping/'
         <h2>Log Tone Mapping</h2>
         <div class="subtitle">La gestion HDR de type "Filmic" — le module le plus puissant d'ART</div>
       </div>
+      <div class="insight">
+        <div class="insight-label">Comment savoir si tu en as besoin ?</div>
+        <p>Si ton histogramme présente deux masses de pixels aux extrêmes — ciel cramé d'un côté, premier plan sombre de l'autre — tu es face à une plage dynamique que l'exposition seule ne peut pas gérer. Le Log Tone Mapping est fait pour ça. <a href="{{ '/modules/histogramme-dynamique/' | url }}" style="color:var(--accent)">Reconnaître ce cas dans l'histogramme →</a></p>
+      </div>
+
       <div class="tip">
         <div class="tip-label">C'est quoi concrètement ?</div>
         <p>Le Log Tone Mapping est l'équivalent du module <strong>Filmic RGB de Darktable</strong>. Il transforme la plage dynamique brute (qui peut aller de -13 EV à +2 EV sur un capteur moderne) en une courbe logarithmique qui "tasse" les extrêmes pour les faire rentrer dans la plage d'affichage — exactement comme ce que fait le log C-Log ou S-Log en vidéo professionnelle. Résultat : ombres détaillées ET hautes lumières récupérées, simultanément.</p>
@@ -49,4 +54,9 @@ permalink: '/modules/logtonemapping/'
       <div class="tip">
         <div class="tip-label">Réglage de départ recommandé pour paysage marin</div>
         <p>Clique <strong>Automatique</strong> d'abord — ART analyse ton histogramme et propose des valeurs. Puis ajuste : Blanc EV à <strong>2.0-2.2</strong> (moins de compression HL), Noir EV à <strong>-10 / -11</strong> (ombres plus riches), Régularisation à <strong>50-60</strong>, Point gris à <strong>18-20</strong>.</p>
+      </div>
+
+      <div class="tip">
+        <div class="tip-label">Dans quel contexte l'utiliser ?</div>
+        <p>Le Log Tone Mapping intervient en réponse à des symptômes précis — ciel cramé, dynamique trop large, contre-jour non gérable. Si tu pars d'un problème visuel plutôt que d'un module, l'outil de diagnostic t'orientera directement ici. <a href="{{ '/modules/diagnostiquer/' | url }}" style="color:var(--accent)">Diagnostiquer une photo →</a></p>
       </div>

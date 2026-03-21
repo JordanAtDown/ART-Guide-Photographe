@@ -13,6 +13,11 @@ permalink: '/modules/ordremodules/'
         <div class="tip-label">Règle d'or</div>
         <p>En développement RAW : <strong>global avant local, tonalité avant couleur, structure avant détail</strong>. Ne jamais affiner les couleurs si la dynamique n'est pas établie — tu retoucheras tout deux fois.</p>
       </div>
+
+      <div class="insight" style="margin-bottom:24px;">
+        <div class="insight-label">Pourquoi cet ordre ?</div>
+        <p>La séquence recommandée ici s'appuie sur l'architecture interne d'ART — l'ordre dans lequel le moteur traite réellement les données RAW. Un module en amont peut modifier le résultat d'un module en aval : comprendre cette contrainte évite les surprises. <a href="{{ '/modules/pipeline/' | url }}" style="color:var(--accent)">Voir le Pipeline de traitement interne →</a></p>
+      </div>
       <div class="workflow">
         <div class="workflow-step">
           <div class="step-num" style="background:rgba(74,158,255,0.2);color:#4a9eff">1</div>

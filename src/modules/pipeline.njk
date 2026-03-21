@@ -24,43 +24,48 @@ permalink: '/modules/pipeline/'
         <div class="workflow-step">
           <div class="step-num" style="background:rgba(74,158,255,0.15);color:#4a9eff">2</div>
           <div class="step-content">
-            <h4>Balance des Blancs</h4>
+            <h4><a href="{{ '/modules/balanceblancs/' | url }}" style="color:var(--text)">Balance des Blancs</a></h4>
             <p>Appliquée très tôt dans la chaîne — corriger la WB maintenant évite des problèmes de couleur plus tard.</p>
           </div>
         </div>
         <div class="workflow-step">
           <div class="step-num" style="background:rgba(0,212,170,0.15);color:#00d4aa">3</div>
           <div class="step-content">
-            <h4>Log Tone Mapping</h4>
+            <h4><a href="{{ '/modules/logtonemapping/' | url }}" style="color:var(--text)">Log Tone Mapping</a></h4>
             <p>Si activé, il transforme la courbe de réponse de manière logarithmique. À faire avant tout réglage d'exposition.</p>
           </div>
         </div>
         <div class="workflow-step">
           <div class="step-num" style="background:rgba(0,212,170,0.15);color:#00d4aa">4</div>
           <div class="step-content">
-            <h4>Exposition & Égaliseur Tonal</h4>
+            <h4><a href="{{ '/modules/exposition/' | url }}" style="color:var(--text)">Exposition</a> &amp; <a href="{{ '/modules/egaliseurtonal/' | url }}" style="color:var(--text)">Égaliseur Tonal</a></h4>
             <p>Réglages globaux de luminosité, récupération des ombres et hautes lumières.</p>
           </div>
         </div>
         <div class="workflow-step">
           <div class="step-num" style="background:rgba(245,158,11,0.15);color:#f59e0b">5</div>
           <div class="step-content">
-            <h4>Courbes Tonales</h4>
+            <h4><a href="{{ '/modules/courbestonales/' | url }}" style="color:var(--text)">Courbes Tonales</a></h4>
             <p>Affinage du contraste. La courbe en S vient affiner ce que le Log Tone Mapping a établi.</p>
           </div>
         </div>
         <div class="workflow-step">
           <div class="step-num" style="background:rgba(245,158,11,0.15);color:#f59e0b">6</div>
           <div class="step-content">
-            <h4>Couleur (HSL, Color Grading, Canaux)</h4>
+            <h4>Couleur — <a href="{{ '/modules/eqcouleurs/' | url }}" style="color:var(--text)">HSL</a>, <a href="{{ '/modules/correctioncouleurs/' | url }}" style="color:var(--text)">Color Wheels</a>, <a href="{{ '/modules/melange/' | url }}" style="color:var(--text)">Canaux</a></h4>
             <p>Travail sur les couleurs une fois la tonalité stabilisée. Ordre : HSL → Color Wheels → Canaux.</p>
           </div>
         </div>
         <div class="workflow-step">
           <div class="step-num" style="background:rgba(232,121,160,0.15);color:#e879a0">7</div>
           <div class="step-content">
-            <h4>Détail (Texture, Contraste Local, NR)</h4>
+            <h4>Détail — <a href="{{ '/modules/texture/' | url }}" style="color:var(--text)">Texture</a>, <a href="{{ '/modules/contrastelocal/' | url }}" style="color:var(--text)">Contraste Local</a>, <a href="{{ '/modules/lissage/' | url }}" style="color:var(--text)">Lissage NR</a></h4>
             <p>Toujours en dernier — les réglages de netteté et de bruit doivent s'appliquer sur l'image finale.</p>
           </div>
         </div>
+      </div>
+
+      <div class="tip">
+        <div class="tip-label">Et en pratique ?</div>
+        <p>Ce pipeline est l'architecture interne du moteur ART. Pour savoir dans quel ordre <em>actionner</em> les modules lors d'un développement réel — <a href="{{ '/modules/ordremodules/' | url }}" style="color:var(--accent)">Méthodologie de traitement →</a></p>
       </div>

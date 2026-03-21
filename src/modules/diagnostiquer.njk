@@ -70,6 +70,11 @@ permalink: '/modules/diagnostiquer/'
   Deux entrées : tu <strong>vois</strong> quelque chose qui ne va pas mais tu ne sais pas le nommer → utilise l'arbre interactif. Tu sais déjà nommer le problème → descends directement à la section de référence.
 </div>
 
+<div class="insight" style="margin-bottom:24px;">
+  <div class="insight-label">Nouveau sur le site ?</div>
+  <p>Si tu ne sais pas encore comment <em>lire</em> les symptômes d'une image — distinguer un problème technique d'un choix artistique, identifier ce qui accroche l'œil — commence par <a href="{{ '/modules/regard/' | url }}" style="color:var(--accent)">Le Regard du Photographe →</a></p>
+</div>
+
 <div class="toc">
   <div class="toc-title">Sommaire</div>
   <ol>
@@ -323,28 +328,28 @@ permalink: '/modules/diagnostiquer/'
 
 <table>
   <tr><th>Symptôme</th><th>Module principal</th><th>Module secondaire</th></tr>
-  <tr><td>Ciel cramé</td><td>Égaliseur Tonal — HLs</td><td>Log Tone Mapping</td></tr>
-  <tr><td>Ombres bouchées</td><td>Égaliseur Tonal — Ombres</td><td>Lissage NR (bruit révélé)</td></tr>
-  <tr><td>Trop sous-exposé</td><td>Exposition</td><td>Égaliseur Tonal</td></tr>
-  <tr><td>Trop surexposé</td><td>Exposition</td><td>Égaliseur Tonal</td></tr>
-  <tr><td>Dynamique ciel/sol</td><td>Log Tone Mapping</td><td>—</td></tr>
-  <tr><td>Trop froid / bleu</td><td>Balance des Blancs (Température)</td><td>HSL — Bleu</td></tr>
-  <tr><td>Trop chaud / orange</td><td>Balance des Blancs (Température)</td><td>HSL — Orange</td></tr>
-  <tr><td>Dominante verte</td><td>Balance des Blancs (Teinte)</td><td>HSL — Vert</td></tr>
-  <tr><td>Couleurs fausses par canal</td><td>Égaliseur HSL</td><td>—</td></tr>
-  <tr><td>Couleurs ternes</td><td>Vibrance / Saturation</td><td>HSL ciblé</td></tr>
-  <tr><td>Couleurs criardes</td><td>Saturation — baisse</td><td>HSL — canal concerné</td></tr>
-  <tr><td>Image molle</td><td>Courbes Tonales (S-curve)</td><td>Contraste Local</td></tr>
-  <tr><td>Contraste excessif</td><td>Égaliseur Tonal — Ombres</td><td>Courbes Tonales</td></tr>
-  <tr><td>Manque de texture</td><td>Amplification Texture</td><td>Contraste Local</td></tr>
-  <tr><td>Halos sur contours</td><td>Contraste Local — baisse</td><td>Lissage — mode moins agressif</td></tr>
-  <tr><td>Grain / bruit</td><td>Lissage NR — Luminance</td><td>—</td></tr>
-  <tr><td>Taches colorées</td><td>Lissage NR — Chrominance</td><td>—</td></tr>
-  <tr><td>Peau plastifiée</td><td>Lissage NR — baisse</td><td>—</td></tr>
+  <tr><td>Ciel cramé</td><td><a href="{{ '/modules/egaliseurtonal/' | url }}" style="color:var(--accent)">Égaliseur Tonal</a> — HLs</td><td><a href="{{ '/modules/logtonemapping/' | url }}" style="color:var(--accent)">Log Tone Mapping</a></td></tr>
+  <tr><td>Ombres bouchées</td><td><a href="{{ '/modules/egaliseurtonal/' | url }}" style="color:var(--accent)">Égaliseur Tonal</a> — Ombres</td><td><a href="{{ '/modules/lissage/' | url }}" style="color:var(--accent)">Lissage NR</a> (bruit révélé)</td></tr>
+  <tr><td>Trop sous-exposé</td><td><a href="{{ '/modules/exposition/' | url }}" style="color:var(--accent)">Exposition</a></td><td><a href="{{ '/modules/egaliseurtonal/' | url }}" style="color:var(--accent)">Égaliseur Tonal</a></td></tr>
+  <tr><td>Trop surexposé</td><td><a href="{{ '/modules/exposition/' | url }}" style="color:var(--accent)">Exposition</a></td><td><a href="{{ '/modules/egaliseurtonal/' | url }}" style="color:var(--accent)">Égaliseur Tonal</a></td></tr>
+  <tr><td>Dynamique ciel/sol</td><td><a href="{{ '/modules/logtonemapping/' | url }}" style="color:var(--accent)">Log Tone Mapping</a></td><td>—</td></tr>
+  <tr><td>Trop froid / bleu</td><td><a href="{{ '/modules/balanceblancs/' | url }}" style="color:var(--accent)">Balance des Blancs</a> (Température)</td><td><a href="{{ '/modules/eqcouleurs/' | url }}" style="color:var(--accent)">HSL</a> — Bleu</td></tr>
+  <tr><td>Trop chaud / orange</td><td><a href="{{ '/modules/balanceblancs/' | url }}" style="color:var(--accent)">Balance des Blancs</a> (Température)</td><td><a href="{{ '/modules/eqcouleurs/' | url }}" style="color:var(--accent)">HSL</a> — Orange</td></tr>
+  <tr><td>Dominante verte</td><td><a href="{{ '/modules/balanceblancs/' | url }}" style="color:var(--accent)">Balance des Blancs</a> (Teinte)</td><td><a href="{{ '/modules/eqcouleurs/' | url }}" style="color:var(--accent)">HSL</a> — Vert</td></tr>
+  <tr><td>Couleurs fausses par canal</td><td><a href="{{ '/modules/eqcouleurs/' | url }}" style="color:var(--accent)">Égaliseur HSL</a></td><td>—</td></tr>
+  <tr><td>Couleurs ternes</td><td><a href="{{ '/modules/saturation/' | url }}" style="color:var(--accent)">Vibrance / Saturation</a></td><td><a href="{{ '/modules/eqcouleurs/' | url }}" style="color:var(--accent)">HSL</a> ciblé</td></tr>
+  <tr><td>Couleurs criardes</td><td><a href="{{ '/modules/saturation/' | url }}" style="color:var(--accent)">Saturation</a> — baisse</td><td><a href="{{ '/modules/eqcouleurs/' | url }}" style="color:var(--accent)">HSL</a> — canal concerné</td></tr>
+  <tr><td>Image molle</td><td><a href="{{ '/modules/courbestonales/' | url }}" style="color:var(--accent)">Courbes Tonales</a> (S-curve)</td><td><a href="{{ '/modules/contrastelocal/' | url }}" style="color:var(--accent)">Contraste Local</a></td></tr>
+  <tr><td>Contraste excessif</td><td><a href="{{ '/modules/egaliseurtonal/' | url }}" style="color:var(--accent)">Égaliseur Tonal</a> — Ombres</td><td><a href="{{ '/modules/courbestonales/' | url }}" style="color:var(--accent)">Courbes Tonales</a></td></tr>
+  <tr><td>Manque de texture</td><td><a href="{{ '/modules/texture/' | url }}" style="color:var(--accent)">Amplification Texture</a></td><td><a href="{{ '/modules/contrastelocal/' | url }}" style="color:var(--accent)">Contraste Local</a></td></tr>
+  <tr><td>Halos sur contours</td><td><a href="{{ '/modules/contrastelocal/' | url }}" style="color:var(--accent)">Contraste Local</a> — baisse</td><td><a href="{{ '/modules/lissage/' | url }}" style="color:var(--accent)">Lissage</a> — mode moins agressif</td></tr>
+  <tr><td>Grain / bruit</td><td><a href="{{ '/modules/lissage/' | url }}" style="color:var(--accent)">Lissage NR</a> — Luminance</td><td>—</td></tr>
+  <tr><td>Taches colorées</td><td><a href="{{ '/modules/lissage/' | url }}" style="color:var(--accent)">Lissage NR</a> — Chrominance</td><td>—</td></tr>
+  <tr><td>Peau plastifiée</td><td><a href="{{ '/modules/lissage/' | url }}" style="color:var(--accent)">Lissage NR</a> — baisse</td><td>—</td></tr>
   <tr><td>Vignettage</td><td>Correction objectif</td><td>—</td></tr>
   <tr><td>Distorsion géométrique</td><td>Correction objectif</td><td>—</td></tr>
   <tr><td>Franges chromatiques</td><td>Correction objectif — aber. chroma.</td><td>—</td></tr>
-  <tr><td>Brume atmosphérique</td><td>Élimination de la Brume</td><td>Contraste Local</td></tr>
+  <tr><td>Brume atmosphérique</td><td><a href="{{ '/modules/eliminationbrume/' | url }}" style="color:var(--accent)">Élimination de la Brume</a></td><td><a href="{{ '/modules/contrastelocal/' | url }}" style="color:var(--accent)">Contraste Local</a></td></tr>
 </table>
 
 </div>
