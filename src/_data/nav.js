@@ -23,7 +23,9 @@ module.exports = [
       { id: "eclairage",           label: "L'Éclairage",               url: "/modules/eclairage/",           color: "#22d3ee" },
       { id: "triangle-exposition", label: "Triangle d'Exposition",     url: "/modules/triangle-exposition/", color: "#22d3ee" },
       { id: "sony-a7ii",           label: "Sony Alpha 7 II",           url: "/modules/sony-a7ii/",           color: "#22d3ee" },
-      { id: "filtres",             label: "Filtres Photographiques",   url: "/modules/filtres/",             color: "#22d3ee" }
+      { id: "filtres",             label: "Filtres Photographiques",   url: "/modules/filtres/",             color: "#22d3ee" },
+      { id: "types-photo",         label: "Les Genres Photographiques", url: "/modules/types-photo/",         color: "#22d3ee" },
+      { id: "pense-bete-terrain",  label: "Pense-bête Terrain",         url: "/modules/pense-bete-terrain/",  color: "#22d3ee" }
     ]
   },
   {
