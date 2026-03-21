@@ -16,6 +16,17 @@ module.exports = [
     ]
   },
   {
+    section: "Photographie & Terrain",
+    items: [
+      { id: "philosophie-photo",   label: "Philosophie de la Photo",   url: "/modules/philosophie-photo/",   color: "#22d3ee" },
+      { id: "composition",         label: "La Composition",            url: "/modules/composition/",         color: "#22d3ee" },
+      { id: "eclairage",           label: "L'Éclairage",               url: "/modules/eclairage/",           color: "#22d3ee" },
+      { id: "triangle-exposition", label: "Triangle d'Exposition",     url: "/modules/triangle-exposition/", color: "#22d3ee" },
+      { id: "sony-a7ii",           label: "Sony Alpha 7 II",           url: "/modules/sony-a7ii/",           color: "#22d3ee" },
+      { id: "filtres",             label: "Filtres Photographiques",   url: "/modules/filtres/",             color: "#22d3ee" }
+    ]
+  },
+  {
     section: "Méthodologie & Pipeline",
     items: [
       { id: "pipeline", label: "Pipeline de traitement RAW", url: "/modules/pipeline/", color: "#34d399" },
