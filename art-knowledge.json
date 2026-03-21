@@ -2,8 +2,8 @@
   "meta": {
     "source": "ART Raw Image Processor — Documentation Photographe",
     "version": "1.0",
-    "generated": "2026-03-21T13:24:47.344Z",
-    "total_modules": 63,
+    "generated": "2026-03-21T20:07:03.651Z",
+    "total_modules": 62,
     "description": "Knowledge base extraite des sources Eleventy pour usage par MCP ou tout système de génération de fichiers .arp"
   },
   "modules": [
@@ -3858,16 +3858,6 @@
           "content": "Dans Affinity : les ajustements après ART doivent être **légers** — recadrage, dust spots, ajustements locaux fins (pinceau). Le gros du travail se fait dans ART sur le RAW. Affinity = finitions, pas re-développement."
         }
       ],
-      "warnings": [],
-      "tables": []
-    },
-    {
-      "id": "mod-pense-bete-terrain",
-      "name": "Pense-bête Terrain — Sony α7 II",
-      "subtitle": "Réglages optimaux par situation en quelques clics",
-      "category": "Photographie & Terrain",
-      "params": [],
-      "tips": [],
       "warnings": [],
       "tables": []
     },
