@@ -18,13 +18,19 @@ permalink: '/modules/histogramme-highkey/'
 
 <h3 class="section-title">Ce que tu vois</h3>
 
-<pre style="font-family:'DM Mono',monospace;font-size:13px;line-height:1.5;color:var(--muted);background:var(--bg2);padding:20px;border-radius:8px;border:1px solid var(--border);overflow-x:auto;">
-                  ▓▓▓▓
-            ▓▓▓▓▓▓▓▓▓▓
-        ▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-|___________________|
-←         Masse à droite</pre>
+<div class="histo-demo">
+  <svg viewBox="0 0 440 100" xmlns="http://www.w3.org/2000/svg" aria-label="Histogramme — High Key, masse à droite sans clipping">
+    <!-- axe -->
+    <line x1="20" y1="88" x2="420" y2="88" stroke="#2a2d33" stroke-width="1"/>
+    <!-- courbe — masse à droite qui s'effile vers la gauche, ne touche pas le bord droit -->
+    <polygon
+      points="20,88 80,87 120,86 160,84 200,80 235,72 265,60 295,46 325,30 355,18 380,10 400,6 415,5 420,6 420,88"
+      fill="rgba(251,191,36,0.13)" stroke="#fbbf24" stroke-width="1.5" stroke-linejoin="round"/>
+    <!-- indication pas de clipping -->
+    <text x="418" y="18" text-anchor="end" font-family="DM Mono, monospace" font-size="9" fill="#fbbf24">pas de clipping</text>
+  </svg>
+  <div class="histo-label"><span>Noirs</span><span>masse → Blancs</span></div>
+</div>
 
 <p>La majorité des pixels est <strong>concentrée dans les hautes lumières</strong> — peu de valeurs sombres. L'image est globalement lumineuse, claire, aérée.</p>
 

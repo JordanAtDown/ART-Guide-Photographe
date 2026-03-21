@@ -976,3 +976,23 @@ h3.section-title:hover .section-top-link { opacity: 1; }
   line-height: 1.5;
 }
 .look-needs strong { color: var(--text); }
+
+/* ── Histogramme illustratif SVG ─────────────────────── */
+.histo-demo {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 20px 10px;
+  margin: 20px 0;
+  overflow: hidden;
+}
+.histo-demo svg { display: block; width: 100%; height: auto; }
+.histo-label {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 6px;
+  padding: 0 2px;
+}

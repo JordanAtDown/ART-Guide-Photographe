@@ -18,14 +18,23 @@ permalink: '/modules/histogramme-hautes-lumieres/'
 
 <h3 class="section-title">Ce que tu vois</h3>
 
-<pre style="font-family:'DM Mono',monospace;font-size:13px;line-height:1.5;color:var(--muted);background:var(--bg2);padding:20px;border-radius:8px;border:1px solid var(--border);overflow-x:auto;">
-                    ▓|
-                  ▓▓▓|
-              ▓▓▓▓▓▓▓|
-▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|
-|___________________|
-                    ↑
-               Clipping !</pre>
+<div class="histo-demo">
+  <svg viewBox="0 0 440 100" xmlns="http://www.w3.org/2000/svg" aria-label="Histogramme — hautes lumières cramées">
+    <!-- zone de clipping à droite -->
+    <rect x="408" y="0" width="32" height="88" fill="rgba(255,107,107,0.10)"/>
+    <!-- axe -->
+    <line x1="20" y1="88" x2="420" y2="88" stroke="#2a2d33" stroke-width="1"/>
+    <!-- ligne de clipping verticale -->
+    <line x1="420" y1="0" x2="420" y2="88" stroke="#ff6b6b" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <!-- courbe — pic vers la droite, collé au bord -->
+    <polygon
+      points="20,88 50,87 80,86 120,84 160,78 200,65 240,48 280,32 320,18 360,8 400,3 420,3 420,88"
+      fill="rgba(255,107,107,0.13)" stroke="#ff6b6b" stroke-width="1.5" stroke-linejoin="round"/>
+    <!-- label clipping -->
+    <text x="415" y="12" text-anchor="end" font-family="DM Mono, monospace" font-size="9" fill="#ff6b6b">clipping</text>
+  </svg>
+  <div class="histo-label"><span>Noirs</span><span>Blancs</span></div>
+</div>
 
 <p>La courbe <strong>colle au bord droit</strong> ou le déborde. Les pixels à cette valeur maximale sont <strong>brûlés</strong> — leur valeur réelle est inconnue, tout ce qu'on sait c'est qu'ils sont "au-dessus de blanc".</p>
 

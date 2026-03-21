@@ -18,14 +18,17 @@ permalink: '/modules/histogramme-equilibre/'
 
 <h3 class="section-title">Ce que tu vois</h3>
 
-<pre style="font-family:'DM Mono',monospace;font-size:13px;line-height:1.5;color:var(--muted);background:var(--bg2);padding:20px;border-radius:8px;border:1px solid var(--border);overflow-x:auto;">
-        ▓▓
-      ▓▓▓▓▓▓
-    ▓▓▓▓▓▓▓▓▓▓
-  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-|___________________|
-Noirs          Blancs</pre>
+<div class="histo-demo">
+  <svg viewBox="0 0 440 100" xmlns="http://www.w3.org/2000/svg" aria-label="Histogramme équilibré — cloche centrée">
+    <!-- axe -->
+    <line x1="20" y1="88" x2="420" y2="88" stroke="#2a2d33" stroke-width="1"/>
+    <!-- courbe remplie — cloche centrée -->
+    <polygon
+      points="20,88 50,86 80,82 110,74 145,58 175,40 200,26 220,16 240,26 265,40 295,58 330,74 360,82 390,86 420,88"
+      fill="rgba(0,212,170,0.15)" stroke="#00d4aa" stroke-width="1.5" stroke-linejoin="round"/>
+  </svg>
+  <div class="histo-label"><span>Noirs</span><span>Blancs</span></div>
+</div>
 
 <p>La courbe forme une <strong>colline centrée</strong>, sans coller aux bords gauche ou droit. Des pixels existent à toutes les valeurs de luminosité — ombres, tons moyens, hautes lumières. Les trois canaux RVB sont approximativement superposés.</p>
 

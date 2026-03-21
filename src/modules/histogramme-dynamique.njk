@@ -18,13 +18,20 @@ permalink: '/modules/histogramme-dynamique/'
 
 <h3 class="section-title">Ce que tu vois</h3>
 
-<pre style="font-family:'DM Mono',monospace;font-size:13px;line-height:1.5;color:var(--muted);background:var(--bg2);padding:20px;border-radius:8px;border:1px solid var(--border);overflow-x:auto;">
-▓▓                  ▓▓▓
-▓▓▓               ▓▓▓▓▓
-▓▓▓▓▓           ▓▓▓▓▓▓▓▓
-▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-|___________________|
-Ombres         HLs</pre>
+<div class="histo-demo">
+  <svg viewBox="0 0 440 100" xmlns="http://www.w3.org/2000/svg" aria-label="Histogramme — forte plage dynamique, deux pics aux extrêmes">
+    <!-- axe -->
+    <line x1="20" y1="88" x2="420" y2="88" stroke="#2a2d33" stroke-width="1"/>
+    <!-- courbe — deux bosses aux extrêmes, vallée au centre -->
+    <polygon
+      points="20,88 20,14 40,10 60,18 80,32 100,52 120,68 140,78 160,84 180,87 200,88 220,88 240,87 260,84 280,78 300,68 320,52 340,32 360,18 380,10 400,14 420,14 420,88"
+      fill="rgba(74,158,255,0.13)" stroke="#4a9eff" stroke-width="1.5" stroke-linejoin="round"/>
+    <!-- label -->
+    <text x="35" y="8" text-anchor="middle" font-family="DM Mono, monospace" font-size="9" fill="#4a9eff">ombres</text>
+    <text x="405" y="8" text-anchor="middle" font-family="DM Mono, monospace" font-size="9" fill="#4a9eff">HLs</text>
+  </svg>
+  <div class="histo-label"><span>Noirs</span><span>Blancs</span></div>
+</div>
 
 <p>Deux bosses distinctes : une masse à gauche (ombres) et une masse à droite (hautes lumières), séparées par un <strong>creux au centre</strong>. Peu de pixels dans les tons moyens. La scène contient des zones très sombres et des zones très lumineuses simultanément.</p>
 

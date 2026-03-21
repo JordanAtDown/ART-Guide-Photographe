@@ -18,13 +18,20 @@ permalink: '/modules/histogramme-contraste/'
 
 <h3 class="section-title">Ce que tu vois</h3>
 
-<pre style="font-family:'DM Mono',monospace;font-size:13px;line-height:1.5;color:var(--muted);background:var(--bg2);padding:20px;border-radius:8px;border:1px solid var(--border);overflow-x:auto;">
-      ▓▓▓▓▓▓▓▓▓
-    ▓▓▓▓▓▓▓▓▓▓▓▓▓
-  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-|___________________|
-      Bande centrale</pre>
+<div class="histo-demo">
+  <svg viewBox="0 0 440 100" xmlns="http://www.w3.org/2000/svg" aria-label="Histogramme — image molle, peu contrastée">
+    <!-- axe -->
+    <line x1="20" y1="88" x2="420" y2="88" stroke="#2a2d33" stroke-width="1"/>
+    <!-- courbe — bosse plate au centre, ne touche pas les bords -->
+    <polygon
+      points="20,88 60,87 100,83 140,72 180,56 210,44 230,38 250,38 270,44 300,56 340,72 380,83 420,87 420,88"
+      fill="rgba(107,114,128,0.2)" stroke="#6b7280" stroke-width="1.5" stroke-linejoin="round"/>
+    <!-- espace vide à gauche et droite — indication -->
+    <text x="42" y="50" text-anchor="middle" font-family="DM Mono, monospace" font-size="9" fill="#3a3d44">∅</text>
+    <text x="398" y="50" text-anchor="middle" font-family="DM Mono, monospace" font-size="9" fill="#3a3d44">∅</text>
+  </svg>
+  <div class="histo-label"><span>Noirs</span><span style="text-align:center;flex:1">bande centrale</span><span>Blancs</span></div>
+</div>
 
 <p>Tous les pixels sont <strong>concentrés dans une bande centrale</strong>, sans atteindre les bords gauche ni droit. Ni noirs profonds, ni blancs définis. L'image occupe seulement une fraction de la plage tonale disponible.</p>
 

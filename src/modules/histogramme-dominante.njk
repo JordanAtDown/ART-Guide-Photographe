@@ -18,13 +18,32 @@ permalink: '/modules/histogramme-dominante/'
 
 <h3 class="section-title">Ce que tu vois</h3>
 
-<pre style="font-family:'DM Mono',monospace;font-size:13px;line-height:1.5;color:var(--muted);background:var(--bg2);padding:20px;border-radius:8px;border:1px solid var(--border);overflow-x:auto;">
-         R
-        RRR  G
-       RRRRRGGG  B
-      RRRRRGGGGGBBB
-|___________________|
-R décalé → dominante chaude</pre>
+<div class="histo-demo">
+  <svg viewBox="0 0 440 100" xmlns="http://www.w3.org/2000/svg" aria-label="Histogramme — canaux RVB décalés, dominante chaude">
+    <!-- axe -->
+    <line x1="20" y1="88" x2="420" y2="88" stroke="#2a2d33" stroke-width="1"/>
+    <!-- canal bleu — décalé à gauche -->
+    <polyline
+      points="20,88 60,84 90,72 115,52 135,34 150,22 165,34 185,52 210,72 240,84 280,88"
+      fill="none" stroke="#7090e8" stroke-width="1.5" opacity="0.8" stroke-linejoin="round"/>
+    <!-- canal vert — au centre -->
+    <polyline
+      points="80,88 120,84 150,72 175,52 195,34 210,22 225,34 245,52 270,72 300,84 340,88"
+      fill="none" stroke="#70c070" stroke-width="1.5" opacity="0.8" stroke-linejoin="round"/>
+    <!-- canal rouge — décalé à droite, dominante chaude -->
+    <polyline
+      points="140,88 180,84 210,72 235,52 255,34 270,22 285,34 305,52 330,72 360,84 400,88"
+      fill="none" stroke="#e87070" stroke-width="1.5" opacity="0.9" stroke-linejoin="round"/>
+    <!-- légende -->
+    <circle cx="30" cy="14" r="3" fill="#7090e8"/>
+    <text x="37" y="18" font-family="DM Mono, monospace" font-size="9" fill="#7090e8">B</text>
+    <circle cx="55" cy="14" r="3" fill="#70c070"/>
+    <text x="62" y="18" font-family="DM Mono, monospace" font-size="9" fill="#70c070">G</text>
+    <circle cx="80" cy="14" r="3" fill="#e87070"/>
+    <text x="87" y="18" font-family="DM Mono, monospace" font-size="9" fill="#e87070">R → dominante chaude</text>
+  </svg>
+  <div class="histo-label"><span>Noirs</span><span>Blancs</span></div>
+</div>
 
 <p>Les courbes rouge, verte et bleue <strong>ne sont pas superposées</strong> — elles sont décalées horizontalement les unes par rapport aux autres. Plus l'écart est prononcé, plus la dominante colorée est forte.</p>
 

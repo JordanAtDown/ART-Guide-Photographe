@@ -18,15 +18,23 @@ permalink: '/modules/histogramme-ombres/'
 
 <h3 class="section-title">Ce que tu vois</h3>
 
-<pre style="font-family:'DM Mono',monospace;font-size:13px;line-height:1.5;color:var(--muted);background:var(--bg2);padding:20px;border-radius:8px;border:1px solid var(--border);overflow-x:auto;">
-|▓
-|▓▓▓
-|▓▓▓▓▓▓
-|▓▓▓▓▓▓▓▓▓
-|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-|___________________|
-↑
-Clipping ombres</pre>
+<div class="histo-demo">
+  <svg viewBox="0 0 440 100" xmlns="http://www.w3.org/2000/svg" aria-label="Histogramme — ombres bouchées">
+    <!-- zone de clipping à gauche -->
+    <rect x="0" y="0" width="32" height="88" fill="rgba(99,102,241,0.12)"/>
+    <!-- axe -->
+    <line x1="20" y1="88" x2="420" y2="88" stroke="#2a2d33" stroke-width="1"/>
+    <!-- ligne de clipping verticale gauche -->
+    <line x1="20" y1="0" x2="20" y2="88" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <!-- courbe — pic vers la gauche, collé au bord -->
+    <polygon
+      points="20,3 20,88 420,88 390,87 360,86 320,84 280,80 240,72 200,60 160,46 120,32 80,18 40,8 20,3"
+      fill="rgba(99,102,241,0.13)" stroke="#6366f1" stroke-width="1.5" stroke-linejoin="round"/>
+    <!-- label clipping -->
+    <text x="25" y="12" text-anchor="start" font-family="DM Mono, monospace" font-size="9" fill="#6366f1">clipping</text>
+  </svg>
+  <div class="histo-label"><span>Noirs</span><span>Blancs</span></div>
+</div>
 
 <p>La courbe <strong>colle au bord gauche</strong> ou le déborde. Les pixels à valeur zéro (noir pur) se sont accumulés — toute information dans les zones les plus sombres de l'image est perdue.</p>
 
