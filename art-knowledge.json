@@ -2,8 +2,8 @@
   "meta": {
     "source": "ART Raw Image Processor — Documentation Photographe",
     "version": "1.0",
-    "generated": "2026-03-21T08:20:27.900Z",
-    "total_modules": 55,
+    "generated": "2026-03-21T09:11:18.274Z",
+    "total_modules": 61,
     "description": "Knowledge base extraite des sources Eleventy pour usage par MCP ou tout système de génération de fichiers .arp"
   },
   "modules": [
@@ -289,6 +289,131 @@
               "Teal ~190° / 0.10",
               "Neutre / 0",
               "Orange ~30° / 0.08"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mod-composition",
+      "name": "La Composition — Organiser le Regard",
+      "subtitle": "Guider l'œil sans que le spectateur s'en rende compte",
+      "category": "Photographie & Terrain",
+      "params": [
+        {
+          "name": "Symétrie",
+          "range": "Centrage rigoureux",
+          "description": "Puissante et apaisante. Efficace pour l'architecture, les reflets dans l'eau, les portraits formels."
+        },
+        {
+          "name": "Asymétrie",
+          "range": "Règle des tiers",
+          "description": "Plus dynamique et naturelle. Une composition asymétrique \"tendue\" vers l'équilibre est souvent plus intéressante qu'une symétrie parfaite."
+        }
+      ],
+      "tips": [
+        {
+          "label": "Quand la casser",
+          "content": "Les portraits en plein cadre, les images symétriques, les réflexions. La symétrie centrale a sa propre puissance — ne pas appliquer la règle mécaniquement."
+        },
+        {
+          "label": "Le bokeh comme outil de séparation",
+          "content": "Un arrière-plan flou (grande ouverture) **sépare** visuellement le sujet de son environnement et attire l'œil sur le plan net. C'est une composition par le contraste de netteté."
+        },
+        {
+          "label": "Spirale de Fibonacci",
+          "content": "La spirale de Fibonacci est une version plus sophistiquée de la règle des tiers — elle guide le regard en spirale vers un point focal. En pratique : pas besoin de la calculer. L'intuition entraînée tend naturellement vers ces équilibres."
+        }
+      ],
+      "warnings": [
+        "La ligne d'horizon doit être parfaitement horizontale sauf si l'inclinaison est intentionnelle et forte. Utilise le niveau électronique du Sony A7 II.",
+        "**Horizon penché** (non intentionnel) — utilise le niveau électronique du A7 II. **Sujet au centre systématiquement** — explore les tiers. **Trop d'éléments** — rapproche-toi ou change de focale. **Espace de mouvement absent** — recule ou recompose. **Premier plan ignoré** — descends, cherche une ancre. **Arrière-plan négligé** — vérifie ce qu'il y a derrière ton sujet avant de déclencher."
+      ],
+      "tables": [
+        {
+          "headers": [
+            "Position",
+            "Effet"
+          ],
+          "rows": [
+            [
+              "Tiers inférieur",
+              "Le ciel domine — nuages dramatiques, lumière"
+            ],
+            [
+              "Tiers supérieur",
+              "Le sol domine — texture, premier plan fort"
+            ],
+            [
+              "Centre",
+              "Symétrie — réflexions, ambiance calme, dédoublement"
+            ],
+            [
+              "Absent",
+              "Abstraction, proximité, immersion"
+            ]
+          ]
+        },
+        {
+          "headers": [
+            "Type de ligne",
+            "Effet",
+            "Exemple"
+          ],
+          "rows": [
+            [
+              "**Lignes convergentes**",
+              "Profondeur, perspective, direction",
+              "Route, voies ferrées, couloirs"
+            ],
+            [
+              "**Lignes diagonales**",
+              "Dynamisme, tension, mouvement",
+              "Escaliers, vagues, ombres"
+            ],
+            [
+              "**Lignes courbes**",
+              "Élégance, douceur, voyage visuel",
+              "Rivières, chemins sinueux, corps"
+            ],
+            [
+              "**Lignes horizontales**",
+              "Calme, stabilité, repos",
+              "Horizon, lignes d'eau calme"
+            ],
+            [
+              "**Lignes verticales**",
+              "Force, solidité, élévation",
+              "Arbres, colonnes, falaises"
+            ]
+          ]
+        },
+        {
+          "headers": [
+            "Point de vue",
+            "Effet",
+            "Usage"
+          ],
+          "rows": [
+            [
+              "**Plongée**",
+              "Écrase, domine, géométrise",
+              "Architecture, foules, patterns"
+            ],
+            [
+              "**Contre-plongée**",
+              "Impose, grandit le sujet",
+              "Portraits de puissance, arbres"
+            ],
+            [
+              "**Hauteur des yeux**",
+              "Naturel, égalitaire",
+              "Portrait standard, reportage"
+            ],
+            [
+              "**Niveau du sol**",
+              "Immersif, intime, dramatique",
+              "Enfants, animaux, macro"
             ]
           ]
         }
@@ -1690,6 +1815,150 @@
       ]
     },
     {
+      "id": "mod-eclairage",
+      "name": "L'Éclairage — Voir et Maîtriser la Lumière",
+      "subtitle": "Celui qui sait lire la lumière a tout compris",
+      "category": "Photographie & Terrain",
+      "params": [
+        {
+          "name": "Lumière dure",
+          "range": "Source petite par rapport au sujet",
+          "description": "Transitions rapides, ombres marquées et nettes, contraste fort. Sculpte les textures, crée du volume. Peut être \"cruel\" sur les visages. Usage : rue, portraits de caractère, architecture sous soleil direct."
+        },
+        {
+          "name": "Lumière douce",
+          "range": "Source grande par rapport au sujet",
+          "description": "Transitions progressives, ombres douces et graduées, faible contraste. Adoucit les textures, convient à la peau et aux fleurs. Usage : portraits, produit, intérieur, nature morte."
+        },
+        {
+          "name": "Réflecteur blanc",
+          "range": "Lumière douce, neutre",
+          "description": "Redirige la lumière existante pour déboucher les ombres. Usage : portrait standard, déboucher les ombres de contre-jour."
+        },
+        {
+          "name": "Réflecteur argent",
+          "range": "Lumière froide, directionnelle",
+          "description": "Ajout de contraste, lumière plus dure que le blanc. Usage : situations où l'on veut renforcer un contraste existant."
+        },
+        {
+          "name": "Réflecteur or",
+          "range": "Lumière chaude, flatteuse",
+          "description": "Simule la golden hour. Très flatteur pour les portraits en plein air. Usage : portrait golden hour, compenser une lumière froide."
+        },
+        {
+          "name": "Diffuseur",
+          "range": "Transforme dure → douce",
+          "description": "Interposé entre la source et le sujet. En extérieur : voile blanc, store translucide, ou diffuseur de flash. Agrandit la source effective."
+        },
+        {
+          "name": "Flash nu (direct)",
+          "range": "Lumière dure et directionnelle",
+          "description": "Éviter en portrait direct — aplatit et crée des ombres dures derrière le sujet."
+        },
+        {
+          "name": "Flash rebondi",
+          "range": "Plafond ou mur comme source",
+          "description": "Lumière douce, enveloppante. La surface devient la source — résultat naturel et flatteur."
+        },
+        {
+          "name": "Flash de remplissage",
+          "range": "Faible puissance, -1 à -2 EV",
+          "description": "En plein soleil, débouche les ombres du visage sans paraître artificiel. Indispensable pour les portraits en contre-jour."
+        },
+        {
+          "name": "LEDs continues",
+          "range": "Ce que tu vois = ce que tu obtiens",
+          "description": "Avantage : pas de surprise à la prise de vue. Usage : studio, vidéo, macro, photographie de produit."
+        },
+        {
+          "name": "Rembrandt",
+          "range": "Source à 45° au-dessus et côté",
+          "description": "Petit triangle de lumière sous l'œil côté ombre. Dramatique, sculpte le visage, très flatteur."
+        },
+        {
+          "name": "Split Lighting",
+          "range": "Source exactement à 90°",
+          "description": "Moitié du visage lumière, moitié ombre. Très dramatique, fort caractère — portraits masculins ou artistiques."
+        },
+        {
+          "name": "Butterfly / Paramount",
+          "range": "Source directement au-dessus",
+          "description": "Ombre sous le nez en forme de papillon. Flatteur pour les pommettes hautes — utilisé en glamour des années 40."
+        },
+        {
+          "name": "Loop Lighting",
+          "range": "Source à 30° côté, légèrement au-dessus",
+          "description": "Petite ombre de nez qui descend en boucle vers la joue. Le plus polyvalent et le plus naturel — idéal pour débuter."
+        },
+        {
+          "name": "Broad Light",
+          "range": "Éclaire le côté large du visage",
+          "description": "Élargit visuellement le visage. À utiliser avec prudence selon la morphologie du sujet."
+        },
+        {
+          "name": "Short Light",
+          "range": "Éclaire le côté étroit du visage",
+          "description": "Affine et creuse le visage. Le plus flatteur pour la majorité des morphologies — amincit visuellement."
+        }
+      ],
+      "tips": [
+        {
+          "label": "Studio naturel",
+          "content": "L'ombre d'un arbre, d'un bâtiment ou d'un mur peut créer un \"studio naturel\" à l'extérieur — lumière du ciel uniquement, douce et directionnelle. Très utilisé par les portraitistes en extérieur."
+        },
+        {
+          "label": "Lumière d'ambiance — Sony A7 II",
+          "content": "Les sources existantes (bougies, néons, lampes de chevet) sont souvent les éclairages les plus beaux et les plus authentiques. Le Sony A7 II à ISO 3200–6400 les capture avec très peu de bruit — préfère les capturer qu'ajouter un flash."
+        },
+        {
+          "label": "Technique terrain",
+          "content": "Ne pas chercher la lumière — la chercher depuis **toutes les positions autour du sujet**. Tourner autour d'un sujet avec ton appareil montre comment la lumière change selon l'angle. Ce que tu cherches est peut-être à 30° de là où tu es."
+        }
+      ],
+      "warnings": [],
+      "tables": [
+        {
+          "headers": [
+            "Moment",
+            "Température",
+            "Caractéristiques"
+          ],
+          "rows": [
+            [
+              "**Golden Hour**",
+              "3000–4000 K",
+              "Lumière rasante, tons orangés/dorés, ombres longues, qualité douce"
+            ],
+            [
+              "**Blue Hour**",
+              "6000–7000 K",
+              "Lumière bleue-violacée, équilibre parfait avec l'éclairage artificiel"
+            ],
+            [
+              "**Midi**",
+              "~5500 K",
+              "Source haute, ombres sous le nez, peu flatteur en portrait"
+            ],
+            [
+              "**Ciel couvert**",
+              "6500–7500 K",
+              "Lumière diffuse sur toute la scène, idéal portraits et macro"
+            ],
+            [
+              "**Tungstène**",
+              "2800–3200 K",
+              "Très chaud, jaune-orange — ambiance intérieure chaude"
+            ],
+            [
+              "**Ombre sous ciel bleu**",
+              "7000–9000 K",
+              "Froid, bleuté — corriger à la prise de vue ou en post"
+            ]
+          ]
+        }
+      ]
+    },
+    {
       "id": "mod-egaliseurtonal",
       "name": "Égaliseur Tonal",
       "subtitle": "Sculption chirurgicale de la dynamique — l'outil qui remplace Ombres/HLs de Lightroom",
@@ -1942,6 +2211,259 @@
         "⚠️ **Curseur Adoucissement** (uniquement visible en mode \"Propagation de la couleur\") : valeur recommandée 20–40. En dessous de 10, risque de halo visible à la jonction ciel/horizon. Au-dessus de 60, la reconstruction devient trop étalée et peut affecter des zones qui n'étaient pas surexposées."
       ],
       "tables": []
+    },
+    {
+      "id": "mod-filtres",
+      "name": "Les Filtres Photographiques — Guide Pratique",
+      "subtitle": "Certains effets se reproduisent en post-traitement. D'autres non.",
+      "category": "Photographie & Terrain",
+      "params": [
+        {
+          "name": "Ce qu'il fait",
+          "range": "Protection mécanique",
+          "description": "Protège physiquement la lentille frontale. Absorbe une partie de la lumière UV — effet quasi nul sur les capteurs modernes."
+        },
+        {
+          "name": "Utilité réelle",
+          "range": "Environnements à risque",
+          "description": "Plage, randonnée poussiéreuse, pluie légère. Un filtre UV bas de gamme permanent fait plus de mal qu'aucun filtre — dégrade la netteté et crée du flare."
+        },
+        {
+          "name": "ND8 — 3 stops",
+          "range": "Légère réduction",
+          "description": "Effet eau douce sous nuages, vidéo en lumière modérée."
+        },
+        {
+          "name": "ND64 — 6 stops",
+          "range": "Polyvalent",
+          "description": "Poses de 0.5s à 5s selon les conditions. Le plus utile au quotidien."
+        },
+        {
+          "name": "ND1000 — 10 stops",
+          "range": "Poses longues",
+          "description": "Poses de plusieurs secondes même en plein soleil. Mer filée, longue exposition diurne."
+        },
+        {
+          "name": "ND variable",
+          "range": "ND3 à ND1000 en tournant",
+          "description": "Pratique mais les versions bas de gamme créent un effet \"croix\" à fort niveau. Préfère des ND fixes de qualité."
+        },
+        {
+          "name": "CPL + ND",
+          "range": "ND en premier, CPL à l'extérieur",
+          "description": "Longue pose avec suppression des reflets — cascade avec ciel saturé, lac transparent avec eau soyeuse. Attention : vignettage possible avec grand-angle."
+        },
+        {
+          "name": "GND + CPL",
+          "range": "Nécessite un porte-filtre",
+          "description": "Paysage avec eau et ciel contrasté. CPL vissé sur l'objectif + GND glissé dans le porte-filtre (système Lee, NiSi, Kase)."
+        },
+        {
+          "name": "Filtres ronds vissants",
+          "range": "S'adaptent au filetage",
+          "description": "Pratiques, compacts. Nécessitent une taille par objectif (ou bagues adaptatrices). CPL et ND simples — format idéal."
+        },
+        {
+          "name": "Filtres carrés (porte-filtre)",
+          "range": "100mm ou 150mm",
+          "description": "Un seul jeu de filtres pour tous les objectifs. Indispensable pour les GND. Systèmes populaires : NiSi, Lee, Kase."
+        },
+        {
+          "name": "Polarisant CPL",
+          "range": "Budget : 60–120€ minimum",
+          "description": "Le plus important. Hoya HD, B+W XS-Pro, Kase Wolverine."
+        },
+        {
+          "name": "ND1000",
+          "range": "Budget : 50–100€",
+          "description": "NiSi, Hoya Pro ND. La qualité de la neutralité colorimétrique compte ici."
+        },
+        {
+          "name": "ND64",
+          "range": "Budget : 40–80€",
+          "description": "Même gamme que le ND1000 — cohérence de marque conseillée."
+        },
+        {
+          "name": "UV / Protection",
+          "range": "Budget : 30–50€ si utilisé",
+          "description": "B+W, Hoya. Seulement si tu l'utilises réellement — pas en permanence."
+        }
+      ],
+      "tips": [
+        {
+          "label": "Marques recommandées",
+          "content": "B+W, Hoya Pro1, Kase — évite les no-name. Utilise-le uniquement dans les environnements à risque, pas en permanence."
+        },
+        {
+          "label": "Perte de lumière + compatibilité A7 II",
+          "content": "Le CPL absorbe **1 à 2 stops** de lumière même au minimum. Ne pas l'utiliser en basse lumière. Le filtre CPL est **circulaire** (par opposition au linéaire) — indispensable avec les capteurs AF modernes. Un polarisant linéaire perturberait le système de détection de phase du A7 II."
+        },
+        {
+          "label": "Calculer la pose longue",
+          "content": "Formule simple : **nouvelle durée = durée sans filtre × facteur ND** Exemple : sans filtre → 1/250s — avec ND1000 → 1/250 × 1000 = 4 secondes. Applications mobiles : ND Calc, Photo Pills — calculent automatiquement."
+        },
+        {
+          "label": "Peut-on s'en passer avec ART ?",
+          "content": "Oui, dans une certaine mesure. Le Log Tone Mapping d'ART compresse la dynamique et peut équilibrer ciel/sol en post. Mais le GND **capture plus d'information** dans les hautes lumières dès la prise de vue — un ciel cramé en plein soleil est parfois irrécupérable. Le GND reste utile pour les scènes à plage dynamique extrême."
+        }
+      ],
+      "warnings": [
+        "**Ce qu'il ne fait pas :** n'élimine pas les reflets de sources directes (le soleil, un flash) · n'a aucun effet sur les surfaces métalliques · effet variable selon l'angle par rapport au soleil. **Grand-angle :** avec un objectif moins de 24mm, un CPL peut créer un **ciel inégal** — plus sombre dans une zone, plus clair dans une autre. Utiliser avec modération.",
+        "Un mauvais filtre peut dégrader la netteté, créer du flare non voulu ou introduire une dominante colorée. Sur un objectif de qualité, c'est dommage. **Évite absolument** les packs de 3 filtres à 15€ — ils dégradent optiquement l'image."
+      ],
+      "tables": [
+        {
+          "headers": [
+            "Effet",
+            "Explication"
+          ],
+          "rows": [
+            [
+              "**Supprime les reflets** sur l'eau, le verre, la peinture humide",
+              "La lumière réfléchie est polarisée — bloquée par le filtre"
+            ],
+            [
+              "**Intensifie les couleurs** de la végétation",
+              "Élimine les micro-reflets sur les feuilles — couleurs plus profondes"
+            ],
+            [
+              "**Assombrit et sature le ciel bleu**",
+              "Effet maximal à 90° du soleil"
+            ],
+            [
+              "**Réduit le voile atmosphérique**",
+              "Moins de diffusion lumineuse — paysages lointains plus nets"
+            ],
+            [
+              "**Révèle le fond des eaux peu profondes**",
+              "Élimine les reflets de surface"
+            ]
+          ]
+        },
+        {
+          "headers": [
+            "Notation ND",
+            "Facteur",
+            "Perte de lumière",
+            "Exemple : 1/250s devient"
+          ],
+          "rows": [
+            [
+              "**ND2**",
+              "2x",
+              "1 stop",
+              "1/125s"
+            ],
+            [
+              "**ND4**",
+              "4x",
+              "2 stops",
+              "1/60s"
+            ],
+            [
+              "**ND8**",
+              "8x",
+              "3 stops",
+              "1/30s"
+            ],
+            [
+              "**ND64**",
+              "64x",
+              "6 stops",
+              "1/4s"
+            ],
+            [
+              "**ND400**",
+              "400x",
+              "~9 stops",
+              "1,5s"
+            ],
+            [
+              "**ND1000**",
+              "1000x",
+              "10 stops",
+              "4s"
+            ]
+          ]
+        },
+        {
+          "headers": [
+            "Type",
+            "Transition",
+            "Usage"
+          ],
+          "rows": [
+            [
+              "**GND dur**",
+              "Transition abrupte",
+              "Horizon net et droit (mer, désert)"
+            ],
+            [
+              "**GND doux**",
+              "Transition progressive",
+              "Horizons irréguliers (montagne, arbres)"
+            ],
+            [
+              "**GND inverse**",
+              "Plus sombre au centre",
+              "Coucher de soleil (zone la plus lumineuse = horizon)"
+            ],
+            [
+              "**GND centré**",
+              "Bande sombre au milieu",
+              "Reflets dans l'eau, luminosité centrale"
+            ]
+          ]
+        },
+        {
+          "headers": [
+            "Situation",
+            "Filtre recommandé"
+          ],
+          "rows": [
+            [
+              "Ciel bleu profond, en journée",
+              "CPL"
+            ],
+            [
+              "Reflets sur l'eau à éliminer",
+              "CPL"
+            ],
+            [
+              "Végétation automnale saturée",
+              "CPL"
+            ],
+            [
+              "Vitrine sans reflet",
+              "CPL"
+            ],
+            [
+              "Cascade effet soyeux",
+              "ND64 ou ND1000 + trépied"
+            ],
+            [
+              "Mer filée longue exposition",
+              "ND1000 + trépied"
+            ],
+            [
+              "Portrait grande ouverture en plein soleil",
+              "ND4–ND8"
+            ],
+            [
+              "Équilibrer ciel/sol",
+              "GND ou Log TM ART"
+            ],
+            [
+              "Protection objectif (plage, pluie)",
+              "UV/protection"
+            ],
+            [
+              "Cascade + ciel saturé",
+              "CPL + ND"
+            ]
+          ]
+        }
+      ]
     },
     {
       "id": "mod-histogramme-contraste",
@@ -3340,6 +3862,91 @@
       "tables": []
     },
     {
+      "id": "mod-philosophie-photo",
+      "name": "L'Art et la Philosophie de la Photographie",
+      "subtitle": "Comprendre ce que signifie vraiment photographier",
+      "category": "Photographie & Terrain",
+      "params": [
+        {
+          "name": "L'approche documentaire",
+          "range": "Témoigner",
+          "description": "Cartier-Bresson, Doisneau, Dorothea Lange. Ces photographes considéraient leur rôle comme celui de **capturer ce qui existe** — la réalité sociale, l'instant humain, la vérité du monde. La retouche est minimale ; l'authenticité, primordiale."
+        },
+        {
+          "name": "L'approche créative",
+          "range": "Construire",
+          "description": "Ansel Adams, Man Ray, Saul Leiter. La photographie est ici une **construction visuelle**. La lumière se choisit, se façonne, se dirige. La retouche fait partie du geste créatif, comme la chambre noire l'était pour Adams."
+        },
+        {
+          "name": "Lumière rasante",
+          "range": "Lever / coucher de soleil",
+          "description": "Texture, volume, reliefs — chaque aspérité projette son ombre."
+        },
+        {
+          "name": "Lumière frontale",
+          "range": "Source derrière le photographe",
+          "description": "Clarté, lisibilité, mais aplat — peu de volume, peu de dramaturgie."
+        },
+        {
+          "name": "Contre-jour",
+          "range": "Source derrière le sujet",
+          "description": "Silhouettes, mystère, drama — sujet découpé sur fond lumineux."
+        },
+        {
+          "name": "Lumière diffuse",
+          "range": "Ciel couvert, ombre",
+          "description": "Douceur, intimité, neutralité — idéal pour les portraits et les textures fines."
+        }
+      ],
+      "tips": [
+        {
+          "label": "Note",
+          "content": "Ces deux approches ne s'opposent pas — elles se complètent. La plupart des photographes naviguent entre les deux selon leur sujet et leur humeur."
+        },
+        {
+          "label": "Pour aller plus loin",
+          "content": "**Lire :** Roland Barthes — La Chambre Claire · Susan Sontag — Sur la photographie"
+        }
+      ],
+      "warnings": [],
+      "tables": [
+        {
+          "headers": [
+            "Niveau",
+            "Question",
+            "Outil"
+          ],
+          "rows": [
+            [
+              "**Sujet**",
+              "Qu'est-ce que je photographie ?",
+              "Le choix du moment"
+            ],
+            [
+              "**Cadre**",
+              "Qu'est-ce que j'inclus et j'exclus ?",
+              "La composition"
+            ],
+            [
+              "**Lumière**",
+              "Quelle lumière sert mon intention ?",
+              "Heure, angle, modification"
+            ],
+            [
+              "**Ambiance**",
+              "Quelle émotion dois-je transmettre ?",
+              "Exposition, couleur"
+            ],
+            [
+              "**Regard**",
+              "Où veux-je que l'œil aille ?",
+              "Contrastes, profondeur"
+            ]
+          ]
+        }
+      ]
+    },
+    {
       "id": "mod-pipeline",
       "name": "Pipeline de Traitement",
       "subtitle": "Comprendre l'ordre dans lequel ART traite tes données RAW",
@@ -3430,6 +4037,360 @@
       "tables": []
     },
     {
+      "id": "mod-sony-a7ii",
+      "name": "Sony Alpha 7 II — Guide Complet",
+      "subtitle": "Premier plein format avec stabilisation sur 5 axes au monde",
+      "category": "Photographie & Terrain",
+      "params": [
+        {
+          "name": "Axes 1 & 2",
+          "range": "Tangage + Lacet",
+          "description": "Rotations verticale et horizontale — les plus fréquentes en main levée. Compensés en interne."
+        },
+        {
+          "name": "Axe 3",
+          "range": "Roulis",
+          "description": "Rotation dans le plan de l'image. Compensé en interne — évite le \"twisting\" des mains."
+        },
+        {
+          "name": "Axes 4 & 5",
+          "range": "Translation X + Y",
+          "description": "Déplacements latéraux. Compensés uniquement en combinaison avec les objectifs OSS — plus efficace à longue focale."
+        },
+        {
+          "name": "Bouton C1",
+          "range": "Personnalisable",
+          "description": "Recommandé : ISO — accès rapide sans plonger dans les menus."
+        },
+        {
+          "name": "Bouton C2",
+          "range": "Personnalisable",
+          "description": "Recommandé : Balance des blancs."
+        },
+        {
+          "name": "Centre du joystick",
+          "range": "Personnalisable",
+          "description": "Recommandé : Spot flexible centré (reset position AF)."
+        },
+        {
+          "name": "Bouton AEL",
+          "range": "Personnalisable",
+          "description": "Recommandé : AF marche/arrêt (si tu utilises l'AF back-button)."
+        }
+      ],
+      "tips": [
+        {
+          "label": "En pratique",
+          "content": "Focale 50mm : limite théorique sans IBIS = 1/50s → avec A7 II : **1/6s viable**. Focale 200mm : limite théorique = 1/200s → avec A7 II : **1/25s potentiellement net**. Pour les objectifs sans communication électronique (anciens objectifs adaptés) : renseigner la focale manuellement dans les réglages SteadyShot."
+        },
+        {
+          "label": "Objectifs A (ancienne monture Sony)",
+          "content": "Via adaptateurs **LA-EA3** (AF passif) ou **LA-EA4** (AF motorisé). Accès à toute la gamme Minolta/Sony A (souvent moins coûteux). La stabilisation IBIS fonctionne. L'AF est plus lent mais fonctionnel avec LA-EA4."
+        },
+        {
+          "label": "Entretien capteur",
+          "content": "Changer d'objectif à l'abri du vent et rapidement. Nettoyage auto : Menu → Nettoyage du capteur. Ne jamais souffler avec la bouche sur le capteur. Batterie : stocker à 50–80% pour le stockage longue durée. Le froid réduit l'autonomie — garder en poche."
+        }
+      ],
+      "warnings": [
+        "Désactiver le SteadyShot si sur trépied — les micro-corrections parasites peuvent créer du flou sur les poses longues."
+      ],
+      "tables": [
+        {
+          "headers": [
+            "Spécification",
+            "Valeur"
+          ],
+          "rows": [
+            [
+              "**Capteur**",
+              "CMOS plein format 35mm, 24,3 MP"
+            ],
+            [
+              "**Processeur**",
+              "BIONZ X"
+            ],
+            [
+              "**Monture**",
+              "Sony E (FE)"
+            ],
+            [
+              "**ISO natif**",
+              "100–25600 (extensions : 50, 51200)"
+            ],
+            [
+              "**Vitesse max**",
+              "1/8000s (mécanique), flash sync 1/250s"
+            ],
+            [
+              "**AF**",
+              "Hybride phase + contraste, 117 points de détection de phase"
+            ],
+            [
+              "**Stabilisation**",
+              "IBIS 5 axes, 4,5 stops compensés"
+            ],
+            [
+              "**Rafale**",
+              "5 images/seconde"
+            ],
+            [
+              "**Viseur**",
+              "EVF OLED 2,36 Mpts"
+            ],
+            [
+              "**Écran**",
+              "Inclinable (non tactile), 3\", 1,23 Mpts"
+            ],
+            [
+              "**Vidéo**",
+              "Full HD 1080p (pas de 4K)"
+            ],
+            [
+              "**Poids**",
+              "599g (avec batterie et carte)"
+            ]
+          ]
+        },
+        {
+          "headers": [
+            "Mode AF",
+            "Comportement",
+            "Usage recommandé"
+          ],
+          "rows": [
+            [
+              "**AF-S**",
+              "MAP faite à mi-pression, puis verrouillée",
+              "Sujets statiques, paysage"
+            ],
+            [
+              "**AF-C**",
+              "MAP continue tant que déclencheur à mi-pression",
+              "Sujets en mouvement"
+            ],
+            [
+              "**DMF**",
+              "AF-S + ajustement manuel possible après",
+              "Macro, précision extrême"
+            ],
+            [
+              "**MF**",
+              "Manuel pur",
+              "Astro, trépied, objectifs adaptés"
+            ]
+          ]
+        },
+        {
+          "headers": [
+            "Zone AF",
+            "Description",
+            "Usage"
+          ],
+          "rows": [
+            [
+              "**Large**",
+              "Tout le cadre, priorité visages",
+              "Auto, scènes variées"
+            ],
+            [
+              "**Zone**",
+              "Section définie du cadre",
+              "Sujets prévisibles"
+            ],
+            [
+              "**Centre**",
+              "Point fixe central",
+              "Technique \"focus and recompose\""
+            ],
+            [
+              "**Spot flexible S/M/L**",
+              "Point déplaçable, taille variable",
+              "Portrait (S sur l'œil), précision"
+            ]
+          ]
+        },
+        {
+          "headers": [
+            "Situation",
+            "Mode",
+            "Ouverture",
+            "Vitesse",
+            "ISO"
+          ],
+          "rows": [
+            [
+              "Paysage (trépied)",
+              "M",
+              "f/8–f/11",
+              "Selon expo",
+              "100"
+            ],
+            [
+              "Paysage (main levée)",
+              "A",
+              "f/8",
+              "Auto (min 1/50)",
+              "Auto 100–1600"
+            ],
+            [
+              "Portrait lumière naturelle",
+              "A",
+              "f/1.8–f/2.8",
+              "Auto (min 1/125)",
+              "Auto 100–3200"
+            ],
+            [
+              "Portrait studio flash",
+              "M",
+              "f/5.6–f/8",
+              "1/200",
+              "100"
+            ],
+            [
+              "Street photography",
+              "A ou P",
+              "f/5.6–f/8",
+              "1/250 min",
+              "Auto 100–3200"
+            ],
+            [
+              "Action / sport",
+              "S",
+              "—",
+              "1/500–1/1000",
+              "Auto"
+            ],
+            [
+              "Nocturne (trépied)",
+              "M",
+              "f/2.8",
+              "Bulb/30s",
+              "1600–6400"
+            ],
+            [
+              "Macro (trépied)",
+              "A",
+              "f/8–f/16",
+              "Auto",
+              "100"
+            ]
+          ]
+        },
+        {
+          "headers": [
+            "Objectif",
+            "Usage principal",
+            "Notes"
+          ],
+          "rows": [
+            [
+              "**FE 28–70mm f/3.5–5.6 OSS**",
+              "Kit polyvalent",
+              "Limité en bokeh, bon poids plume"
+            ],
+            [
+              "**FE 50mm f/1.8**",
+              "Portrait, polyvalent",
+              "Excellent rapport qualité/prix"
+            ],
+            [
+              "**FE 85mm f/1.8**",
+              "Portrait",
+              "Bokeh remarquable, très net"
+            ],
+            [
+              "**FE 24–70mm f/2.8 GM**",
+              "Polyvalent professionnel",
+              "Coûteux, exceptionnel"
+            ],
+            [
+              "**FE 16–35mm f/2.8 GM**",
+              "Paysage, architecture",
+              "Grand angle lumineux"
+            ],
+            [
+              "**Tamron 28–75mm f/2.8**",
+              "Polyvalent",
+              "Natif FE, excellent rapport Q/P"
+            ]
+          ]
+        },
+        {
+          "headers": [
+            "Paramètre",
+            "Réglage recommandé"
+          ],
+          "rows": [
+            [
+              "Qualité d'image",
+              "RAW (ou RAW+JPEG pour prévisualisation)"
+            ],
+            [
+              "Mode mise au point",
+              "AF-S (défaut) ou AF-C selon sujet"
+            ],
+            [
+              "Zone mise au point",
+              "Spot flexible S"
+            ],
+            [
+              "ISO Auto",
+              "Min 100, Max 3200–6400 selon tolérance"
+            ],
+            [
+              "Creative Style",
+              "Neutre (JPEG uniquement, ignoré en RAW)"
+            ],
+            [
+              "SteadyShot",
+              "On (Off sur trépied)"
+            ],
+            [
+              "DRO / HDR auto",
+              "Off (si RAW — inutile)"
+            ],
+            [
+              "Espace colorimétrique",
+              "AdobeRGB (plus large, capturé en JPEG)"
+            ]
+          ]
+        },
+        {
+          "headers": [
+            "Limite",
+            "Contournement"
+          ],
+          "rows": [
+            [
+              "Pas de 4K vidéo",
+              "Utiliser pour la photo, pas la vidéo principale"
+            ],
+            [
+              "Autonomie batterie NP-FW50 (~340 photos)",
+              "Emporter 2 batteries minimum. Désactiver Wi-Fi/Bluetooth"
+            ],
+            [
+              "AF tracking moins performant qu'A7 III/IV",
+              "Compenser avec le positionnement et l'anticipation"
+            ],
+            [
+              "AF lent sur sujets très sombres",
+              "Utiliser la lampe AF ou passer en MF"
+            ],
+            [
+              "Pas de joint d'étanchéité",
+              "Protéger de la pluie et de la poussière"
+            ],
+            [
+              "Pas de connecteur USB-C",
+              "Charge via Micro-USB ou kit de charge externe"
+            ]
+          ]
+        }
+      ]
+    },
+    {
       "id": "mod-texture",
       "name": "Amplification de la Texture",
       "subtitle": "Révélation des micro-détails — rochers, eau, écumes",
@@ -3463,6 +4424,249 @@
       ],
       "warnings": [],
       "tables": []
+    },
+    {
+      "id": "mod-triangle-exposition",
+      "name": "L'Exposition — Triangle & Réglages",
+      "subtitle": "Maîtriser la lumière, c'est maîtriser tout le reste",
+      "category": "Photographie & Terrain",
+      "params": [
+        {
+          "name": "Panoramique filé",
+          "range": "1/30 – 1/60s",
+          "description": "Suivre un sujet mobile avec une vitesse lente — sujet net, fond flou en stries horizontales. Effet cinématographique."
+        },
+        {
+          "name": "Flou de mouvement intentionnel",
+          "range": "1/15 – 1/60s",
+          "description": "Le flou n'est pas une erreur — c'est un outil narratif. Eau, foule, danse : la durée d'exposition raconte le temps qui passe."
+        },
+        {
+          "name": "Compensation d'exposition (EV)",
+          "range": "-3 EV → +3 EV",
+          "description": "Le posemètre vise toujours un \"gris 18%\". Sur une scène claire (neige, sable) : +1 à +2 EV. Sur un fond sombre ou coucher de soleil : -1 à -2 EV."
+        },
+        {
+          "name": "ETTR (Exposer à droite)",
+          "range": "Sans écrêter les hautes lumières",
+          "description": "Expose légèrement en surexposition. Au développement RAW, baisse l'exposition — les ombres récupérées sont plus propres qu'en sous-exposition."
+        },
+        {
+          "name": "AF-S (Single)",
+          "range": "MAP verrouillée",
+          "description": "Sujets statiques — paysage, portrait posé, produit."
+        },
+        {
+          "name": "AF-C (Continuous)",
+          "range": "MAP continue",
+          "description": "Sujets en mouvement — sport, enfants, animaux, danse."
+        },
+        {
+          "name": "MF (Manuel)",
+          "range": "Focus Peaking disponible",
+          "description": "Paysage sur trépied, astrophoto, objectifs adaptés. Le Focus Peaking du A7 II surligne les zones nettes."
+        },
+        {
+          "name": "Bracketing",
+          "range": "-2 / 0 / +2 EV (ou focus)",
+          "description": "Plusieurs expositions pour se protéger ou fusionner (HDR). Bracket focus utile en macro pour le focus stacking."
+        }
+      ],
+      "tips": [
+        {
+          "label": "La profondeur de champ dépend de 3 facteurs simultanés",
+          "content": "**Ouverture** (plus ouvert = moins de PDC) · **Distance sujet** (plus proche = moins de PDC) · **Focale** (plus longue = moins de PDC). Exemple : portrait à 85mm f/1.8 à 2 m → PDC de quelques centimètres seulement — les yeux nets, les oreilles déjà douces."
+        },
+        {
+          "label": "IBIS Sony A7 II — avantage terrain",
+          "content": "Avec l'IBIS du Sony A7 II, tu peux descendre de 3 à 4 stops par rapport à la règle de l'inverse de la focale — soit 1/6s à 50mm, ce qui est remarquable. La règle 1/focale s'applique sans stabilisation."
+        },
+        {
+          "label": "Mode le plus polyvalent",
+          "content": "Priorité ouverture (A) avec Auto ISO et une vitesse minimale définie. Contrôle la profondeur de champ, délègue le reste. Sur le Sony A7 II : Menu → Appareil 1 → ISO Auto → définir ISO min (100), ISO max (3200 ou 6400), vitesse minimale selon la focale."
+        },
+        {
+          "label": "En RAW",
+          "content": "Laisse en AWB (Auto White Balance) — tu corriges parfaitement en post dans ART. En JPEG : choisis le préréglage correspondant. Un écart de balance des blancs intentionnel chauffe ou refroidit une atmosphère."
+        }
+      ],
+      "warnings": [
+        "Au-delà de f/16 sur plein format, la **diffraction** commence à réduire la netteté globale. f/8–f/11 est souvent le pic de netteté des optiques."
+      ],
+      "tables": [
+        {
+          "headers": [
+            "Ouverture",
+            "Profondeur de champ",
+            "Usage"
+          ],
+          "rows": [
+            [
+              "f/1.4 – f/2.8",
+              "Faible — sujet net, fond flou",
+              "Portrait, macro, faible lumière"
+            ],
+            [
+              "f/4 – f/5.6",
+              "Moyenne",
+              "Polyvalent, reportage"
+            ],
+            [
+              "f/8 – f/11",
+              "Grande — pic de netteté",
+              "Paysage, architecture, groupe"
+            ],
+            [
+              "f/16+",
+              "Maximale — diffraction possible",
+              "À éviter sur plein format"
+            ]
+          ]
+        },
+        {
+          "headers": [
+            "Situation",
+            "Vitesse recommandée"
+          ],
+          "rows": [
+            [
+              "Sujet statique, à main levée (sans IBIS)",
+              "1/focale minimum (ex: 1/50 avec 50mm)"
+            ],
+            [
+              "Portrait standard",
+              "1/125 – 1/250"
+            ],
+            [
+              "Enfant ou animal actif",
+              "1/500 – 1/1000"
+            ],
+            [
+              "Sport, action",
+              "1/1000 – 1/4000"
+            ],
+            [
+              "Eau soyeuse",
+              "0.5s – 5s (trépied)"
+            ],
+            [
+              "Filé de lumière nocturne",
+              "5s – 30s (trépied)"
+            ],
+            [
+              "Astrophotographie",
+              "10s – 30s (suivi : minutes)"
+            ]
+          ]
+        },
+        {
+          "headers": [
+            "Plage ISO (Sony A7 II)",
+            "Qualité"
+          ],
+          "rows": [
+            [
+              "100 – 1600",
+              "Excellent — bruit quasi absent"
+            ],
+            [
+              "3200",
+              "Très bon — bruit luminance fin, acceptable"
+            ],
+            [
+              "6400",
+              "Bon pour usage web et petits tirages"
+            ],
+            [
+              "12800",
+              "Dégradation visible — utiliser avec intention"
+            ],
+            [
+              "25600+",
+              "Uniquement si pas d'alternative — grain comme sujet"
+            ]
+          ]
+        },
+        {
+          "headers": [
+            "Mode",
+            "Contrôle",
+            "Automatique",
+            "Usage"
+          ],
+          "rows": [
+            [
+              "**P (Auto)**",
+              "Rien",
+              "Tout",
+              "Urgence, test rapide"
+            ],
+            [
+              "**A (Priorité ouverture)**",
+              "Ouverture",
+              "Vitesse + ISO",
+              "80 % des situations"
+            ],
+            [
+              "**S (Priorité vitesse)**",
+              "Vitesse",
+              "Ouverture + ISO",
+              "Sport, eau, mouvement"
+            ],
+            [
+              "**M (Manuel)**",
+              "Tout",
+              "Rien",
+              "Studio, trépied, conditions fixes"
+            ],
+            [
+              "**M + Auto ISO**",
+              "Ouverture + Vitesse",
+              "ISO",
+              "Lumière variable, événement"
+            ]
+          ]
+        },
+        {
+          "headers": [
+            "Source",
+            "Température (K)",
+            "Rendu"
+          ],
+          "rows": [
+            [
+              "Bougie",
+              "1800–2000 K",
+              "Très chaud, orange"
+            ],
+            [
+              "Tungstène (ampoule)",
+              "2800–3200 K",
+              "Chaud, jaune-orange"
+            ],
+            [
+              "Lever/coucher de soleil",
+              "3000–4000 K",
+              "Doré à orange"
+            ],
+            [
+              "Lumière du jour (midi)",
+              "5000–6000 K",
+              "Neutre"
+            ],
+            [
+              "Ciel couvert",
+              "6500–7500 K",
+              "Légèrement froid"
+            ],
+            [
+              "Ombre sous ciel bleu",
+              "7000–9000 K",
+              "Froid, bleuté"
+            ]
+          ]
+        }
+      ]
     },
     {
       "id": "mod-workflow-complet",
