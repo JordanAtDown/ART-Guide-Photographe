@@ -99,7 +99,6 @@ const MODULE_LINKS = {
   'Compression Dynamique':         '/ART-Guide-Photographe/modules/compressiondyn/',
   'Balance des Blancs':            '/ART-Guide-Photographe/modules/balanceblancs/',
   'Égaliseur de Couleurs':         '/ART-Guide-Photographe/modules/eqcouleurs/',
-  'Color Wheels':                  '/ART-Guide-Photographe/modules/correctioncouleurs/',
   'Correction Couleurs':           '/ART-Guide-Photographe/modules/correctioncouleurs/',
   'Mélange des Canaux':            '/ART-Guide-Photographe/modules/melange/',
   'Courbes RVB':                   '/ART-Guide-Photographe/modules/courbesrvb/',
