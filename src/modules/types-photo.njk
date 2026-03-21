@@ -228,7 +228,7 @@ permalink: "/modules/types-photo/"
   color: var(--muted);
   text-decoration: line-through;
 }
-#pb-root .pb-restart-row { margin-top: 1.5rem; display: flex; gap: 8px; }
+#pb-root .pb-restart-row { margin-bottom: 1rem; display: flex; gap: 8px; }
 #pb-root .pb-restart {
   font-family: var(--mono);
   font-size: 11px;
@@ -694,6 +694,10 @@ function renderStep(node) {
 function renderResult(r) {
   const el = document.getElementById('pb-content');
   let h = `<div class="pb-result">`;
+  h += `<div class="pb-restart-row">
+      <button class="pb-restart" onclick="pbGoBack()">← Retour</button>
+      <button class="pb-restart" onclick="pbGoHome()">↺ Recommencer</button>
+    </div>`;
   h += `<div class="pb-result-banner">
     <div class="pb-result-banner-icon">${svg(r.icon)}</div>
     <div>
@@ -721,10 +725,6 @@ function renderResult(r) {
         <div class="pb-tips">`;
   r.tips.forEach(t => { h += `<div class="pb-tip">${t}</div>`; });
   h += `</div>
-    <div class="pb-restart-row">
-      <button class="pb-restart" onclick="pbGoBack()">← Retour</button>
-      <button class="pb-restart" onclick="pbGoHome()">↺ Recommencer</button>
-    </div>
   </div>`;
   el.innerHTML = h;
 }
