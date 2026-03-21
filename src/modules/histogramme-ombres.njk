@@ -1,0 +1,130 @@
+---
+layout: base.njk
+title: "Ombres bouchées — Clipping basses lumières"
+permalink: '/modules/histogramme-ombres/'
+---
+
+<div class="module-header">
+  <div class="module-tag"><div class="tag-dot" style="background:#a78bfa"></div><span style="color:#a78bfa">Analyse, Courbes & Masques</span></div>
+  <h2>⚠️ Ombres bouchées</h2>
+  <div class="subtitle">Le pic colle à gauche — les noirs ont absorbé les détails des zones sombres.</div>
+</div>
+
+<p style="margin-bottom:16px;">
+  <a href="{{ '/modules/histogramme/' | url }}" style="color:var(--muted);font-size:13px;">← Retour à l'index Histogramme</a>
+</p>
+
+<div class="editorial">
+
+<h3 class="section-title">Ce que tu vois</h3>
+
+<pre style="font-family:'DM Mono',monospace;font-size:13px;line-height:1.5;color:var(--muted);background:var(--bg2);padding:20px;border-radius:8px;border:1px solid var(--border);overflow-x:auto;">
+|▓
+|▓▓▓
+|▓▓▓▓▓▓
+|▓▓▓▓▓▓▓▓▓
+|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+|___________________|
+↑
+Clipping ombres</pre>
+
+<p>La courbe <strong>colle au bord gauche</strong> ou le déborde. Les pixels à valeur zéro (noir pur) se sont accumulés — toute information dans les zones les plus sombres de l'image est perdue.</p>
+
+<h3 class="section-title">Ce que ça signifie</h3>
+
+<p>Les ombres bouchées peuvent résulter de deux situations très différentes :</p>
+
+<table>
+  <tr>
+    <th>Cause</th>
+    <th>Signal supplémentaire</th>
+    <th>Nature du problème</th>
+  </tr>
+  <tr>
+    <td>Sous-exposition générale</td>
+    <td>Image globalement sombre, tons moyens bas</td>
+    <td>Problème technique — données manquantes</td>
+  </tr>
+  <tr>
+    <td>Contraste global trop fort</td>
+    <td>HLs correctes, creux brutal dans les ombres</td>
+    <td>Traitement excessif — données présentes mais écrasées</td>
+  </tr>
+  <tr>
+    <td>Low Key intentionnel</td>
+    <td>Image artistiquement sombre, texture visible</td>
+    <td>Intention — voir <a href="{{ '/modules/histogramme-lowkey/' | url }}" style="color:var(--accent)">Clé sombre</a></td>
+  </tr>
+</table>
+
+<div class="warning">
+  <div class="warning-label">Ombres bouchées vs clé sombre intentionnelle</div>
+  <p>La différence se voit dans les détails : si les zones sombres ont de la <strong>texture visible</strong> même dans les noirs, c'est une clé sombre réussie. Si le bord gauche est une paroi verticale sans aucune variation, les ombres sont bouchées — les données sont perdues.</p>
+</div>
+
+<h3 class="section-title">Actions dans ART — selon la cause</h3>
+
+<div class="workflow">
+
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(99,102,241,0.14);color:#6366f1">1</div>
+    <div class="step-content">
+      <h4>Ombres légèrement bouchées — traitement excessif</h4>
+      <p>Remonter le curseur <strong>Noirs (Blacks)</strong> — il relève le point noir sans toucher aux tons moyens. Quelques unités suffisent pour récupérer la texture dans les zones sombres.</p>
+    </div>
+  </div>
+
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(99,102,241,0.14);color:#6366f1">2</div>
+    <div class="step-content">
+      <h4>Ombres globalement sombres</h4>
+      <p>Utiliser le curseur <strong>Ombres (Shadows)</strong> dans l'Égaliseur Tonal — il agit spécifiquement sur les basses lumières sans dégrader les tons moyens ni les hautes lumières.</p>
+    </div>
+  </div>
+
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(239,68,68,0.14);color:#ef4444">3</div>
+    <div class="step-content">
+      <h4>Sous-exposition générale</h4>
+      <p>Corriger d'abord l'<strong>Exposition globale</strong>, puis affiner avec les ombres. Une sous-exposition sévère peut avoir généré du bruit significatif dans les zones sombres — même après récupération, le bruit reste.</p>
+    </div>
+  </div>
+
+</div>
+
+<h3 class="section-title">Le bruit dans les ombres — la contrainte incontournable</h3>
+
+<p>Ouvrir les ombres est possible en RAW, mais chaque incrément de récupération <strong>amplifie le bruit</strong> présent dans les données basses lumières. C'est une loi physique du capteur : moins il y a de lumière, moins il y a de signal, et plus le rapport signal/bruit se dégrade.</p>
+
+<div class="param-grid">
+  <div class="param-item">
+    <div class="param-name">Ordre conseillé</div>
+    <div class="param-desc">1. Déboucher les ombres → 2. Vérifier le bruit → 3. Appliquer le Lissage NR si nécessaire. Ne jamais réduire le bruit avant d'avoir fini les réglages d'exposition.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Limites acceptables</div>
+    <div class="param-desc">Récupérer 1 à 2 IL d'ombres donne généralement un résultat acceptable avec un bon module NR. Au-delà, le compromis bruit/détail devient difficile à gérer.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">ISO et capteur</div>
+    <div class="param-desc">La récupérabilité des ombres dépend directement de l'ISO de capture et de la qualité du capteur. Un ISO 3200 laisse beaucoup moins de marge qu'un ISO 400.</div>
+  </div>
+</div>
+
+<div class="tip">
+  <div class="tip-label">Technique — Masque de luminance pour cibler les ombres</div>
+  <p>Plutôt que d'agir globalement sur les ombres, un <a href="{{ '/modules/masques-parametrique/' | url }}" style="color:var(--accent)">masque paramétrique par luminance</a> permet de cibler précisément les pixels sombres et d'y appliquer séparément le débouchage et la réduction de bruit — sans affecter les tons clairs qui n'en ont pas besoin.</p>
+</div>
+
+</div>
+
+<div style="display:flex;gap:16px;margin-top:32px;flex-wrap:wrap;">
+  <a href="{{ '/modules/histogramme-hautes-lumieres/' | url }}" class="wf-card" style="--wf-color:#ef4444;flex:1;min-width:200px;text-decoration:none;">
+    <div style="font-size:12px;color:var(--muted);margin-bottom:6px;">← Cas précédent</div>
+    <div style="font-weight:600;color:var(--text)">⚠️ Hautes lumières cramées</div>
+  </a>
+  <a href="{{ '/modules/histogramme-dynamique/' | url }}" class="wf-card" style="--wf-color:#4a9eff;flex:1;min-width:200px;text-decoration:none;">
+    <div style="font-size:12px;color:var(--muted);margin-bottom:6px;">Cas suivant →</div>
+    <div style="font-weight:600;color:var(--text)">📷 Forte plage dynamique</div>
+  </a>
+</div>

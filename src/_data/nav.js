@@ -26,8 +26,9 @@ module.exports = [
     ]
   },
   {
-    section: "Courbes & Masques",
+    section: "Analyse, Courbes & Masques",
     items: [
+      { id: "histogramme", label: "L'Histogramme dans ART", url: "/modules/histogramme/", color: "#a78bfa" },
       { id: "courbes", label: "Maîtriser les Courbes", url: "/modules/courbes/", color: "#a78bfa" },
       { id: "masques", label: "Masques & Édition Locale", url: "/modules/masques/", color: "#a78bfa" }
     ]

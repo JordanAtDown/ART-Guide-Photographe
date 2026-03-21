@@ -1,0 +1,128 @@
+---
+layout: base.njk
+title: "Low Key — Clé sombre intentionnelle"
+permalink: '/modules/histogramme-lowkey/'
+---
+
+<div class="module-header">
+  <div class="module-tag"><div class="tag-dot" style="background:#a78bfa"></div><span style="color:#a78bfa">Analyse, Courbes & Masques</span></div>
+  <h2>🌑 Low Key — Clé sombre</h2>
+  <div class="subtitle">Masse à gauche — distinguer l'intention dramatique de la sous-exposition.</div>
+</div>
+
+<p style="margin-bottom:16px;">
+  <a href="{{ '/modules/histogramme/' | url }}" style="color:var(--muted);font-size:13px;">← Retour à l'index Histogramme</a>
+</p>
+
+<div class="editorial">
+
+<h3 class="section-title">Ce que tu vois</h3>
+
+<pre style="font-family:'DM Mono',monospace;font-size:13px;line-height:1.5;color:var(--muted);background:var(--bg2);padding:20px;border-radius:8px;border:1px solid var(--border);overflow-x:auto;">
+▓▓▓▓
+▓▓▓▓▓▓▓
+▓▓▓▓▓▓▓▓▓▓
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+|___________________|
+Masse à gauche     →</pre>
+
+<p>La majorité des pixels est <strong>concentrée dans les basses lumières</strong> — peu ou rien dans les tons moyens et hautes lumières. L'image est globalement sombre.</p>
+
+<h3 class="section-title">Deux réalités très différentes</h3>
+
+<p>Un histogramme tassé à gauche peut correspondre à deux situations opposées dans leur nature :</p>
+
+<table>
+  <tr>
+    <th></th>
+    <th>Low Key réussi</th>
+    <th>Sous-exposition à corriger</th>
+  </tr>
+  <tr>
+    <td><strong>Les ombres</strong></td>
+    <td>Riches en texture, différenciées</td>
+    <td>Bouchées, sans détail, aplaties</td>
+  </tr>
+  <tr>
+    <td><strong>Le bord gauche</strong></td>
+    <td>N'est pas une paroi verticale — la courbe décroît progressivement</td>
+    <td>Paroi verticale abrupte — clipping ombres</td>
+  </tr>
+  <tr>
+    <td><strong>L'intention</strong></td>
+    <td>Visible — portrait dramatique, ambiance nuit, chiaroscuro</td>
+    <td>Absente — image simplement trop sombre</td>
+  </tr>
+  <tr>
+    <td><strong>Les hautes lumières</strong></td>
+    <td>Souvent absentes ou très restreintes — c'est voulu</td>
+    <td>Présentes mais elles aussi trop basses</td>
+  </tr>
+</table>
+
+<div class="insight">
+  <div class="insight-label">La question décisive</div>
+  <p>Regarde les zones les plus sombres de l'image. Y a-t-il de la <strong>texture et des détails visibles</strong> dans ces noirs ? Si oui, c'est une clé sombre construite — les données sont là, juste sombres. Si les zones sombres sont uniformément noires, plates et sans variation, les ombres sont bouchées.</p>
+</div>
+
+<h3 class="section-title">Low Key réussi — travailler l'intention</h3>
+
+<p>Si l'image est bien une clé sombre intentionnelle, les ajustements visent à <strong>préserver et amplifier l'atmosphère</strong> plutôt qu'à "corriger" l'exposition :</p>
+
+<div class="param-grid">
+  <div class="param-item">
+    <div class="param-name">Noirs — valider sans écraser</div>
+    <div class="param-desc">Les noirs peuvent aller profond — mais veiller à ce que les ombres riches gardent leur texture. Un léger ajustement du curseur Noirs vers le haut peut révéler de la matière sans trahir l'ambiance.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Contraste local — la clé</div>
+    <div class="param-desc">Le Contraste Local agit sur les microcontrastes dans les zones sombres sans toucher à la valeur globale d'exposition. Il "réveille" les détails dans les ombres sans les déboucher.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Grain — ami du Low Key</div>
+    <div class="param-desc">Un grain léger dans les ombres est souvent bénéfique en clé sombre — il empêche les aplats de paraître artificiels et ancre l'image dans une esthétique photographique.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Color grading — froids ou neutres</div>
+    <div class="param-desc">Les ombres bleues ou cyan renforcent une ambiance nocturne ou froide. Les ombres chaudes (brun, orange) évoquent la bougie, l'intimité. Un virage partiel dans les ombres via les Color Wheels structure l'atmosphère.</div>
+  </div>
+</div>
+
+<h3 class="section-title">Sous-exposition à corriger</h3>
+
+<p>Si l'histogramme révèle une sous-exposition non intentionnelle, la récupération suit le même chemin que les ombres bouchées — avec les mêmes contraintes sur le bruit :</p>
+
+<div class="workflow">
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(167,139,250,0.14);color:#a78bfa">1</div>
+    <div class="step-content">
+      <h4>Corriger l'Exposition globale d'abord</h4>
+      <p>Remonter l'Exposition jusqu'à ce que les tons moyens semblent naturels. Vérifier l'histogramme — la courbe doit se déplacer vers le centre.</p>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(167,139,250,0.14);color:#a78bfa">2</div>
+    <div class="step-content">
+      <h4>Déboucher les ombres si nécessaire</h4>
+      <p>Remonter les Ombres dans l'Égaliseur Tonal. Vérifier la montée de bruit — appliquer le Lissage NR si nécessaire.</p>
+    </div>
+  </div>
+</div>
+
+<div class="tip">
+  <div class="tip-label">Clés sombres et exports</div>
+  <p>Les images en clé sombre sont très sensibles aux variations d'affichage — un écran trop lumineux ou mal calibré peut masquer des zones complètement noires qui s'avèrent bouchées sur un autre écran. Vérifier avec l'histogramme et les zébrures d'ombres avant l'export. En impression, les noirs ont tendance à encore s'assombrir selon le support.</p>
+</div>
+
+</div>
+
+<div style="display:flex;gap:16px;margin-top:32px;flex-wrap:wrap;">
+  <a href="{{ '/modules/histogramme-contraste/' | url }}" class="wf-card" style="--wf-color:#6b7280;flex:1;min-width:200px;text-decoration:none;">
+    <div style="font-size:12px;color:var(--muted);margin-bottom:6px;">← Cas précédent</div>
+    <div style="font-weight:600;color:var(--text)">🌫️ Image molle</div>
+  </a>
+  <a href="{{ '/modules/histogramme-highkey/' | url }}" class="wf-card" style="--wf-color:#fbbf24;flex:1;min-width:200px;text-decoration:none;">
+    <div style="font-size:12px;color:var(--muted);margin-bottom:6px;">Cas suivant →</div>
+    <div style="font-weight:600;color:var(--text)">☀️ Clé claire (High Key)</div>
+  </a>
+</div>

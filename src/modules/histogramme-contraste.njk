@@ -1,0 +1,141 @@
+---
+layout: base.njk
+title: "Image molle — Histogramme peu contrasté"
+permalink: '/modules/histogramme-contraste/'
+---
+
+<div class="module-header">
+  <div class="module-tag"><div class="tag-dot" style="background:#a78bfa"></div><span style="color:#a78bfa">Analyse, Courbes & Masques</span></div>
+  <h2>🌫️ Image molle — peu contrastée</h2>
+  <div class="subtitle">Tout au centre — la plage tonale n'est pas utilisée, l'image manque de corps.</div>
+</div>
+
+<p style="margin-bottom:16px;">
+  <a href="{{ '/modules/histogramme/' | url }}" style="color:var(--muted);font-size:13px;">← Retour à l'index Histogramme</a>
+</p>
+
+<div class="editorial">
+
+<h3 class="section-title">Ce que tu vois</h3>
+
+<pre style="font-family:'DM Mono',monospace;font-size:13px;line-height:1.5;color:var(--muted);background:var(--bg2);padding:20px;border-radius:8px;border:1px solid var(--border);overflow-x:auto;">
+      ▓▓▓▓▓▓▓▓▓
+    ▓▓▓▓▓▓▓▓▓▓▓▓▓
+  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+|___________________|
+      Bande centrale</pre>
+
+<p>Tous les pixels sont <strong>concentrés dans une bande centrale</strong>, sans atteindre les bords gauche ni droit. Ni noirs profonds, ni blancs définis. L'image occupe seulement une fraction de la plage tonale disponible.</p>
+
+<h3 class="section-title">Scènes typiques</h3>
+
+<div class="param-grid">
+  <div class="param-item">
+    <div class="param-name">Brume et brouillard</div>
+    <div class="param-desc">L'atmosphère diffuse la lumière et "remonte" les noirs. Impossible d'avoir de vrais noirs dans une scène brumeuse — c'est la physique.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Temps couvert uniforme</div>
+    <div class="param-desc">Ciel blanc, lumière plate, pas d'ombres portées. La scène manque naturellement de plage dynamique.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">RAW non développé</div>
+    <div class="param-desc">Un fichier RAW brut sans profil d'entrée peut avoir un histogramme aplati — c'est normal, le profil d'entrée est censé l'étirer.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Scène intrinsèquement plate</div>
+    <div class="param-desc">Certaines scènes (intérieur avec lumière douce et diffuse, studio avec fond gris) ont une faible dynamique naturelle.</div>
+  </div>
+</div>
+
+<div class="insight">
+  <div class="insight-label">La question à se poser d'abord</div>
+  <p>Est-ce que l'image <em>devrait</em> avoir du contraste, ou est-ce que sa mollesse est l'essence de la scène ? Une photo de brume au lever du soleil peut et doit rester "douce". Un portrait en studio raté peut nécessiter d'être étiré. L'intention prime sur la technique.</p>
+</div>
+
+<h3 class="section-title">Actions dans ART — étirer la plage tonale</h3>
+
+<div class="workflow">
+
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(107,114,128,0.14);color:#9ca3af">1</div>
+    <div class="step-content">
+      <h4>Ancrer les noirs — curseur Noirs (Blacks)</h4>
+      <p>Baisser les Noirs pour "poser" un point noir réel. La courbe va se déplacer vers la gauche. Aller jusqu'à ce que les premières zones sombres touchent le bord gauche sans y coller.</p>
+    </div>
+  </div>
+
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(107,114,128,0.14);color:#9ca3af">2</div>
+    <div class="step-content">
+      <h4>Ouvrir les blancs — curseur Blancs (Whites)</h4>
+      <p>Monter les Blancs pour étirer les hautes lumières jusqu'au bord droit. La combinaison Noirs bas + Blancs hauts donne une courbe qui utilise toute la plage disponible.</p>
+    </div>
+  </div>
+
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(107,114,128,0.14);color:#9ca3af">3</div>
+    <div class="step-content">
+      <h4>Affiner avec la courbe tonale en S légère</h4>
+      <p>Une fois les extrêmes ancrés, une légère S-curve dans les courbes tonales renforce le contraste des tons moyens sans toucher aux extrêmes. C'est l'outil le plus naturel pour ajouter du "corps" à une image.</p>
+    </div>
+  </div>
+
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(52,211,153,0.14);color:#34d399">4</div>
+    <div class="step-content">
+      <h4>Cas particulier — voile atmosphérique réel</h4>
+      <p>Si la mollesse est causée par du brouillard, de la brume ou de la pollution atmosphérique (voile visible à l'horizon), tester le module <a href="{{ '/modules/eliminationbrume/' | url }}" style="color:var(--accent)">Élimination de la Brume</a>. Il cible spécifiquement ce type de diffusion sans dégrader le reste.</p>
+    </div>
+  </div>
+
+</div>
+
+<h3 class="section-title">Aller trop loin — le piège du sur-contraste</h3>
+
+<div class="warning">
+  <div class="warning-label">Le sur-contraste révèle les limites du capteur</div>
+  <p>En étirant trop une plage tonale initialement étroite, tu amplifie aussi tout ce qu'elle contenait de défauts : bruit dans les ombres, artefacts de compression, transitions de couleur abruptes. Si l'image semble "craquer" ou "griller" après les réglages de contraste, c'est que la plage d'origine ne contenait pas suffisamment d'information pour supporter cette amplitude.</p>
+</div>
+
+<table>
+  <tr>
+    <th>Action</th>
+    <th>Effet sur l'histogramme</th>
+    <th>Risque associé</th>
+  </tr>
+  <tr>
+    <td>Baisser les Noirs</td>
+    <td>La partie gauche s'étend, ancre les ombres</td>
+    <td>Bruit dans les zones débouchées</td>
+  </tr>
+  <tr>
+    <td>Monter les Blancs</td>
+    <td>La partie droite s'étend, ouvre les HLs</td>
+    <td>Clipping si on va trop loin</td>
+  </tr>
+  <tr>
+    <td>Courbe en S</td>
+    <td>Compression aux extrêmes, étirement au centre</td>
+    <td>Écrasement des ombres et HLs si trop prononcée</td>
+  </tr>
+  <tr>
+    <td>Élimination de Brume</td>
+    <td>Étire toute la plage de manière adaptative</td>
+    <td>Artefacts sur les ciels ou zones uniformes si trop fort</td>
+  </tr>
+</table>
+
+</div>
+
+<div style="display:flex;gap:16px;margin-top:32px;flex-wrap:wrap;">
+  <a href="{{ '/modules/histogramme-dynamique/' | url }}" class="wf-card" style="--wf-color:#4a9eff;flex:1;min-width:200px;text-decoration:none;">
+    <div style="font-size:12px;color:var(--muted);margin-bottom:6px;">← Cas précédent</div>
+    <div style="font-weight:600;color:var(--text)">📷 Forte plage dynamique</div>
+  </a>
+  <a href="{{ '/modules/histogramme-lowkey/' | url }}" class="wf-card" style="--wf-color:#a78bfa;flex:1;min-width:200px;text-decoration:none;">
+    <div style="font-size:12px;color:var(--muted);margin-bottom:6px;">Cas suivant →</div>
+    <div style="font-weight:600;color:var(--text)">🌑 Clé sombre (Low Key)</div>
+  </a>
+</div>

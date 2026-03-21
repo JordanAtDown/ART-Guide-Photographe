@@ -1,0 +1,110 @@
+---
+layout: base.njk
+title: "Histogramme équilibré — Exposition correcte"
+permalink: '/modules/histogramme-equilibre/'
+---
+
+<div class="module-header">
+  <div class="module-tag"><div class="tag-dot" style="background:#a78bfa"></div><span style="color:#a78bfa">Analyse, Courbes & Masques</span></div>
+  <h2>✅ Histogramme équilibré</h2>
+  <div class="subtitle">Exposition correcte — la matière est là, l'intention peut s'exprimer.</div>
+</div>
+
+<p style="margin-bottom:16px;">
+  <a href="{{ '/modules/histogramme/' | url }}" style="color:var(--muted);font-size:13px;">← Retour à l'index Histogramme</a>
+</p>
+
+<div class="editorial">
+
+<h3 class="section-title">Ce que tu vois</h3>
+
+<pre style="font-family:'DM Mono',monospace;font-size:13px;line-height:1.5;color:var(--muted);background:var(--bg2);padding:20px;border-radius:8px;border:1px solid var(--border);overflow-x:auto;">
+        ▓▓
+      ▓▓▓▓▓▓
+    ▓▓▓▓▓▓▓▓▓▓
+  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+|___________________|
+Noirs          Blancs</pre>
+
+<p>La courbe forme une <strong>colline centrée</strong>, sans coller aux bords gauche ou droit. Des pixels existent à toutes les valeurs de luminosité — ombres, tons moyens, hautes lumières. Les trois canaux RVB sont approximativement superposés.</p>
+
+<h3 class="section-title">Ce que ça signifie</h3>
+
+<p>L'exposition est <strong>techniquement solide</strong>. Le capteur a enregistré des informations sur toute la plage tonale de la scène. Aucun détail n'est irrémédiablement perdu.</p>
+
+<div class="insight">
+  <div class="insight-label">Ce que ça ne signifie pas</div>
+  <p>Un histogramme équilibré n'est pas une fin en soi. Il indique que la <em>matière brute est présente</em> — à toi de décider comment la façonner selon ton intention. Un portrait dramatique peut légitimement finir avec un histogramme décalé à gauche. Un paysage haut-clé peut coller vers la droite. L'équilibre est un point de départ, pas une destination.</p>
+</div>
+
+<h3 class="section-title">Que faire dans ART</h3>
+
+<p>Avec une exposition équilibrée, le développement peut se concentrer sur l'intention artistique plutôt que sur la récupération technique :</p>
+
+<div class="param-grid">
+  <div class="param-item">
+    <div class="param-name">Courbes tonales</div>
+    <div class="param-desc">Ajouter une légère S-curve pour renforcer le contraste sans perdre de détails aux extrêmes. Les données sont présentes — profite-en.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Égaliseur Tonal</div>
+    <div class="param-desc">Travailler séparément les ombres et les hautes lumières pour guider le regard vers le sujet principal.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Log Tone Mapping</div>
+    <div class="param-desc">Si la scène a de la dynamique malgré l'équilibre global, le Log TM permet d'affiner la répartition sans forcer sur les curseurs globaux.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Color grading</div>
+    <div class="param-desc">Données présentes dans les ombres ET les HLs — le split toning (ombres froides, HLs chaudes) fonctionne avec toute son amplitude.</div>
+  </div>
+</div>
+
+<div class="tip">
+  <div class="tip-label">Bonne pratique</div>
+  <p>Avant d'agir sur les curseurs, confirme visuellement que l'image correspond à l'histogramme : est-ce que les zones sombres ont de la texture ? Les hautes lumières gardent-elles du détail ? Un histogramme équilibré avec des zones visuellement problématiques peut indiquer un contraste très localisé invisible à l'échelle globale.</p>
+</div>
+
+<h3 class="section-title">Variantes à surveiller</h3>
+
+<table>
+  <tr>
+    <th>Variante</th>
+    <th>Signal</th>
+    <th>Action</th>
+  </tr>
+  <tr>
+    <td>Courbe légèrement décalée à droite</td>
+    <td>ETTR — exposition optimisée pour le RAW</td>
+    <td>Parfait. Baisser légèrement l'Exposition si nécessaire</td>
+  </tr>
+  <tr>
+    <td>Canaux RVB légèrement décalés</td>
+    <td>Légère dominante colorée</td>
+    <td>Affiner la Balance des Blancs</td>
+  </tr>
+  <tr>
+    <td>Colline très plate, étalée</td>
+    <td>Bonne dynamique, bon signal</td>
+    <td>Ajouter du contraste via courbe en S</td>
+  </tr>
+  <tr>
+    <td>Pic très étroit au centre</td>
+    <td>Scène à faible dynamique (brume, ciel couvert)</td>
+    <td>Voir <a href="{{ '/modules/histogramme-contraste/' | url }}" style="color:var(--accent)">Image molle</a></td>
+  </tr>
+</table>
+
+</div>
+
+<div style="display:flex;gap:16px;margin-top:32px;flex-wrap:wrap;">
+  <a href="{{ '/modules/histogramme/' | url }}" class="wf-card" style="--wf-color:#6b7280;flex:1;min-width:200px;text-decoration:none;">
+    <div style="font-size:12px;color:var(--muted);margin-bottom:6px;">← Index</div>
+    <div style="font-weight:600;color:var(--text)">Retour à l'Histogramme</div>
+  </a>
+  <a href="{{ '/modules/histogramme-hautes-lumieres/' | url }}" class="wf-card" style="--wf-color:#ef4444;flex:1;min-width:200px;text-decoration:none;">
+    <div style="font-size:12px;color:var(--muted);margin-bottom:6px;">Cas suivant →</div>
+    <div style="font-weight:600;color:var(--text)">⚠️ Hautes lumières cramées</div>
+  </a>
+</div>

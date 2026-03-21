@@ -1,0 +1,149 @@
+---
+layout: base.njk
+title: "High Key — Clé claire intentionnelle"
+permalink: '/modules/histogramme-highkey/'
+---
+
+<div class="module-header">
+  <div class="module-tag"><div class="tag-dot" style="background:#a78bfa"></div><span style="color:#a78bfa">Analyse, Courbes & Masques</span></div>
+  <h2>☀️ High Key — Clé claire</h2>
+  <div class="subtitle">Masse à droite — distinguer le High Key maîtrisé de la surexposition.</div>
+</div>
+
+<p style="margin-bottom:16px;">
+  <a href="{{ '/modules/histogramme/' | url }}" style="color:var(--muted);font-size:13px;">← Retour à l'index Histogramme</a>
+</p>
+
+<div class="editorial">
+
+<h3 class="section-title">Ce que tu vois</h3>
+
+<pre style="font-family:'DM Mono',monospace;font-size:13px;line-height:1.5;color:var(--muted);background:var(--bg2);padding:20px;border-radius:8px;border:1px solid var(--border);overflow-x:auto;">
+                  ▓▓▓▓
+            ▓▓▓▓▓▓▓▓▓▓
+        ▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+|___________________|
+←         Masse à droite</pre>
+
+<p>La majorité des pixels est <strong>concentrée dans les hautes lumières</strong> — peu de valeurs sombres. L'image est globalement lumineuse, claire, aérée.</p>
+
+<h3 class="section-title">Deux réalités très différentes</h3>
+
+<table>
+  <tr>
+    <th></th>
+    <th>High Key maîtrisé</th>
+    <th>Surexposition à corriger</th>
+  </tr>
+  <tr>
+    <td><strong>Le bord droit</strong></td>
+    <td>La courbe approche sans toucher — pas de clipping</td>
+    <td>Paroi verticale contre le bord — clipping HLs</td>
+  </tr>
+  <tr>
+    <td><strong>Les hautes lumières</strong></td>
+    <td>Riches, subtiles, avec des dégradés fins et du détail</td>
+    <td>Brûlées, blanches pures, sans texture</td>
+  </tr>
+  <tr>
+    <td><strong>L'intention</strong></td>
+    <td>Visible — portrait lumineux, neige, ambiance printanière</td>
+    <td>Absente — image simplement trop claire</td>
+  </tr>
+  <tr>
+    <td><strong>Les ombres</strong></td>
+    <td>Absentes ou minimes — c'est voulu</td>
+    <td>Présentes mais trop claires elles aussi</td>
+  </tr>
+</table>
+
+<div class="insight">
+  <div class="insight-label">La vérification décisive</div>
+  <p>Active les <strong>indicateurs de clipping hautes lumières dans ART</strong>. Si les zones les plus claires de l'image sont signalées comme clippées, c'est de la surexposition. Si les zones les plus claires ont encore des dégradés subtils visibles — et que l'indicateur reste muet — c'est du High Key réussi.</p>
+</div>
+
+<h3 class="section-title">High Key réussi — travailler l'intention</h3>
+
+<p>Si l'image est bien une clé claire intentionnelle, les ajustements préservent la légèreté tout en gardant les détails dans les hautes lumières :</p>
+
+<div class="param-grid">
+  <div class="param-item">
+    <div class="param-name">Hautes lumières — surveiller le clipping</div>
+    <div class="param-desc">Le curseur Hautes Lumières (Highlights) permet d'affiner sans laisser cramer. Aller jusqu'au bord sans y coller — l'espace entre la courbe et le bord droit, c'est ton marge de manœuvre.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Noirs — ajouter juste assez de présence</div>
+    <div class="param-desc">Un léger ancrage des noirs (même minimal) empêche l'image de paraître "sans air" ou lavée. Une touche de noir quelque part guide l'œil et donne de la profondeur à la luminosité générale.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Balance des Blancs — température neutre ou légèrement chaude</div>
+    <div class="param-desc">Le High Key de portrait fonctionne bien avec une balance neutre à légèrement chaude. Éviter le froid qui peut rendre l'image clinique.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Saturation — retenue</div>
+    <div class="param-desc">Dans un contexte High Key, une saturation forte risque de faire clipper les canaux les plus chargés. Préférer la Vibrance qui agit sur les couleurs peu saturées en épargnant les hautes lumières déjà lumineuses.</div>
+  </div>
+</div>
+
+<h3 class="section-title">Surexposition à corriger</h3>
+
+<div class="workflow">
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(251,191,36,0.14);color:#fbbf24">1</div>
+    <div class="step-content">
+      <h4>Baisser l'Exposition globale</h4>
+      <p>Première action — corriger l'exposition générale. Vérifier que les zones importantes (sujet, visage, texture) reviennent dans la plage.</p>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(251,191,36,0.14);color:#fbbf24">2</div>
+    <div class="step-content">
+      <h4>Récupérer les HLs si nécessaire</h4>
+      <p>Si le clipping est modéré (1-2 canaux), le curseur Hautes Lumières peut récupérer de la matière. Pour un clipping sévère sur tous les canaux, les données RAW sont absentes — voir <a href="{{ '/modules/histogramme-hautes-lumieres/' | url }}" style="color:var(--accent)">Hautes lumières cramées</a>.</p>
+    </div>
+  </div>
+</div>
+
+<h3 class="section-title">Cas typiques de High Key</h3>
+
+<table>
+  <tr>
+    <th>Scène</th>
+    <th>Particularité</th>
+    <th>Point de vigilance</th>
+  </tr>
+  <tr>
+    <td>Portrait blanc sur fond blanc</td>
+    <td>Peu de contraste entre sujet et fond — l'éclairage doit séparer les deux</td>
+    <td>Texture de la peau peut disparaître si les HLs clippent</td>
+  </tr>
+  <tr>
+    <td>Neige, plages blanches</td>
+    <td>L'appareil sous-expose souvent automatiquement (gris moyen)</td>
+    <td>Surcompenser à la prise de vue pour exposer correctement</td>
+  </tr>
+  <tr>
+    <td>Product shot fond blanc</td>
+    <td>Le fond doit clipper (blanc pur) mais le produit ne doit pas</td>
+    <td>Surveiller les canaux du produit séparément du fond</td>
+  </tr>
+</table>
+
+<div class="tip">
+  <div class="tip-label">High Key et impression</div>
+  <p>Sur papier, les hautes lumières qui paraissent légères à l'écran peuvent s'imprimer très proches du blanc du papier — et perdre toute subtilité. Prévoir une légère correction si la destination est l'impression : baisser légèrement les HLs par rapport au rendu écran.</p>
+</div>
+
+</div>
+
+<div style="display:flex;gap:16px;margin-top:32px;flex-wrap:wrap;">
+  <a href="{{ '/modules/histogramme-lowkey/' | url }}" class="wf-card" style="--wf-color:#a78bfa;flex:1;min-width:200px;text-decoration:none;">
+    <div style="font-size:12px;color:var(--muted);margin-bottom:6px;">← Cas précédent</div>
+    <div style="font-weight:600;color:var(--text)">🌑 Clé sombre (Low Key)</div>
+  </a>
+  <a href="{{ '/modules/histogramme-dominante/' | url }}" class="wf-card" style="--wf-color:#f59e0b;flex:1;min-width:200px;text-decoration:none;">
+    <div style="font-size:12px;color:var(--muted);margin-bottom:6px;">Cas suivant →</div>
+    <div style="font-weight:600;color:var(--text)">🎨 Canaux RVB décalés</div>
+  </a>
+</div>

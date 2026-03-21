@@ -1,0 +1,337 @@
+---
+layout: base.njk
+title: "L'Histogramme dans ART"
+permalink: '/modules/histogramme/'
+---
+
+<div class="module-header">
+  <div class="module-tag"><div class="tag-dot" style="background:#a78bfa"></div><span style="color:#a78bfa">Analyse, Courbes & Masques</span></div>
+  <h2>L'Histogramme dans ART</h2>
+  <div class="subtitle">Lire et utiliser l'outil de mesure le plus fiable du développement RAW.</div>
+</div>
+
+<p style="font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:4px;">
+  L'histogramme dit la vérité là où l'écran ment. Un moniteur mal calibré, une pièce trop lumineuse, une fatigue visuelle — l'histogramme, lui, ne se trompe pas. Dans ART, il reflète l'état réel de l'image après tous les modules actifs, dans l'espace de sortie configuré. Apprendre à le lire, c'est apprendre à <strong>diagnostiquer avant d'agir</strong>.
+</p>
+
+<div class="toc">
+  <div class="toc-title">Sur cette page</div>
+  <ol>
+    <li><a href="#anatomie">Anatomie de l'histogramme dans ART</a></li>
+    <li><a href="#cas">Les cas à diagnostiquer — choisir une situation</a></li>
+    <li><a href="#pendant-developpement">Utiliser l'histogramme pendant le développement</a></li>
+    <li><a href="#ettr">Exposer à droite — la technique du RAW</a></li>
+    <li><a href="#limites">Ce que l'histogramme ne dit pas</a></li>
+    <li><a href="#resume">Résumé — Diagnostic rapide</a></li>
+  </ol>
+</div>
+
+<div class="editorial">
+
+<!-- ═══════════════════════════════════════════════ -->
+<h3 class="section-title" id="anatomie">Anatomie de l'histogramme dans ART</h3>
+
+<p>L'histogramme représente la <strong>distribution des pixels selon leur luminosité</strong>, de gauche (noir pur, 0) à droite (blanc pur, 255 ou 1.0). Plus une colonne est haute, plus il y a de pixels à cette valeur de luminosité.</p>
+
+<p>Dans ART, l'histogramme reflète le <strong>RAW réel</strong>, pas un aperçu JPEG. C'est crucial : tu lis l'image telle qu'elle est encodée, pas comme le boîtier l'a interprétée.</p>
+
+<h4>Les trois courbes superposées</h4>
+
+<p>ART affiche par défaut <strong>trois courbes colorées</strong> superposées :</p>
+
+<table>
+  <tr>
+    <th>Courbe</th>
+    <th>Ce qu'elle représente</th>
+  </tr>
+  <tr>
+    <td><strong style="color:#e87070">Rouge</strong></td>
+    <td>Canal Rouge</td>
+  </tr>
+  <tr>
+    <td><strong style="color:#70c070">Verte</strong></td>
+    <td>Canal Vert</td>
+  </tr>
+  <tr>
+    <td><strong style="color:var(--muted)">Grise remplie</strong></td>
+    <td>Luminance globale (luma)</td>
+  </tr>
+</table>
+
+<p>La courbe verte tend à être la plus haute — l'œil humain est plus sensible au vert, et les capteurs allouent plus de photosites au canal vert (pattern Bayer). C'est normal.</p>
+
+<div class="insight">
+  <div class="insight-label">Signal d'alerte — canaux décalés</div>
+  <p>Quand les trois courbes ne sont pas superposées mais <strong>décalées entre elles</strong>, c'est le signe d'une dominante colorée. Action immédiate : <a href="{{ '/modules/balanceblancs/' | url }}" style="color:var(--accent)">Balance des Blancs</a>. Ne jamais corriger une dominante de balance des blancs dans Affinity après coup.</p>
+</div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<h3 class="section-title" id="cas">Les cas à diagnostiquer</h3>
+
+<p style="font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:16px;">
+  Chaque situation produit une forme caractéristique. Identifie ce que tu vois, puis ouvre la page du cas correspondant pour le diagnostic complet et les actions dans ART.
+</p>
+
+<div class="wf-grid">
+
+  <a class="wf-card" href="{{ '/modules/histogramme-equilibre/' | url }}" style="--wf-color: #34d399">
+    <div class="wf-card-top">
+      <span class="wf-icon">✅</span>
+      <span class="wf-section-tag" style="color:#34d399">Exposition correcte</span>
+    </div>
+    <h3>Histogramme équilibré</h3>
+    <p class="wf-enjeu">La colline est centrée, sans coller aux bords. Détails présents dans les ombres et les hautes lumières. Point de départ idéal.</p>
+    <div class="wf-chips">
+      <span class="wf-chip">Exposition solide</span>
+      <span class="wf-chip">Matière présente</span>
+      <span class="wf-chip">Affinage libre</span>
+    </div>
+    <div class="wf-card-cta">Voir le cas →</div>
+  </a>
+
+  <a class="wf-card" href="{{ '/modules/histogramme-hautes-lumieres/' | url }}" style="--wf-color: #ef4444">
+    <div class="wf-card-top">
+      <span class="wf-icon">⚠️</span>
+      <span class="wf-section-tag" style="color:#ef4444">Clipping HLs</span>
+    </div>
+    <h3>Hautes lumières cramées</h3>
+    <p class="wf-enjeu">La courbe colle ou déborde par la droite. Les pixels au-delà du bord sont brûlés — l'information est perdue ou partiellement récupérable depuis le RAW.</p>
+    <div class="wf-chips">
+      <span class="wf-chip">Baisser l'Exposition</span>
+      <span class="wf-chip">Log Tone Mapping</span>
+      <span class="wf-chip">Récupération HLs</span>
+    </div>
+    <div class="wf-card-cta">Voir le cas →</div>
+  </a>
+
+  <a class="wf-card" href="{{ '/modules/histogramme-ombres/' | url }}" style="--wf-color: #6366f1">
+    <div class="wf-card-top">
+      <span class="wf-icon">⚠️</span>
+      <span class="wf-section-tag" style="color:#6366f1">Clipping ombres</span>
+    </div>
+    <h3>Ombres bouchées</h3>
+    <p class="wf-enjeu">La courbe colle ou déborde par la gauche. Plus de détail dans les zones sombres. Le bruit se cache souvent juste avant ce point.</p>
+    <div class="wf-chips">
+      <span class="wf-chip">Remonter Noirs</span>
+      <span class="wf-chip">Remonter Ombres</span>
+      <span class="wf-chip">Lissage NR après</span>
+    </div>
+    <div class="wf-card-cta">Voir le cas →</div>
+  </a>
+
+  <a class="wf-card" href="{{ '/modules/histogramme-dynamique/' | url }}" style="--wf-color: #4a9eff">
+    <div class="wf-card-top">
+      <span class="wf-icon">📷</span>
+      <span class="wf-section-tag" style="color:#4a9eff">Forte dynamique</span>
+    </div>
+    <h3>Forte plage dynamique</h3>
+    <p class="wf-enjeu">Deux bosses aux extrêmes, creux au centre. Contre-jour, intérieur + fenêtre, paysage ciel + sol — la scène dépasse la plage dynamique confortable.</p>
+    <div class="wf-chips">
+      <span class="wf-chip">Log Tone Mapping</span>
+      <span class="wf-chip">Égaliseur Tonal</span>
+      <span class="wf-chip">Masques</span>
+    </div>
+    <div class="wf-card-cta">Voir le cas →</div>
+  </a>
+
+  <a class="wf-card" href="{{ '/modules/histogramme-contraste/' | url }}" style="--wf-color: #6b7280">
+    <div class="wf-card-top">
+      <span class="wf-icon">🌫️</span>
+      <span class="wf-section-tag" style="color:#9ca3af">Peu contrasté</span>
+    </div>
+    <h3>Image molle — manque de contraste</h3>
+    <p class="wf-enjeu">Tous les pixels dans une bande centrale, sans atteindre les bords. Brume, brouillard, temps couvert, RAW non développé.</p>
+    <div class="wf-chips">
+      <span class="wf-chip">Baisser les Noirs</span>
+      <span class="wf-chip">Monter les Blancs</span>
+      <span class="wf-chip">Courbe en S</span>
+    </div>
+    <div class="wf-card-cta">Voir le cas →</div>
+  </a>
+
+  <a class="wf-card" href="{{ '/modules/histogramme-lowkey/' | url }}" style="--wf-color: #a78bfa">
+    <div class="wf-card-top">
+      <span class="wf-icon">🌑</span>
+      <span class="wf-section-tag" style="color:#a78bfa">Clé sombre</span>
+    </div>
+    <h3>Low Key — Clé sombre</h3>
+    <p class="wf-enjeu">Masse des pixels à gauche, peu ou rien à droite. Portrait dramatique, nuit, ambiance sombre — intentionnel ou sous-exposition à corriger.</p>
+    <div class="wf-chips">
+      <span class="wf-chip">Distinguer intention</span>
+      <span class="wf-chip">vs sous-exposition</span>
+      <span class="wf-chip">Ombres texturées</span>
+    </div>
+    <div class="wf-card-cta">Voir le cas →</div>
+  </a>
+
+  <a class="wf-card" href="{{ '/modules/histogramme-highkey/' | url }}" style="--wf-color: #fbbf24">
+    <div class="wf-card-top">
+      <span class="wf-icon">☀️</span>
+      <span class="wf-section-tag" style="color:#fbbf24">Clé claire</span>
+    </div>
+    <h3>High Key — Clé claire</h3>
+    <p class="wf-enjeu">Masse des pixels à droite, peu de valeurs sombres. Portrait blanc sur blanc, neige, fond clair — intentionnel ou surexposition à corriger.</p>
+    <div class="wf-chips">
+      <span class="wf-chip">Vérifier le clipping</span>
+      <span class="wf-chip">High Key maîtrisé</span>
+      <span class="wf-chip">vs surexposition</span>
+    </div>
+    <div class="wf-card-cta">Voir le cas →</div>
+  </a>
+
+  <a class="wf-card" href="{{ '/modules/histogramme-dominante/' | url }}" style="--wf-color: #f59e0b">
+    <div class="wf-card-top">
+      <span class="wf-icon">🎨</span>
+      <span class="wf-section-tag" style="color:#f59e0b">Dominante colorée</span>
+    </div>
+    <h3>Canaux RVB décalés</h3>
+    <p class="wf-enjeu">Les courbes rouge, verte, bleue ne se superposent pas. Dominante colorée révélée — balance des blancs incorrecte ou intention colorimétrique à valider.</p>
+    <div class="wf-chips">
+      <span class="wf-chip">Balance des Blancs</span>
+      <span class="wf-chip">Température</span>
+      <span class="wf-chip">Teinte</span>
+    </div>
+    <div class="wf-card-cta">Voir le cas →</div>
+  </a>
+
+</div>
+
+<div class="editorial">
+
+<!-- ═══════════════════════════════════════════════ -->
+<h3 class="section-title" id="pendant-developpement">Utiliser l'histogramme pendant le développement</h3>
+
+<p>L'histogramme n'est pas un outil statique. Il évolue à chaque réglage. Le lire à chaque étape du pipeline évite les corrections aveugles.</p>
+
+<div class="workflow">
+
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(74,158,255,0.14);color:#4a9eff">1</div>
+    <div class="step-content">
+      <h4>À l'ouverture du RAW — diagnostic initial</h4>
+      <p>Y a-t-il du clipping ? Où ? Quelle est la forme générale — dynamique faible, forte, équilibrée ? Les canaux RVB sont-ils superposés (BB correcte) ou décalés (dominante à corriger) ?</p>
+    </div>
+  </div>
+
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(74,158,255,0.14);color:#4a9eff">2</div>
+    <div class="step-content">
+      <h4>Pendant l'exposition et la dynamique</h4>
+      <p>Corriger l'Exposition déplace la courbe gauche/droite. Le Log Tone Mapping compresse les extrêmes — la courbe s'étire vers le centre. Surveiller que rien ne clippe.</p>
+    </div>
+  </div>
+
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(245,158,11,0.14);color:#f59e0b">3</div>
+    <div class="step-content">
+      <h4>Pendant le color grading</h4>
+      <p>Une saturation forte peut faire clipper un canal seul. Un virage partiel fort peut créer une dominante dans les HLs ou les ombres. Surveiller les canaux RVB séparément.</p>
+    </div>
+  </div>
+
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(52,211,153,0.14);color:#34d399">4</div>
+    <div class="step-content">
+      <h4>Avant l'export — validation finale</h4>
+      <p>Aucun canal ne clippe (sauf intention). Les noirs ont de la présence sans être bouchés. La distribution correspond à l'intention artistique de l'image.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<h3 class="section-title" id="ettr">Exposer à droite — la technique du RAW</h3>
+
+<p>En photographie numérique, il est conseillé d'<strong>exposer légèrement à droite</strong> (sans cramer) : cela maximise les informations captées dans les ombres et réduit le bruit numérique dans les zones sombres. Au développement, tu peux ensuite baisser l'exposition sans perdre de qualité.</p>
+
+<p>C'est l'inverse de l'argentique (où surexposer grille le négatif). En numérique, <strong>les ombres sont plus bruyantes que les hautes lumières récupérées.</strong></p>
+
+<div class="insight">
+  <div class="insight-label">ETTR en pratique</div>
+  <p>À la prise de vue, pousse l'exposition jusqu'à ce que la courbe approche le bord droit — sans le toucher. Au développement ART, baisse l'Exposition globale pour retrouver les tons voulus. Tu auras maximisé le signal utile capté par le capteur.</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<h3 class="section-title" id="limites">Ce que l'histogramme ne dit pas</h3>
+
+<table>
+  <tr>
+    <th>Ce qu'il ignore</th>
+    <th>Ce que ça implique</th>
+  </tr>
+  <tr>
+    <td>La <strong>répartition spatiale</strong> des pixels</td>
+    <td>Un histogramme équilibré peut masquer un ciel brûlé et un sol bouché simultanément</td>
+  </tr>
+  <tr>
+    <td>La <strong>qualité des couleurs</strong></td>
+    <td>Un histogramme centré ne garantit pas une belle couleur</td>
+  </tr>
+  <tr>
+    <td>Le <strong>rendu final sur support</strong></td>
+    <td>Impression, écran web — relatif à l'espace de sortie configuré dans ART</td>
+  </tr>
+  <tr>
+    <td>L'<strong>intention artistique</strong></td>
+    <td>Un histogramme "mauvais" techniquement peut être une excellente photo</td>
+  </tr>
+</table>
+
+<div class="blockquote">
+  L'histogramme valide la technique. L'œil valide l'intention. Les deux sont nécessaires.
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<h3 class="section-title" id="resume">Résumé — Diagnostic rapide</h3>
+
+<table>
+  <tr>
+    <th>Ce que tu vois</th>
+    <th>Ce que ça signifie</th>
+    <th>Première action</th>
+  </tr>
+  <tr>
+    <td>Pic collé à droite</td>
+    <td>Hautes lumières cramées</td>
+    <td>Baisser Exposition ou Log TM</td>
+  </tr>
+  <tr>
+    <td>Pic collé à gauche</td>
+    <td>Ombres bouchées</td>
+    <td>Remonter Noirs ou Ombres</td>
+  </tr>
+  <tr>
+    <td>Deux pics aux extrêmes</td>
+    <td>Forte plage dynamique</td>
+    <td>Log Tone Mapping</td>
+  </tr>
+  <tr>
+    <td>Centré, étalé</td>
+    <td>Dynamique équilibrée</td>
+    <td>Affinage — courbes tonales</td>
+  </tr>
+  <tr>
+    <td>Tout au centre</td>
+    <td>Image molle</td>
+    <td>Étirer les tons (Noirs + Blancs)</td>
+  </tr>
+  <tr>
+    <td>Masse à gauche</td>
+    <td>Clé sombre ou sous-expo</td>
+    <td>Vérifier les ombres</td>
+  </tr>
+  <tr>
+    <td>Masse à droite</td>
+    <td>Clé claire ou sur-expo</td>
+    <td>Vérifier le clipping</td>
+  </tr>
+  <tr>
+    <td>Canaux RVB décalés</td>
+    <td>Dominante colorée</td>
+    <td>Balance des Blancs</td>
+  </tr>
+</table>
+
+</div>

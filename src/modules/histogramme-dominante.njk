@@ -1,0 +1,160 @@
+---
+layout: base.njk
+title: "Canaux RVB décalés — Dominante colorée"
+permalink: '/modules/histogramme-dominante/'
+---
+
+<div class="module-header">
+  <div class="module-tag"><div class="tag-dot" style="background:#a78bfa"></div><span style="color:#a78bfa">Analyse, Courbes & Masques</span></div>
+  <h2>🎨 Canaux RVB décalés</h2>
+  <div class="subtitle">Les courbes rouge, verte, bleue ne se superposent pas — dominante colorée détectée.</div>
+</div>
+
+<p style="margin-bottom:16px;">
+  <a href="{{ '/modules/histogramme/' | url }}" style="color:var(--muted);font-size:13px;">← Retour à l'index Histogramme</a>
+</p>
+
+<div class="editorial">
+
+<h3 class="section-title">Ce que tu vois</h3>
+
+<pre style="font-family:'DM Mono',monospace;font-size:13px;line-height:1.5;color:var(--muted);background:var(--bg2);padding:20px;border-radius:8px;border:1px solid var(--border);overflow-x:auto;">
+         R
+        RRR  G
+       RRRRRGGG  B
+      RRRRRGGGGGBBB
+|___________________|
+R décalé → dominante chaude</pre>
+
+<p>Les courbes rouge, verte et bleue <strong>ne sont pas superposées</strong> — elles sont décalées horizontalement les unes par rapport aux autres. Plus l'écart est prononcé, plus la dominante colorée est forte.</p>
+
+<h3 class="section-title">Lecture des décalages</h3>
+
+<table>
+  <tr>
+    <th>Canal décalé à droite</th>
+    <th>Dominante résultante</th>
+    <th>Scènes typiques</th>
+  </tr>
+  <tr>
+    <td><strong style="color:#e87070">Rouge</strong> décalé à droite des autres</td>
+    <td>Dominante chaude — orange, rouge, ambre</td>
+    <td>Lumière tungstène, coucher de soleil, bougie</td>
+  </tr>
+  <tr>
+    <td><strong style="color:#70c070">Vert</strong> décalé à droite des autres</td>
+    <td>Dominante verdâtre</td>
+    <td>Néons, fluorescents, végétation très présente</td>
+  </tr>
+  <tr>
+    <td><strong style="color:#7090e8">Bleu</strong> décalé à droite des autres</td>
+    <td>Dominante froide — cyan, bleu</td>
+    <td>Lumière de flash, ombre, ciel bleu, lumière du jour</td>
+  </tr>
+  <tr>
+    <td>Canaux très écartés entre eux</td>
+    <td>Dominante forte, couleurs saturées artificiellement</td>
+    <td>Balance des blancs incorrecte en capture</td>
+  </tr>
+</table>
+
+<h3 class="section-title">Deux natures de dominante</h3>
+
+<p>Avant d'agir, identifier si la dominante est un <strong>problème à corriger</strong> ou une <strong>intention à préserver</strong> :</p>
+
+<div class="param-grid">
+  <div class="param-item">
+    <div class="param-name">Dominante parasite</div>
+    <div class="param-desc">Balance des blancs incorrecte en capture (néons verdâtres, flash non calibré). Les tons chair ont une teinte anormale, les zones blanches ne sont pas neutres. À corriger.</div>
+  </div>
+  <div class="param-item">
+    <div class="param-name">Dominante intentionnelle</div>
+    <div class="param-desc">Chaleur d'un coucher de soleil, froid d'une scène hivernale, ambiance colorée d'un lieu. La dominante contribue à l'atmosphère. La "corriger" tuerait l'image.</div>
+  </div>
+</div>
+
+<div class="insight">
+  <div class="insight-label">Comment distinguer les deux</div>
+  <p>Regarde les <strong>zones qui devraient être neutres</strong> dans l'image — mur blanc, ciel gris, zone gris neutre. Si elles ont une teinte marquée que tu n'as pas voulue, c'est une dominante à corriger. Si toute l'image baigne dans une atmosphère cohérente et intentionnelle, c'est de la couleur créative.</p>
+</div>
+
+<h3 class="section-title">Corriger la dominante dans ART</h3>
+
+<div class="workflow">
+
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(245,158,11,0.14);color:#f59e0b">1</div>
+    <div class="step-content">
+      <h4>Balance des Blancs — premier outil</h4>
+      <p>C'est ici que se corrige une dominante de balance des blancs. Les curseurs <strong>Température</strong> (axe chaud/froid) et <strong>Teinte</strong> (axe vert/magenta) couvrent la quasi-totalité des dominantes courantes.</p>
+      <ul class="step-notes">
+        <li>Dominante chaude → baisser la Température</li>
+        <li>Dominante froide → monter la Température</li>
+        <li>Dominante verte → déplacer la Teinte vers le magenta</li>
+        <li>Dominante magenta → déplacer la Teinte vers le vert</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(245,158,11,0.14);color:#f59e0b">2</div>
+    <div class="step-content">
+      <h4>Utiliser un point de référence neutre</h4>
+      <p>Si l'image contient une zone qui devrait être neutre (gris, blanc, peau neutre), utiliser la <strong>pipette de Balance des Blancs</strong> en cliquant dessus. ART calcule automatiquement la correction nécessaire.</p>
+    </div>
+  </div>
+
+  <div class="workflow-step">
+    <div class="step-num" style="background:rgba(245,158,11,0.14);color:#f59e0b">3</div>
+    <div class="step-content">
+      <h4>Dominante localisée — Correction Couleurs</h4>
+      <p>Si la dominante n'est présente que dans une plage tonale spécifique (dominante verte dans les ombres, dominante orange dans les HLs), la <a href="{{ '/modules/correctioncouleurs/' | url }}" style="color:var(--accent)">Correction Couleurs/Ton</a> permet d'agir séparément par zone tonale via les Color Wheels.</p>
+    </div>
+  </div>
+
+</div>
+
+<h3 class="section-title">Dominante pendant le color grading — vigilance</h3>
+
+<p>Un histogramme sans décalage à l'ouverture peut <strong>acquérir une dominante pendant le color grading</strong>. C'est particulièrement fréquent avec :</p>
+
+<table>
+  <tr>
+    <th>Action</th>
+    <th>Dominante possible</th>
+    <th>Solution</th>
+  </tr>
+  <tr>
+    <td>Saturation globale forte</td>
+    <td>Tous les canaux s'écartent selon leurs valeurs initiales</td>
+    <td>Surveiller l'histogramme RVB pendant l'opération</td>
+  </tr>
+  <tr>
+    <td>Virage partiel ombres (Color Wheels)</td>
+    <td>Dominante dans les ombres selon la direction du virage</td>
+    <td>Normal si intentionnel — vérifier la cohérence globale</td>
+  </tr>
+  <tr>
+    <td>Courbes RVB asymétriques</td>
+    <td>Dominante liée à l'amplification d'un canal</td>
+    <td>Comparer les courbes — s'assurer que les canaux restent cohérents</td>
+  </tr>
+</table>
+
+<div class="warning">
+  <div class="warning-label">Ne jamais corriger la balance des blancs dans Affinity après coup</div>
+  <p>Une correction de balance des blancs dans un logiciel de retouche pixel (Affinity, Photoshop) opère sur les données déjà converties, avec une précision limitée et des artefacts potentiels. En RAW dans ART, tu agis sur les données brutes — la correction est propre, sans dégradation. C'est la règle absolue du workflow RAW → TIFF : tout ce qui relève de la balance des blancs et des dominantes se règle dans ART.</p>
+</div>
+
+</div>
+
+<div style="display:flex;gap:16px;margin-top:32px;flex-wrap:wrap;">
+  <a href="{{ '/modules/histogramme-highkey/' | url }}" class="wf-card" style="--wf-color:#fbbf24;flex:1;min-width:200px;text-decoration:none;">
+    <div style="font-size:12px;color:var(--muted);margin-bottom:6px;">← Cas précédent</div>
+    <div style="font-weight:600;color:var(--text)">☀️ Clé claire (High Key)</div>
+  </a>
+  <a href="{{ '/modules/histogramme/' | url }}" class="wf-card" style="--wf-color:#a78bfa;flex:1;min-width:200px;text-decoration:none;">
+    <div style="font-size:12px;color:var(--muted);margin-bottom:6px;">← Index</div>
+    <div style="font-weight:600;color:var(--text)">Retour à l'Histogramme</div>
+  </a>
+</div>
